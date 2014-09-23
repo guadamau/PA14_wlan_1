@@ -1,0 +1,6 @@
+# Partial OMNeT++/Tkenv config file -- see $HOME/.tkenvrc as well
+config default-configname	{Tictoc16}
+config default-runnumber	{0}
+inspector {Tictoc15.tic[4].hopCountStats} cLongHistogram {} 2 404x318+81+697:normal
+inspector {Tictoc15.tic[4].HopCount} cOutVector {} 2 492x328+587+683:normal
+

@@ -1,0 +1,116 @@
+version 2
+run Tictoc16-0-20140923-18:08:40-2390
+attr configname Tictoc16
+attr datetime 20140923-18:08:40
+attr experiment Tictoc16
+attr inifile omnetpp.ini
+attr iterationvars ""
+attr iterationvars2 $repetition=0
+attr measurement ""
+attr network Tictoc16
+attr processid 2390
+attr repetition 0
+attr replication #0
+attr resultdir results
+attr runnumber 0
+attr seedset 0
+
+statistic Tictoc16.tic[0] 	hopCount:stats
+field count 61452
+field mean 7.5129531992449
+field stddev 6.4070720165747
+field sum 461686
+field sqrsum 5991224
+field min 1
+field max 69
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"
+statistic Tictoc16.tic[1] 	hopCount:stats
+field count 61320
+field mean 2.7220971950424
+field stddev 2.6563881166227
+field sum 166919
+field sqrsum 887061
+field min 1
+field max 32
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"
+statistic Tictoc16.tic[1] 	hopCount:histogram
+field count 61320
+field mean 2.7220971950424
+field stddev 2.6563881166227
+field sum 166919
+field sqrsum 887061
+field min 1
+field max 32
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, histogram"
+bin	-INF	0
+bin	-4	0
+bin	-3	0
+bin	-2	0
+bin	-1	0
+bin	0	0
+bin	1	28932
+bin	2	12122
+bin	3	4026
+bin	4	6098
+bin	5	2013
+bin	6	3061
+bin	7	1038
+bin	8	1479
+bin	9	507
+bin	10	737
+bin	11	280
+bin	12	403
+bin	13	110
+bin	14	195
+bin	15	62
+bin	16	257
+statistic Tictoc16.tic[2] 	hopCount:stats
+field count 61268
+field mean 7.5449174120259
+field stddev 6.4958662529582
+field sum 462262
+field sqrsum 6072968
+field min 1
+field max 74
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"
+statistic Tictoc16.tic[3] 	hopCount:stats
+field count 61166
+field mean 7.5451558055129
+field stddev 6.4574629250593
+field sum 461507
+field sqrsum 6032651
+field min 1
+field max 70
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"
+statistic Tictoc16.tic[4] 	hopCount:stats
+field count 61557
+field mean 2.7239631560992
+field stddev 2.6304474371012
+field sum 167679
+field sqrsum 882673
+field min 1
+field max 34
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"
+statistic Tictoc16.tic[5] 	hopCount:stats
+field count 60875
+field mean 7.5218562628337
+field stddev 6.4570116777695
+field sum 457893
+field sqrsum 5982225
+field min 1
+field max 73
+attr interpolationmode  none
+attr source  arrival
+attr title  "hop count, stats"

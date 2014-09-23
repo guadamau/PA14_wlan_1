@@ -34,6 +34,9 @@ OBJS = \
     $O/txc11.o \
     $O/txc12.o \
     $O/txc13.o \
+    $O/txc14.o \
+    $O/txc15.o \
+    $O/txc16.o \
     $O/txc2.o \
     $O/txc3.o \
     $O/txc4.o \
@@ -42,11 +45,17 @@ OBJS = \
     $O/txc7.o \
     $O/txc8.o \
     $O/txc9.o \
-    $O/tictoc13_m.o
+    $O/tictoc13_m.o \
+    $O/tictoc14_m.o \
+    $O/tictoc15_m.o \
+    $O/tictoc16_m.o
 
 # Message files
 MSGFILES = \
-    tictoc13.msg
+    tictoc13.msg \
+    tictoc14.msg \
+    tictoc15.msg \
+    tictoc16.msg
 
 #------------------------------------------------------------------------------
 
@@ -131,11 +140,23 @@ depend:
 # DO NOT DELETE THIS LINE -- make depend depends on it.
 $O/tictoc13_m.o: tictoc13_m.cc \
   ./tictoc13_m.h
+$O/tictoc14_m.o: tictoc14_m.cc \
+  ./tictoc14_m.h
+$O/tictoc15_m.o: tictoc15_m.cc \
+  ./tictoc15_m.h
+$O/tictoc16_m.o: tictoc16_m.cc \
+  ./tictoc16_m.h
 $O/txc10.o: txc10.cc
 $O/txc11.o: txc11.cc
 $O/txc12.o: txc12.cc
 $O/txc13.o: txc13.cc \
   ./tictoc13_m.h
+$O/txc14.o: txc14.cc \
+  ./tictoc14_m.h
+$O/txc15.o: txc15.cc \
+  ./tictoc15_m.h
+$O/txc16.o: txc16.cc \
+  ./tictoc16_m.h
 $O/txc1.o: txc1.cc
 $O/txc2.o: txc2.cc
 $O/txc3.o: txc3.cc
