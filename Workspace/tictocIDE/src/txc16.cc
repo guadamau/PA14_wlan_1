@@ -114,6 +114,20 @@ void Txc16::forwardMessage(TicTocMsg16 *msg)
     int n = gateSize("gate");
     int k = intuniform(0,n-1);
 
+    // If more than one port, don't send to same node whom it just received the msg
+    if(n > 1)
+    {
+            cGate *arrivalGate = msg->getArrivalGate();
+            if(arrivalGate!=NULL)
+            {
+                    int indexArrival = arrivalGate->getIndex();
+                    while(indexArrival==k){
+                            EV << "Not Forwarding to same node again, choosing other gate..." << "\n";
+                            k = intuniform(0,n-1);
+                    }
+            }
+    }
+
     EV << "Forwarding message " << msg << " on gate[" << k << "]\n";
     send(msg, "gate$o", k);
 }
