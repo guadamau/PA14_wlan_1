@@ -1,0 +1,5414 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_vdaProsperLeibundgut.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Kapitel 2: Pflichtenheft}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Pflichtenheft
+\end_layout
+
+\begin_layout Section
+Ausgangslage
+\end_layout
+
+\begin_layout Standard
+Die Eulersche Zahl wurde nach ihrer Entdeckung durch Leonhard Euler von
+ ihm selbst auf 23 Nachkommastellen berechnet.
+ Das war im Jahre 1748.
+ Die Zahl etablierte sich schnell und wurde zu einer der wichtigsten Konstanten
+ der Mathematik.
+ Infolge dessen waren stets Leute bestrebt, sich mit dieser mysteriösen
+ Zahl genauer auseinanderzusetzen.
+ Die Berechnung von Nachkommastellen der Eulerschen Zahl ist sehr interessant
+ im Zusammenhang mit Computerbedingungen.
+ Da die Formel zur Berechnung der Zahl aus einer Summe gebildet wird, die
+ ins Unendliche verläuft, kann die Leistungsfähigkeit der jeweils aktuellen
+ Hardware auf den Prüfstand gebracht werden.
+ Es beschäftigten sich deshalb immer wieder Ingenieure und Programmierer
+ damit, neue Rekorde in der Anzahl von Nachkommastellen zu erzielen, mit
+ eigens dafür geschriebenen Programmen.
+ Folgende Tabelle listet die Anzahl der bisher berechneten Nachkommastellen
+ chronologisch auf.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="26" columns="3">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top" width="22col%">
+<column alignment="right" valignment="top" width="21col%">
+<column alignment="left" valignment="top" width="48col%">
+<row>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Datum
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anzahl Nachkommastellen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Person
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1748
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+23
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Leonhard Euler
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1853
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+137
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+William Shanks
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1871
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+205
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+William Shanks
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1884
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+346
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+J.
+ Marcus Boorman
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1946
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+808
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+?
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1949
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.010
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+John von Neumann (berechnet auf dem ENIAC)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1961
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100.265
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Daniel Shanks & John Wrench
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1981
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+116.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Stephen Gary Wozniak (berechnet mithilfe eines Apple II)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1994
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Robert Nemiroff & Jerry Bonnell
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mai 1997
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.199.978
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Patrick Demichel
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+August 1997
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Birger Seifert
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+September 1997
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50.000.817
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Patrick Demichel
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Februar 1999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200.000.579
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sebastian Wedeniwski
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Oktober 1999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+869.894.101
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sebastian Wedeniwski
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.
+ November 1999
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.250.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.
+ Juli 2000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.147.483.648
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.
+ Juli 2000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.221.225.472
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Colin Martin & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.
+ August 2000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.442.450.944
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.
+ August 2000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12.884.901.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.
+ August 2003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25.100.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+18.
+ September 2003
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+50.100.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Xavier Gourdon
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+27.
+ April 2007
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100.000.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Steve Pagliarulo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6.
+ Mai 2009
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+200.000.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo & Steve Pagliarulo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20.
+ Februar 2010
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500.000.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Alexander Yee
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5.
+ Juli 2010
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="right" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.000.000.000.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Shigeru Kondo
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Entwicklung der Anzahl der bekannten Nachkommastellen von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaEulerscheZahl}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie bereits erwähnt, wurden diese Berechnungen entweder von Hand, oder mittels
+ individuell geschriebener Programme durchgeführt.
+ Der nächste Abschnitt meiner Recherchen befasst sich damit, Produkte zu
+ finden, die ebenfalls mathematische Konstanten auf sehr hohe Präzision
+ ausrechnen können.
+\end_layout
+
+\begin_layout Subsection
+Vergleichbare Produkte
+\end_layout
+
+\begin_layout Standard
+Nach einiger Suche im Internet schien es mir, dass nicht sehr viel Software
+ existiert, welche sich mit dem sogenannten Number-Crunching befasst.
+ Alexander Yee, der selbst eine Software entwickelte mit dem Namen 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+-cruncher
+\begin_inset Quotes frd
+\end_inset
+
+, stellt die Binaries der Software zur Verfügung.
+ Es handelt sich um eine Konsolen-Anwendung, die für die Betriebssysteme
+ Linux und Windows verfügbar ist.
+ Weitere interessante Produkte, die es erlauben mit solch grossen Zahlen
+ umzugehen sind 
+\begin_inset Quotes fld
+\end_inset
+
+MATLAB
+\begin_inset Quotes frd
+\end_inset
+
+ der Firma Mathworks und 
+\begin_inset Quotes fld
+\end_inset
+
+Mathematica
+\begin_inset Quotes frd
+\end_inset
+
+ der Firma Wolfram Research.
+ Diese drei Produkte werden nachfolgend etwas genauer betrachtet:
+\end_layout
+
+\begin_layout Subsubsection
+gamma (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+)-cruncher
+\end_layout
+
+\begin_layout Standard
+Der Name gamma (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+)-cruncher stammt daher, weil die Software ursprünglich einmal dafür erstellt
+ wurde, die Eulersche Konstante auszurechnen, welche bekanntlich das Formelzeich
+en 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+ verwendet.
+ Diese Anwendung wurde ursprünglich auf einem Windows-Betriebssystem entwickelt.
+ Gegenwärtig ist die Version v0.5.5.9187 aktuell.
+ Für Linux wurde die Anwendung 
+\begin_inset Quotes fld
+\end_inset
+
+quick and dirty
+\begin_inset Quotes frd
+\end_inset
+
+ portiert, was leider bedeutet, dass nicht alle Funktionen der Anwendung,
+ wie sie für die Windows-Version verfügbar sind, beziehungsweise funktionieren.
+ Ebenfalls ist die Ausführung und Genauigkeit der Anwendung auf Linux-Systemen
+ mit Vorsicht zu geniessen, allein schon aus dem Grund, weil der betriebssystems
+pezifische Datentyp 
+\begin_inset Quotes fld
+\end_inset
+
+wide-char
+\begin_inset Quotes frd
+\end_inset
+
+ (wchar_t) auf Windows-Systemen zwei Bytes Länge hat und auf Linux-Systemen
+ deren vier.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Software ist schon seit ein paar Jahren in Entwicklung und wird stetig
+ weiterverbessert.
+ Die Entwicklung des Quellcodes wird auf einem Windows-Rechner betrieben.
+ Ich habe die Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$100.000$
+\end_layout
+
+\end_inset
+
+ Nachkommastellen durchgeführt und ein verblüffend schnelles Ergebnis erhalten.
+ Die Berechnung dauerte lediglich 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0.016 s$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Positiv überrascht hat auch die ausgereifte Optionenwahl.
+ Multitherading, Swapping auf einen Persistenten Speicher, etc.
+ ist alles problemlos möglich.
+ Weiter fasziniert hat mich auch die Tatsache, dass Informationen zur gegenwärti
+gen Hardware, die dem Betriebssystem zu Grunde liegt, ausgelesen und in
+ die Menüführung miteinbezogen werden.
+ Nachfolgende Bildschirmaufnahmen veranschaulichen dies:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/y-cuncher_conf_menu.eps
+	display false
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Konfigurationsmenü des gamma (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+)-cruncher
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/y-cruncher_result_menu.eps
+	display false
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Statistik nach der Berechnung einer Zahl des gamma (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+)-cruncher
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei obiger Abbildung ist auch die Fehlermeldung sichtbar, welche auf einem
+ Linux-System erscheint.
+ Die Funktion für die Verifizierung konnte nicht korrekt ausgeführt werden.
+ Die Dateirechte wären vorhanden, damit das Programm eine Datei schreiben
+ könnte, deshalb ist die Aussage 
+\begin_inset Quotes fld
+\end_inset
+
+Unable to create file.
+\begin_inset Quotes frd
+\end_inset
+
+ an dieser Stelle etwas irreführend.
+\end_layout
+
+\begin_layout Subsubsection
+MATLAB
+\end_layout
+
+\begin_layout Standard
+Matlab ist ein etabliertes Produkt der Unternehmung 
+\begin_inset Quotes fld
+\end_inset
+
+The MathWorks
+\begin_inset Quotes frd
+\end_inset
+
+, dass an Hochschulen sowie in der Industrie zur Lösung mathematischer Problemst
+ellungen eingesetzt wird.
+ Das Programm ist vor allem stark darin, Matrizen zu berechnen.
+ Ebenso bietet es die Möglichkeiten zur grafischen Dartstellung der Ergebnisse.
+ Das Softwarepaket Matlab dient auch als Grundlage weiterer Softwareprodukte
+ von The MathWorks wie Simulink und Stateflow.
+\end_layout
+
+\begin_layout Standard
+Nach doch längerer Ermittlung im Internet bin ich auf keine Funktion gestossen,
+ die beispielsweise via Parameterübergabe die Anzahl der Nachkommastellen
+ einstellen lässt.
+ Viel mehr habe ich selbstgeschriebene Matlab-Scripts gefunden, die Nachkommaste
+llen berechnen.
+ Meist werden bei diesen Beispielen grosse Zahlen dabei nicht einem Datentyp,
+ sondern einem Array zugeordnet: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Zahlenspeicherung im Array},  captionpos=b,language=C++
+]{_srcListings/digitHandlingExample.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Methode lässt natürlich 
+\begin_inset Quotes fld
+\end_inset
+
+beliebig
+\begin_inset Quotes frd
+\end_inset
+
+ viele einzelne Integer-Werte aneinanderreihen.
+ Die obere Grenze wird lediglich durch die Kapazität des Arbeitsspeichers
+ gesetzt.
+ Um diese Zahlenarrays zu berechnen muss aber, wie erwähnt, im Matlab ein
+ eigenes Programm geschrieben werden.
+\end_layout
+
+\begin_layout Standard
+Die Eulersche Zahl ist die Basis der exp-Funktion in Mathlab.
+ Sie kann mit den Bordmitteln von Matlab 15 Nachkommastellen darstellen,
+ mit Hilfe des Befehls 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$format long$
+\end_layout
+
+\end_inset
+
+.
+ Der folgende Screenshot veranschaulicht dies (zuerst wird die Zahlenformatierun
+g eingestellt und anschliessend 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e^{1}$
+\end_layout
+
+\end_inset
+
+ ausgerechnet):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/matlabCalculateE.eps
+	display false
+	BoundingBox 0bp 0bp 386bp 257bp
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnen der Eulerschen Zahl in Matlab
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Wolfram Mathematica
+\end_layout
+
+\begin_layout Standard
+Mathematica ist ein sehr ausgereiftes Produkt mit einem enormen Funktionsumfang.
+ Es erlaubt unter anderem die Visualisierung von Graphen, das Lösen von
+ Gleichungen mittels Computeralgebrasystem.
+ Ebenfalls bringt das Paket eine eigene, sehr flexible Programmiersprache
+ mit sich, die mit allen gängigen Programmieransätzen (objektorientiert,
+ prozedural, funktional und regelbasiert) geschrieben werden kann.
+\end_layout
+
+\begin_layout Standard
+Die Software findet Anwendung in der Naturwissenschaft, Industrie wie auch
+ in der Wirtschaftswissenschaft.
+ So verwenden Banken Mathematica zur Simulation von Aktienkursentwicklung,
+ Bewertung von Derivaten, Risikoabschätzung bzw.
+ -wandlung und so weiter.
+ Die Anforderung an die Korrektheit der Ergebnisse (analytisch wie numerisch)
+ ist daher hoch.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaMathematica}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Grenzen von Mathematica
+\end_layout
+
+\begin_layout Standard
+Um dieses Produkt etwas genauer zu analysieren habe ich eine Trial-Version
+ der Software heruntergeladen.
+ Laut Hersteller lassen sich damit nämlich Zahlen zu einer x-beliebigen
+ Präzision errechnen.
+ Dies ist nicht ganz korrekt, wie sich herausstellte.
+ Die IDE des Programms Mathematica besitzt 
+\begin_inset Quotes fld
+\end_inset
+
+Systemvariablen
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Eine davon ist 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+$MaxNumber$
+\end_layout
+
+\end_inset
+
+.
+ Der Wert, welcher in dieser Variable abgelegt ist, wird beim Programmstart
+ gesetzt und ist abhängig vom Betriebssystem, respektive von der Leistungsfähigk
+eit der zugrunde liegenden Hardware.
+ Auf meinem Entwicklungssystem beläuft sich dieser Wert auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.233433712981650 * 10^{323228458}$
+\end_layout
+
+\end_inset
+
+.
+ Das ist durchaus ein grosser Wertebereich.
+ Es gelang mir damit, die Eulersche Zahl innert weniger Minuten auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$100.000.000$
+\end_layout
+
+\end_inset
+
+ Nachkommastellen auszurechnen.
+ Als ich dann allerdings den Versuch startete, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.000.000.000$
+\end_layout
+
+\end_inset
+
+ Nachkommastellen zu errechnen wurde nach einiger Zeit die folgende Meldung
+ ausgegeben: 
+\begin_inset Quotes fld
+\end_inset
+
+Overflow occurred in computation
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Scheinbar wurde also der Wertebereich der Variable 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+$MaxNumber$
+\end_layout
+
+\end_inset
+
+ überschritten.
+ Demzufolge kann diese Rechnung nicht mehr ausgeführt werden.
+ Will man also mehr Nachkommastellen errechnen, muss wohl oder übel auch
+ hier ein eigenes Programm für die Berechnung geschrieben werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/e100000000Digits.eps
+	display false
+	scale 50
+	BoundingBox 0bp 0bp 742bp 896bp
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$100.000.000$
+\end_layout
+
+\end_inset
+
+ Nachkommastellen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/e1000000000Digits.eps
+	display false
+	scale 50
+	BoundingBox 0bp 0bp 742bp 239bp
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1.000.000.000$
+\end_layout
+
+\end_inset
+
+ Nachkommastellen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Fazit
+\end_layout
+
+\begin_layout Standard
+Matlab rechnet standardmässig mit den bekannten Datentypen (int, double,
+ long, ...), und hat per se keine Funktion implementiert, welche die Konstanten
+ mit hoher Präzision darstellen lässt.
+ Will man solches mit dieser Software erreichen, muss die Berechnung selbst
+ implementiert werden.
+ Mathematica ist in diesem Punkt weiter und der Benutzer kann Konstanten
+ mit sehr hoher Genauigkeit anzeigen lassen.
+ Begrenzt ist man dort durch eine Variable, die in der Umgebung von Mathematica
+ existiert, deren Wert sich aus der zu Verfügung stehenden Hardware errechnet.
+ Also bei wirklich vielen Nachkommastellen (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$>= 1.000.000.000$
+\end_layout
+
+\end_inset
+
+) kommen heute gängige Desktop-PCs an ihre Grenzen.
+ Einzig die Software gamma (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+gamma$
+\end_layout
+
+\end_inset
+
+)-cruncher verfolgt als primäres Ziel, mathematische Konstanten so genau
+ wie möglich zu berechnen.
+\end_layout
+
+\begin_layout Section
+Ziele/Grundsätze
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Als oberstes Ziel meiner eigenen Arbeit steht der Gewinn neuer Erkenntnisse
+ und eine möglichst maschinen-optimierte Programmierung zur Berechnung von
+ Zahlen, umgesetzt mit der Sprache C++.
+ Als weiteres Hauptziel sollte am Schluss die Eulersche Zahl auf möglichst
+ viele Nachkommastellen berechnet und präsentiert werden können.
+ Diese Formulierung wird später noch etwas genauer spezifiziert.
+ Das Berechnen der Zahlen benötigt fast keine Interaktionen mit dem Benutzer
+ und muss lediglich beim Beginn der Berechnung parametrisiert werden.
+ Deshalb wird die Software als Konsolenapplikation realisiert, also ohne
+ grafische Benutzeroberfläche (GUI).
+ Da als Entwicklungsumfeld ausschliesslich mit Linux-Systemen gearbeitet
+ wird, bringt diese Umsetzung den Vorteil, dass die Applikation problemlos
+ auch auf Servern gestartet werden kann, die keine Grafische-Benutzeroberfläche
+ installiert haben.
+ Ein System, dass keine Benutzeroberfläche betreiben muss, braucht generell
+ weniger Arbeitsspeicher, was für solch lange Rechenoperationen ein Vorteil
+ ist.
+ Auf diese Weise steht mehr Arbeitsspeicher für die Berechnung zur Verfügung.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Software muss wie folgt genutzt werden können:
+\end_layout
+
+\begin_layout Itemize
+Lauffähig auf mindestens zwei verschiedenen Architekturen (z.
+ B.
+ x86 und x86_64)
+\end_layout
+
+\begin_layout Itemize
+Einfach konfigurierbar (ohne Neukompilierung des Programms)
+\end_layout
+
+\begin_layout Itemize
+Lauffähig ohne Benutzeroberfläche (GUI), damit das Programm auch auf Servern/Sup
+ercomputern ausgeführt werden kann.
+\end_layout
+
+\begin_layout Itemize
+Teilvalidierung des errechneten Ergebnisses
+\end_layout
+
+\begin_layout Itemize
+Die Software sollte leicht erweiterbar sein, und in späteren Releases sollten
+ auch weitere Zahlen/Konstanten berechnet werden können.
+\end_layout
+
+\begin_layout Subsection
+Namensgebung
+\end_layout
+
+\begin_layout Standard
+Damit in dieser Arbeit künftig nicht immer die generischen Wörter 
+\begin_inset Quotes fld
+\end_inset
+
+Software
+\begin_inset Quotes frd
+\end_inset
+
+, 
+\begin_inset Quotes fld
+\end_inset
+
+Programm
+\begin_inset Quotes frd
+\end_inset
+
+ oder 
+\begin_inset Quotes fld
+\end_inset
+
+Applikation
+\begin_inset Quotes frd
+\end_inset
+
+ gebraucht werden, wird das Programm ab dieser Stelle mit dem marketingtaugliche
+n Namen 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{<<
+\backslash
+myProgName>>}
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+bezeichnet.
+ Dieser Name ist absichtlich nicht nur auf 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ bezogen, sondern bezieht sich einfach auf Zahlen (Englisch: Numbers), da
+ das längerfristige Ziel des Programms sein muss, auch beispielsweise andere
+ Konstanten auf beliebig viele Nachkommastellen zu berechnen oder aber einfach
+ als Rechner für Langzahlenarithmetik gebraucht werden kann.
+\end_layout
+
+\begin_layout Section
+Die Eulersche Zahl
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt wurden die nachfolgend gelisteten Quellen konsultiert,
+ um die Eulersche Zahl und deren Anwendungsfall genau zu dokumentieren:
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaBinom}, 
+\backslash
+cite{JoernEuler1}, 
+\backslash
+cite{JoernEuler2}, 
+\backslash
+cite{JoernEulerExp1}, 
+\backslash
+cite{JoernEulerExp2}, 
+\backslash
+cite{TangExp}, 
+\backslash
+cite{AblEohneE}, 
+\backslash
+cite{AblZweiHochX}, 
+\backslash
+cite{AblExp}
+\end_layout
+
+\end_inset
+
+ (die Zahlen sind Referenzen auf das Quellenverzeichnis am Ende der Dokumentatio
+n)
+\end_layout
+
+\begin_layout Subsection
+Formeln zur Berechnung der Eulerschen Zahl
+\end_layout
+
+\begin_layout Standard
+In der Mathematik-Literatur sind die beiden häufigsten Formeln, um die Eulersche
+ Zahl zu berechnen wie folgt formuliert:
+\end_layout
+
+\begin_layout Subsubsection
+Grenzwertbildung
+\end_layout
+
+\begin_layout Standard
+Die eigentliche Formel, um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ zu berechnen basiert auf der folgenden Grenzwertbildung:
+\end_layout
+
+\begin_layout Standard
+Je grösser 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ gemacht wird, desto genauer - sprich, umso mehr Nachkommastellen von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ - können berechnet werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+e=\lim\limits _{n\rightarrow\infty}\left(1+\frac{1}{n}\right)^{n}
+\]
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Formel zur Berechnung der Eulerschen Zahl mittels Grenzwertbildung
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaEulerscheZahl}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Formel ist zwar schön anzusehen, jedoch ist sie zum Rechnen sehr umständli
+ch.
+ Nur schon das Auswerten der Potenz wird schon bei verhältnismässig kleinen
+ Zahlen aufwändig bis unmöglich, von Hand wie auch für Rechenmaschinen.
+\end_layout
+
+\begin_layout Standard
+Aufgrund dessen wurde eine weitere Formel von der oben gezeigten hergeleitet,
+ die mit Hilfe einer Taylorreihe ausgerechnet wird.
+ Diese Formel ist vor allem maschinell einiges effizienter zu berechnen,
+ da sie beispielsweise keine Operationen dritter Stufe (Potzenzen, Wurzeln,
+ Logarithmen) mehr enthält.
+\end_layout
+
+\begin_layout Subsubsection
+Herleitung der Taylorreihen-Formel
+\end_layout
+
+\begin_layout Standard
+Betrachtet man die obige Formel genauer, fällt auf, dass es sich um ein
+ Binom handelt: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left(1+
+\backslash
+frac{1}{n}
+\backslash
+right)^{n}$
+\end_layout
+
+\end_inset
+
+.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+ wird mit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$a$
+\end_layout
+
+\end_inset
+
+ substituiert und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{1}{n}$
+\end_layout
+
+\end_inset
+
+ mit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$b$
+\end_layout
+
+\end_inset
+
+, dann könnte stehen: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left(a + b
+\backslash
+right)^{1000}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+Binominalkoeffizient
+\end_layout
+
+\begin_layout Standard
+Zum Ausrechnen des Binominalkoeffizienten gilt folgende Formel:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+[
+\end_layout
+
+\begin_layout Plain Layout
+
+{n 
+\backslash
+choose k} = 
+\backslash
+frac{n * 
+\backslash
+left(n - 1
+\backslash
+right) ...
+ 
+\backslash
+left(n - k + 1
+\backslash
+right)}{k!}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+]
+\end_layout
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Formel zur Berechnung des Binominalkoeffizienten
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wichtig: Per Definition: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0! = 1$
+\end_layout
+
+\end_inset
+
+, deshalb 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$+ 1$
+\end_layout
+
+\end_inset
+
+ beim letzten Term.
+\end_layout
+
+\begin_layout Standard
+Dieses Binom wird dann mit Hilfe des Binominalkoeffizienten ausgerechnet:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left(a + b
+\backslash
+right)^{1000} = a^{1000} + 1000a^{999}b + {1000 
+\backslash
+choose 2}a^{998}b^{2} + {1000 
+\backslash
+choose 3}a^{997}b^{3} + ...$ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eingesetzt, die Formel, um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ zu berechnen (wenn für 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n 1000$
+\end_layout
+
+\end_inset
+
+ eingesetzt würde).
+ Zur Erinnerung; je höher die Zahl ist, die für 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ eingesetzt wird, desto genauer wird 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ ausgerechnet.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+$
+\backslash
+left(1 + 
+\backslash
+frac{1}{1000}
+\backslash
+right)^{1000} = 1^{1000} + 1000 * 1^{999} + 
+\backslash
+frac{1}{1000} + {1000 
+\backslash
+choose 2}1^{998}* 
+\backslash
+frac{1}{1000^{2}} + {1000 
+\backslash
+choose 3}1^{997} * 
+\backslash
+frac{1}{1000^{3}} + ...$ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Und weiter gehts:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+$1 + 1 + 
+\backslash
+frac{1000 * 999}{2 * 1} * 
+\backslash
+frac{1}{1000^{2}} + 
+\backslash
+frac{1000 * 999 * 998}{3 * 2 * 1} * 
+\backslash
+frac{1}{1000^{3}} + 
+\backslash
+frac{1000 * 999 * 998 * 997}{4 * 3 * 2 * 1} * 
+\backslash
+frac{1}{1000^{4}} + ...$ 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei näherer Betrachtung der Rechnerei fällt auf, dass der Bruch gekürzt
+ werden kann.
+ Bsp.: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1000 * 999 * 998 * 997$
+\end_layout
+
+\end_inset
+
+ kann mit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1000^{4}$
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+weggekürzt
+\begin_inset Quotes frd
+\end_inset
+
+ werden.
+ Es gibt in diesem Fall zwar nicht genau 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+, jedoch annähernd 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+.
+ Auch hier wird der Betrachter darauf hingewiesen, dass je höher 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ gewählt wird, umso genauere Resultate zu erzielen sind.
+ Mit dem Wachsen von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$n$
+\end_layout
+
+\end_inset
+
+ nähert sich die oben erwähnte Kürzung des Bruchs mehr und mehr an 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+.
+ Nach diesem kurzen Einwand kann die Berechnung wiederum vereinfacht betrachtet
+ werden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+$1 + 1 + 
+\backslash
+frac{1}{2!} + 
+\backslash
+frac{1}{3!} + 
+\backslash
+frac{1}{4!} + ...$
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Taylorreihe
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{wuWienTaylor}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Taylorreihe"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nun haben wir uns eine vereinfachte Berechnung der Eulerschen Zahl hergeleitet.
+ Vereinfacht deshalb weil, wie bereits erwähnt, keine Operationen dritter
+ Stufe mehr gerechnet werden müssen.
+ Maschinell ist diese Formel relativ effizient auszurechnen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+e=\sum\limits _{k=0}^{\infty}\frac{1}{k!}=\frac{1}{0!}+\frac{1}{1!}+\frac{1}{2!}+\frac{1}{3!}+\frac{1}{4!}+...=1+1+\frac{1}{2}+\frac{1}{6}+\frac{1}{24}+...
+\]
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Formel zur Berechnung der Eulerschen Zahl als Taylorreihe
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wichtig: Per Definition ist: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0! = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ wird also die Formel der Aufsummierung der Kehrwerte der Fakultäten verwendet
+ für die Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Anwendungsfall und Darstellung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Weshalb kommt man auf den Gedanken, mit 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e = 2.71828...$
+\end_layout
+
+\end_inset
+
+ zu rechnen? Aufgrund des wohl bekanntesten Anwendungsfalls von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+, werde ich versuchen, dies zu erläutern.
+ Bei diesem Anwendungsfall handelt es sich um die Funktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = e^{x}$
+\end_layout
+
+\end_inset
+
+.
+ Diese einfache Funktion wird von Mathematikern als 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textbf{DIE natürliche Exponentialfunktion}
+\end_layout
+
+\end_inset
+
+ bezeichnet.
+ Diese Funktion wird mit zwei an 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ naheliegenden Ganzzahlen, namentlich zwei und drei, verglichen.
+ Das heisst, als Basis dieser 
+\begin_inset Quotes fld
+\end_inset
+
+nur
+\begin_inset Quotes frd
+\end_inset
+
+-Exponentialfunktionen wird zwei, respektive drei verwendet (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 2^{x}$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 3^{x}$
+\end_layout
+
+\end_inset
+
+).
+ Die nachfolgenden Graphen, sowie deren Tangenten-Berechnungen zeigen bildlich
+ auf, wie die natürliche Exponentialfunktion sich verhält, und was ihre
+ Besonderheit ist.
+\end_layout
+
+\begin_layout Subsubsection
+Darstellung der Funktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 2^{x}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{figure}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+pshlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+psvlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+%Variabeln werden definiert und Werte werden zugewiesen 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMin{-3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMax{3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMin{0}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMax{6} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psset{xunit=1cm,yunit=1cm} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{pspicture}(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psgrid[subgriddiv=0,griddots=10,gridwidth=0.6pt,gridlabels=0pt](
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psaxes[Dx=1,Dy=1]{->}(0,0)(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+% postscript functions
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=red]{-3}{2.585}{2 x exp}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=blue]{-1.443}{3}{0.69315 x
+ mul 1 add}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{pspicture} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Graph der Exponetialfunktion $f(x) = 2^{x}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rot: die Exponentialfunktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2^x$
+\end_layout
+
+\end_inset
+
+, blau: Tangente 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+ mit einer Steigung 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$< 1$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Schritt für Schritt die Berechnung der Tangenten-Funktionsgleichung:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 2^{x}$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+, denn die Kurve der Exponentialfunktion soll bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+ tangiert werden.
+\end_layout
+
+\begin_layout Enumerate
+Allgemeine Formel für die Tangente an der Exponentialfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = f(x_{0}) + f'(x_{0}) * (x - x_{0})$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x_{0}) = 2^{x_{0}} = f(0) = 2^{0} = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Für die erste Ableitung von Exponentialfunktionen, welche nicht 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ enthalten, gibt es eine eigens dafür geschaffene Formel, diese lautet:
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = a^{x} -> f'(x) = 
+\backslash
+ln{(a)} * a^{x}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wir setzen ein: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(x_{0}) = 
+\backslash
+ln{(2)} * 2^{x_{0}} = f'(0) = 
+\backslash
+ln{(2)} * 2^{0} = 0.69315$
+\end_layout
+
+\end_inset
+
+, das Ergebnis ist sogleich auch die Steigung der Geraden.
+\end_layout
+
+\begin_layout Enumerate
+Teilergebnisse für die Tangenten-Funktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(0) = 1$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(0) = 0.69315$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Einsetzen bei der Tangentenfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 0.69315 * (x - 0)$
+\end_layout
+
+\end_inset
+
+ für 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x$
+\end_layout
+
+\end_inset
+
+ kann nun 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0}$
+\end_layout
+
+\end_inset
+
+ eingesetzt werden, also 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Ergibt: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 0.69315x - 0 = 1 + 0.69315x$
+\end_layout
+
+\end_inset
+
+ ist die Tangentengleichung zur Tangierung der Exponentialfunktion bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Darstellung der Funktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 3^{x}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{figure}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+pshlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+psvlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+%Variabeln werden definiert und Werte werden zugewiesen 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMin{-3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMax{3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMin{0}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMax{6} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psset{xunit=1cm,yunit=1cm} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{pspicture}(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psgrid[subgriddiv=0,griddots=10,gridwidth=0.6pt,gridlabels=0pt](
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psaxes[Dx=1,Dy=1]{->}(0,0)(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+% postscript functions
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=red]{-3}{1.631}{3 x exp}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=blue]{-0.91}{3}{1.09861 x
+ mul 1 add}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{pspicture} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Graph der Exponetialfunktion $f(x) = 3^{x}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rot: die Exponentialfunktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3^x$
+\end_layout
+
+\end_inset
+
+, blau: Tangente 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+ mit einer Steigung 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$> 1$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Schritt für Schritt die Berechnung der Tangenten-Funktionsgleichung:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = 3^{x}$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+, denn die Kurve der Exponentialfunktion soll bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+ tangiert werden.
+\end_layout
+
+\begin_layout Enumerate
+Allgemeine Formel für die Tangente an der Exponentialfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = f(x_{0}) + f'(x_{0}) * (x - x_{0})$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x_{0}) = 3^{x_{0}} = f(0) = 3^{0} = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Für die erste Ableitung von Exponentialfunktionen, welche nicht 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ enthalten, gibt es eine eigens dafür geschaffene Formel, diese lautet:
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = a^{x} -> f'(x) = 
+\backslash
+ln{(a)} * a^{x}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wir setzen ein: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(x_{0}) = 
+\backslash
+ln{(3)} * 3^{x_{0}} = f'(0) = 
+\backslash
+ln{(3)} * 3^{0} = 1.09861$
+\end_layout
+
+\end_inset
+
+, das Ergebnis ist sogleich auch die Steigung der Geraden.
+\end_layout
+
+\begin_layout Enumerate
+Teilergebnisse für die Tangenten-Funktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(0) = 1$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(0) = 1.09861$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Einsetzen bei der Tangentenfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 1.09861 * (x - 0)$
+\end_layout
+
+\end_inset
+
+ für 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x$
+\end_layout
+
+\end_inset
+
+ kann nun 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0}$
+\end_layout
+
+\end_inset
+
+ eingesetzt werden, also 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Enumerate
+Ergibt: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 1.09861x - 0 = 1 + 1.09861x$
+\end_layout
+
+\end_inset
+
+ ist die Tangentengleichung zur Tangierung der Exponentialfunktion bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Darstellung der Funktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = e^{x}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{figure}[H]
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+pshlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+psvlabel#1{
+\backslash
+small #1} 
+\end_layout
+
+\begin_layout Plain Layout
+
+%Variabeln werden definiert und Werte werden zugewiesen 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMin{-3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+xMax{3}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMin{0}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+yMax{6} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psset{xunit=1cm,yunit=1cm} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{pspicture}(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psgrid[subgriddiv=0,griddots=10,gridwidth=0.6pt,gridlabels=0pt](
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psaxes[Dx=1,Dy=1]{->}(0,0)(
+\backslash
+xMin,
+\backslash
+yMin)(
+\backslash
+xMax,
+\backslash
+yMax) 
+\end_layout
+
+\begin_layout Plain Layout
+
+% postscript functions
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+psplot[plotstyle=curve,linewidth=1pt,linecolor=green]{-3}{1.585}{2 x exp}
+\end_layout
+
+\begin_layout Plain Layout
+
+%
+\backslash
+psplot[plotstyle=curve,linewidth=1pt,linecolor=blue]{-3}{1}{3 x exp}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=red]{-3}{1.792}{Euler x exp}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+psplot[plotstyle=curve,linewidth=0.5pt,linecolor=blue]{-1}{3}{1 x mul 1 add}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{pspicture} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{center}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+caption{Graph der natürlichen Exponetialfunktion $f(x) = e^{x}$}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{figure}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Rot: die natürliche Exponentialfunktion 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e^x$
+\end_layout
+
+\end_inset
+
+, blau: Tangente 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+ mit einer Steigung von exakt 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Schritt für Schritt die Berechnung der Tangenten-Funktionsgleichung:
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x) = e^{x}$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0} = 0$
+\end_layout
+
+\end_inset
+
+, denn die Kurve der Exponentialfunktion soll bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+ tangiert werden.
+\end_layout
+
+\begin_layout Enumerate
+Allgemeine Formel für die Tangente an der Exponentialfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = f(x_{0}) + f'(x_{0}) * (x - x_{0})$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(x_{0}) = e^{0} = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Eine Besonderheit ist, dass die natürliche Exponentialfunktion sich bei
+ der Ableitung reproduziert, das heisst: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(x_{0}) = e^{0} = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Teilergebnisse für die Tangenten-Funktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f(0) = 1$
+\end_layout
+
+\end_inset
+
+ und 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$f'(0) = 1$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Einsetzen bei der Tangentenfunktion: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 1 * (x - 0)$
+\end_layout
+
+\end_inset
+
+ für 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x$
+\end_layout
+
+\end_inset
+
+ kann nun 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x_{0}$
+\end_layout
+
+\end_inset
+
+ eingesetzt werden, also 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$0$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Ergibt: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$t(x) = 1 + 1x - 0 = 1 + x$
+\end_layout
+
+\end_inset
+
+ ist die Tangentengleichung zur Tangierung der natürlichen Exponentialfunktion
+ bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$x = 0$
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+MVC-Aufteilung
+\end_layout
+
+\begin_layout Standard
+Obwohl es sich bei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+bloss um eine Konsolen-Anwendung handelt, kann bis zu einem gewissen Grad
+ mit dem MVC-Pattern der Software-Entwicklung gearbeitet werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="23col%">
+<column alignment="left" valignment="top" width="68col%">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Model
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+unabhängig, kennt keine Klassen der anderen beiden Schichten (View und Controlle
+r).
+ Auf dieser Ebene ist sämtliche, für die Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ relevanten Logik implementiert.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+View
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Die View-Schicht wird durch eine simple Ein-/Ausgabe-Konsole verkörpert,
+ mit der der Benutzer interagiert.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Controller
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kümmert sich um jegliche 
+\begin_inset Quotes fld
+\end_inset
+
+administrative
+\begin_inset Quotes frd
+\end_inset
+
+ Logik, wie beispielsweise dem Speichermanagement.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Grobe Strukturierung gemäss MVC-Pattern
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+wird wo möglich nach dem MVC-Pattern realisiert.
+\end_layout
+
+\begin_layout Section
+Projektorganisation
+\end_layout
+
+\begin_layout Standard
+Das Endprodukt wird komplett autonom erarbeitet.
+ Es wird nicht von Unternehmungen gestützt und die Verantwortung/Projektleitung
+ in allen Bereichen liegt beim Verfasser dieser Arbeit.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Grober Aufbau 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:GroberAufbau"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Folgend eine grafische Veranschaulichung, wie 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+realisiert werden soll.
+ Top-Down-Sicht auf die gesamte Software.
+ Sichtweise, bei der die gesamte Applikaiton nicht allzu detailliert von
+ aussen betrachtet wird.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/environmentOverview.eps
+	display false
+	scale 58
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Top-Down-Sicht auf die gesamte Software
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Funktionale Anforderungen
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Funktionale-Anforderungen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4col%">
+<column alignment="left" valignment="top" width="68col%">
+<column alignment="center" valignment="top" width="9.5col%">
+<column alignment="center" valignment="top" width="9.5col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Anforderung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Version 1.0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Version 2.0
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lauffähig auf mindestens zwei verschiedenen Architekturen (nicht Betriebssysteme
+n)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfigurierbar mittels Konfigurationsdatei(en), ohne Neukompilierung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Resultat der Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ muss auf 1 Million Nachkommastellen validiert werden
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Bei der Berechnung muss für sehr grosse Zahlen ein persistenter Speicher
+ miteinbezogen werden.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Operationen müssen parallel durchgeführt werden können (Multithreading)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Funktionale Anforderungen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Nichtfunktionale Anforderungen
+\end_layout
+
+\begin_layout Subsection
+Bedienungsanleitung
+\end_layout
+
+\begin_layout Standard
+Zu 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+wird eine Bendienungsanleitung mitgeliefert.
+ Diese beschriebt die Konfigurationsdatei(en).
+\end_layout
+
+\begin_layout Subsection
+Dokumentation/Integrationsanleitung
+\end_layout
+
+\begin_layout Standard
+Beschreibt die Kompilierung des Programms.
+ Diese Neukompilierung wird notwendig, wenn man das Programm auf verschiedenen
+ Systemarchitekturen ausführen möchte.
+ Für die Kompilierung wird ein Makefile zur Verfügung gestellt und in der
+ Integrationsanleitung beschrieben.
+\end_layout
+
+\begin_layout Subsection
+Anforderung an Umsetzungsmittel/-technologie
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="30col%">
+<column alignment="left" valignment="top" width="62col%">
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entwicklungsumgebung:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Debian 6.0.4 [Squeeze] GNU/Linux Server zur Berechnung (keine grafische Oberfläach
+e)
+\end_layout
+
+\begin_layout Plain Layout
+Entwicklungsmaschine: Ubuntu 12.04 Linux (Debian-Derivat)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Entwicklungstool:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eclipse Platform 3.7.2 (Version für C/C++ Entwickler)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Programmiersprache:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+C++
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Testing
+\end_layout
+
+\begin_layout Standard
+Um die Korrektheit der Funktionen der Anwendung zu testen, wird ein Testkonzept
+ erarbeitet.
+ Das Testkonzept beinhaltet verschiedene Testcases, welche in einem Testprotokol
+l festgehalten werden.
+ Die Abnahme des Releases 0.1 der Komponente erfolgt erst, wenn alle Testcases
+ fehlerfrei mit den erwarteten Resultaten abgearbeitet werden konnten.
+ Die Testcases werden aufgrund funktionaler Anforderungen erarbeitet.
+\end_layout
+
+\begin_layout Subsection
+Testdaten
+\end_layout
+
+\begin_layout Standard
+Als Testdaten werden einerseits Berechnungen durchgeführt, die eindeutig
+ als korrekt bezeichnet werden können.
+ Andererseits wird zur Validierung der Eulerschen Zahl eine Datei Verwendet,
+ welche 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf eine Million Stellen nach dem Komma berechnet beinhaltet.
+ Die Datei befindet sich unter: http://www.gutenberg.org/files/127/
+\end_layout
+
+\begin_layout Subsection
+Release
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Release"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+wird als zip-Datei ausgeliefert.
+ Darin enthalten sind kompilierte Binaries sowie der Quellcode.
+ Somit kann der Benutzer das Programm auch selbst für eine eigene Architektur
+ kompilieren und dort verwenden.
+ Einzige Voraussetzung dafür ist ein (GNU)-C++-Compiler.
+ Eine Installations-/Anwendungsanleitung befindet sich im Anhang dieses
+ Dokuments, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Bedienungsanleitung"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Terminplanung
+\end_layout
+
+\begin_layout Standard
+Für das Projekt gelten die unten aufgelisteten Meilensteine.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="35col%">
+<column alignment="left" valignment="top" width="57col%">
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Projektstart
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.
+ Mai 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Pflichtenheft abgeschlossen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29.
+ Juni 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Engineering abgeschlossen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16.
+ Juli 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Realisierung beendet
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.
+ August 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Abgabe der Arbeit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+21.
+ August 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Präsentation der Arbeit
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.
+ September 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row interlinespace="default">
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Projekt abgeschlossen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15.
+ September 2012
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Arbeitspakete und Zeitplanung
+\begin_inset CommandInset label
+LatexCommand label
+name "subsec:Arbeitspakete-und-Zeitplanung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/ple/Desktop/da/03_Zeitplanung/Projektplanung_DA_09-i_HFU_PL1.eps
+	display false
+	scale 45
+	BoundingBox -30bp 0bp 732bp 783bp
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Erster Teil des Gantt-Diagramms.
+ Hier sind die Arbeitspakete und Meilensteine in Schriftlicher Form dargestellt.
+ Die Einheit der Zahlen in der Spalte 
+\begin_inset Quotes fld
+\end_inset
+
+Duration
+\begin_inset Quotes frd
+\end_inset
+
+, konnte leider mit der verwendeten Software nicht dargestellt werden.
+ Es handelt sich bei der Einheit um Tage.
+\end_layout
+
+\begin_layout Subsection
+Gantt-Chart
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/ple/Desktop/da/03_Zeitplanung/Projektplanung_DA_09-i_HFU_PL2.eps
+	display false
+	scale 45
+	BoundingBox 0bp 0bp 1230bp 765bp
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zweiter Teil der Zeitplanung, ergänzt die Zeiteinteilung der Arbeitspakete
+ auf Seite 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pageref{subsec:Arbeitspakete-und-Zeitplanung}
+\end_layout
+
+\end_inset
+
+ grafisch.
+ Der gesamte Chart wird der Dokumentation noch als A3-Ausdruck beigelegt.
+\end_layout
+
+\begin_layout Subsection
+Soll-Ist-Vergleich
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename /home/ple/Desktop/da/03_Zeitplanung/sollIst-Vergleich.eps
+	display false
+	scale 78
+	BoundingBox 0bp 0bp 511bp 435bp
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Horizontale Achse: Aufwand in Stunden / Vertikale Achse: Beschrieb Arbeitspaket
+\end_layout
+
+\begin_layout Standard
+Hier wird ersichtlich, dass über die ganze Arbeit hinweg gesehen über 50
+ Stunden mehr Zeit als geplant investiert werden musste.
+ Der Grund dafür ist vor allem die noch mangelnde Erfahrung mit der Programmiers
+prache C++ und anfangs unvorhergesehene Aufwände wie beispielsweise die
+ Algorithmen zum Ein-/Auslagern der Daten auf eine Harddisk/RAM.
+\end_layout
+
+\begin_layout Section
+Abschluss Pflichtenheft
+\end_layout
+
+\begin_layout Standard
+Im folgenden bezeugt der verantwortliche Projektleiter, dass er mit den
+ in diesem Papier ausgeführten Bedingungen und Anforderungen einverstanden
+ ist.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="5">
+<features tabularvalignment="middle">
+<column alignment="right" valignment="top" width="12col%">
+<column alignment="center" valignment="top" width="30col%">
+<column alignment="right" valignment="top" width="2col%">
+<column alignment="right" valignment="top" width="12col%">
+<column alignment="center" valignment="top" width="30col%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ort/Datum: _____________________ Unterschrift: _____________________
+\end_layout
+
+\end_body
+\end_document

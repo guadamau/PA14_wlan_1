@@ -1,0 +1,2105 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_vdaProsperLeibundgut.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Kapitel 4: Umsetzung der Software/Spezifikation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Umsetzung der Software/Spezifikation
+\end_layout
+
+\begin_layout Section
+Diagramme und Beschrieb
+\end_layout
+
+\begin_layout Standard
+Aufgrund der im Konzeptpapier aufgezeigten Komponenten und Anforderungen
+ werden die folgenden Klassendiagramme / Objektmodelle eingesetzt.
+\end_layout
+
+\begin_layout Standard
+Bei den Klassendiagrammen werden nur die public-Funktionen aufgezeigt und
+ beschrieben.
+ Dies dient der besseren Überschaubarkeit.
+\end_layout
+
+\begin_layout Standard
+Getter- und Setter-Methoden, die für den externen Zugriff auf die 
+\begin_inset Quotes fld
+\end_inset
+
+privaten
+\begin_inset Quotes frd
+\end_inset
+
+ Klassenvariablen verantwortlich sind, werden ebenfalls zwecks Übersichtlichkeit
+ nicht in den Klassendiagrammen dargestellt.
+\end_layout
+
+\begin_layout Standard
+So oft wie möglich wird mit Pointern (*) oder Referenzen (&) gearbeitet,
+ nach dem Prinzip 
+\begin_inset Quotes fld
+\end_inset
+
+call by reference
+\begin_inset Quotes frd
+\end_inset
+
+, um den Arbeitsspeicher nicht unnötig zu belasten.
+ Dies wird bei der textuellen Beschreibung der Klassen nicht jedes Mal neu
+ erwähnt.
+\end_layout
+
+\begin_layout Subsection
+Coding-Richtlinien
+\end_layout
+
+\begin_layout Standard
+Da C++ so einiges zulässt, gelten für die Umsetzung des Quellcodes die folgenden
+ Richtlinien, damit das ganze etwas übersichtlicher bleibt und der Quellcode
+ nicht aussieht, wie nach einer Explosion in der ASCII-Fabrik:
+\end_layout
+
+\begin_layout Subsubsection
+Konstante Werte
+\end_layout
+
+\begin_layout Standard
+Konstante Werte werden mittels #define am Anfang der C++-Headerfiles nach
+ den #include-Direktiven abgespeichert.
+\end_layout
+
+\begin_layout Subsubsection
+Import von Fremdbibliotheken
+\end_layout
+
+\begin_layout Standard
+Alle #include-Direktiven werden in den Klassenheadern geschrieben.
+ Die Files, welche die Implementierung einer C++-Klasse beschreiben (*.cpp)
+ enthalten lediglich eine #include-Direktive, nämlich die des Klassenheaders.
+\end_layout
+
+\begin_layout Subsubsection
+Getter- und Setter-Methoden
+\end_layout
+
+\begin_layout Standard
+Implementierung ebenfalls im cpp-File.
+\end_layout
+
+\begin_layout Subsubsection
+Kommentare
+\end_layout
+
+\begin_layout Standard
+Wenn möglich sollten immer Block- und keine Linienkommentare verwendet werden.
+ Dies grenzt Kommentare schöner vom Quellcode ab und dient der besseren
+ Übersichtlichkeit.
+\end_layout
+
+\begin_layout Subsubsection
+Mehrfach-Vererbung
+\end_layout
+
+\begin_layout Standard
+Ist strikt zu unterlassen, da die Gefahr besteht, dass der Code mit der
+ Zeit in einem unwartbaren Chaos endet, und ganz nach dem Motto: 
+\begin_inset Quotes fld
+\end_inset
+
+C makes it easy to shoot yourself in the foot; C++ makes it harder, but
+ when you do, it blows your whole leg off.
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+textit{Zitat von Bjarne Stroustrup, dem Erfinder von C++}
+\end_layout
+
+\end_inset
+
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Allgemeines
+\end_layout
+
+\begin_layout Itemize
+Generell sollte in den Header-Files (*.h) keine Implementierung vorgenommen
+ werden.
+ In den Headerfiles finden nur Definitionen statt.
+ Für die Implementation sind CPP-Files gedacht.
+ In diesen sollten im Gegenzug aber auch keine Definitionen stattfinden.
+\end_layout
+
+\begin_layout Itemize
+Zwischen der Implementierung von Methoden sollten immer drei Linebreaks
+ (2 leere Linien) eingefügt werden.
+\end_layout
+
+\begin_layout Itemize
+Pointer werden mit dem Präfix p bezeichnet.
+\end_layout
+
+\begin_layout Itemize
+Klassenvariablen (Member) werden mit dem Präfix m_ bezeichnet
+\end_layout
+
+\begin_layout Itemize
+Als generelle Schreibweise wird Camel-Casing verwendet.
+\end_layout
+
+\begin_layout Itemize
+Bei jeder Klasse, die Klassenvariablen enthält, muss mindestens der Zuweisungsop
+erator (=), und ein Kopierkonstruktor implementiert werden.
+\end_layout
+
+\begin_layout Subsection
+Präprozessor
+\end_layout
+
+\begin_layout Standard
+In C/C++ existiert ein Präprozessor.
+ Damit können beispielsweise Konstanten definiert werden (#define EULER
+ 2.718281828).
+ Ebenso können sogenannte Makros definiert werden.
+ Makros können als Mini-Funktionen angesehen werden.
+ Beispiel: #define KLEINER_100(x) ((x) < 100), gibt true zurück wenn der
+ Wert x, der übergeben wird < 100 ist.
+ Weiter können im Präprozessor Kontrollstrukturen wie 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$if$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$else$
+\end_layout
+
+\end_inset
+
+ und so weiter eingesetzt werden.
+ Dies ist für die Umsetzung dieses Projekts sehr interessant, mehr dazu
+ in den folgenden Unterabschnitten.
+\end_layout
+
+\begin_layout Subsubsection
+Funktionsweise
+\end_layout
+
+\begin_layout Standard
+Wie es der Name schon erahnen lässt, agiert der Präprozessor bevor die eigentlic
+he Kompilierung stattfindet.
+ Im Quellcode wird also mit den Konstanten-/Makronamen gearbeitet.
+ Vor der Kompilierung ersetzt der Präprozessor all diese Namen mit Zahlen
+ oder eben den Mini-Funktionen und erst dann wird der Quellcode kompiliert.
+\end_layout
+
+\begin_layout Subsubsection
+Einsatz in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Präprozessor kann durch bedingte Anweisungen (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$if$
+\end_layout
+
+\end_inset
+
+, 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$else$
+\end_layout
+
+\end_inset
+
+) gesteuert werden.
+ Somit ist es möglich, eine bedingte Kompilierung des Programms zu erreichen.
+ Wie in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Wahl-des-Testing-Frameworks"
+
+\end_inset
+
+ beschrieben, wird ein Testing-Framework verwendet.
+ Mit Hilfe des Präprozessors und einem TestingEnabled-Flag kann während
+ der Entwicklung gesteuert werden, ob die normale Ausführung des Programms
+ oder die Ausführung der Unit-Tests gestartet werden soll.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/preProcessorTestingFlow.eps
+	display false
+	scale 52
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Präprozessor, bedingte Kompilierung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Systemarchitektur
+\end_layout
+
+\begin_layout Standard
+Die Applikation besteht aus den folgenden Komponenten:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/packageDiagram.eps
+	display false
+	scale 80
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Package-Diagramm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Einige Erläuterungen zum Package-Diagramm:
+\end_layout
+
+\begin_layout Itemize
+Unter Input/Output sind alle Klassen abgelgt, die lesenden oder schreibenden
+ Zugriff auf Dateien sowie auf die Konsole haben.
+ Dazu gehört auch die Konfigurationsdatei, die gelesen werden muss.
+\end_layout
+
+\begin_layout Itemize
+Unter dem Package Math sind Klassen mit mathematischen Funktionen abgelegt,
+ wie die Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ oder der Fakultät.
+\end_layout
+
+\begin_layout Itemize
+Das Package Memory-Manager ist für die Ein-Auslagerung der BigNumbers zuständig
+ und wird von den BigNumbers-Klassen benutzt.
+ Es wird hier der besseren Übersichtlichkeit halber separat als Package
+ aufgeführt, da es ein wesentlicher Bestandteil der Software ist.
+\end_layout
+
+\begin_layout Itemize
+Das BigNumbers-Package enthält die eigens kreierten Datentypen.
+ BigNumberInt und BigNumberFloat, die zum Berechnen von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ notwendig sind.
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramm BigNumbers-Package
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersBigNumbers.pdf
+	display false
+	scale 69
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Klassendiagramm BigNumbers
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Interface 
+\begin_inset Quotes fld
+\end_inset
+
+IBigNumber
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Enthält nur pure-virtual-Methoden, das heisst, von dieser Klasse kann keine
+ Instanz erzeugt werden, deshalb ist es ein Interface.
+ Alle BigNumber-Datentypen müssen dieses Interface implementieren.
+ Es enthält die 3 Methoden, die für den MemoryManager von Nöten sind.
+ Beschrieben in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CBigNumberInt
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Repräsentiert eine grosse Zahl (Ganzzahl ohne Nachkommastellen.)
+\end_layout
+
+\begin_layout Paragraph
+Klassenvariablen
+\end_layout
+
+\begin_layout Itemize
+m_numberLength, speichert die logische Nummerngrösse.
+\end_layout
+
+\begin_layout Itemize
+m_pMm, ist der Speicherverwalter der Nummer (RAM/Harddisk), siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_pNumber, ist eine Datenstruktur (Vector), der die aktuell im RAM-liegenden
+ Stellen der Nummer enthält, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_positiveNumber, ist ein Flag, welches auf wahr gesetzt ist wenn es sich
+ um eine positive Zahl handelt.
+\end_layout
+
+\begin_layout Paragraph
+Konstruktoren und Destruktor
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Es existiert ein 
+\begin_inset Quotes fld
+\end_inset
+
+Default
+\begin_inset Quotes frd
+\end_inset
+
+-Konstruktor, der ein neues BigNumberInt-Objekt erstellt und sich um die
+ Initialisierung der Klassenvariablen kümmert.
+ Weiter gibt es einen Konstruktor, dem eine 64 Bit breite Ganzzahl übergeben
+ werden kann.
+ Diese Zahl wird dann in eine BigNumber konvertiert, niederwertigste Stelle
+ mit dem Index 0.
+ Weiter gibt es einen Kopierkonstruktor.
+ Dieser wird verwendet, um ein neues BigNumberInt-Objekt zu erzeugen, indem
+ ein bestehendes kopiert wird.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Destruktor kümmert sich darum, gegebenenfalls in den Konstruktoren alloziert
+en Speicher wieder freizugeben und um die Archiv-Dateien des Memory-Managers,
+ welche noch auf der Harddisk liegen wieder zu löschen.
+ Die Implementation des Destruktors ist unabdingbar, da sonst Memory-Leaks
+ entstehen.
+\end_layout
+
+\begin_layout Paragraph
+Zuweisungsoperator (=)
+\end_layout
+
+\begin_layout Standard
+Auch dieser muss zwingend implementiert sein, um ein bestehendes BigNumberInt-Ob
+jekt einem anderen zuzuweisen.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+Die mathematischen Operatoren +, -, * und / sind dafür verantwortlich, dass
+ mit den BigNumberInt-Objekten gerechnet werden kann.
+ Das Prinzip des schriftlichen Rechnens wird erklärt unter 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Schriftliches-Rechnen"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Die Vergleichsoperatoren >, >=, < und <= sind dazu da, um BigNumberInt-Objekte
+ miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+getAt, setAt und push_back sind dem MemoryManager vorgschaltet.
+ Sie leiten die geforderten Parameter an den MemoryManager weiter, sprich
+ sie rufen die gleichnamige Methode des Memory managers auf.
+ Dies dient dazu, dass die Algorithmen für das Speichermanagement nur im
+ MemoryManager implementiert werden müssen und nicht für jeden BigNumber-Datenty
+p.
+\end_layout
+
+\begin_layout Paragraph
+Spezielles
+\end_layout
+
+\begin_layout Itemize
+Beim Operator - (minus) muss der Minuend >= Subtrahend sein.
+ Ist dies nicht der Fall, ist das Resultat 0, da momentan keine negativen
+ Zahlen unterstützt werden.
+\end_layout
+
+\begin_layout Itemize
+Bei einer Division durch 0 (Division by zero exception) ist das Resultat
+ immer 0.
+ Division durch 0 sollte vermieden werden, da nicht möglich.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CBigNumberFloat
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Repräsentiert eine grosse Fliesskommazahl.
+\end_layout
+
+\begin_layout Paragraph
+Klassenvariablen
+\end_layout
+
+\begin_layout Itemize
+m_numberLength, speichert die logische Nummerngrösse.
+\end_layout
+
+\begin_layout Itemize
+m_pMm, ist der Speicherverwalter der Nummer (RAM/Harddisk), siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_pNumber, ist eine Datenstruktur (Vector), der die aktuell im RAM-liegenden
+ Stellen der Nummer enthält, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_positiveNumber, ist ein Flag, welches auf wahr gesetzt ist wenn es sich
+ um eine positive Zahl handelt.
+\end_layout
+
+\begin_layout Itemize
+m_digitsAfterFp, speichert die Anzahl der Nachkommastellen.
+\end_layout
+
+\begin_layout Itemize
+m_fpBefore, speichert die Position des Kommas.
+ Bsp: Hat den Wert 9, das heisst nach dem Index 8 der Zahl befindet sich
+ das Komma.
+\end_layout
+
+\begin_layout Itemize
+m_numberPrecision, beim Konstruktorenaufruf wird aufgrund des Wertes in
+ der Konfigurationsdatei die Anzahl der zu berechnenden Nachkommastellen
+ gesetzt, inklusive Präzisionszusatz, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Präzisionszusatz"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Konstruktoren und Destruktor
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Es existiert ein 
+\begin_inset Quotes fld
+\end_inset
+
+Default
+\begin_inset Quotes frd
+\end_inset
+
+-Konstruktor, der ein neues BigNumberFloat-Objekt erstellt und sich um die
+ Initialisierung der Klassenvariablen kümmert.
+ Weiter gibt es einen Konstruktor, dem eine 64 Bit breite Ganzzahl übergeben
+ werden kann.
+ Diese Zahl wird dann in eine BigNumber konvertiert, niederwertigste Stelle
+ mit dem Index 0.
+ Weiter gibt es einen Kopierkonstruktor.
+ Dieser wird verwendet, um ein neues BigNumberFloat-Objekt zu erzeugen,
+ indem ein Bestehendes kopiert wird.
+ Des weiteren existiert ein Kostruktor, dem als Parameter ein BigNumberInt-Objek
+t übergeben werden kann.
+ Daraus wird dann eine grosse Fliesskommazahl, die Nachkommastellen sind
+ initial alle 0.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Destruktor sorgt dafür, dass gegebenenfalls in den Konstruktoren allozierter
+ Speicher wieder freigegeben wird und dass die Archiv-Dateien des Memory-Manager
+s, welche noch auf der Harddisk liegen wieder gelöscht werden.
+ Die Implementation des Destruktors ist unbedingt nötig, da sonst Memory-Leaks
+ entstehen.
+\end_layout
+
+\begin_layout Paragraph
+Zuweisungsoperator (=)
+\end_layout
+
+\begin_layout Standard
+Auch dieser muss zwingend implementiert sein, um ein bestehendes BigNumberFloat-
+Objekt einem anderen zuzuweisen.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Die mathematischen Operatoren + und / sind dafür verantwortlich, dass mit
+ den BigNumberFloat-Objekten gerechnet werden kann.
+ Das Prinzip des schriftlichen Rechnens wird erklärt unter 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Schriftliches-Rechnen"
+
+\end_inset
+
+.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Die Vergleichsoperatoren >, >=, < und <= sind dazu da, um BigNumberFloat-Objekte
+ miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+getAt, setAt und push_back sind dem MemoryManager vorgschaltet.
+ Sie leiten die geforderten Parameter an den Memory Manager weiter, d.
+ h.
+ sie rufen die gleichnamige Methode des Memory Managers auf.
+ Dies dient dazu, dass die Algorithmen für das Speichermanagement nur im
+ Memory Manager implementiert werden müssen und nicht für jeden BigNumber-Datent
+yp.
+\end_layout
+
+\begin_layout Paragraph
+Spezielles
+\end_layout
+
+\begin_layout Itemize
+Bei einer Division durch 0 (Division by zero exception) ist das Resultat
+ immer 0.
+ Division durch 0 sollte vermieden werden, da nicht möglich.
+\end_layout
+
+\begin_layout Itemize
+Für die Division wird zur Zeit nicht der /-operator implementiert, da dieser
+ mit zwei BigNumberFloat-Objekten rechnet.
+ Um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ zu berechnen, müssen lediglich zwei Ganzzahlen dividiert werden können,
+ die eine Fliesskommazahl als Ergebnis liefern.
+ Dies wird mit der Funktion divideIntegers erreicht.
+ Die Implementation wird mit der iterativen Division gemacht, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Iterative-Division"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Addition-und-Division"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramm Memory-Manager-Package
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersMemoryManager.pdf
+	display false
+	scale 69
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Klassendiagramm Memory Manager
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CMemoryManager
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ist die Hauptklasse des Memory Managers und enthält all die Methoden, die
+ sich um die Ein-/Auslagerung einer Nummer kümmert.
+\end_layout
+
+\begin_layout Paragraph
+Klassenvariablen
+\end_layout
+
+\begin_layout Itemize
+m_archive, ist das Archiv eines BigNumber-Objekts.
+ Es enthält eine Datenstruktur (ArchiveEntries), bei der ein Datensatz eine
+ Referenz und Metadaten zu einer Auslagerungsdatei enthält.
+\end_layout
+
+\begin_layout Itemize
+m_archiveIndexInUse, speichert den Index, des gegenwärtig im RAM liegenden
+ Datenblocks der Nummer, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_archiveSize, speichert wie viele Elemente das Archiv hat.
+\end_layout
+
+\begin_layout Itemize
+m_buffer, ist das selbe wie das Archive, nur das der Buffer nur ein Element
+ speichern kann (ArchiveEntry), siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+m_bufferInUse, ist ein Flag, das aussagt, ob zur Zeit der Buffer verwendet
+ wird.
+\end_layout
+
+\begin_layout Paragraph
+Konstruktoren und Destruktor
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Es existiert ein 
+\begin_inset Quotes fld
+\end_inset
+
+Default
+\begin_inset Quotes frd
+\end_inset
+
+-Konstruktor, der ein neues MemoryManager-Objekt erstellt und sich um die
+ Initialisierung der Klassenvariablen kümmert.
+ Weiter gibt es einen Kopierkonstruktor.
+ Dieser wird verwendet, um ein neues MemoryManager-Objekt zu erzeugen, indem
+ ein bestehendes kopiert wird.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Destruktor kümmert sich darum, gegebenenfalls in den Konstruktoren alloziert
+en Speicher wieder freizugeben.
+ Die Implementation des Destruktors ist zwingend nötig, da sonst Memory-Leaks
+ entstehen.
+\end_layout
+
+\begin_layout Paragraph
+Zuweisungsoperator (=)
+\end_layout
+
+\begin_layout Standard
+Auch dieser muss zwingend implementiert sein, um ein bestehendes MemoryManager-O
+bjekt einem anderen zuzuweisen.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+checkExistence, prüft, ob eine Datei im Filesystem vorhanden ist.
+ Gibt false zurück, falls nicht.
+\end_layout
+
+\begin_layout Itemize
+copyFile, kopiert eine Datei des Quellpfades an den Zielpfad.
+\end_layout
+
+\begin_layout Itemize
+copySwapFiles, kopiert/dupliziert alle swap-Dateien, die im Archiv oder
+ Buffer liegen.
+ Bsp.
+ für den Kopierkonstruktor oder Zuweisungsoperator notwendig.
+\end_layout
+
+\begin_layout Itemize
+createSwapFilePath, erstellt einen Zufalls-Dateinamen, mit Hilfe der Zeit
+ in Mikrosekunden und einem Zufallsgenerator.
+\end_layout
+
+\begin_layout Itemize
+deleteFile, löscht eine Datei.
+ Nimmt den Dateipfad als Parameter.
+\end_layout
+
+\begin_layout Itemize
+getAt, gibt den Wert zurück der im geforderten logischen Index der Zahl
+ liegt, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Index-Übersetzung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+getFromArchive, durch Übergabe des physischen Archive-Index, wird das ensprechen
+de Swap-File in den Arbeitsspeicher geladen.
+\end_layout
+
+\begin_layout Itemize
+getFromBuffer, das Buffer-Swap-File wird in den Arbeitsspeicher geladen.
+\end_layout
+
+\begin_layout Itemize
+getMaxArchiveIndex, gibt den höchsten Archiv-Index zurück.
+\end_layout
+
+\begin_layout Itemize
+purgeArchiveAndBuffer, diese Methode löscht alle zu diesem Memory-Manager
+ dazugehörigen Swap-Dateien.
+ Also alle Swap-Dateien (Buffer und Archive), die zu einem BigNumber-Objekt
+ gehören, da der Memory-Manager ja wiederum zu einer BigNumber gehört.
+ Die Methode wird zum expliziten 
+\begin_inset Quotes fld
+\end_inset
+
+Aufräumen
+\begin_inset Quotes frd
+\end_inset
+
+ verwendet.
+\end_layout
+
+\begin_layout Itemize
+push_back, fügt am Ende der Nummer (logischer Index) eine neue Stelle ein.
+\end_layout
+
+\begin_layout Itemize
+pushToArchive, speichert den aktuellen Nummernblock im RAM als Archiv-Datei
+ (Swap-File) ab.
+\end_layout
+
+\begin_layout Itemize
+pushToBuffer, speichert den aktuellen Nummernblock im RAM als Buffer-Datei
+ (Swap-File) ab.
+\end_layout
+
+\begin_layout Itemize
+readFile, liest eine Datei ein.
+\end_layout
+
+\begin_layout Itemize
+setAt, speichert den Wert an der im geforderten logischen Index liegenden
+ Stelle, Funktionsprinzip siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Index-Übersetzung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+translateIndex, ist die Schlüsselfunktion für die korrekte Index-Übersetzung.
+ Der Funktion wird der logische Index einer BigNumber übergeben.
+ Zurückgeliefert wird ein Pair mit Archchive-Index-Nummer und physischem
+ Zahlenindex.
+\end_layout
+
+\begin_layout Itemize
+writeFile, schreibt eine Datei aufs Filesystem, an als Parameter übergebene
+ Lokation.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CArchiveEntry
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie es der Name schon sagt, handelt es sich hierbei um eine reine Model-Klasse,
+ die für die Datenhaltung eines einzelnen Archiveintrages zuständig ist.
+\end_layout
+
+\begin_layout Paragraph
+Klassenvariablen
+\end_layout
+
+\begin_layout Itemize
+m_elementsCount, Anzahl der Stellen, die der Datensatz enthält.
+\end_layout
+
+\begin_layout Itemize
+m_filePath, Pfadangabe zur Swap-Datei im Filesystem
+\end_layout
+
+\begin_layout Itemize
+m_index, Archive Index, damit der Datensatz vom Memory Manager adressiert
+ werden kann.
+\end_layout
+
+\begin_layout Itemize
+m_rangeEnd, letzte Stelle, die im Datensatz enthalten ist (logischer Index).
+\end_layout
+
+\begin_layout Itemize
+m_rangeStart, erste Stelle, die im Datensatz enthalten ist (logischer Index).
+\end_layout
+
+\begin_layout Paragraph
+Konstruktoren und Destruktor
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{sloppypar} 
+\backslash
+tolerance 9999
+\end_layout
+
+\end_inset
+
+Es existiert ein 
+\begin_inset Quotes fld
+\end_inset
+
+Default
+\begin_inset Quotes frd
+\end_inset
+
+-Konstruktor, der ein neues ArchiveEntry-Objekt erstellt und sich um die
+ Initialisierung der Klassenvariablen kümmert.
+ Weiter gibt es einen Kopierkonstruktor.
+ Dieser wird verwendet, um ein neues ArchiveEntry-Objekt zu erzeugen, indem
+ ein bestehendes kopiert wird.
+ Es gibt auch einen Konstruktor, dem gleich alle Werte für die Initialisierung
+ der Klassenvariablen übergeben werden können.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{sloppypar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Destruktor kümmert sich darum, gegebenenfalls in den Konstruktoren alloziert
+en Speicher wieder freizugeben.
+ Die Implementation des Destruktors ist zwingend nötig, da sonst Memory-Leaks
+ entstehen können.
+\end_layout
+
+\begin_layout Paragraph
+Zuweisungsoperator (=)
+\end_layout
+
+\begin_layout Standard
+Auch dieser muss zwingend implementiert sein, um ein bestehendes ArchiveEntry-Ob
+jekt einem anderen zuzuweisen.
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramm Input/Output-Package
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersInputOutput.pdf
+	display false
+	scale 69
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Klassendiagramm Input/Output
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CValidator
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ist die Klasse, die für die Validierung des errechneten Resultats zuständig
+ ist.
+ Es kann mit einer in der Konfigurationsdatei spezifizierten Datei das errechnet
+e Resultat überprüft werden.
+ Siehe auch in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Validierung-des-Resultats"
+
+\end_inset
+
+.
+ Ob der Validator verwendet wird, kann in der Konfigurationsdatei angegeben
+ werden (verification_enabled).
+\end_layout
+
+\begin_layout Paragraph
+Klassenvariablen
+\end_layout
+
+\begin_layout Itemize
+m_pValidationNumber, speichert die Validierungszahl aus der Validierungsdatei.
+\end_layout
+
+\begin_layout Paragraph
+Konstruktor und Destruktor
+\end_layout
+
+\begin_layout Standard
+Der 
+\begin_inset Quotes fld
+\end_inset
+
+Default
+\begin_inset Quotes frd
+\end_inset
+
+-Konstruktor initialisiert die Klassenvariable m_pValidationNumber.
+ Es wird die in der Konfigurationsdatei spezifizierte Validierungsdatei
+ eingelesen.
+\end_layout
+
+\begin_layout Standard
+Der Destruktor kümmert sich darum, gegebenenfalls in den Konstruktoren alloziert
+en Speicher wieder freizugeben und um die Archiv-Dateien des Memory-Managers,
+ welche noch auf der Harddisk liegen wieder zu löschen.
+ Die Implementation des Destruktors ist zwingend nötig, da sonst Memory-Leaks
+ entstehen.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+validateResult, nimmt das berechnete Resultat als BigNumber-Objekt entgegen
+ und validiert dieses mit der Validierungsnummer.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CFileOutput
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wird verwendet, um von BigNumber-Int und BigNumber-Float Objekten eine Lesbare
+ Datei zu schreiben.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+wirteHumanFile, der Methode kann eine BigNumber-Referenz übergeben werden.
+ Danach wird die BigNumber an den in der Konfigurationsdatei spezifizierten
+ Ort geschrieben.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CScreenOutput
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ist eine Klasse, die für die Konsolenausgabe zuständig ist.
+ Alle Ausgaben auf der Konsole sollten über Methoden dieser Klasse gemacht
+ werden.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+convertFloat, wird verwendet um eine Fliesskommazahl in eine Zeichenkette
+ (String) umzuwandeln.
+ Is notwendig, um zusammengesetzte Strings in Kombination mit Zahlen zu
+ erstellen.
+\end_layout
+
+\begin_layout Itemize
+convertInt, wird verwendet um eine Ganzzahl in eine Zeichenkette (String)
+ umzuwandeln.
+ Is notwendig, um zusammengesetzte Strings in Kombination mit Zahlen zu
+ erstellen.
+\end_layout
+
+\begin_layout Itemize
+getInstance, spezielle Methode für das Singleton-Pattern.
+ Wird verwendet, um einerseits die einzelne Instanz zu erzeugen oder, wenn
+ dies schon geschehen ist, darauf zuzugreifen.
+\end_layout
+
+\begin_layout Itemize
+show, der Methode kann ein einzelner String oder ein Vector von Strings
+ übergeben werden, welche/r dann in der Standard-Konsole angezeigt wird/werden.
+\end_layout
+
+\begin_layout Itemize
+showError, der Methode kann ein einzelner String oder ein Vector von Strings
+ übergeben werden, welche/r dann in der Standard-Fehlerkonsole angezeigt
+ wird/werden.
+\end_layout
+
+\begin_layout Itemize
+showSplashScreen, diese Methode reflektiert dem Benutzer mittels Konsolenausgabe
+ die spezifizierten Parameter in der Konfigurationsdatei.
+ Wird nur am Anfang des Programms aufgerufen
+\end_layout
+
+\begin_layout Paragraph
+Spezielles
+\end_layout
+
+\begin_layout Standard
+Die Klasse ist geäss dem Singleton-Pattern implementiert.
+ Für die globale Verwendung eines Objekts im gesamten Programm.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaSingleton}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klassen 
+\begin_inset Quotes fld
+\end_inset
+
+CConfigFile
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+CChameleon
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Diese Klassen stammen von R.
+ Nyffenegger
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{configFileC}
+\end_layout
+
+\end_inset
+
+ und wurden für die Verwendung in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+fein modifiziert.
+ Es wird deshalb an dieser Stelle nicht näher auf jede Methode eingegangen.
+ Für nähere Informationen kann auch die Website, welche im Literaturverzeichnis
+ gelistet ist konsultiert werden.
+\end_layout
+
+\begin_layout Standard
+Der relative Pfad zur Konfigurationsdatei ist mittels #define im Klassenheader
+ definiert.
+ Die Klassen sind für das Parsen der Konfigurationsdatei zuständig.
+ Mit den Getter-Methoden, die hier ausnahmsweise aufgeführt sind, kann so
+ auf die Parameter in der Konfigurationsdatei zugegriffen werden.
+ Vergleiche 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Entwurf-der-Konfigurationsdatei"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Paragraph
+Spezielles
+\end_layout
+
+\begin_layout Standard
+Es existiert für die gesamte Anwendung genau nur eine Konfigurationsdatei.
+ Deshalb wird auch hier wieder ein Singleton-Pattern eingesetzt, um global
+ auf ein und dieselbe Konfigurationsdatei zugreifen zu können.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{WikipediaSingleton}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramm Math-Package
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersMath.pdf
+	display false
+	scale 69
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Klassendiagramm Math
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CBigNumberIntMath
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Klasse enthält mathematische Funktionen für ganzzahlige BigNumbers.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+fact, Berechnet die Fakultät der übergebenen Zahl und gibt das Resultat
+ als BigNumber-Objekt zurück.
+\end_layout
+
+\begin_layout Subsubsection
+Klasse 
+\begin_inset Quotes fld
+\end_inset
+
+CEuler
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Klasse enthält die Formel zur Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+, siehe auch 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Taylorreihe"
+
+\end_inset
+
+.
+ Die Klasse arbeitet hauptsächlich mit BigNumber-Objekten.
+\end_layout
+
+\begin_layout Paragraph
+Methoden
+\end_layout
+
+\begin_layout Itemize
+calculateE, rechnet 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ aus und gibt 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ als BigNumberFloat-Objekt zurück.
+\end_layout
+
+\begin_layout Subsection
+Klassendiagramm Gesamtübersicht
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersAll.pdf
+	display false
+	scale 69
+	clip
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Gesamtes Klassendiagramm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Vereinfachtes Sequenzdiagramm
+\end_layout
+
+\begin_layout Standard
+Das nachfolgende Sequenzdiagramm ist eine vereinfachte Darstellung des Hauptprog
+rammablaufs, um den Ablauf der Berechnung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ etwas klarer aufzuzeigen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _uml/powerInNumbersSequency.pdf
+	display false
+	scale 63
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Sequenzdiagramm
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

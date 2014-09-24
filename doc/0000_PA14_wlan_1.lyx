@@ -1,0 +1,385 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\begin_preamble
+% Sprachpaket
+\usepackage{ngerman}
+
+% Variabeln
+\newcommand{\myTitle}{Performance-Evaluation Ethernet für Echtzeit-Datenerfassung}
+\newcommand{\myProgName}{powerInNumbers}
+
+% Package fuer Gesamtseitenzahl
+\usepackage{lastpage}
+
+% Kopf- und Fusszeilendefinition
+\lhead{\includegraphics[scale=1.0]{_img/InES_small.png}}
+\rhead{\nouppercase{\rightmark}}
+\chead{}
+\lfoot{\myTitle}
+\rfoot{\thepage/\pageref{LastPage}}
+\cfoot{}
+\renewcommand{\headrulewidth}{0.1mm}
+\renewcommand{\footrulewidth}{0.1mm}
+\fancypagestyle{plain}
+
+% Ifthenpackage
+\usepackage{ifthen}
+
+% urls
+\usepackage{url}
+
+% deutsches Literaturverzeichnis
+\usepackage{bibgerm}
+
+% fuer Querseiten
+\usepackage{lscape}
+
+% code listings
+\usepackage{listings}
+\usepackage{color}
+
+% pdfBookmarks
+%\usepackage[bookmarks]{hyperref}
+\usepackage[breaklinks=true,bookmarks]{hyperref}
+
+%some plot packages
+\usepackage{pstricks} 
+\usepackage{pst-plot}
+
+% Definitionen fuer CodeListings
+\definecolor{middlegray}{rgb}{0.5,0.5,0.5}
+\definecolor{lightgray}{rgb}{0.8,0.8,0.8}
+\definecolor{orange}{rgb}{0.8,0.3,0.3}
+\definecolor{yac}{rgb}{0.6,0.6,0.1}
+\definecolor{darkgreen}{rgb}{0.0,0.6,0.0}
+\definecolor{gray}{rgb}{0.4,0.4,0.4}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{cyan}{rgb}{0.0,0.6,0.6}
+
+% basicstyle=\scriptsize\ttfamily,
+ \lstset{
+   basicstyle=\scriptsize\ttfamily,
+   keywordstyle=\bfseries\ttfamily\color{blue},
+   stringstyle=\color{darkgreen}\ttfamily,
+   commentstyle=\color{middlegray}\ttfamily,
+   emph={square}, 
+   emphstyle=\color{orange}\texttt,
+   emph={[2]root,base},
+   emphstyle={[2]\color{yac}\texttt},
+   showstringspaces=false,
+   flexiblecolumns=false,
+   tabsize=2,
+   numbers=left,
+   numberstyle=\tiny,
+   numberblanklines=true,
+   stepnumber=1,
+   breaklines=true,
+   numbersep=10pt,
+   xleftmargin=15pt,
+   %frame=single
+ }
+
+% Sprache XML definieren fuer das Syntaxhighlighting
+\lstdefinelanguage{XML}
+{
+  morestring=[b]",
+  morestring=[s]{>}{<},
+  morecomment=[s]{<?}{?>},
+  stringstyle=\color{black},
+  identifierstyle=\color{blue},
+  keywordstyle=\color{cyan}
+  %morekeywords={xmlns,version,type}% list your attributes here
+}
+
+% farbige Tabellen
+\usepackage{colortbl}
+
+% Algorithmen
+\usepackage[Algorithmus]{algorithm}
+
+% Umbrueche in URLs
+\usepackage{breakurl}
+
+% \ThisTileWallPaper{}
+\usepackage{wallpaper}
+
+% \usepackage{epstopdf}
+
+% to include pdfs as graphic
+\usepackage{graphicx}
+
+\usepackage{eso-pic}
+\newcommand\BackgroundPic{
+\put(0,0){
+\parbox[b][\paperheight]{\paperwidth}{%
+\vfill
+\centering
+\includegraphics[width=\paperwidth,height=\paperheight,
+keepaspectratio]{_img/InES.pdf}%
+\vfill
+}}}
+\end_preamble
+\use_default_options true
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry true
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip bigskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "_tex/titlepage.tex"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "001_Abstract.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "002_Vorwort.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Teil I}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Vorarbeiten, Planung
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "003_chapter01.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "004_chapter02.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Teil II}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Engineering
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "005_chapter03.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Teil III}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Realisierung
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "006_chapter04.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "007_chapter05.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Teil IV}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Anhang
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "099_appendix.lyx"
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
