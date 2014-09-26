@@ -1,0 +1,3 @@
+package ethernethsr;
+
+@license(LGPL);

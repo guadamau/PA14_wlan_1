@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<simulation_behaviour>
+    <source>00-15-12-14-??-??
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.00001</startzeit>            
+            <stopzeit>0.01</stopzeit>            
+            <last>99.0</last>
+            <maxlast>100.0</maxlast>
+            
+            <destination>FF-FF-FF-FF-FF-FF</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>       
+</simulation_behaviour>

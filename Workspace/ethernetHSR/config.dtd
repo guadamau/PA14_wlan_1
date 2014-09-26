@@ -1,0 +1,14 @@
+		
+<!ELEMENT test			(source)>
+<!ELEMENT source		(cpu)>
+<!ELEMENT cpu			(#PCDATA, paket)>
+<!ELEMENT paket			(typ, verhalten, startzeit, stopzeit, destination, interval, last, paketgroesse)>
+<!ELEMENT typ			(#PCDATA)>
+<!ELEMENT verhalten		(#PCDATA)>
+<!ELEMENT startzeit		(#PCDATA)>
+<!ELEMENT stopzeit		(#PCDATA)>
+<!ELEMENT destination	(#PCDATA)>
+<!ELEMENT interval	(#PCDATA)>
+<!ELEMENT last			(#PCDATA)>
+<!ELEMENT paketgroesse	(#PCDATA)>
+

@@ -1,0 +1,151 @@
+%description:
+Teste die CPU
+Mit diesem Test wird einerseits geprüft ob die CPU das Empfangen 
+von Paketen richtig an den Testcontroller meldet. Andererseits 
+wird geprüft ob die CPU geplante Pakete im richtigen Format und 
+zur richtigen Zeit absendet. Die CPU wird angewiesen für alle 
+Lastmuster Pakete zu generieren. Das Testmodul prüft ob alle 
+Pakete richtig von der CPU versendet werden. Zudem schickt das 
+Testmodul selbst Pakete an die CPU und prüft in der Simulationsausgabe 
+ob diese richtig registriert wurden.
+Voraussetzungen: 
+TestControl muss vorhanden und auf Korrektheit geprüft sein.
+
+
+%file: test.ned
+import util.CPU;
+import util.testControl.TestControl;
+
+simple Test
+{
+	gates:
+    	input in[];
+    	output out[];
+}
+
+network TestNet
+{
+    submodules:
+        dut: CPU
+        {
+        	myAddress = "00:00:00:11:00:00";
+        	xmlparam = xmldoc("../../TestCpu.xml"); 
+        }
+        tester: Test;
+        TestControl1 : TestControl;
+    connections:
+        dut.gate$i <-- tester.out++;
+        dut.gate$o --> tester.in++;
+}
+
+%includes:
+#include <omnetpp.h>
+#include "EtherFrame_m.h"
+#include "MACAddress.h"
+#include "dataMessage_m.h"
+//#include "hsrDefines.h"
+#include "TestControl.h"
+
+%global:
+EthernetIIFrame *createFrame(const char *name, int64 length, int etherType, MACAddress dest, MACAddress src)
+{
+    EthernetIIFrame *frm;
+    frm = new EthernetIIFrame(name,0);
+    frm->setByteLength(ETHER_MAC_FRAME_BYTES);
+    frm->setEtherType(etherType);
+    frm->setDest(dest);
+    frm->setSrc(src);
+    
+    dataMessage *result_messageData = new dataMessage("std");
+    result_messageData->setCounter(42);
+    result_messageData->setSendTime(simTime().dbl());
+    result_messageData->setByteLength(length);
+    
+    frm->encapsulate(result_messageData);
+    return frm;
+}
+
+
+%activity:
+
+TestControl *tc = NULL;
+//tc =  check_and_cast<TestControl *>(getParentModule()->getSubmodule("TestControl1")); 
+    cModule *calleeModule = getParentModule();
+    while (calleeModule != NULL)
+    {
+        //EV<< "getClassName():  " << calleeModule->getFullName() << " \n";
+        if(calleeModule->getParentModule() != NULL)
+        {
+            calleeModule= calleeModule->getParentModule();
+        }
+        else
+        {
+            break;
+        }
+    }
+    if(calleeModule != NULL)
+    {
+        calleeModule = calleeModule->getSubmodule("TestControl1"); //TODO: Namen als Parameter übergeben
+        tc = check_and_cast<TestControl *>(calleeModule);
+    }
+  //EV << "tc: " << tc << " \n";   
+MACAddress myAddr("00-00-00-00-00-02");
+tc->registerCPU(myAddr);
+
+EthernetIIFrame *testframe = createFrame("CT3",130,0x8000,	MACAddress("00:00:00:11:00:00"),MACAddress("00:00:00:00:00:03")) ;
+tc->registerSEND(myAddr, testframe->dup(), 0);
+    
+
+send(createFrame("CT1",0,0x8000,	MACAddress("00:00:00:00:00:03"),MACAddress("00:00:00:00:00:01")),		gate("out",0));
+send(createFrame("CT2",100,0x8000,	MACAddress("00:00:00:11:00:00"),MACAddress("00:00:00:00:00:02")),		gate("out",0));
+send(testframe,		gate("out",0));
+
+
+
+simtime_t timeout = 100.0;
+while (true)
+{
+	cMessage *msg = receive( timeout );
+	if (msg==NULL)
+	{
+    	break;
+	}
+    EthernetIIFrame *frm = check_and_cast<EthernetIIFrame *> (msg);
+    dataMessage *dat = check_and_cast<dataMessage *> (frm->decapsulate());
+    ev << "< " << simTime() << " " << frm->getName() << " " << frm->getByteLength() << " " << frm->getDest() << " " << frm->getSrc() << " " << frm->getEtherType() << " " << dat->getSendTime() << " " << dat->getByteLength() << " " << dat->getCounter() << " >\n";
+    delete msg;
+    delete dat;
+}
+
+%inifile: test.ini
+[General]
+network = TestNet
+**.dut.cmdenv-ev-output = true
+**.tester.cmdenv-ev-output = true
+**.cmdenv-ev-output = false
+cmdenv-express-mode = false
+cmdenv-event-banners = false
+
+
+
+%exitcode: 0
+
+%contains: stdout
+CPU: 00-00-00-11-00-00 Missroutet Message ARRIVED! Gate: gate
+PAKET OHNE ABSENDER ANGEKOMMEN BEI CPU 00-00-00-11-00-00: source: 00-00-00-00-00-01 destination: 00-00-00-00-00-03 sendtime: 0 senderCPU: 00-00-00-11-00-00
+PAKET OHNE ABSENDER ANGEKOMMEN BEI CPU 00-00-00-11-00-00: source: 00-00-00-00-00-02 destination: 00-00-00-11-00-00 sendtime: 0 senderCPU: 00-00-00-11-00-00
+< 1 eth 18 00-15-12-14-88-04 00-00-00-11-00-00 2048 1 120 0 >
+< 1.01 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.01 130 1 >
+< 1.1 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.1 140 2 >
+< 1.101 eth 61 11-22-33-44-55-66 00-00-00-11-00-00 2048 1.101 3 3 >
+< 1.101 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.101 140 4 >
+< 1.102 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.102 140 5 >
+< 1.103 eth 61 11-22-33-44-55-66 00-00-00-11-00-00 2048 1.103 3 6 >
+< 1.103 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.103 140 7 >
+< 1.104 eth 18 FF-FF-FF-FF-FF-FF 00-00-00-11-00-00 2048 1.104 140 8 >
+< 1.105 eth 61 11-22-33-44-55-66 00-00-00-11-00-00 2048 1.105 3 9 >
+< 1.107 eth 61 11-22-33-44-55-66 00-00-00-11-00-00 2048 1.107 3 10 >
+< 17 eth 18 00-15-12-14-88-99 00-00-00-11-00-00 2048 17 89 11 >
+
+
+

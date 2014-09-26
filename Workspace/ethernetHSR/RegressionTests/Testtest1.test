@@ -1,0 +1,12 @@
+%description:
+Ein kleiner Test um das Testsystem zu demonstrieren.
+Test the name and length properties of cMessage.
+
+%activity:
+cPacket * msg = new cPacket ("Joe",0);
+msg->setByteLength(456);
+ev << "length: " << msg->getByteLength() << endl;
+delete msg;
+
+%contains: stdout
+length: 456

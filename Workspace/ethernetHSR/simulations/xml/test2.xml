@@ -1,0 +1,244 @@
+<?xml version="1.0" ?>
+<simulation_behaviour>
+    <source>00-15-12-14-88-08
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>               
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-09
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-09</destination>    
+            <paketgroesse>64</paketgroesse>             
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-10
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-11
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-12
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-13
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-14
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-15
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-16
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-17
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-18
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-19
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>            
+    <source>00-15-12-14-88-20
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-21
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-22
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-23
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-24
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-25
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-26
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+    <source>00-15-12-14-88-27
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>0.1</last>
+            <maxlast>12</maxlast>            
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>    
+                                  
+</simulation_behaviour>

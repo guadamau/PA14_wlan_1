@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<simulation_behaviour>
+    <source>00-15-12-14-88-09
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>einmalig</verhalten>         <!-- zyklisch -->
+            <startzeit>0.002</startzeit>            
+            <destination>00-15-12-14-88-13</destination>    <!-- (Multicast) -->                    
+            <paketgroesse>1486</paketgroesse>               <!-- Sampled Values sind bis zu 100 Byte -->            
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-09
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>einmalig</verhalten>         <!-- zyklisch -->
+            <startzeit>0.002</startzeit>            
+            <destination>00-15-12-14-88-13</destination>    <!-- (Multicast) -->                    
+            <paketgroesse>1486</paketgroesse>               <!-- Sampled Values sind bis zu 100 Byte -->            
+        </lastmuster>                
+    </source>          
+</simulation_behaviour>

@@ -1,0 +1,88 @@
+%description:
+Teste den ForwardDelay
+Um den Delay zu testen werden insgesamt sechs Testnachrichten 
+verschickt. Zuerst drei im Cut Through Modus und danach drei 
+im Store & Forward Modus. Es werden jeweils drei verschiedene 
+Paketgrössen getestet: 0 Byte, 1 Byte und 100Byte um die 
+korrekte Verzögerungsberechnung zu verifizieren. 
+
+%file: test.ned
+import util.ForwardDelay;
+
+simple Test
+{
+	gates:
+    	input in[];
+    	output out[];
+}
+
+network TestNet
+{
+    submodules:
+        cutThrough: ForwardDelay
+        {
+        	delay = 1s;
+        	storeAndForward = false;
+        }
+        storeAndForward: ForwardDelay
+        {
+        	delay = 1s;
+        	storeAndForward = true;
+        }                
+        tester: Test;
+    connections:
+        cutThrough.in <-- tester.out++;
+        cutThrough.out --> tester.in++;
+        storeAndForward.in <-- tester.out++;
+        storeAndForward.out --> tester.in++;
+}
+
+
+
+%global:
+cPacket *createPacket(const char *name, int64 length)
+{
+    cPacket *msg = new cPacket(name);
+    msg->setBitLength(length);
+    return msg;
+}
+
+%activity:
+send(createPacket("CT1",0),		gate("out",0));
+send(createPacket("CT2",100),	gate("out",0));
+send(createPacket("CT3",1),		gate("out",0));
+
+send(createPacket("SF1",0),		gate("out",1));
+send(createPacket("SF2",100),	gate("out",1));
+send(createPacket("SF3",1),		gate("out",1));
+
+simtime_t timeout = 100.0;
+while (true)
+{
+	cMessage *msg = receive( timeout );
+	if (msg==NULL)
+	{
+    	break;
+	}
+    cPacket *pkg = check_and_cast<cPacket *> (msg);
+    ev << "at " << simTime() << ": " << pkg->getName() << " length=" << pkg->getBitLength() << "\n";
+    delete msg;
+}
+
+%inifile: test.ini
+[General]
+network = TestNet
+cmdenv-express-mode = false
+cmdenv-event-banners = false
+
+%exitcode: 0
+
+%contains: stdout
+at 1: CT1 length=0
+at 1: CT2 length=100
+at 1: CT3 length=1
+at 1: SF1 length=0
+at 1.00000001: SF3 length=1
+at 1.000001: SF2 length=100
+
+

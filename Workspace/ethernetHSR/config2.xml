@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<test>
+	<source>00-15-12-14-88-01
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>einmalig</verhalten>
+			<startzeit>0.0</startzeit>
+			<destination>00-15-12-14-88-04</destination>						
+			<paketgroesse>140</paketgroesse>			
+		</paket>			
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>einmalig</verhalten>
+			<startzeit>0.01</startzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>						
+			<paketgroesse>140</paketgroesse>
+		</paket>				
+	</source>
+	<source>00-15-12-14-88-07
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>einmalig</verhalten>
+			<startzeit>0.02</startzeit>
+			<destination>00-15-12-14-88-01</destination>						
+			<paketgroesse>140</paketgroesse>
+		</paket>									
+	</source>			
+</test>

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<test>
+	<source>00-15-12-14-88-14
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>gleichverteilte last</verhalten>
+			<startzeit>0.0</startzeit>
+			<stopzeit>0.005</stopzeit>
+			<destination>00-15-12-14-88-20</destination>						
+			<interval>0.001</interval>
+			<maxinterval>0.002</maxinterval>
+			<paketgroesse>140</paketgroesse>			
+		</paket>			
+			<!-- 	
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>gleichverteilte last</verhalten>
+			<startzeit>0.01</startzeit>
+			<stopzeit>0.1</stopzeit>
+			<destination>00-15-12-14-88-20</destination>						
+			<last>50.0</last>
+			<maxlast>80.0</maxlast>
+			<paketgroesse>140</paketgroesse>
+		</paket>	
+		 -->
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>gleichverteilte last</verhalten>
+			<startzeit>0.01</startzeit>
+			<stopzeit>0.04</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>						
+			<last>50.0</last>
+			<maxlast>80.0</maxlast>
+			<paketgroesse>140</paketgroesse>
+		</paket>				
+	</source>
+	<source>00-15-12-14-88-30
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>gleichverteilte last</verhalten>
+			<startzeit>0.02</startzeit>
+			<stopzeit>0.05</stopzeit>
+			<destination>00-15-12-14-88-40</destination>						
+			<last>5.0</last>
+			<maxlast>80.0</maxlast>
+			<paketgroesse>140</paketgroesse>
+		</paket>									
+	</source>			
+</test>

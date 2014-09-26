@@ -3,3 +3,8 @@ Workspace/inet/
 Workspace/tictocIDE/out/
 Workspace/tictocIDE/simulations/results/
 zhaw_bsp_doc/
+
+Workspace/ethernetHSR/.settings/
+Workspace/ethernetHSR/out/
+Workspace/ethernetHSR/simulations/results/
+Workspace/ethernetHSR/src/ethernetHSR

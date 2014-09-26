@@ -1,0 +1,208 @@
+%description:
+Teste die Duplikaterkennung
+Dieser Test die Duplikat Erkennung. Dazu werden verschiedene Frames 
+einfach, doppelt oder mehrfach an die Duplikat Erkennung gesendet. 
+Dabei wird überprüft ob sich die Erkennung richtig verhält.
+
+%file: test.ned
+import util.duplicateDetection.ListenErkennung;
+
+simple Test
+{
+	gates:
+    	input in[];
+    	output out[];
+}
+
+network TestNet
+{
+    submodules:
+        dut1: ListenErkennung
+        {
+        	ListSize = 1;
+        }
+        dut100: ListenErkennung
+        {
+        	ListSize = 100;
+        }                        
+        tester: Test;
+    connections:
+        dut1.gate$i <-- tester.out++;
+        dut1.gate$o --> tester.in++;
+        dut100.gate$i <-- tester.out++;
+        dut100.gate$o --> tester.in++;                
+}
+
+%includes:
+#include <omnetpp.h>
+#include "EtherFrame_m.h"
+#include "MACAddress.h"
+#include "dataMessage_m.h"
+#include "hsrMessage_m.h"
+#include "MessagePacker.h"
+
+//#include "hsrDefines.h"
+//#include "TestControl.h"
+
+
+%global:
+EthernetIIFrame * create_ETH_Message(int64 length, int messageCounter, MACAddress dest, MACAddress src)
+{
+	EthernetIIFrame *testframe		= NULL; 
+	EthernetIIFrame *ethTag			= NULL; 
+	vlanMessage 	*vlanTag		= NULL;
+	hsrMessage 		*hsrTag			= NULL;
+	dataMessage 	*messageData	= NULL;
+	
+	ethTag		= MessagePacker::createETHTag("ETH",dest,src);
+	messageData	= MessagePacker::createDataMessage("data",length,messageCounter);
+	testframe   = MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData);
+	MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+	return testframe;
+}
+
+EthernetIIFrame * create_ETH_VLAN_Message(int64 length, int messageCounter, MACAddress dest, MACAddress src, int user_priority, int canonical_format_indicator, int vlan_identifier)
+{
+	EthernetIIFrame *testframe		= NULL; 
+	EthernetIIFrame *ethTag			= NULL; 
+	vlanMessage 	*vlanTag		= NULL;
+	hsrMessage 		*hsrTag			= NULL;
+	dataMessage 	*messageData	= NULL;
+	
+	ethTag		= MessagePacker::createETHTag("ETH",dest,src);
+	vlanTag		= MessagePacker::createVLANTag("vlan", user_priority, canonical_format_indicator, vlan_identifier);
+	messageData	= MessagePacker::createDataMessage("data",length,messageCounter);
+	testframe   = MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData);
+	MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+	return testframe;
+}
+EthernetIIFrame * create_ETH_HSR_Message(int64 length, int messageCounter, MACAddress dest, MACAddress src, unsigned int ringID, unsigned int sequenceNum)
+{
+	EthernetIIFrame *testframe		= NULL; 
+	EthernetIIFrame *ethTag			= NULL; 
+	vlanMessage 	*vlanTag		= NULL;
+	hsrMessage 		*hsrTag			= NULL;
+	dataMessage 	*messageData	= NULL;
+	
+	ethTag		= MessagePacker::createETHTag("ETH",dest,src);
+	hsrTag		= MessagePacker::createHSRTag("HSR", ringID, sequenceNum);
+	messageData	= MessagePacker::createDataMessage("data",length,messageCounter);
+	testframe   = MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData);
+	MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+	return testframe;
+}
+EthernetIIFrame * create_ETH_VLAN_HSR_Message(int64 length, int messageCounter, MACAddress dest, MACAddress src, unsigned int ringID, unsigned int sequenceNum, int user_priority, int canonical_format_indicator, int vlan_identifier)
+{
+	EthernetIIFrame *testframe		= NULL; 
+	EthernetIIFrame *ethTag			= NULL; 
+	vlanMessage 	*vlanTag		= NULL;
+	hsrMessage 		*hsrTag			= NULL;
+	dataMessage 	*messageData	= NULL;
+	
+	ethTag		= MessagePacker::createETHTag("ETH",dest,src);
+	vlanTag		= MessagePacker::createVLANTag("vlan", user_priority, canonical_format_indicator, vlan_identifier);
+	hsrTag		= MessagePacker::createHSRTag("HSR", ringID, sequenceNum);
+	messageData	= MessagePacker::createDataMessage("data",length,messageCounter);
+	testframe   = MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData);
+	MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+	return testframe;
+}
+
+
+
+%activity:
+EthernetIIFrame *testframe1		= NULL; 
+EthernetIIFrame *testframe2		= NULL; 
+EthernetIIFrame *ethTag			= NULL; 
+vlanMessage 	*vlanTag		= NULL;
+hsrMessage 		*hsrTag			= NULL;
+dataMessage 	*messageData	= NULL;
+
+
+/*
+TEST 1
+*/
+//zwei normale frames, müssen durchgereicht werden
+send(create_ETH_Message(89, 1, MACAddress("00:00:00:00:00:01"),MACAddress("00:00:00:00:00:02")),gate("out",0));
+send(create_ETH_Message(89, 2, MACAddress("00:00:00:00:00:02"),MACAddress("00:00:00:00:00:03")),gate("out",0));
+
+/*
+TEST 2
+*/
+//sende zwei mal das selbe Frame, da es aber keinen HSR Tag besitzt wird es durchgelassen 
+testframe1   = create_ETH_Message(89, 3, MACAddress("00:00:00:00:00:03"),MACAddress("00:00:00:00:00:01"));
+send(testframe1->dup(), gate("out",0));
+send(testframe1, gate("out",0));
+
+/*
+TEST 3
+*/
+//sende zwei mal das selbe Frame, da es aber einen HSR Tag besitzt wird es nur ein mal durchgelassen 
+testframe1   = create_ETH_HSR_Message(89, 4, MACAddress("00:00:00:00:00:04"),MACAddress("00:00:00:00:00:01"),3,0);
+send(testframe1->dup(), gate("out",0));
+send(testframe1->dup(), gate("out",0));
+
+//sende zwei mal das selbe Frame, da es aber einen HSR Tag besitzt wird es nur ein mal durchgelassen 
+testframe2   = create_ETH_HSR_Message(89, 5, MACAddress("00:00:00:00:00:04"),MACAddress("00:00:00:00:00:01"),3,1);
+send(testframe2->dup(), gate("out",0));
+send(testframe2, gate("out",0));
+
+//sende zwei mal das selbe Frame wie ganz am anfang, da die Liste aber nur ein Duplikat erkennen kann wird es einmal durchgelassen
+send(testframe1->dup(), gate("out",0));
+send(testframe1, gate("out",0));
+
+
+/*
+TEST 4
+*/
+//sende zwei mal das selbe Frame, da es aber einen HSR Tag besitzt wird es nur ein mal durchgelassen 
+testframe1   = create_ETH_HSR_Message(89, 6, MACAddress("00:00:00:00:00:04"),MACAddress("00:00:00:00:00:01"),3,0);
+send(testframe1->dup(), gate("out",1));
+send(testframe1->dup(), gate("out",1));
+
+//sende zwei mal das selbe Frame, da es aber einen HSR Tag besitzt wird es nur ein mal durchgelassen 
+testframe2   = create_ETH_HSR_Message(89, 7, MACAddress("00:00:00:00:00:04"),MACAddress("00:00:00:00:00:01"),3,1);
+send(testframe2->dup(), gate("out",1));
+send(testframe2, gate("out",1));
+
+//sende zwei mal das selbe Frame wie ganz am anfang, da die Liste aber nur ein Duplikat erkennen kann wird es einmal durchgelassen
+send(testframe1->dup(), gate("out",1));
+send(testframe1, gate("out",1));
+
+
+//Ausgabe
+simtime_t timeout = 100.0;
+while (true)
+{
+	cMessage *msg = receive( timeout );
+	if (msg==NULL)
+	{
+    	break;
+	}
+    ethTag = check_and_cast<EthernetIIFrame *> (msg);
+    MessagePacker::decapsulateMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+    ev << "< " << simTime() << " " << ethTag->getName() << " " << ethTag->getByteLength() << " " << ethTag->getDest() << " " << ethTag->getSrc() << " " << ethTag->getEtherType() << " " << messageData->getSendTime() << " " << messageData->getByteLength() << " " << messageData->getCounter() << " >\n";
+	MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+}
+
+%inifile: test.ini
+[General]
+network = TestNet
+cmdenv-express-mode = false
+cmdenv-event-banners = false
+
+%exitcode: 0
+
+%contains: stdout
+ limitCheck error: Duplikat verpasst !
+< 0 ETH 18 00-00-00-00-00-01 00-00-00-00-00-02 2048 0 89 1 >
+< 0 ETH 18 00-00-00-00-00-02 00-00-00-00-00-03 2048 0 89 2 >
+< 0 ETH 18 00-00-00-00-00-03 00-00-00-00-00-01 2048 0 89 3 >
+< 0 ETH 18 00-00-00-00-00-03 00-00-00-00-00-01 2048 0 89 3 >
+< 0 ETH 18 00-00-00-00-00-04 00-00-00-00-00-01 35067 0 89 4 >
+< 0 ETH 18 00-00-00-00-00-04 00-00-00-00-00-01 35067 0 89 5 >
+< 0 ETH 18 00-00-00-00-00-04 00-00-00-00-00-01 35067 0 89 4 >
+< 0 ETH 18 00-00-00-00-00-04 00-00-00-00-00-01 35067 0 89 6 >
+< 0 ETH 18 00-00-00-00-00-04 00-00-00-00-00-01 35067 0 89 7 >
+
+

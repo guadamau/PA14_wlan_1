@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+
+<!-- 
+An den in 9-2 beschriebene Prozessbus können bis zu 8 Messeinheiten angeschlossen werden, 
+welche mit einer Abtastfrequenz von 4 oder 4.8 kHz Messdaten (Sampled Values) generieren 
+und diese zyklisch alle 250 µs bzw. 208 µs per Multicast 
+an eine bis zwei Empfangseinheiten (Merging Units) schicken. 
+Sampled Values sind bis zu 100 Byte grosse, mit einem VLAN Tag  versehene Layer 2 Frames. 
+Die  zyklische Übertragung der SV könnte dazu führen, dass der Bus mit massiven Bursts belastet wird. 
+Um diesem Effekt entgegen zu wirken und eine gleichmässige Netzauslastung zu erhalten 
+wird mit Hilfe von PTP jedem Knoten eine andere Zyklusstartzeit zugeteilt. 
+ -->
+
+<test>
+	<source>00-15-12-14-88-01
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000208</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-02
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000230</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-03
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000252</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-04
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000274</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-05
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000296</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-06
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000318</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-07
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000340</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-08
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>konstante last</verhalten>			<!-- zyklisch -->
+			<startzeit>0.000362</startzeit>
+			<stopzeit>0.01</stopzeit>
+			<destination>FF-FF-FF-FF-FF-FF</destination>	<!-- (Multicast) -->					
+			<paketgroesse>91</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->
+			<interval>0.000208</interval> 					<!-- 208 µs -->	
+			<vlan>123</vlan> 	
+		</paket>				
+	</source>		
+	<source>00-15-12-14-88-09
+		<paket>
+			<typ>hsr</typ>
+			<verhalten>einmalig</verhalten>			<!-- zyklisch -->
+			<startzeit>0.002</startzeit>			
+			<destination>00-15-12-14-88-04</destination>	<!-- (Multicast) -->					
+			<paketgroesse>1486</paketgroesse>				<!-- Sampled Values sind bis zu 100 Byte -->			
+		</paket>				
+	</source>			
+	
+</test>

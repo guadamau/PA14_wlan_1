@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<simulation_behaviour>
+    <source>00-15-12-14-??-??
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.00001</startzeit>            
+            <stopzeit>0.01</stopzeit>            
+            <last>8.0</last>
+            <maxlast>12.0</maxlast>
+            
+            <destination>FF-FF-FF-FF-FF-FF</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.01</startzeit>            
+            <stopzeit>0.02</stopzeit>            
+            <last>16.0</last>
+            <maxlast>24.0</maxlast>
+            
+            <destination>FF-FF-FF-FF-FF-FF</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.02</startzeit>            
+            <stopzeit>0.03</stopzeit>            
+            <last>1.0</last>
+            <maxlast>2.0</maxlast>
+            
+            <destination>FF-FF-FF-FF-FF-FF</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.03</startzeit>            
+            <stopzeit>0.04</stopzeit>            
+            <last>1.0</last>
+            <maxlast>99.0</maxlast>
+            
+            <destination>FF-FF-FF-FF-FF-FF</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                  
+    </source>                       
+</simulation_behaviour>
