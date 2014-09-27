@@ -151,7 +151,7 @@ MessagePacker::generateEthMessage(EthernetIIFrame *ethTag, vlanMessage *vlanTag,
 void
 MessagePacker::deleteMessage(EthernetIIFrame **ethMessage, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
 {
-    if (*ethMessage != NULL)
+    if ( *ethMessage != NULL)
     {
         delete *ethMessage;
     }
@@ -163,11 +163,14 @@ MessagePacker::deleteMessage(EthernetIIFrame **ethMessage, vlanMessage **vlanTag
     }
     *vlanTag = NULL;
 
-    if (*hsrTag != NULL)
+    if( hsrTag != NULL )
     {
-        delete *hsrTag;
+        if (*hsrTag != NULL)
+        {
+            delete *hsrTag;
+        }
+        *hsrTag = NULL;
     }
-    *hsrTag = NULL;
 
     if (*messageData != NULL)
     {

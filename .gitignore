@@ -7,4 +7,5 @@ zhaw_bsp_doc/
 Workspace/ethernetHSR/.settings/
 Workspace/ethernetHSR/out/
 Workspace/ethernetHSR/simulations/results/
+Workspace/ethernetHSR/simulations/.tkenvrc
 Workspace/ethernetHSR/src/ethernetHSR

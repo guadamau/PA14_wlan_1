@@ -1,4 +1,8 @@
 #!/bin/sh
 cd `dirname $0`
-../src/ethernethsr -n .:../src $*
+
+# execute directly
+# ../src/ethernethsr -n .:../src $*
+
 # for shared lib, use: opp_run -l ../src/ethernethsr -n .:../src $*
+opp_run -l ../src/ethernethsr -n .:../src $*
