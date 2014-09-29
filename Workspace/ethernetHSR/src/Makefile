@@ -2,7 +2,7 @@
 # OMNeT++/OMNEST Makefile for ethernetHSR
 #
 # This file was generated with the command:
-#  opp_makemake -f --deep -I../../inet/src/linklayer/ethernet -I../../inet/src/linklayer/ieee80211/radio -I../../inet/src/networklayer/routing/aodv -I../../inet/src/networklayer/common -I../../inet/src -I../../inet/src/networklayer/icmpv6 -I../../inet/src/world/obstacles -I../../inet/src/networklayer/xmipv6 -I../../inet/src/networklayer/contract -I../../inet/src/networklayer/autorouting/ipv4 -I../../inet/src/util -I../../inet/src/transport/contract -I../../inet/src/linklayer/common -I../../inet/src/status -I../../inet/src/linklayer/radio/propagation -I../../inet/src/linklayer/ieee80211/radio/errormodel -I../../inet/src/linklayer/radio -I../../inet/src/util/headerserializers/tcp -I../../inet/src/networklayer/ipv4 -I../../inet/src/mobility/contract -I../../inet/src/util/headerserializers/ipv4 -I../../inet/src/base -I../../inet/src/util/headerserializers -I../../inet/src/world/radio -I../../inet/src/linklayer/ieee80211/mac -I../../inet/src/transport/sctp -I../../inet/src/networklayer/ipv6 -I../../inet/src/util/headerserializers/udp -I../../inet/src/networklayer/ipv6tunneling -I../../inet/src/applications/pingapp -I../../inet/src/battery/models -I../../inet/src/util/headerserializers/ipv6 -I../../inet/src/util/headerserializers/sctp -I../../inet/src/linklayer/contract -I../../inet/src/networklayer/arp -I../../inet/src/transport/tcp_common -I../../inet/src/transport/udp -L../../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../../inet
+#  opp_makemake -f --deep -I../../inet/src/transport/tcp_common -I../../inet/src/base -I../../inet/src/util -I../../inet/src/linklayer/ieee80211/mac -I../../inet/src/transport/udp -I../../inet/src/linklayer/ieee80211/radio/errormodel -I../../inet/src/util/headerserializers -I../../inet/src/linklayer/ieee80211/radio -I../../inet/src/status -I../../inet/src/transport/sctp -I../../inet/src/networklayer/icmpv6 -I../../inet/src/linklayer/radio/propagation -I../../inet/src/transport/contract -I../../inet/src/networklayer/ipv6tunneling -I../../inet/src/world/radio -I../../inet/src/linklayer/contract -I../../inet/src/util/headerserializers/udp -I../../inet/src/util/headerserializers/tcp -I../../inet/src/linklayer/radio -I../../inet/src/world/obstacles -I../../inet/src/networklayer/common -I../../inet/src/linklayer/ethernet -I../../inet/src/networklayer/ipv6 -I../../inet/src/networklayer/arp -I../../inet/src/networklayer/routing/aodv -I../../inet/src/networklayer/contract -I../../inet/src -I../../inet/src/networklayer/xmipv6 -I../../inet/src/util/headerserializers/sctp -I../../inet/src/util/headerserializers/ipv6 -I../../inet/src/battery/models -I../../inet/src/networklayer/autorouting/ipv4 -I../../inet/src/networklayer/ipv4 -I../../inet/src/mobility/contract -I../../inet/src/applications/pingapp -I../../inet/src/linklayer/common -I../../inet/src/util/headerserializers/ipv4 -L../../inet/out/$$\(CONFIGNAME\)/src -linet -DINET_IMPORT -KINET_PROJ=../../inet
 #
 
 # Name of target to be created (-o option)
@@ -15,43 +15,43 @@ USERIF_LIBS = $(ALL_ENV_LIBS) # that is, $(TKENV_LIBS) $(CMDENV_LIBS)
 
 # C++ include paths (with -I)
 INCLUDE_PATH = \
-    -I../../inet/src/linklayer/ethernet \
-    -I../../inet/src/linklayer/ieee80211/radio \
-    -I../../inet/src/networklayer/routing/aodv \
-    -I../../inet/src/networklayer/common \
-    -I../../inet/src \
-    -I../../inet/src/networklayer/icmpv6 \
-    -I../../inet/src/world/obstacles \
-    -I../../inet/src/networklayer/xmipv6 \
-    -I../../inet/src/networklayer/contract \
-    -I../../inet/src/networklayer/autorouting/ipv4 \
+    -I../../inet/src/transport/tcp_common \
+    -I../../inet/src/base \
     -I../../inet/src/util \
-    -I../../inet/src/transport/contract \
-    -I../../inet/src/linklayer/common \
-    -I../../inet/src/status \
-    -I../../inet/src/linklayer/radio/propagation \
+    -I../../inet/src/linklayer/ieee80211/mac \
+    -I../../inet/src/transport/udp \
     -I../../inet/src/linklayer/ieee80211/radio/errormodel \
-    -I../../inet/src/linklayer/radio \
+    -I../../inet/src/util/headerserializers \
+    -I../../inet/src/linklayer/ieee80211/radio \
+    -I../../inet/src/status \
+    -I../../inet/src/transport/sctp \
+    -I../../inet/src/networklayer/icmpv6 \
+    -I../../inet/src/linklayer/radio/propagation \
+    -I../../inet/src/transport/contract \
+    -I../../inet/src/networklayer/ipv6tunneling \
+    -I../../inet/src/world/radio \
+    -I../../inet/src/linklayer/contract \
+    -I../../inet/src/util/headerserializers/udp \
     -I../../inet/src/util/headerserializers/tcp \
+    -I../../inet/src/linklayer/radio \
+    -I../../inet/src/world/obstacles \
+    -I../../inet/src/networklayer/common \
+    -I../../inet/src/linklayer/ethernet \
+    -I../../inet/src/networklayer/ipv6 \
+    -I../../inet/src/networklayer/arp \
+    -I../../inet/src/networklayer/routing/aodv \
+    -I../../inet/src/networklayer/contract \
+    -I../../inet/src \
+    -I../../inet/src/networklayer/xmipv6 \
+    -I../../inet/src/util/headerserializers/sctp \
+    -I../../inet/src/util/headerserializers/ipv6 \
+    -I../../inet/src/battery/models \
+    -I../../inet/src/networklayer/autorouting/ipv4 \
     -I../../inet/src/networklayer/ipv4 \
     -I../../inet/src/mobility/contract \
-    -I../../inet/src/util/headerserializers/ipv4 \
-    -I../../inet/src/base \
-    -I../../inet/src/util/headerserializers \
-    -I../../inet/src/world/radio \
-    -I../../inet/src/linklayer/ieee80211/mac \
-    -I../../inet/src/transport/sctp \
-    -I../../inet/src/networklayer/ipv6 \
-    -I../../inet/src/util/headerserializers/udp \
-    -I../../inet/src/networklayer/ipv6tunneling \
     -I../../inet/src/applications/pingapp \
-    -I../../inet/src/battery/models \
-    -I../../inet/src/util/headerserializers/ipv6 \
-    -I../../inet/src/util/headerserializers/sctp \
-    -I../../inet/src/linklayer/contract \
-    -I../../inet/src/networklayer/arp \
-    -I../../inet/src/transport/tcp_common \
-    -I../../inet/src/transport/udp \
+    -I../../inet/src/linklayer/common \
+    -I../../inet/src/util/headerserializers/ipv4 \
     -I. \
     -Ichannels \
     -Icpu \
@@ -79,32 +79,32 @@ O = $(PROJECT_OUTPUT_DIR)/$(CONFIGNAME)/$(PROJECTRELATIVE_PATH)
 # Object files for local .cc and .msg files
 OBJS = \
     $O/cpu/CPU.o \
-    $O/duplicateDetection/ListenErkennung.o \
     $O/duplicateDetection/keyMSG.o \
+    $O/duplicateDetection/ListenErkennung.o \
     $O/duplicateDetection/MessageList.o \
     $O/forwardDelay/ForwardDelay.o \
     $O/mac/ModifiedEtherMACBase.o \
     $O/nodeTable/nodeTable.o \
-    $O/packer/DecapsulateMessage.o \
-    $O/packer/EncapsulateMessage.o \
     $O/packer/MessagePacker.o \
-    $O/switch/EndNodeSwitch.o \
+    $O/packer/EncapsulateMessage.o \
+    $O/packer/DecapsulateMessage.o \
     $O/switch/RedBoxSwitch.o \
+    $O/switch/EndNodeSwitch.o \
     $O/testControl/TestControl.o \
-    $O/messages/vlanMessage_m.o \
     $O/messages/hsrMessage_m.o \
+    $O/messages/cpuSelfMessage_m.o \
     $O/messages/dataMessage_m.o \
     $O/messages/prpMessage_m.o \
-    $O/messages/cpuSelfMessage_m.o \
+    $O/messages/vlanMessage_m.o \
     $O/nodeTable/nodeTableTimeoutMessage_m.o
 
 # Message files
 MSGFILES = \
-    messages/vlanMessage.msg \
     messages/hsrMessage.msg \
+    messages/cpuSelfMessage.msg \
     messages/dataMessage.msg \
     messages/prpMessage.msg \
-    messages/cpuSelfMessage.msg \
+    messages/vlanMessage.msg \
     nodeTable/nodeTableTimeoutMessage.msg
 
 # Other makefile variables (-K)

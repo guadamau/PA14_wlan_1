@@ -9,3 +9,7 @@ Workspace/ethernetHSR/out/
 Workspace/ethernetHSR/simulations/results/
 Workspace/ethernetHSR/simulations/.tkenvrc
 Workspace/ethernetHSR/src/ethernetHSR
+
+Workspace/ethernetHSR/simulations/.tkenvlog
+Workspace/tictocIDE/.gitignore
+
