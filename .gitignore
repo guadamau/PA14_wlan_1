@@ -9,7 +9,13 @@ Workspace/ethernetHSR/out/
 Workspace/ethernetHSR/simulations/results/
 Workspace/ethernetHSR/simulations/.tkenvrc
 Workspace/ethernetHSR/src/ethernetHSR
-
 Workspace/ethernetHSR/simulations/.tkenvlog
-Workspace/tictocIDE/.gitignore
 
+Workspace/PA14_wlan_1/.settings/
+Workspace/PA14_wlan_1/out/
+Workspace/PA14_wlan_1/simulations/results/
+Workspace/PA14_wlan_1/simulations/.tkenvrc
+Workspace/PA14_wlan_1/src/ethernetHSR
+Workspace/PA14_wlan_1/simulations/.tkenvlog
+
+Workspace/tictocIDE/.gitignore
