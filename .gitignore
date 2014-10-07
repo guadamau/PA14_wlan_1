@@ -1,8 +1,12 @@
 Workspace/.metadata/
 Workspace/inet/
+
+zhaw_bsp_doc/
+
 Workspace/tictocIDE/out/
 Workspace/tictocIDE/simulations/results/
-zhaw_bsp_doc/
+Workspace/tictocIDE/src/Makefile
+Workspace/tictocIDE/.gitignore
 
 Workspace/ethernetHSR/.settings/
 Workspace/ethernetHSR/out/
@@ -10,6 +14,7 @@ Workspace/ethernetHSR/simulations/results/
 Workspace/ethernetHSR/simulations/.tkenvrc
 Workspace/ethernetHSR/src/ethernetHSR
 Workspace/ethernetHSR/simulations/.tkenvlog
+Workspace/ethernetHSR/src/Makefile
 
 Workspace/PA14_wlan_1/.settings/
 Workspace/PA14_wlan_1/out/
@@ -17,5 +22,5 @@ Workspace/PA14_wlan_1/simulations/results/
 Workspace/PA14_wlan_1/simulations/.tkenvrc
 Workspace/PA14_wlan_1/src/ethernetHSR
 Workspace/PA14_wlan_1/simulations/.tkenvlog
+Workspace/PA14_wlan_1/src/Makefile
 
-Workspace/tictocIDE/.gitignore
