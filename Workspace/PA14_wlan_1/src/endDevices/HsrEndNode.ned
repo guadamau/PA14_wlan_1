@@ -1,4 +1,4 @@
-
+package endDevices;
 //
 // TODO auto-generated module
 //
@@ -12,7 +12,7 @@ import duplicateDetection.ListenErkennung;
 import mac.ModifiedEtherMACBase;
 import nodeTable.nodeTable;
 
-module EndNode3
+module HsrEndNode
 {
     parameters:
         string myAddress;

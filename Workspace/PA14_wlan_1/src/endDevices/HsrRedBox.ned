@@ -1,4 +1,4 @@
-
+package endDevices;
 //
 // TODO auto-generated module
 //
@@ -13,7 +13,7 @@ import mac.ModifiedEtherMACBase;
 
 
 
-module RedBox3
+module HsrRedBox
 {
     parameters:
         string myAddress;
