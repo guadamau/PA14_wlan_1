@@ -18,6 +18,7 @@ Workspace/ethernetHSR/src/Makefile
 
 Workspace/PA14_wlan_1/.settings/
 Workspace/PA14_wlan_1/out/
+Workspace/PA14_wlan_1/simulations/core
 Workspace/PA14_wlan_1/simulations/results/
 Workspace/PA14_wlan_1/simulations/.tkenvrc
 Workspace/PA14_wlan_1/src/ethernetHSR

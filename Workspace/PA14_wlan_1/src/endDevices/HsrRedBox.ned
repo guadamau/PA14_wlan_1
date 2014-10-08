@@ -7,8 +7,6 @@ import cpu.CPU;
 import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import switch.RedBoxSwitch;
-// import util.packer.EncapsulateMessage;
-// import util.packer.DecapsulateMessage;
 import mac.ModifiedEtherMACBase;
 
 
@@ -27,7 +25,7 @@ module HsrRedBox
     gates:
         inout gateA;  // declare two way connections
         inout gateB;  // declare two way connections
-        inout gateInterlink;  // declare two way connections   
+        inout gateInterlink @loose;  // declare two way connections
     submodules:
 
         hsrSwitch: RedBoxSwitch {

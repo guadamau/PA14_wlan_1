@@ -1,39 +1,15 @@
 ﻿<?xml version="1.0" ?>
 <simulation_behaviour>
-    <source>00-15-12-14-88-09
+    <source>00-15-12-14-88-01
         <lastmuster>
             <typ>hsr</typ>
             <verhalten>gleichverteilte last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit>            
+            <stopzeit>0.060</stopzeit>            
             <last>20</last>
             <maxlast>40</maxlast>               
-            <destination>00-15-12-14-87-08</destination>    
-            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+            <destination>00-15-12-14-88-04</destination>    
+            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->        
         </lastmuster>                
-    </source>
-    <source>00-15-12-14-88-08
-        <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>gleichverteilte last</verhalten>         
-            <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit>            
-            <last>20</last>
-            <maxlast>40</maxlast>            
-            <destination>00-15-12-14-87-09</destination>    
-            <paketgroesse>64</paketgroesse>             
-        </lastmuster>                
-    </source>
-    <source>00-15-12-14-88-14
-        <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>gleichverteilte last</verhalten>         
-            <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit>            
-            <last>20</last>
-            <maxlast>40</maxlast>            
-            <destination>00-15-12-14-87-08</destination>    
-            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
-        </lastmuster>                
-    </source>    
+    </source>  
 </simulation_behaviour>
