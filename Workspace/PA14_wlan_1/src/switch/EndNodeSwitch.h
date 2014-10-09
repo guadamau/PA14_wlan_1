@@ -37,6 +37,34 @@
  */
 class EndNodeSwitch : public cSimpleModule
 {
+  public:
+    EndNodeSwitch();
+    virtual ~EndNodeSwitch();
+
+    const cGate*& getGateAIn() const {
+        return gateAIn;
+    }
+
+    const cGate*& getGateAOut() const {
+        return gateAOut;
+    }
+
+    const cGate*& getGateBIn() const {
+        return gateBIn;
+    }
+
+    const cGate*& getGateBOut() const {
+        return gateBOut;
+    }
+
+    const cGate*& getGateCpuIn() const {
+        return gateCpuIn;
+    }
+
+    const cGate*& getGateCpuOut() const {
+        return gateCpuOut;
+    }
+
   private:
     MACAddress myAddr;
     unsigned long cntTotalSentA; //number of frames sent over network interface A
@@ -58,13 +86,8 @@ class EndNodeSwitch : public cSimpleModule
     nodeTable *endNodeTable;
     nodeTable *getNodeTable();
 
-//     ListenErkennung *listenErkennungPortA;
-//     ListenErkennung *listenErkennungPortB;
-//     ListenErkennung *listenErkennungInterlink;
-
-//     ListenErkennung *getListenErkennungPortA();
-//     ListenErkennung *getListenErkennungPortB();
-//     ListenErkennung *getListenErkennungInterlink();
+    Scheduler* sched;
+    schedulerMode schedmode;
 
     void DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
     void DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);

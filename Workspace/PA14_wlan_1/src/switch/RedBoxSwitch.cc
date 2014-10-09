@@ -97,6 +97,11 @@ void RedBoxSwitch::forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlan
 void
 RedBoxSwitch::handleMessage(cMessage *msg)
 {
+    ///////////////////////////////////////////////////////////////
+    // Will be implemented as soon as the function itself is implemented
+    ///////////////////////////////////////////////////////////////
+    // sched->enqueueMessage(msg, schedmode);
+
     cGate* arrivalGate = msg->getArrivalGate();
 
     EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);

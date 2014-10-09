@@ -14,6 +14,7 @@
 //
 
 #include "EndNodeSwitch.h"
+#include "Scheduler.h"
 
 Define_Module(EndNodeSwitch)
 ;
@@ -25,48 +26,21 @@ nodeTable *EndNodeSwitch::getNodeTable()
 
     if(calleeModule != NULL)
     {
-        calleeModule = calleeModule->getSubmodule("nodeTable"); //TODO: Namen als Parameter übergeben
+        calleeModule = calleeModule->getSubmodule("nodeTable"); //TODO: Namen als Parameter ï¿½bergeben
         return check_and_cast<nodeTable *>(calleeModule);
     }
 
     return NULL;
 }
 
-// ListenErkennung *EndNodeSwitch::getListenErkennungPortA()
-// {
-//     cModule *calleeModule = getParentModule();
-//     if(calleeModule != NULL)
-//     {
-//         calleeModule = calleeModule->getSubmodule("duplikatlistePortA"); //TODO: Namen als Parameter übergeben
-//         return check_and_cast<ListenErkennung *>(calleeModule);
-//     }
-//     return NULL;
-// }
-// ListenErkennung *EndNodeSwitch::getListenErkennungPortB()
-// {
-//     cModule *calleeModule = getParentModule();
-//     if(calleeModule != NULL)
-//     {
-//         calleeModule = calleeModule->getSubmodule("duplikatlistePortB"); //TODO: Namen als Parameter übergeben
-//         return check_and_cast<ListenErkennung *>(calleeModule);
-//     }
-//     return NULL;
-// }
-// ListenErkennung *EndNodeSwitch::getListenErkennungInterlink()
-// {
-//     cModule *calleeModule = getParentModule();
-//     if(calleeModule != NULL)
-//     {
-//         calleeModule = calleeModule->getSubmodule("duplikatlisteInterlink"); //TODO: Namen als Parameter übergeben
-//         return check_and_cast<ListenErkennung *>(calleeModule);
-//     }
-//     return NULL;
-// }
-
 
 void
 EndNodeSwitch::initialize()
 {
+    //Initialize Scheduler
+    schedmode = par("schedulerMode").stringValue();
+    sched = new Scheduler(schedmode);
+
     myAddr.setAddress(par("myAddress").stringValue());
 
     if ((myAddr.isBroadcast()) || (myAddr.isMulticast()))
@@ -88,30 +62,16 @@ EndNodeSwitch::initialize()
         throw cRuntimeError("can't load node table");
     }
 
-//     listenErkennungPortA = getListenErkennungPortA();
-//     if(listenErkennungPortA == NULL)
-//     {
-//         throw cRuntimeError("can't load ListenErkennung");
-//     }
-
-//     listenErkennungPortB = getListenErkennungPortB();
-//     if(listenErkennungPortB == NULL)
-//     {
-//         throw cRuntimeError("can't load ListenErkennung");
-//     }
-
-//     listenErkennungInterlink = getListenErkennungInterlink();
-//     if(listenErkennungInterlink == NULL)
-//     {
-//         throw cRuntimeError("can't load ListenErkennung");
-//     }
-
     gateAIn = gate("gateA$i");
     gateAOut = gate("gateA$o");
     gateBIn = gate("gateB$i");
     gateBOut = gate("gateB$o");
     gateCpuIn = gate("gateCPU$i");
     gateCpuOut = gate("gateCPU$o");
+}
+
+EndNodeSwitch::~EndNodeSwitch() {
+    delete sched;
 }
 
 void EndNodeSwitch::DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
@@ -175,22 +135,6 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
         if(((myAddr == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (myAddr != (*ethTag)->getSrc()))
         {
 	        send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), gateCpuOut);
-//             //If this is the first occurrence of the frame over the link layer interface
-//             if (listenErkennungInterlink->limitCheck((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber(), 1) == false)
-//             {
-//                 //Register the occurrence of that frame
-//                 listenErkennungInterlink->addMessage((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber());
-//                 //Remove the HSR tag and pass the modified frame to its link layer interface
-//                 //EV << "Remove the HSR tag and pass the modified frame to its link layer interface";
-//                 send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), NULL, (*messageData)), gateCpuOut);
-//             }
-//             else //(this is not the first occurrence of the frame over the link layer interface):
-//             {
-//                 //Register the occurrence of that frame
-//                 listenErkennungInterlink->addMessage((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber());
-//                 //Do not send it over the link layer interface
-//                 //EV << "Do not send it over the link layer interface";
-//             }
         }
         else //(if this node is not a destination)
         {
@@ -200,20 +144,6 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
         if(myAddr != (*ethTag)->getDest())
         {
 	        send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
-//             //If this is the first occurrence of the frame over the second port
-//             if (PortAoderB->limitCheck((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber(), 1) == false)
-//             {
-//                 //Register the occurrence of that frame
-//                 //PortAoderB->addMessage((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber());
-//                 //Enqueue the unmodified frame for sending over the second port
-//                 send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
-//             }
-//             else//(this is not the first occurrence of the frame over the second port)
-//             {
-//                 //Register the occurrence of that frame
-//                 //PortAoderB->addMessage((*ethTag)->getSrc(), (*hsrTag)->getSequencenumber());
-//                 // Discard the frame
-//             }
         }
         else//(If this node is the only (unicast) destination)
         {
@@ -227,6 +157,11 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
 void
 EndNodeSwitch::handleMessage(cMessage *msg)
 {
+    ///////////////////////////////////////////////////////////////
+    // Will be implemented as soon as the function itself is implemented
+    ///////////////////////////////////////////////////////////////
+    // sched->enqueueMessage(msg);
+
     cGate* arrivalGate = msg->getArrivalGate();
 
     EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);

@@ -22,6 +22,7 @@ simple EndNodeSwitch
 {
     parameters:      
         string myAddress;
+        string schedulerMode = default("FCFS");
         int ringID; //ring number
         @display("i=abstract/switch");
     gates:
