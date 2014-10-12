@@ -1,0 +1,339 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_PA14_wlan_1.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_math auto
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Kapitel 2: Theoretische Grundlagen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Theoretische Grundlagen
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Theoretische-Grundlagen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+OMNeT++
+\end_layout
+
+\begin_layout Standard
+OMNeT++ ist ein C++-Framework, welches es erleichtert, Netzwerke und all
+ deren Kompnenten mit einem sehr hohen Detaillierungsgrad zu modellieren
+ und den Netzwerk-Datenverkehr zu simulieren.
+ Die Simulationen können grafisch dargestellt werden.
+ Zur Auswertung der Simulationen steht eine grosse Auswahl an verschiedenen
+ Diagrammtypen zur Verfügung.
+ In dieser Projektarbeit wird die Version 4.5 verwendet.
+\end_layout
+
+\begin_layout Section
+High-availability Seamless Redundancy (HSR)
+\end_layout
+
+\begin_layout Standard
+Die Grundlagen zum Beschrieb und zur Funktionsweise des HSR-Protokolls wurden
+ alle der bestehenden Vertiefungsarbeit 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "VA_HSR_Simulation"
+
+\end_inset
+
+ entnommen.
+\end_layout
+
+\begin_layout Standard
+HSR ist ein Redundanzprotokoll für Ethernet basierte Netzwerke.
+ Im Vergleich zu weit verbreiteten Redundanzprotokollen wie z.B.
+ Rapid Spanning Tree, zeichnet sich HSR dadurch aus, dass auch im Fehlerfall
+ keine Pakete verloren gehen.
+ Im Gegensatz zu HSR braucht Rapid Spanning Tree im Fehlerfall einige Millisekun
+den bis zu mehreren Sekunden, bis das Netzwerk wieder Daten übermitteln
+ kann.
+ Für gewisse industrielle Anwendungen wie beispielsweise in der Automatisierung
+ sind solche Unterbrüche nicht tolerierbar.
+\end_layout
+
+\begin_layout Subsection
+Funktionsweise
+\end_layout
+
+\begin_layout Standard
+In einem HSR Netzwerk besitzen alle Geräte mindestens zwei Ethernet Ports.
+ Eine Quelle sendet jedes Paket auf beide Ports.
+ Im fehlerfreien Zustand kommen immer zwei oder mehr Pakete beim Ziel an.
+ Anhand einer Sequenznummer und der Quelladresse werden Duplikate erkannt
+ und verworfen.
+ Falls ein Link ausfällt, geht nur eines der Pakete verloren und die anderen
+ erreichen trotzdem noch das Ziel.
+ Auf diese Weise wird verhindert, dass es im Fehlerfall zu einem Paketverlust
+ kommt.
+\end_layout
+
+\begin_layout Subsubsection
+Duplikat Erkennung
+\end_layout
+
+\begin_layout Standard
+Die Duplikat Erkennung ist ein zentrales Element von HSR.
+ Sie sorgt einerseits dafür, dass jedes Frame nur einmal zu den höheren
+ Protokollschichten weitergegeben wird und andererseits sorgt sie dafür,
+ dass die Frames von den Netzwerkknoten nur einmal über jeden Netzwerkport
+ versendet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Die zweite Aufgabe ist kritisch.
+ Versagt die Duplikat Erkennung, werden Frames unendlich lange im Netzwerk
+ weitergeleitet.
+ Je nach Anzahl solcher Frames kann das Netzwerk dadurch völlig ausgelastet
+ werden, so dass keine Nutzdaten mehr übertragen werden können.
+ Die Duplikat Erkennung benutzt die Absender-MAC-Adresse und eine 16-Bit-Sequenz
+nummer, welche vom Sender für jedes Frame um eins inkrementiert wird.
+ Ein Knoten muss für jedes Frame 64 Bit Informationen speichern, solange
+ sich das Frame im HSR Netzwerk befindet, um Duplikate erkennen zu können.
+\end_layout
+
+\begin_layout Subsection
+Gerätetypen
+\end_layout
+
+\begin_layout Standard
+Die folgende Abbildung zeigt ein Beispielnetzwerk mit allen Gerätetypen,
+ die mit einem HSR Netzwerk verbunden werden können.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename ../doc/_img/HSR-Konzept.png
+	display false
+	width 120mm
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+HSR-Ring mit allen möglichen Gerätetypen
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HSR_Konzept"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+DANH (Doubly Attached Node HSR)
+\end_layout
+
+\begin_layout Standard
+Ein DANH ist ein direkt und redundant an das HSR Netzwerk angeschlossener
+ Netzwerkknoten mit zwei Ethernet Ports.
+ Die beiden Ports teilen sich dabei die MAC- und IP-Adresse.
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "PRPHSR_Red_Ind_Eth"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+RedBox (Redundancy Box)
+\end_layout
+
+\begin_layout Standard
+Eine RedBox wird benötigt, um das HSR Netzwerk mit anderen Netzwerken zu
+ verbinden.
+ Mit RedBoxen können entweder Standard-Ethernet, PRP oder andere HSR Netzwerke
+ an ein HSR Netzwerk gekoppelt werden.
+\end_layout
+
+\begin_layout Subsubsection
+QuadBox
+\end_layout
+
+\begin_layout Standard
+Quadboxen sind Geräte mit vier Ethernet Ports.
+ Sie werden benötigt, um zwei HSR Netzwerke miteinander zu verbinden.
+ Es sind mindestens zwei Qaudboxen nötig, um zwei Netze redundant zu verbinden,
+ da sonst ein Single Point of Failure entsteht.
+\end_layout
+
+\begin_layout Subsubsection
+VDAN (Virtual Doubly Attached Node)
+\end_layout
+
+\begin_layout Standard
+VDAN sind Knoten, die über eine Redbox mit dem redundanten Netzwerk verbunden
+ sind.
+ VDAN kennen das HSR Protokoll nicht und sind auch nicht redundant ans Netzwerk
+ angeschlossen, können aber trotzdem transparent mit jedem redundanten Gerät
+ im HSR Netzwerk kommunizieren.
+\end_layout
+
+\begin_layout Subsubsection
+DANP (Double Attached Node PRP)
+\end_layout
+
+\begin_layout Standard
+DANP sind redundant angeschlossen Knoten, welche das PRP Protokoll verwenden.
+ Das PRP Protokoll arbeitet grundsätzlich mit dem gleichen Funktionsprinzip
+ wie HSR, es gibt aber einige Unterschiede, wie beispielsweise das Frameformat.
+ Durch die Ähnlichkeit können PRP Netzwerke über RedBoxen mit HSR Netzwerken
+ gekoppelt werden.
+ Die Kommunikation zwischen DANP und DANH ist transparent und redundant.
+ Ein DANP muss das HSR Protokoll für die Kommunikation mit einem DANH nicht
+ kennen.
+\end_layout
+
+\begin_layout Section
+M-Frame
+\end_layout
+
+\end_body
+\end_document

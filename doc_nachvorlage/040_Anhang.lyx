@@ -1,0 +1,352 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_PA14_wlan_1.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_math auto
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Teil IV: Anhang}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Projektmanagement
+\end_layout
+
+\begin_layout Section
+Offizielle Aufgabenstellung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Offizielle-Aufgabenstellung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph
+\noindent
+1 Ausgangslage
+\end_layout
+
+\begin_layout Standard
+In Anlagen für die Automatisierung der elektrischen Energieversorg hat sich
+ Ethernet gut etabliert.
+ Ein Anwendungsfeld ist jedoch noch mit Unsicherheiten behaftet: der Prozessbus
+ von Unterstationen.
+ Bei dieser Anwendung werden extrem viele Messdaten erfasst und übertragen.
+ Gleichzeitig soll das Netzwerk Steuerbefehle (z.B.
+ für Notabschaltung) mit sehr geringer Verzögerung übertragen können.
+\end_layout
+
+\begin_layout Standard
+Um höchste Verfügbarkeit zu garantieren wird das Ethernet in einer Ringtopologie
+ betrieben.
+ Das Redundanzverfahren heisst HSR (High-availability Seamless Redundancy)
+ und arbeitet verlustfrei, d.h.
+ es übersteht den Ausfall einer Komponente oder eines Links, ohne dass Frames
+ verloren gehen.
+\end_layout
+
+\begin_layout Standard
+Es gibt verschiedene Ansätze, die Verzögerung kritischer Frames zu garantieren.
+ 
+\end_layout
+
+\begin_layout Description
+a) Die Erhöhung der Datenrate (in diesem Fall von 100 MBit/s auf 1 GBit/s)
+ ist naheliegend.
+ Damit kann das Problem aber nicht prinzipiell gelöst, sondern lediglich
+ auf ein anderes Niveau verschoben werden.
+ Diesen "Brute Force"- Ansatz möchte man wegen den damit verbundenen sehr
+ viel höheren Anforderungen an die Hardware wenn möglich vermeiden und stattdess
+en lieber einen effizienten Algorithmus verwenden.
+\end_layout
+
+\begin_layout Description
+b) Wenn es um sehr zeitsensitive Anwendungen geht, hat Ethernet generell
+ das Problem, dass ein langes Frame, dessen Aussendung schon begonnen hat,
+ die Aussendung eines hoch priorisierten Frames verzögert.
+ Das Zeitverhalten könnte mit einem Pre-Emption-Mechanismus verzögert werden,
+ welcher es erlaubt, das Versenden eines langen Frames zu unterbrechen und
+ später wieder aufzunehmen.
+ In der Standardisierung gibt es Bestrebungen, einen solchen Mechanismus
+ einzuführen.
+\end_layout
+
+\begin_layout Description
+c) Durch ein zeitgesteuertes Scheduling kann man Zeitfenster für kritische
+ Kommunikation reservieren und somit Verzögerungszeiten garantieren.
+\end_layout
+
+\begin_layout Paragraph
+2 Aufgabenstellung
+\end_layout
+
+\begin_layout Standard
+In der Arbeit soll untersucht werden, welchen Effekt die zur Diskussion
+ stehenden Massnahmen für einen konkreten Anwendungsfall bringen.
+ Das umfasst folgende Tätigkeiten:
+\end_layout
+
+\begin_layout Subparagraph
+2.1 Modell für HSR-Knoten erweitern
+\end_layout
+
+\begin_layout Standard
+Das betrachtete Netzwerk ist ein HSR-Ring.
+ Die bestehende Simulationsumgebung soll so erweitert bzw.
+ angepasst werden, dass folgende Funktionen/Mechanismen simuliert werden
+ können:
+\end_layout
+
+\begin_layout Description
+a) Der Knoten soll zwei Prioritäten unterstützen, d.h.
+ zwei Warteschlangen pro Interface bewirtschaften.
+\end_layout
+
+\begin_layout Description
+b) Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
+ Express Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
+hen.
+\end_layout
+
+\begin_layout Description
+c) Der in den Ring einfliessende Traffic kann limitiert werden.
+\end_layout
+
+\begin_layout Description
+d) Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
+ Frames, die in den Ring einfliessen, können variiert werden (z.B.
+ „zirkulierende Frames haben immer Vortritt“ oder „minimaler Zufluss wird
+ garantiert“).
+\end_layout
+
+\begin_layout Description
+e) Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
+ Traffic und dem Bulk Traffic je eine Phase zuordnet.
+\end_layout
+
+\begin_layout Subparagraph
+2.2 Lastmodell beschreiben und implementieren
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das durch die Anwendung generierte Verkehrsaufkommen ist zu studieren und
+ zu beschreiben.
+ Lastgeneratoren sollen implementiert werden, die das Verkehrsaufkommen
+ für die Simulation generieren durch die Überlagerung von Strömen mit folgender
+ Charakteristik: 
+\end_layout
+
+\begin_layout Description
+a) konstante Framerate
+\end_layout
+
+\begin_layout Description
+b) zufällige zeitliche Verteilung der Frames
+\end_layout
+
+\begin_layout Description
+c) spontane Einzelmeldungen
+\end_layout
+
+\begin_layout Subparagraph
+2.3 Simulationen durchführen und Resultate interpretieren 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Zeitverhalten der verschiedenen Weiterleitungsvarianten soll durch entsprech
+ende Simulationsläufe ermittelt werden.
+ Die Resultate sind zu vergleichen und zu interpretieren.
+ 
+\end_layout
+
+\begin_layout Paragraph
+3 Ziele
+\end_layout
+
+\begin_layout Itemize
+Es liegt eine lauffähige und ausreichend dokumentierte Simulationsumgebung
+ vor, welche
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+die verschiedenen Weiterleitungsvarianten implementiert,
+\end_layout
+
+\begin_layout Itemize
+Traffic unterschiedlicher Charakteristik generieren kann,
+\end_layout
+
+\begin_layout Itemize
+die Laufzeit der einzelnen Frames misst und geeignet visualisiert.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Das zeitliche Verhalten einiger Konfigurationen ist für verschiedene Lastprofile
+ simuliert.
+ Die Resultate sind visualisiert, interpretiert und kommentiert.
+\end_layout
+
+\begin_layout Section
+Besprechungsprotokolle
+\end_layout
+
+\begin_layout Standard
+------------------------------------
+\end_layout
+
+\begin_layout Itemize
+Offizielle Aufgabenstellung, Projektauftrag
+\end_layout
+
+\begin_layout Itemize
+(Zeitplan)
+\end_layout
+
+\begin_layout Itemize
+(Besprechungsprotokolle oder Journals)
+\end_layout
+
+\begin_layout Chapter
+Weiteres
+\end_layout
+
+\begin_layout Itemize
+CD mit dem vollständigen Bericht als pdf-File inklusive Film- und Fotomaterial
+ 
+\end_layout
+
+\begin_layout Itemize
+(Schaltpläne und Ablaufschemata)
+\end_layout
+
+\begin_layout Itemize
+(Spezifikationen u.
+ Datenblätter der verwendeten Messgeräte und/oder Komponenten)
+\end_layout
+
+\begin_layout Itemize
+(Berechnungen, Messwerte, Simulationsresultate)
+\end_layout
+
+\begin_layout Itemize
+(Stoffdaten)
+\end_layout
+
+\begin_layout Itemize
+(Fehlerrechnungen mit Messunsicherheiten)
+\end_layout
+
+\begin_layout Itemize
+(Grafische Darstellungen, Fotos)
+\end_layout
+
+\begin_layout Itemize
+(Datenträger mit weiteren Daten (z.
+ B.
+ Software-Komponenten) inkl.
+ Verzeichnis der auf diesem Datenträger abgelegten Dateien)
+\end_layout
+
+\begin_layout Itemize
+(Softwarecode)
+\end_layout
+
+\end_body
+\end_document

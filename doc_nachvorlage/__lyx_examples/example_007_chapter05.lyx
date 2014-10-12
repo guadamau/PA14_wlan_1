@@ -1,0 +1,1284 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_vdaProsperLeibundgut.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Kapitel 5: Testing}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Testing
+\end_layout
+
+\begin_layout Section
+Teststrategie
+\end_layout
+
+\begin_layout Standard
+Um die Korrektheit aller Funktionen zu testen wird generell auf das Prinzip
+ der Unit-Tests gesetzt.
+\end_layout
+
+\begin_layout Standard
+Die Funktionen werden mit einem speziell in der IDE installierten Testing-Framew
+ork getestet, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Wahl-des-Testing-Frameworks"
+
+\end_inset
+
+.
+ Dafür wird spezieller Testcode für Testfälle geschrieben und abgearbeitet.
+\end_layout
+
+\begin_layout Standard
+Es wurden an die 50 Unit-Tests geschrieben, welche das korrekte Verhalten
+ der Funktionen validieren sollen.
+ Da Tests wiederholbar sein müssen um aussagekräftig zu sein wird auch nach
+ diesem Prinzip gearbeitet.
+\end_layout
+
+\begin_layout Subsection
+Blackbox-Test
+\end_layout
+
+\begin_layout Standard
+Als Blackbox-Test kann die Validierung des Resultats angesehen werden, siehe
+ Anforderung Nr.
+ 3.
+ Hier wird nur das Endresultat validiert.
+\end_layout
+
+\begin_layout Subsection
+Whitebox-Tests
+\end_layout
+
+\begin_layout Standard
+Die Unit-Tests, die mittels Testing-Framework abgearbeitet werden, können
+ als Whitebox-Tests angesehen werden.
+ Denn diese sind sehr detailliert und um die Korrektheit des Rechnens zu
+ testen auch in diesem Detaillierungsgrad von Nöten.
+\end_layout
+
+\begin_layout Subsection
+Performance-Tests
+\end_layout
+
+\begin_layout Standard
+Performace-Tests können erst gemacht werden, wenn die Whitbox-Tests alle
+ passiert sind.
+ Diese werden ohne Testing-Framework durchgeführt.
+ Es muss dafür eigener Testcode geschrieben werden.
+ Die Geschwindigkeit kann mit dem Einsatz der clock-Methode gemessen werden.
+\end_layout
+
+\begin_layout Section
+Testkriterien
+\end_layout
+
+\begin_layout Standard
+Als Hauptkriterien gelten die Anforderungen, welche im Pflichtenheft an
+ die Software gestellt werden, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Funktionale-Anforderungen"
+
+\end_inset
+
+.
+ Diese Anforderungen müssen in messbarer Form korrekt erfüllt sein.
+ Als sekundäres Kriterium wird in dieser Version von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+die Performance betrachtet, ganz nach dem Motto: 
+\begin_inset Quotes fld
+\end_inset
+
+First make it run, then make it fast.
+\begin_inset Quotes frd
+\end_inset
+
+ Zuerst muss die Korrektheit der Berechnungen stimmen, danach kann in der
+ Performance optimiert werden.
+\end_layout
+
+\begin_layout Section
+Schlüsselfunktionen
+\end_layout
+
+\begin_layout Standard
+In einem Programm, dass Zahlen berechnet, gibt es keine wichtigeren oder
+ weniger wichtigen Funktionen.
+ Es müssen alle Funktionen korrekte Resultate liefern.
+ Wenn eine Funktion kein korrektes Ergebnis zurück gibt schlägt sich das
+ sofort auf die Berechnung des Gesamtresultats nieder.
+\end_layout
+
+\begin_layout Standard
+Das heisst, es gibt keine speziellen Schlüsselfunktionen zu identifizieren,
+ jeder Testfall hat die gleiche Wertigkeit.
+\end_layout
+
+\begin_layout Section
+Testumgebung
+\end_layout
+
+\begin_layout Standard
+Um die Unit-Tests durchzuführen wird die Testumgebung CUTE-Test verwendet.
+ CUTE-Test ist ein Testing-Framework, das für die Entwicklungsumgebung Eclipse
+ verfügbar ist.
+ Dieses Projekt wird mit der Entwicklungsumgebung Eclipse entwickelt und
+ CUTE-Test wird als PlugIn in der IDE installiert.
+\end_layout
+
+\begin_layout Subsection
+Funktionsweise CUTE-Test
+\end_layout
+
+\begin_layout Standard
+Ein CUTE-Test kennt nur zwei Ergebnisse: Entweder der Test gelingt (dann
+ ist er 
+\begin_inset Quotes fld
+\end_inset
+
+grün
+\begin_inset Quotes frd
+\end_inset
+
+) oder er misslingt (dann ist er 
+\begin_inset Quotes fld
+\end_inset
+
+rot
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Das Misslingen kann als Ursache einen Fehler (Error) oder ein falsches
+ Ergebnis (Failure) haben, die beide per Konsolen-Ausgabe signalisiert werden.
+ Der Unterschied zwischen den beiden Begriffen liegt darin, dass Failures
+ erwartet werden, während Errors eher unerwartet auftreten.
+ Technisch werden Failures mittels einer speziellen Konsolen-Ausgabe signalisier
+t, bsp.
+ 
+\begin_inset Quotes fld
+\end_inset
+
+expected 3 but was 5
+\begin_inset Quotes frd
+\end_inset
+
+, ...
+\end_layout
+
+\begin_layout Section
+Testhilfsmittel
+\end_layout
+
+\begin_layout Standard
+Es werden keine speziellen Hilfsmittel für die Tests eingesetzt.
+ Die Konfigurationsdatei und die Validierungsdatei sind die einzigen externen
+ Komponenten, welche ebenfalls eine Auswirkung auf die Unit-Tests haben
+ können.
+ 
+\end_layout
+
+\begin_layout Section
+Kurzbeschrieb der Tests
+\end_layout
+
+\begin_layout Standard
+In diesem Abschnitt werden die erreichten Ergebnisse den Anforderungen aus
+ dem Pflichtenheft gegenübergestellt.
+ Um die Anforderungen Nr.
+ 2 bis 4 zu testen, wird eine Reihe von Testfällen abgearbeitet.
+ Damit die Anforderung als erfüllt bezeichnet werden kann, müssen all die
+ Unit-Tests der Testreihe erfolgreich passieren.
+ Im Fehlerfall muss der fehlerhafte Testfall genauer angesehen werden und
+ der Fehler analysiert werden, beispielsweise durch Debugging.
+\end_layout
+
+\begin_layout Standard
+Tabelle der Testreihe.
+ Die nachfolgende tabellarische Darstellung zeigt alle UnitTests die korrekt
+ 
+\begin_inset Quotes fld
+\end_inset
+
+grün
+\begin_inset Quotes frd
+\end_inset
+
+ sein müssen damit die Anforderung als fehlerfrei passiert betrachtet werden
+ kann.
+\end_layout
+
+\begin_layout Subsection
+Lauffähig auf mehreren Architekturen > Anforderung #1
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Lauffähig-auf-mehreren"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um diese Anforderungen zu Testen, wurde der Quellcode auf zwei Maschinen
+ mit verschiedenen Architekturen kompiliert und das Programm ausgeführt.
+\end_layout
+
+\begin_layout Subsubsection
+Maschine 1
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="20col%">
+<column alignment="left" valignment="top" width="68col%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prozessor:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1 Core, Pentium 3 (Coppermine), 600 MHz, 256 KB Cache
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Installierter Arbeitsspeicher:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+512 MB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Architektur:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+i686, 32 Bit
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jahrgang:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2000
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Betriebssystem:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Debian GNU/Linux 6.0.2.1 (Squeeze)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Technische Daten Maschine 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Maschine 2
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="20col%">
+<column alignment="left" valignment="top" width="68col%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Prozessor:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4 resp.
+ 8 Cores (Hyperthreading), Intel Xeon, 4 x 3.0 GHz, 2048 KB Cache (je Core)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Installierter Arbeitsspeicher:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16 GB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Architektur:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+x86_64, 64 Bit
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Jahrgang:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2007
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Betriebssystem:
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Debian GNU/Linux 6.0.4 (Squeeze)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Technische Daten Maschine 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Systemanforderungen/Voraussetzungen
+\end_layout
+
+\begin_layout Standard
+Auf beiden Geräten ist der GNU-C++-Compiler inklusive GNU-Make installiert.
+ Ebenfalls müssen die Standard C/C++-Bibliotheken vorhanden sein.
+\end_layout
+
+\begin_layout Subsubsection
+Testdaten
+\end_layout
+
+\begin_layout Standard
+Auf beiden Geräten wird 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf 100 Nachkommastellen berechnet.
+\end_layout
+
+\begin_layout Subsubsection
+Resultat
+\end_layout
+
+\begin_layout Standard
+Auf der Maschine 2 wird die Zahl nach fünf Testwiederholungen immer korrekt
+ ausgerechnet und validiert.
+ (Mit und ohne Datenauslagerung, swapping)
+\end_layout
+
+\begin_layout Standard
+Auf der Maschine 1 wird die Zahl nach fünf Testwiederholungen immer dann
+ korrekt ausgerechnet, wenn die Daten nicht auf die Harddisk ausgelagert
+ werden müssen.
+ Wenn die Blockgrösse reduziert wird, vermeldet die Validierung einen immer
+ einen Fehler.
+\end_layout
+
+\begin_layout Subsubsection
+Interpretation
+\end_layout
+
+\begin_layout Standard
+Wenn auf sehr alten Systemen (langsam getaktete CPU) Dateien ausgelagert
+ werden müssen, überschreiben sich die Swap-Dateien des Memory-Managers.
+ Dies hängt mit der Dateipfad-Generierung der Swap-Dateien zusammen.
+ Die Zeit (Uhr) kann aufgrund der langsameren Taktung nicht präzise genug
+ ausgelesen werden.
+\end_layout
+
+\begin_layout Subsubsection
+Weiteres Vorgehen
+\end_layout
+
+\begin_layout Standard
+In einem weiteren Release muss die Generierung der Swap-Dateinamen überarbeitet
+ werden, beispielsweise durch einen globalen Zähler, der in die Namensgebung
+ miteinbezogen wird.
+\end_layout
+
+\begin_layout Subsection
+Konfigurierbar mittels Konfig-Datei > Anforderung #2
+\end_layout
+
+\begin_layout Standard
+Das Einlesen der Konfigurationsdatei wurde während der Umsetzung nur mittels
+ Debugging getestet.
+ Explizite Unit-Tests existieren nicht.
+ Beim Aufruf des Programms erscheinen alle gesetzten Parameter der Konfiguration
+sdatei auf dem Splash-Screen.
+ Somit kann die Korrektheit überprüft werden.
+ Die Testreihe, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Testprotokolle"
+
+\end_inset
+
+, wurde mit verschiedenen Parametern in der Konfigurationsdatei durchgeführt.
+ Einerseits wurden die Kontrollen manuell durchgeführt (Pfade kontrolliert,
+ etc.), andererseits mussten alle Unit-Tests der Testreihe erfolgreich abgearbeit
+et werden.
+ Dies ist der Fall, also gilt die Anforderung #2 als erfolgreich getestet
+ und abgenommen.
+\end_layout
+
+\begin_layout Subsection
+Resultat validieren > Anforderung #3
+\end_layout
+
+\begin_layout Standard
+Die Funktionsweise der Validierung wurde durch Debugging und manuelles Testen
+ gemacht.
+ Hier macht es wenig Sinn, Unit-Tests dafür zu schreiben, da immer dieselbe
+ Datei eingelesen werden muss und nichts dynamisch berechnet wird.
+ Sollte die Validierungsdatei mal nicht gefunden werden, wird dies im Fehler-Rep
+ort, beim Einlesen der Konfigurationsdatei angezeigt.
+ Die Validierungsdatei wird richtig eingelesen, die Anforderung ist somit
+ erfolgreich getestet.
+\end_layout
+
+\begin_layout Subsection
+Persistentes Speichern bei sehr grossen Zahlen > Anforderung #4
+\end_layout
+
+\begin_layout Standard
+Dafür ist der MemoryManager einer BigNumber zuständig.
+ Um diese Anforderung genau zu testen wurde in der Konfigurationsdatei jeweils
+ die Blockgrösse 
+\begin_inset Quotes fld
+\end_inset
+
+block_size_threshold
+\begin_inset Quotes frd
+\end_inset
+
+ verändert und anschliessend alle Unit-Tests durchgeführt, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Testprotokolle"
+
+\end_inset
+
+.
+ Die Unit-Tests mussten immer wiederholt alle erfolgreich verlaufen.
+ Somit ist diese Anforderung erfolgreich getestet.
+\end_layout
+
+\begin_layout Section
+Testabweichungen
+\end_layout
+
+\begin_layout Standard
+Testabweichungen als solches gab es nur bei der Anforderung #1.
+ Diese sind in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Lauffähig-auf-mehreren"
+
+\end_inset
+
+ beschrieben, erklärt und eine Lösungsvariante wird vorgeschlagen.
+\end_layout
+
+\begin_layout Section
+Zusammenfassung der Testresultate
+\end_layout
+
+\begin_layout Standard
+Generell können alle Anforderungen als erfüllt betrachtet werden.
+ Das detaillierte Testprotokoll der Unit-Tests kann auf den folgenden Seiten
+ eingesehen werden.
+ Zum Zeitpunkt des Beta-Releases der Version 0.1 muss aber gesagt werden,
+ dass auf das Testen der Performance zu wenig Wert gelegt wurde, denn die
+ Berechnungszeiten sind noch viel zu langsam.
+ Die mathematischen Operatoren + und * wurden mehrfach implementiert/optimiert
+ und auf die Performance getestet.
+ Die Resultate sind einigermassen zufriedenstellend.
+ Eine Fakultät von 1000 wird unter 100 ms berechnet.
+ Aus Zeitgründen konnten jedoch die Subtraktions- und Divisions-Operatoren
+ der BigNumbers nicht mehr weiter überarbeitet, getestet und optimiert werden.
+ Deshalb die langen Rechenzeiten.
+\end_layout
+
+\begin_layout Section
+Weiteres Vorgehen
+\end_layout
+
+\begin_layout Standard
+Für ein weiteres Release muss auf die folgenden Probleme eingegangen werden,
+ es steht sicher die Performance im Vordergrund:
+\end_layout
+
+\begin_layout Itemize
+Löschen der Swap-Dateien muss verbessert werden (alle Swap-Dateien dynamisch
+ löschen, zum Teil existieren noch 
+\begin_inset Quotes fld
+\end_inset
+
+Leichen
+\begin_inset Quotes frd
+\end_inset
+
+ der Auslagerungs-Dateien, die am Schluss mit einem 
+\begin_inset Quotes fld
+\end_inset
+
+rm
+\begin_inset Quotes frd
+\end_inset
+
+-Befehl entfernt werden müssen).
+\end_layout
+
+\begin_layout Itemize
+Korrekturen im Hauptprogramm-Ablauf (Wenn Validierung fehlschlägt, Programm
+ automatisch beenden).
+\end_layout
+
+\begin_layout Itemize
+Optimierung des Divisions-Operators
+\end_layout
+
+\begin_layout Itemize
+Optimierung des Subtraktions-Operators
+\end_layout
+
+\begin_layout Itemize
+Für ein schnelleres Berechnen, mit breiteren Integer-Werten arbeiten (anstatt
+ int8_t int64_t verwenden).
+ Wird allerdings schwierig, dann noch mit Unit-Tests zu arbeiten.
+\end_layout
+
+\begin_layout Itemize
+Algorithmen für das schnellere Berechnen einer Fakultät studieren.
+\end_layout
+
+\begin_layout Itemize
+ev.
+ keine iterative Divsion verwenden
+\end_layout
+
+\begin_layout Itemize
+Wo möglich, Bitshifting einsetzen um schneller zu rechnen.
+\end_layout
+
+\begin_layout Itemize
+Allgemein versuchen mit hardwarenäheren Anweisungen zu arbeiten.
+\end_layout
+
+\begin_layout Section
+Testprotokolle
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Testprotokolle"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols01.pdf
+	display false
+	scale 68
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 1 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols02.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 2 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols03.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 3 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols04.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 4 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols05.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 5 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols06.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 6 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _testingProtocols/testingProtocols07.pdf
+	display false
+	scale 71.400000000000006
+	rotateAngle 90
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Testprotokoll Anforderungen 2 bis 4, Seite 7 von 7
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document

@@ -1,0 +1,3903 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_vdaProsperLeibundgut.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Kapitel 3: Konzeptpapier}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter
+Konzeptpapier
+\end_layout
+
+\begin_layout Section
+Einleitung
+\end_layout
+
+\begin_layout Standard
+Dieses Dokument geht konkret auf die funktionalen Anforderungen, welche
+ im Pflichtenheft gestellt werden ein und versucht anhand von verschiedenen
+ Varianten die geeignete Lösung für deren Umsetzung herauszufiltern.
+ Zunächst werden mögliche Projektrisiken aufgezeigt.
+\end_layout
+
+\begin_layout Section
+Projekt-Risikoanalyse
+\end_layout
+
+\begin_layout Subsubsection*
+Risikoidentifikation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="35col%">
+<column alignment="left" valignment="top" width="56col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Risiko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mögliche Massnahmen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+unrealistische Termine
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Planung mit Pufferzeiten
+\end_layout
+
+\begin_layout Itemize
+realistische Zeitplanung
+\end_layout
+
+\begin_layout Itemize
+Erfahrungen aus anderen Projekten beiziehen
+\end_layout
+
+\begin_layout Itemize
+Kommunikation mit Auftraggeber/Betreuer
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Quotes fld
+\end_inset
+
+Vergolden
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+nur die effektiven Anforderungen erfüllen.
+ Nicht mehr und nicht weniger.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Motivationsprobleme
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Für möglichst wenig Ablenkung sorgen (Internet/Multimedia, etc.)
+\end_layout
+
+\begin_layout Itemize
+Zeitplanung mit den versch.
+ Teilaufgaben möglichst einhalten.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Probleme mit Fremdkomponenten
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Sich nicht zu lange auf eine bestimmte Komponente festsetzen, sondern nach
+ Alternativen suchen.
+\end_layout
+
+\begin_layout Itemize
+Foren mit ähnlichen Problemstellungen konsultieren.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Projekt-Risikoanalyse 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Wahl der Entwicklungsumgebung
+\end_layout
+
+\begin_layout Standard
+Da mit einem Linux-System und freier Software entwickelt wird, stehen zur
+ Umsetzung die folgenden Entwicklungsumgebungen zur Verfügung:
+\end_layout
+
+\begin_layout Itemize
+Code Blocks IDE
+\end_layout
+
+\begin_layout Itemize
+Eclipse IDE for C/C++ Developers
+\end_layout
+
+\begin_layout Itemize
+Editoren wie VIM oder EMACS
+\end_layout
+
+\begin_layout Itemize
+Netbeans C/C++ Edition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="15col%">
+<column alignment="left" valignment="top" width="38col%">
+<column alignment="left" valignment="top" width="38col%">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+IDE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vorteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachteile
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Code Blocks IDE
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Sehr schlanke Entwicklungsumgebung optimiert nur für C/C++ Entwicklung
+\end_layout
+
+\begin_layout Itemize
+Detailliertes Debugging möglich
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Unit-Testing-Framework muss separat installiert werden.
+\end_layout
+
+\begin_layout Itemize
+Testing-Framework schwierig zu konfigurieren.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Eclipse IDE for C/C++ Developers
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Mittlerweile sehr ausgereiftes Produkt
+\end_layout
+
+\begin_layout Itemize
+Umfangreiche IDE mit vielen Features und doch nicht zu unübersichtlich/überladen.
+\end_layout
+
+\begin_layout Itemize
+Sehr detailliertes Debugging möglich
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes fld
+\end_inset
+
+Console
+\begin_inset Quotes frd
+\end_inset
+
+ direkt in der IDE ersichtlich
+\end_layout
+
+\begin_layout Itemize
+Durch Plugins fast uneingeschränkt erweiterbar
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Kein integriertes Testing-Framework
+\end_layout
+
+\begin_layout Itemize
+zum Teil sehr aufwändige/komplizierte Plug-In-Installationen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Editoren wie VIM oder EMACS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Man lernt auf Anhieb besser bzw.
+ mit weniger Fehlern zu schreiben, da man jedes Mal neu kompilieren muss
+ bei einem Schreibfehler.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Kein Testingframework
+\end_layout
+
+\begin_layout Itemize
+Mühsame Arbeitsweise.
+ Debugging sehr umständlich.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Netbeans C/C++ Edition
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Klassische IDE mit grafischer Oberfläche.
+\end_layout
+
+\begin_layout Itemize
+Der Programmierer findet sich schnell darin zurecht
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Debugging erweist sich meist als etwas launisch.
+ Bei verschachtelten Klassen können beispielsweise nicht immer alle Unterobjekte
+ und deren Member angezeigt werden.
+\end_layout
+
+\begin_layout Itemize
+Testingframework muss separat hinzugefügt werden
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Vor-/Nachteile verschiedener Entwicklungsumgebungen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Entscheidung
+\end_layout
+
+\begin_layout Standard
+Als Entwicklungsumgebung wird Eclipse verwendet und ein entsprechendes Testingfr
+amework wird als Plug-In installiert.
+\end_layout
+
+\begin_layout Subsubsection*
+Begründung
+\end_layout
+
+\begin_layout Standard
+Entscheidend für die Wahl waren die einfache Bedienung und die sehr ausgereiften
+ Debugging-Möglichkeiten, welche in Eclipse vorherrschen.
+\end_layout
+
+\begin_layout Section
+Wahl des Testing-Frameworks
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Wahl-des-Testing-Frameworks"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie vorhergehend ersichtlich, muss das Testing-Framework nachträglich zur
+ IDE installiert werden.
+ Auch hier gibt es verschiedne Anbieter:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="3">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="15col%">
+<column alignment="left" valignment="top" width="38col%">
+<column alignment="left" valignment="top" width="38col%">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Testumgebung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vorteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachteile
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+googletest
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Kann als Eclipse-Plug-In verwendet werden.
+\end_layout
+
+\begin_layout Itemize
+Wird häufig verwendet, bei Google-Internen Projekten und google Chrome.
+\end_layout
+
+\begin_layout Itemize
+Dokumentation ausreichend.
+\end_layout
+
+\begin_layout Itemize
+Aktuelle Version, letztes Release 2011 (V 1.6)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Konzept der Anwendung ist mir eher unbekannt, da es sich etwas von den bekannten
+ Unit-Testing-Frameworks aus der Java-Welt unterscheidet.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+CUTE Test
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Kann sehr einfach als Eclipse-Plug-In installiert werden.
+\end_layout
+
+\begin_layout Itemize
+Installation und Anwendung sind sehr gut dokumentiert.
+\end_layout
+
+\begin_layout Itemize
+Lokales Projekt der Hochschule Rapperswil.
+ Wird stets weiterentwickelt.
+ Letztes Release 2011 (V 1.6)
+\end_layout
+
+\begin_layout Itemize
+Sehr einfach in der Anwendung, da in weiten Teilen genau dasselbe Konzept
+ dahinter steht wie beim bekannten Java-Testing-Framework JUnit.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Benutzung vieler Fremdbibliotheken wie beispielsweise Boost-C++.
+ Diese muss ebenfalls installiert werden.
+\end_layout
+
+\begin_layout Itemize
+Kompilierte Test-Binaries werden demenstprechend gross und die Ausführung
+ des Programms langsam.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+boost test
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Sehr umfangreiches Testing-Framework.
+ Gehört zur etablierten Boost-C++-Library.
+\end_layout
+
+\begin_layout Itemize
+Viele Funktionen
+\end_layout
+
+\begin_layout Itemize
+Einfache Installation in Eclipse.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Da umfangreich, eher kompliziert für Neueinsteiger.
+\end_layout
+
+\begin_layout Itemize
+Aufbau der Testcases ist kompliziert.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Vor-/Nachteile Testumgebungen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Entscheidung
+\end_layout
+
+\begin_layout Standard
+CUTE-Test ist für dieses Projekt die beste Wahl.
+ Dieses Plug-In wird in Eclipse installiert inklusive der Boost-Library.
+\end_layout
+
+\begin_layout Subsubsection*
+Begründung
+\end_layout
+
+\begin_layout Standard
+Entscheidend für die Wahl war, dass CUTE-Test auf Anhieb sehr einfach zu
+ verstehen war, vor allem wenn man bereits mit Testing-Frameworks wie JUnit
+ (Java) oder NUnit (C#/.net) gearbeitet hat.
+ Ebenfalls entscheidend war der Vorteil, dass Boost-Test zur Ausführung
+ der Tests verwendet wird, eine sehr ausgereifte und etablierte Bibliothek.
+\end_layout
+
+\begin_layout Standard
+Anbei ein Code-Beispiel von der CUTE-Test-Projektwebsite
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{cuteEx}
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Beispiel-Test-Case mit CUTE-Test},  captionpos=b,langua
+ge=C++]{_srcListings/testCaseExample.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Beispiel zeigt auf, wie einfach ein Test-Case geschrieben werden kann.
+ Testsuites können einen bis mehrere Test-Cases enthalten.
+ Gestartet werden die Testcases mittels Aufruf der enstprechenden Testsuite.
+ Eine Testsuite ist ein Verbund, der mehrere Test-Cases beinhaltet.
+\end_layout
+
+\begin_layout Section
+Lauffähig auf mehreren Architekturen > Anforderung # 1
+\end_layout
+
+\begin_layout Standard
+Da das Projekt in einer unixbasierten Umgebung mit der Programmiersprache
+ C++ entwickelt wird, ist fast gezwungenermassen der GNU-C/C++-Compiler
+ zu verwenden.
+ Dieser Compiler gilt als einer der optimiertesten; er ist daher weit verbreitet
+ und auf allen gängigen Betriebssystemen frei verfügbar (Linux / Windows
+ / Mac OS X).
+\end_layout
+
+\begin_layout Standard
+Noch viel wichtiger ist aber die Tasache, dass der GNU-Compiler auch für
+ die meisten System-Architekturen verfügbar ist.
+ Rein theoretisch müsste der geschriebene Quellcode also lauffähig auf jeder
+ Systemarchitektur sein, für welche es eine Version des GNU-Compilers gibt.
+ Da sich aber Theorie und Praxis meist diametral voneinander unterscheiden,
+ kann darauf nicht einfach blind vertraut werden.
+\end_layout
+
+\begin_layout Standard
+Für dieses Projekt wird die Ausführung des erstellten Programms auf den
+ Arichtekturen x86_64 (64 Bit) und i686 (32 Bit) getestet.
+ Das Programm wird auf der entsprechenden Maschine kompiliert und ausgeführt.
+\end_layout
+
+\begin_layout Subsection
+Verzicht auf die Verwendung vieler Fremdbibliotheken
+\end_layout
+
+\begin_layout Standard
+Die Anforderung, die Lauffähigkeit auf mindestens zwei verschiedenen Architektur
+en zu garantieren, lässt durchblicken, dass auf eine hohe Portabilität des
+ Programms Wert gelegt wird.
+ In Anbetracht dessen, wird bei der Umsetzung des Programms darauf Acht
+ gegeben, dass möglichst nur Standard-Systembibliotheken zum Einsatz kommen.
+ Somit ist gewährleistet, dass auf dem System, auf dem das Programm eingesetzt
+ werden will, nur ein GNU-Compiler, GNU-Make und die Standard-Systembibliotheken
+ installiert sein müssen.
+\end_layout
+
+\begin_layout Subsection
+Einsatz von GNU-Make
+\end_layout
+
+\begin_layout Standard
+GNU-Make ist integriert in der Entwicklungsumgebung Eclipse und wird für
+ das Kompilieren des Quellcodes verwendet.
+ Make lässt sich elegant für den enstprechenden Debug- oder Release-Build
+ konfigurieren, wie der folgende Screenshot zeigt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/eclipseMake.eps
+	display false
+	scale 38
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Konfiguration von GNU-Make in Eclipse
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Eclipse verwendet den Standard-Build-Befehl 
+\begin_inset Quotes fld
+\end_inset
+
+make
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Es wird also zuerst ein Makefile erstellt, welches mit dem Aufruf von 
+\begin_inset Quotes fld
+\end_inset
+
+make
+\begin_inset Quotes frd
+\end_inset
+
+ abgearbeitet wird.
+ Das Makefile enthält die Befehle für den Compiler und den Linker um letztendlic
+h die Binaries, das ausführbare Programm, zu erzeugen.
+ Wie hier zu sehen ist, können separat für den Debug- sowie den Release-Build
+ die Befehle für den Compiler und den Linker konfiguriert werden.
+ Der Entwickler kann hier also fast unbegrenzt Einfluss auf die Kompilierung
+ seines Quellcodes nehmen.
+\end_layout
+
+\begin_layout Standard
+Standardmässig wird das Makefile so erzeugt, dass mit dem Aufruf von 
+\begin_inset Quotes fld
+\end_inset
+
+make all
+\begin_inset Quotes frd
+\end_inset
+
+ das gesamte Projekt kompiliert wird.
+ Mit 
+\begin_inset Quotes fld
+\end_inset
+
+make clean
+\begin_inset Quotes frd
+\end_inset
+
+ können alle bestehenden Binaries gelöscht werden.
+\end_layout
+
+\begin_layout Subsection
+Kompilierung für verschiedene Architekturen
+\end_layout
+
+\begin_layout Standard
+Wie im vorherigen Abschnitt erläutert, wird das Programm mit dem Befehl
+ 
+\begin_inset Quotes fld
+\end_inset
+
+make
+\begin_inset Quotes frd
+\end_inset
+
+ kompiliert.
+ Wie in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Release"
+
+\end_inset
+
+ erwähnt, wird ein Release inklusive Makefile und Quellcode ausgeliefert.
+ Das heisst, wenn ein Benutzer die Software neu kompilieren muss, kann er
+ ins entsprechende Verzeichnis navigieren und die Befehle 
+\begin_inset Quotes fld
+\end_inset
+
+make clean
+\begin_inset Quotes frd
+\end_inset
+
+ und anschliessend 
+\begin_inset Quotes fld
+\end_inset
+
+make install
+\begin_inset Quotes frd
+\end_inset
+
+ ausführen.
+ Einzige Voraussetzung dafür ist der GNU-C++-Compiler.
+\end_layout
+
+\begin_layout Subsection
+Header für einheitliche Datentypten
+\end_layout
+
+\begin_layout Standard
+Um zu gewährleisten, dass immer die richtige Breite bei den Datentypen verwendet
+ wird, kann das Header-File 
+\begin_inset Quotes fld
+\end_inset
+
+stdint.h
+\begin_inset Quotes frd
+\end_inset
+
+ verwendet werden.
+ Dieses File enthält Typedefs und ist pro Systemarchitektur teilweise unterschie
+dlich definiert.
+ Wenn also beispielsweise ein 64-Bit-Integer angefordert wird, geschieht
+ dies mit der Definition 
+\begin_inset Quotes fld
+\end_inset
+
+int64_t
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Somit ist unabhängig von der Architektur gewährleistet, dass auch wirklich
+ eine Ganzzahl mit 64 Bit Breite verwendet wird.
+\end_layout
+
+\begin_layout Standard
+Getestet wurde dies vorgängig mit einem x86_64-System und einem i686-System.
+\end_layout
+
+\begin_layout Section
+Konfigurierbar mittels Konfig-Datei > Anforderung # 2
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:ConfigFile"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wenn man Einstellungen am Programm verändern will, muss dies möglich sein,
+ ohne vorher stets neu kompilieren zu müssen.
+ Es wird deshalb mit einer Konfigurations-Datei gearbeitet.
+ Diese ist leicht verständlich und kann vom Benutzer vor der Ausführung
+ des Programms editiert werden.
+\end_layout
+
+\begin_layout Standard
+Die Konfigurationsdatei kann Zahlenwerte und Zeichenketten enthalten.
+ Es wird dafür bereits vorhandener Quellcode
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{configFileC}
+\end_layout
+
+\end_inset
+
+ von René Nyffenegger verwendet.
+ Es werden die Klassen CConfigFile und CChameleon verwendet.
+ Diese werden so angepasst, damit sie optimal in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ eingesetzt werden können.
+ Die Konfigurationsdatei wird der Einfachheit halber im selben Verzeichnis
+ wie die Binaries abgelegt.
+ 
+\end_layout
+
+\begin_layout Standard
+Wichtige Parameter, die in der Konfigurationsdatei enthalten sein müssen
+ sind:
+\end_layout
+
+\begin_layout Itemize
+Zahl die ausgerechnet werden soll.
+\end_layout
+
+\begin_layout Itemize
+Genauigkeit der Zahl (Anzahl der Nachkommastellen).
+\end_layout
+
+\begin_layout Itemize
+Blockgrösse; Schwellwert, ab wievielen Bytes die Zahl während der Berechnung
+ auf die Harddisk ausgelagert werden soll.
+\end_layout
+
+\begin_layout Itemize
+Pfadangabe für die Auslagerungsdateien.
+\end_layout
+
+\begin_layout Itemize
+Pfadangabe, wo das berechnete Resultat abgespeichert werden soll.
+\end_layout
+
+\begin_layout Itemize
+Validierung ein/aus.
+\end_layout
+
+\begin_layout Itemize
+Pfadangabe, wo das Validierungsfile abgelegt ist.
+\end_layout
+
+\begin_layout Section
+Validierung des Resultats > Anforderung # 3
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Validierung-des-Resultats"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Grosse Zahlen werden mit einem quasi eigenen Datentyp behandelt.
+ Eine Art Array-Struktur, wird verwendet, wie das folgende Code-Beispiel
+ aufzeigt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Aufbau grosser Zahlen},  captionpos=b,language=C++]{_sr
+cListings/digitHandlingExample.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für eine Validierung der errechneten Zahl, wird also bei der höchstwertigen
+ Zahl begonnen und jede Stelle der Zahl mit der Validierungsdatei verglichen.
+ Die nachfolgende Grafik zeigt dies auf.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/validationGraphic.eps
+	display false
+	scale 75
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Veranschaulichung zur Validierung des Resultats
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Grün hinterlegt sind die Stellen bei denen die Berechnung korrekt ist.
+ Bei Rot liegt ein Fehler vor.
+ Sobald ein erster Fehler erkannt wurde, wird die Fehlermeldung angezeigt
+ und die Validierung abgebrochen, denn die restlichen niederwertigeren Stellen
+ können gar nicht mehr korrekt sein.
+\end_layout
+
+\begin_layout Standard
+Die Validierungsdatei enthält nur die Zahl 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ und ist gemäss folgender Darstellung aufgebaut:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Auszug aus der Validierungsdatei},  captionpos=b,langua
+ge=C++]{_srcListings/e_approx_1M.txt}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Validierungsdatei hat eine Genauigkeit von ca.
+ 1 Million Nachkommastellen und wird von dieser Quelle bezogen: http://www.gutenb
+erg.org/files/127/
+\end_layout
+
+\begin_layout Section
+Persistenter Speicher > Anforderung # 4
+\end_layout
+
+\begin_layout Standard
+Da für die Berechnungen der Arbeitsspeicher/RAM keine Begrenzung darstellen
+ soll, muss eine Technik gefunden werden, um Teile einer grossen Zahl auf
+ die Festplatte auslagern zu können.
+ Wie bereits erwähnt wird in der Konfigurationsdatei ein Schwellwert definiert,
+ ab welcher Grösse Teile der Zahl ausgelagert werden sollen.
+\end_layout
+
+\begin_layout Subsection
+Datenstruktur
+\end_layout
+
+\begin_layout Standard
+Wie in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Validierung-des-Resultats"
+
+\end_inset
+
+ gezeigt, wird eine Zahl mit einer 
+\begin_inset Quotes fld
+\end_inset
+
+arrayartigen
+\begin_inset Quotes frd
+\end_inset
+
+-Datenstruktur aufgebaut.
+ Es gilt nun herauszufinden, welche Struktur sich am besten eignet, um die
+ Daten so abzuspeichern.
+ In Frage dafür kam die Verwendung von regulären Arrays oder der Einsatz
+ von Datenstrukturen aus der STL, Standard Template Library.
+ Die STL bietet mehrere solche Datenstrukturen an.
+ Die einfachste davon ist der 
+\begin_inset Quotes fld
+\end_inset
+
+vector
+\begin_inset Quotes frd
+\end_inset
+
+, da sie über die wenigsten Funktionen verfügt, mit diesen aber die Bedürfnisse
+ für die Umsetzung abdeckt.
+ Die folgende Nutzwertanalyse soll als Entscheidungshilfe zwischen herkömmlichem
+ Array und STL-Vector dienen.
+\end_layout
+
+\begin_layout Subsubsection
+Array
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="19col%">
+<column alignment="left" valignment="top" width="72col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vorteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Es müssen keine zusätzlichen Bibliotheken verwendet werden.
+\end_layout
+
+\begin_layout Itemize
+Sehr schnell während der Programmausführung
+\end_layout
+
+\begin_layout Itemize
+Einfach verständlich, da keine Zusatz-Informationen über eine Bibliothek
+ notwendig sind.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+Dynamische Speicherverwaltung muss selbst und individuell umgesetzt werden,
+ was einen grossen Aufwand bedeutet.
+\end_layout
+
+\begin_layout Itemize
+Gefahr von Memory-Leaks, bei unsauberer Implementierung.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Vor-/Nachteile herkömmliches Array
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Vector (STL)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="19col%">
+<column alignment="left" valignment="top" width="72col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Vorteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+sehr gute Dokumentation mit Anwendungsbeispielen vorhanden
+\begin_inset CommandInset citation
+LatexCommand cite
+key "vectCpp"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Bibliothek ist per default auf einem System mit C++-Compiler installiert.
+\end_layout
+
+\begin_layout Itemize
+Dynamische Speicherverwaltung
+\end_layout
+
+\begin_layout Itemize
+nützliche Zusatzfunktionen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachteile
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+STL muss auf dem System vorhanden sein.
+\end_layout
+
+\begin_layout Itemize
+Etwas langsamer als herkömmliche Arrays.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Vor-/Nachteile STL Vector
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das folgende Code-Snippet zeigt, wie konkret ein STL-Vector verwendet werden
+ kann:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Beispiel-Anwendung eines Vector-Konstruktors},
+  captionpos=b,language=C++]{_srcListings/vectorEx.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Entscheidung, Wahl der Datenstruktur
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4col%">
+<column alignment="left" valignment="top" width="65col%">
+<column alignment="center" valignment="top" width="9.5col%">
+<column alignment="center" valignment="top" width="12.5col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kriterium
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Muss- Kriterium
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gewichtung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dynamische Speicherverwaltung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+einfach in der Anwendung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+schnell in der Ausführung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Kriterien Datenstruktur 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Lösungsvarianten
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="4">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4col%">
+<column alignment="left" valignment="top" width="65col%">
+<column alignment="center" valignment="top" width="9.5col%">
+<column alignment="center" valignment="top" width="12.5col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kriterium
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Array
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+STL-Vector
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dynamische Speicherverwaltung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+einfach in der Anwendung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+schnell in der Ausführung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+X
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Lösungsvarianten Datenstruktur 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Nutzwertanalyse
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="7">
+<features tabularvalignment="middle">
+<column alignment="left" valignment="top" width="4col%">
+<column alignment="left" valignment="top" width="36col%">
+<column alignment="center" valignment="top" width="5col%">
+<column alignment="center" valignment="top" width="8col%">
+<column alignment="center" valignment="top" width="11col%">
+<column alignment="center" valignment="top" width="8col%">
+<column alignment="center" valignment="top" width="11col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kriterium
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gew
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" usebox="none" width="15col%">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Array
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="1" alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none" width="15col%">
+\begin_inset Text
+
+\begin_layout Plain Layout
+STL-Vector
+\end_layout
+
+\end_inset
+</cell>
+<cell multicolumn="2" alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Note
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T-Nutzen
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Note
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T-Nutzen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+dynamische Speicherverwaltung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+150
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+einfach in der Anwendung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+160
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+140
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+schnell in der Ausführung
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+30
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+9
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+270
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+210
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Total
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+430
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Nutzwertanalyse Datenstruktur 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection*
+Entscheidung
+\end_layout
+
+\begin_layout Standard
+Dank der neutralen Nutzwertanalyse wird klar, dass die Verwendung des STL-Vector
+s für dieses Projekt am meisten Sinn macht.
+\end_layout
+
+\begin_layout Subsubsection*
+Begründung
+\end_layout
+
+\begin_layout Standard
+Das Killer-Kriterium ist ganz klar die dynamische Speicherverwaltung, welche
+ von einem herkömmlichen Array leider nicht unterstützt wird.
+ Deshalb ist auch die Entscheidung zugunsten des STL-Vectors gefallen.
+ Um eine dynamische Speicherverwaltung selbst zu implementieren und zu testen,
+ ist der vorgegebene Zeitrahmen zu klein.
+\end_layout
+
+\begin_layout Subsection
+Daten Ein- bzw.
+ Auslagerung
+\end_layout
+
+\begin_layout Standard
+Eine grosse Zahl wird also im Programm durch einen STL-Vector verkörpert.
+ Der Vector befindet sich während der Ausführung im Arbeitsspeicher/RAM.
+ Es muss also eine Memory-Manager-Klasse geschaffen werden, die den Zugriff
+ auf die Zahl überwacht und falls nötig die aktuellen Daten auf einen persistent
+en Speicher auslagert und angeforderte Daten zurück in den Arbeitsspeicher
+ holt.
+\end_layout
+
+\begin_layout Standard
+Um die Sache möglichst übersichtlich zu halten soll der Zugriff auf den
+ Vector nur über wenige Methoden erfolgen.
+ Dazwischen wird der Memory-Manager geschaltet, der den Zugriff überwacht.
+ Die folgende Grafik soll versuchen, das geschriebene verständlicher aufzuzeigen
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/memoryManagerOverview.eps
+	display false
+	scale 72
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Grobübersicht Memory-Manager
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "mmOverview"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Erläuterungen zur Grafik: Beim aufgezeigten Beispiel wird eine Zahl mit
+ 14 Stellen verwendet.
+ Die Blockgrösse beträgt 4 Bytes (Stellen).
+ Momentan ist der 2.
+ Archiv-Block in Verwendung.
+ Man kann sich also vorstellen, dass gerade eine Stelle der Zahl, die den
+ logischen Index zwischen 4 und 7 besitzt, verwendet werden will (getAt
+ oder SetAt).
+ Wenn eine neue Stelle angefügt werden will (push_back), wären drei Archiv-Datei
+en auf der Festplatte und die beiden Stellen des Buffers wären im RAM.
+ Logischerweise wäre dann kein Buffer mehr in Verwendung.
+\end_layout
+
+\begin_layout Subsubsection
+Index-Übersetzung
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Index-Übersetzung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie in der vorhergehend gezeigten Grafik ist von einem logischen und von
+ einem physischen Index die Rede.
+\end_layout
+
+\begin_layout Paragraph
+Logischer Index: 
+\end_layout
+
+\begin_layout Standard
+Eine Grosse Zahl hat eine länge von 14 Stellen.
+ (Es sei hier wieder auf die Grafik in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+ verwiesen.) Die Zahlenlänge beträgt 14, das heisst es gibt einen logischen
+ Index-Bereich von 0 bis 13.
+ Mit diesem Index wird auf die Zahl zugegriffen.
+ Ob die Zahl in verschiedne Blöcke unterteilt ist, interessiert auf die
+ Zahl zugreifende Elemente nicht.
+\end_layout
+
+\begin_layout Paragraph
+Physischer Index:
+\end_layout
+
+\begin_layout Standard
+Bei unserem Beispiel verwenden wir eine Blockgrösse von 4.
+ Heisst, wir haben einen physischen Index-Bereich von 0 bis 3.
+\end_layout
+
+\begin_layout Standard
+Der Memory Manager hat nun also die Aufgabe, den logischen Index in einen
+ Physischen Index zu übersetzen und ebenfalls den richtigen Archiv-Index
+ zu errechnen.
+ Dies geschieht durch folgenden Algorithmus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+archiveIndex=\frac{logicalIndex}{blockSize}
+\]
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnung des Archiv-Index
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float algorithm
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+physicalIndex=logicalIndex-\left(archiveIndex*blockSize\right)
+\]
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Berechnung des Physischen-Index
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Zur Kontrolle wenden wir diese Formeln auf unser Beispiel an: Wir wollen
+ den Zugriff auf die Stelle mit dem logischen Index 6 (Zahlenwert 7).
+ Archiv Index = 6 / 4 = 1.
+ Physischer Index = 6 - ( 1 * 4 ) = 2.
+ Archiv-Datei mit dem Index 1 und dem physischen Zahlen-Index 2.
+ Korrekt, an dieser Stelle befindet sich der Zahlenwert 7.
+\end_layout
+
+\begin_layout Subsubsection
+Verhalten des Memory-Managers
+\end_layout
+
+\begin_layout Standard
+Aufgrund der gewonnen Erkenntnisse kann nun aufgezeigt werden, wie sich
+ das Ein- bzw.
+ Auslagern der Daten beim Zugriff verhalten soll.
+ Es gibt grundsätzlich zwei Algorithmen:
+\end_layout
+
+\begin_layout Itemize
+push_back, wenn eine neue Stelle an eine Zahl agefügt werden soll.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/mmPushBackFlow.eps
+	display false
+	scale 64
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ablauf, um eine neue Stelle anzufügen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+getAt oder setAt, wenn von einer bestehenden Stelle gelesen oder geschrieben
+ werden soll.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/mmGetAtSetAtFlow.eps
+	display false
+	scale 60
+	BoundingBox 0bp 0bp 723bp 842bp
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Ablauf, um bestehende Daten zu lesen/modifizieren
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Parallelverarbeitung > Anforderung # 5
+\end_layout
+
+\begin_layout Standard
+Dieses Feature wird erst in einem weiteren Release (v 2.0) von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+in Betracht gezogen.
+ An dieser Stelle wird darauf nicht näher eingegangen.
+\end_layout
+
+\begin_layout Section
+Benutzerinteraktion
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ ist ein Programm, das nur in einer einfachen Konsole gestartet wird.
+ Ein GUI, wie es sich der normale Benutzer gewöhnt ist existiert also nicht.
+ Um die Benutzereingaben entgegen zu nehmen, wird eine Konfigurationsdatei
+ verwendet, siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:ConfigFile"
+
+\end_inset
+
+.
+ Die Konfigurationsdatei ist fest definiert und es können nur die vorgegebenen
+ Parameter verändert werden.
+ Beim Start des Programms wird die Konfigurationsdatei auf Fehler überprüft.
+ Falls Fehler darin enthalten sind, wird dem Benutzer auf der Konsole eine
+ Fehlerliste angezeigt und das Programm wird abgebrochen.
+\end_layout
+
+\begin_layout Standard
+Wenn alle Parameter in der Konfigurationsdatei richtig gesetzt wurden, wird
+ ein 
+\begin_inset Quotes fld
+\end_inset
+
+Splash-Screen
+\begin_inset Quotes frd
+\end_inset
+
+ gezeigt, der dem Beutzer nochmals alle in der Konfigurations-Datei gesetzten
+ Parameter aufzeigt (Das Ganze natürlich auch in der Konsole).
+ Es gibt somit dem Benutzer die Möglichkeit, die Eingaben zu kontrollieren.
+ Danach kann mit der Taste 
+\begin_inset Quotes fld
+\end_inset
+
+Enter
+\begin_inset Quotes frd
+\end_inset
+
+ die Berechnung gestartet werden.
+\end_layout
+
+\begin_layout Subsection
+Entwurf des Splash-Screens
+\end_layout
+
+\begin_layout Standard
+Die nächste Abblidung zeigt einen Entwurf der initialen Ausgabe des Programms:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/splashScreenScrShot.eps
+	display false
+	scale 35
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Entwurf Splash-Screen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Entwurf der Konfigurationsdatei
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Entwurf-der-Konfigurationsdatei"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={Beispiel der Konfigurationsdatei},  captionpos=b,langua
+ge=sh]{_srcListings/pin.conf}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das obige Listing zeigt, wie genau die Konfigurationsdatei aussieht.
+ Mit den Kommentaren in der Konfigurationsdatei sollte die Datei selbsterklärend
+ sein.
+\end_layout
+
+\begin_layout Subsection
+Objektorientierte Umsetzung
+\end_layout
+
+\begin_layout Standard
+Da es die Sprache C++ erlaubt, das Software-Gerüst objektorientiert aufzubauen,
+ bietet sich für die objektorientierte Abbildung der Ausgabekonsole und
+ der Konfigurationsdatei ein Singleton-Pattern an.
+ Denn diese beiden 
+\begin_inset Quotes fld
+\end_inset
+
+Objekte
+\begin_inset Quotes frd
+\end_inset
+
+ abstrahieren real vorhandene Dinge.
+ Da diese im Programm nur einmal vorkommen und global gültig sind, darf
+ es davon im gesamten Programm nur eine Instanz geben.
+\end_layout
+
+\begin_layout Section
+Mathematische Operatoren
+\end_layout
+
+\begin_layout Standard
+Wie in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+ ersichtlich ist, muss mit eigenen Datentypen gearbeitet werden 
+\begin_inset Quotes fld
+\end_inset
+
+BigNumber
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Damit mit diesen eigenen Datentypen auch gerechnet werden kann (wie man
+ sich das von den Standard-Datentypen int, double, float, etc.
+ gewohnt ist), müssen innerhalb dieser 
+\begin_inset Quotes fld
+\end_inset
+
+BigNumber
+\begin_inset Quotes frd
+\end_inset
+
+-Objekte Mathematische- sowie Vergleichs-Operatoren selbst implementiert
+ werden.
+\end_layout
+
+\begin_layout Standard
+Um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ gemäss der Formel in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Taylorreihe"
+
+\end_inset
+
+ auszurechnen, müssen folgende 
+\begin_inset Quotes fld
+\end_inset
+
+BigNumber
+\begin_inset Quotes frd
+\end_inset
+
+-Klassen implementiert werden:
+\end_layout
+
+\begin_layout Subsection
+BigNumberInt
+\end_layout
+
+\begin_layout Standard
+Dieser 
+\begin_inset Quotes fld
+\end_inset
+
+Datentyp
+\begin_inset Quotes frd
+\end_inset
+
+ repräsentiert eine sehr grosse Ganzzahl (Integer) und muss mindestens die
+ nachfolgenden Operatoren implementiert haben:
+\end_layout
+
+\begin_layout Itemize
++-Operator, wird u.
+ A.
+ in der Multiplikation für die Fakultät verwendet.
+\end_layout
+
+\begin_layout Itemize
+--Operator, wird in der Division von Kommazahlen verwendet.
+\end_layout
+
+\begin_layout Itemize
+*-Operator, für das Berechnen der Fakultät.
+\end_layout
+
+\begin_layout Itemize
+>-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+<-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+>=-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+<=-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Subsection
+BigNumberFloat
+\end_layout
+
+\begin_layout Standard
+Dieser 
+\begin_inset Quotes fld
+\end_inset
+
+Datentyp
+\begin_inset Quotes frd
+\end_inset
+
+ repräsentiert eine sehr grosse Fliesskommazahl (Float) und muss mindestens
+ die nachfolgenden Operatoren implementiert haben:
+\end_layout
+
+\begin_layout Itemize
++-Operator, wird das aufsummieren von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ gebraucht.
+\end_layout
+
+\begin_layout Itemize
+/-Operator, für das Berechnen der Kehrwerte (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{1}{x}$
+\end_layout
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Itemize
+>-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+<-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+>=-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Itemize
+<=-Operator, um zwei Objekte miteinander zu vergleichen.
+\end_layout
+
+\begin_layout Standard
+Beim Divisions-Operator macht es Sinn, diesen so zur Verfügung zu stellen,
+ dass zwei Ganzzahlige BigNumberInt übergeben werden können.
+ Um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ zu berechnen gibt es nur diesen Fall.
+ Fliesskommazahlen müssen nicht zwingend dividiert werden können.
+\end_layout
+
+\begin_layout Subsection
+Schriftliches Rechnen
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Schriftliches-Rechnen"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mmOverview"
+
+\end_inset
+
+ bereits aufgezeigt, werden die einzelnen Stellen der Zahl je in einem Feld
+ gehalten.
+ Die Rechenoperatoren müssen also so implementiert werden, wie dies vom
+ schriftlichen Rechnen her bekannt ist.
+ Wie die Abläufe beim schriftlichen Rechnen genau gemacht werden zeigen
+ die nachfolgenden Abbildungen:
+\end_layout
+
+\begin_layout Subsubsection
+Addition
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/addition.eps
+	display false
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schriftliche Addition
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{MathWissen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wir schreiben die Zahlen stellenweise (Erinnerung Stellentafel vom Zehnersystem)
+ und rechtsbündig (also von rechts nach link) untereinander.
+ Das Plus schreiben wir vor die zweite Zeile.
+\end_layout
+
+\begin_layout Enumerate
+Als nächstes ziehen wir einen Strich unter der untersten Zahl (ein bisschen
+ Platz lassen für spätere Überträge).
+\end_layout
+
+\begin_layout Enumerate
+Wir fangen an, die Zahlen stellenweise zu addieren.
+ Wir fangen hinten an und addieren zuerst die Einer, also in diesem Beispiel
+ 5 und 9.
+ Das ergibt 14.
+ Nun fragen wir uns, wie viele Einer und wie viele Zehner hat diese Zahl
+ (wir haben 4 Einer und 1 Zehner).
+ Wir wollen nur die Einer an die entsprechende Stelle unterm Strich schreiben.
+ Die Zehner merken wir uns.
+ Um nicht den Überblick zu verlieren, schreiben wir den Zehner in die Spalte
+ für Zehner über dem Strich, genau dort, wo wir vorher etwas Platz gelassen
+ haben.
+\end_layout
+
+\begin_layout Enumerate
+Wir wiederholen das, was wir mit den Einern gemacht haben für jede Stelle,
+ also erst für die Zehner, dann Hunderter, … eben sooft wie wir Stellen
+ haben.
+ Dabei dürfen wir aber auf keinen Fall unsere Überträge vergessen, die werden
+ einfach dazu addiert (also in diesem Beispiel haben wir 1 + 6 + 0 Zehner).
+ Wir erhalten 7 Zehner und stellen fest, dass wir diesmal keinen Übertrag
+ benötigen (hätten wir zum Beispiel 14 Zehner gehabt, hätten wir wieder
+ eine 1 übertragen müssen, und zwar in der Spalte für Hunderter über dem
+ Strich, aber in diesem Fall haben wir 0 Hunderter, natürlich könnte man
+ an diese Stelle eine 0 schreiben, aber die bewirkt ja nichts).
+\end_layout
+
+\begin_layout Enumerate
+Und wir wiederholen den Schritt ein weiteres Mal.
+ Wir addieren die Hunderter und erhalten 3 + 0 = 3.
+ Diese Zahl tragen wir bei den Hundertern ein.
+ Auch hier benötigen wir wieder keinen Übertrag.
+\end_layout
+
+\begin_layout Enumerate
+Als Letztes wiederholen wir den Schritt für die Tausender, unsere höchste
+ Stelle.
+ Danach sind wir fertig.
+ Die zweite Zahl hat allerdings weniger Stellen als unsere erste.
+ Das macht es besonders einfach.
+ Wir stellen uns auch hier die Frage, wie viele Tausender haben wir insgesamt,
+ die zweite Zahl 365 hat keine Tausender, die erste Zahl 2009 hat 2 Tausender.
+ Wir schreiben die 2 an die entsprechende Stelle und sind fertig.
+\end_layout
+
+\begin_layout Subsubsection
+Subtraktion
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/subtraction.eps
+	display false
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schriftliche Subtraktion
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{MathWissen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wir schreiben die Zahlen stellenweise (Erinnerung Stellentafel vom Zehnersystem)
+ und rechtsbündig (also von rechts nach link) untereinander.
+ Das Minus schreiben wir vor die zweite Zeile.
+\end_layout
+
+\begin_layout Enumerate
+Als nächstes ziehen wir einen Strich unter der untersten Zahl (ein bisschen
+ Platz lassen für spätere Überträge).
+\end_layout
+
+\begin_layout Enumerate
+Wir fangen an, die Zahlen stellenweise zu subtrahieren, und zwar hinten
+ bei den Einern, und addieren zuerst die Subtrahenden (also alle Einer,
+ die in einer Zeile vorkommen, vor der ein Minus steht).
+ In diesem Fall gibt es nur einen Subtrahenden, sodass wir nichts vor dem
+ eigentlichen Subtrahieren addieren müssen.
+ Die addierten Subtrahenden, in diesem Fall also nur die 3, ziehen wir von
+ der 2 ab.
+ Bei der Subtraktion von 2 – 3 ergibt sich allerdings ein Problem.
+ Es käme ein negatives Ergebnis heraus, welches wir zu diesem Zeitpunkt
+ noch nicht rechnen können und es ergäbe auch keinen Sinn, mitten in einer
+ Zahl später ein Minus zu haben.
+ Wir greifen zu einem Trick und addieren zu der Zwei so viele Zehner, Hunderter,
+ usw.
+ hinzu, sodass es funktioniert, also: 10 + 2 = 12.
+ Wir überprüfen: Können wir 12 – 3 rechnen? Ja, denn 12 – 3 = 9.
+ Die 9 notieren wir in der Einer-Spalte unter dem Strich.
+ Wenn es nicht gereicht hätte, 10 zu addieren, hätte man noch einmal 10
+ addieren müssen, solange bis es gereicht hätte.
+ Nun haben wir in unserer Tabelle 10 zu viel.
+ Schliesslich haben wir einfach so 10 hinzugefügt.
+ Der eigentliche Trick ist es, diese sofort wieder abzuziehen, sodass nur
+ eine Null hinzugefügt wurde.
+ Das machen wir, indem wir einen Übertrag, also eine 1 (für einen Zehner)
+ unter die Zehner schreiben; schliesslich werden die im nächsten Schritt
+ ohnehin abgezogen.
+ Hätten wir zwei Zehner hinzugefügt, hätten wir eine 2 übertragen müssen.
+\end_layout
+
+\begin_layout Enumerate
+Wir wiederholen das, was wir mit den Einern gemacht haben für jede Stelle,
+ also erst für die Zehner, dann Hunderter, … eben sooft, wie wir Stellen
+ haben.
+ Dabei dürfen wir aber auf keinen Fall unsere Überträge vergessen.
+ Diese müssen vorher zu den übrigen Subtrahenden addiert werden und gemeinsam
+ vom Minuenden abgezogen werden.
+ Und schon wieder haben wir das gleiche Problem.
+ Wir müssen 1 + 8 also 9 von 0 abziehen.
+ Wir greifen auf den oben genannten Trick zurück und addieren eine 10.
+ 10 – 9 = 1.
+ Die 1 notieren wir unter den Zehnern und zusätzlich unter den Hundertern
+ eine 1 als Übertrag.
+\end_layout
+
+\begin_layout Enumerate
+Kommen wir zu den Hundertern: Zuerst die Subtrahenden addieren, also 1 +
+ 2 = 3.
+ Diese ziehen wir von der 8 ab.
+ 8 – 3 = 5.
+ Wir sehen, es war kein Übertrag notwendig, sodass wir nur die 5 unter den
+ Hundertern notieren müssen.
+\end_layout
+
+\begin_layout Enumerate
+Es sieht nun so aus, als ob wir schon fertig wären, weil in der nächsten
+ Spalte bei den Subtrahenden nichts steht, aber dieses „Nichts“ müssen wir
+ auch noch subtrahieren.
+ Wir machen das ganz schematisch so wie oben.
+ Wir addieren die Subtrahenden 0 und die Überträge, also noch mal 0, also
+ 0 + 0 = 0.
+ Dann ziehen wir die Null von der Eins ab, also 1 – 0 = 1 und notieren diese
+ bei den Tausendern.
+\end_layout
+
+\begin_layout Subsubsection
+Multiplikation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/multiplication.eps
+	display false
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schriftliche Multiplikation
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{MathWissen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Wir schreiben die Zahlen sehr sauber nebeneinander, zur Übersicht wird unter
+ dem Produkt ein Strich gezogen, wir werden später so viele Zeilen benötigen
+ wie die rechte Zahl Stellen hat und eine für Überträge, denn später wird
+ addiert.
+ Das ist hier schon alles vorbereitet, kann aber auch nach Bedarf nach und
+ nach hinzugefügt werden.
+\end_layout
+
+\begin_layout Enumerate
+Wir fangen mit der höchsten Stelle bei der rechten Zahl an (also der Hunderterst
+elle) und multiplizieren diese mit den Einern der linken Zahl.
+ Die Einer des Ergebnisses schreiben wir unter die Hunderter der rechten
+ Zahl.
+ Die Zehner merkt man sich.
+ Hier werden sie als tiefergestellte Zahlen dargestellt; gewöhnlich merkt
+ man sie sich aber im Kopf.
+ Danach multipliziert man die höchste Stelle der rechten Zahl mit den Zehnern
+ der linken Zahl, schreibt sie, nachdem man sie mit dem Übertrag addiert
+ hat links neben die vorherige Stelle; danach multipliziert man mit den
+ Hundertern und falls vorhanden Tausendern usw.
+ Also 2 · 8 = 16 (erste Stelle 6), 2 · 3 = 6 (+ Übertrag 1 von den 16, also
+ zweite Stelle 7), 2 · 5 = 10 (kein Übertrag von 7, also dritte Stelle 0),
+ kein weiteres Produkt, aber der Übertrag von der 10, also vierte Stelle
+ 1.
+\end_layout
+
+\begin_layout Enumerate
+Wiederholen des 2.
+ Schrittes mit der zweithöchsten Stelle der rechten Zahl, also: 1 · 8 =
+ 8 (erste Stelle, kommt unter die zweithöchste Stelle, ist 8), 1 · 3 = 3
+ (zweite Stelle 3), 1 · 5 = 5 (dritte Stelle 5)
+\end_layout
+
+\begin_layout Enumerate
+Erneute Wiederholung des 2.
+ Schrittes bis keine Stellen mehr übrig bleiben, also: 7 · 8 = 56, 7 · 3
+ = 21 (Übertrag 5, also 26), 7 · 5 = 35 (Übertrag 2, also 37)
+\end_layout
+
+\begin_layout Enumerate
+Die Zeilen addieren.
+\end_layout
+
+\begin_layout Subsubsection
+Iterative Division 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Iterative-Division"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _diagrams/iterativeDivision.eps
+	display false
+	scale 70
+	BoundingBox 0bp 0bp 397bp 510bp
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Algorithmus der iterativen Division
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie dieser Algorithmus zeigt, ist es möglich eine Division nur durch Addieren
+ und Subtrahieren druchzuführen.
+ Die Implementation sollte nach diesem Ablauf gemacht werden.
+\end_layout
+
+\begin_layout Subsubsection
+Addition und Division mit Fliesskommazahlen
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Addition-und-Division"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Addition mit Fliesskommazahlen funktioniert genau gleich wie die oben
+ erklärte schriftliche Addition.
+ Es muss einzig darauf geachtet werden, dass die Kommas untereinander stehen
+ und die Nachkommastellen falls nicht vorhanden mit Nullen aufgefüllt werden.
+\end_layout
+
+\begin_layout Standard
+Die Division zweier Ganzzahlen mit Fliesskommazahl als Ergebnis wird iterativ
+ (nur mittels Addition und Subtraktion von Ganzzahlen) durchgeführt.
+ Zuerst werden die Stellen vor dem Komma iterativ ausgerechnet.
+ Danach wird mit dem Rest weitergerechnet, durch Anfügen von Nullen.
+ Beim Rest wird so lange gerechnet, bis die vom Benutzer definierten Nachkommast
+ellen erreicht sind (Beispielsweise unendliche Division 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+frac{1}{3} = 0.33
+\backslash
+bar{3}$
+\end_layout
+
+\end_inset
+
+).
+ Folgende Abbildung soll diese Rechenart noch etwas verdeutlichen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/kommazahl_dividieren_1.eps
+	display false
+	BoundingBox 0bp 0bp 228bp 210bp
+	clip
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+Schriftlich dividieren mit Kommabehandlung
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{MathWissen2}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Präzisionszusatz
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Präzisionszusatz"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um die Nachkommastellen von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ genau zu berechnen, muss mit einem 
+\begin_inset Quotes fld
+\end_inset
+
+Präzisionszusatz
+\begin_inset Quotes frd
+\end_inset
+
+ gearbeitet werden.
+ Beispiel: Wenn wir 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ auf 10 Nachkommastellen berechnen wollen, müssen mindestens 14 Nachkommastellen
+ berechnet werden, damit das Resultat auf 10 Nachkommastellen korrekt aufsummier
+t werden kann, Formel siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Taylorreihe"
+
+\end_inset
+
+.
+ Dieser Zusatz muss auch vergrössert werden, je mehr Nachkommastellen von
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$e$
+\end_layout
+
+\end_inset
+
+ berechnet werden sollen.
+ Zur Zeit habe ich dafür keine Formel erarbeiten können und fand auch keine
+ Literatur darüber.
+ Momentan sagt uns die Validierung des Resultats, bis zu welcher Nachkommastelle
+ das Resultat korrekt ist.
+ Ich könnte mir vorstellen, dass sich der Präzisionszusatz proportional
+ zur Anzahl der korrekten Nachkommastellen verhält.
+\end_layout
+
+\end_body
+\end_document

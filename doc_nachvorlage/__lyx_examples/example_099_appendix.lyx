@@ -1,0 +1,1507 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass scrbook
+\use_default_options true
+\master 0000_vdaProsperLeibundgut.lyx
+\maintain_unincluded_children false
+\language ngerman
+\language_package default
+\inputencoding utf8
+\fontencoding global
+\font_roman cmr
+\font_sans lmss
+\font_typewriter cmtt
+\font_default_family sfdefault
+\use_non_tex_fonts false
+\font_sc false
+\font_osf true
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize 11
+\spacing other 1.2
+\use_hyperref false
+\papersize a4paper
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 0
+\index Stichwortverzeichnis
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 35mm
+\topmargin 35mm
+\rightmargin 25mm
+\bottommargin 30mm
+\headheight 18mm
+\headsep 12mm
+\footskip 20mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation skip
+\defskip medskip
+\quotes_language french
+\papercolumns 1
+\papersides 1
+\paperpagestyle fancy
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Fremdprodukte}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Fremdprodukte}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Fremdprodukte
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Fremdprodukte"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Fremdprodukte}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Standard-Template-Library (STL)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Standard-Template-Library (STL)}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Als Datenstruktur einer BigNumber wird der Vector aus der Standard-Template-Libr
+ary verwendet.
+ Die STL gehört mittlerweile den Systembibliotheken an und wird spätestens
+ mit der Compiler-Installation mitinstalliert.
+\end_layout
+
+\begin_layout Section*
+CUTE
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{CUTE}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+CUTE is an easy to use C++ unit testing framework that leverages modern
+ C++ libraries and features.
+ CUTE is orthogonal, easily extendable and much simpler than other C++ unit
+ testing approaches like CPPUnit.
+ For example, CUTE does not require that you write a derived class for each
+ C++ class you want to unit test.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+url{http://cute-test.com/}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+ConfigFile
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{ConfigFile}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Klassen CConfigFile und CChameleon wurden ursprünglich von R.
+ Nyffenegger geschrieben.
+ Damit kann eine Textdatei nach genau spezifiziertem Aufbau eingelesen und
+ geparst werden.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+cite{configFileC}
+\end_layout
+
+\end_inset
+
+ Für meine Arbeit habe ich die beiden Klassen übernommen und für die Verwendung
+ in 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+dementsprechend angepasst.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Bedienungsanleitung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Bedienungsanleitung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Bedienungsanleitung
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Bedienungsanleitung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Bedienungsanleitung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In dieser Bedienungsanleitung wird mit einer simplen Eingabekonsole gearbeitet.
+ Es ist keine grafische Oberfläche nötig.
+ Es wird auch davon aus gegangen, dass Standardsoftware eines Betriebssystem
+ bereits installiert sind, bsp.: tar, gzip, vi/vim, ...
+\end_layout
+
+\begin_layout Standard
+Ebenfalls zu erwähnen ist, dass sich diese Anleitung an erfahrene Benutzer
+ wendet, die sich im Umgang mit einer Eingabekonsole auskennen.
+\end_layout
+
+\begin_layout Section*
+Lieferumfang (Beta-Release)
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Lieferumfang}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+wird als Zip-Datei geliefert.
+ Die Ordner-Struktur im obersten Verzeichnis (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\end_layout
+
+\end_inset
+
+) in der Zip-Datei sollte nach dem Entpacken nicht verändert werden.
+ Im Root-Verzeichnis (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\end_layout
+
+\end_inset
+
+) des Zip-Archivs enthalten sind:
+\end_layout
+
+\begin_layout Itemize
+Quellcode im Verzeichnis 
+\begin_inset Quotes fld
+\end_inset
+
+src
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Debug-Verzeichnis mit entsprechendem Makefile (Ist nur für die Entwicklung
+ und kann von Anwendern ignoriert werden.)
+\end_layout
+
+\begin_layout Itemize
+cute-Verzeichnis (Ist nur für die Entwicklung und kann von Anwendern ignoriert
+ werden.
+ Wird vom Testing-Framework verwendet.)
+\end_layout
+
+\begin_layout Itemize
+Release-Verzeichnis, dieses ist für den Anwender relevant.
+ In diesem Verzeichnis kann mittels dem Makefile die Kompilierung gemacht
+ und später das Programm gestartet werden.
+ In diesem Verzeichnis befinden sich auch die Konfigurations- und Validierungsda
+tei.
+\end_layout
+
+\begin_layout Section*
+Systemvoraussetzungen
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Systemvoraussetzungen}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein GNU-C++-Compiler inklusive GNU-Make muss auf dem Gerät bereits installiert
+ sein.
+ Ebenfalls müssen die Standard C/C++-Bibliotheken vorhanden sein.
+ Dies sind die Voraussetzungen damit das Programm kompiliert werden kann.
+ Auf unixoiden Systemen (Linux/openSolaris/OpenBSD, etc.) können die erwähnten
+ Produkte mit dem jeweiligen Paketverwaltungssystem des Betriebssystems
+ heruntergeladen und installiert werden.
+ Für die Installation benötigt man Super-User-Privilegien auf dem Betriebssystem.
+ Folgendes Beispiel zeigt die Installation mittels dem Paketverwaltungssystem
+ Apt, das auf Debian und Debain-abstammenden Distributionen (Ubuntu, Mint,
+ ...) der Defakto-Standard ist.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+sudo apt-get install g++ make
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieser Befehl reicht, und es werden alle benötigten Abhängigkeiten und Bibliothe
+ken für eine erfolgreiche Kompilierung heruntergeladen und auch gleich installie
+rt.
+\end_layout
+
+\begin_layout Standard
+MS-Windows-Benutzer sollten sich über das Projekt Cygwin informieren und
+ dieses installieren.
+ Cygwin ist eine Art Unix-Emulation auf einem Windows-Betriebssystem.
+ Dort sollte die GNU-Compiler-Collection auch vorhanden sein, ist aber zur
+ Zeit ungetestet und der Verfasser übernimmt keine Haftung.
+ Mehr Infos unter: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+url{http://www.cygwin.com/}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Arichivdatei kann unter MS-Windows mit der freien Software 7-zip entpackt
+ werden.
+ Mehr unter: 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+url{http://www.7-zip.org/}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Kompilierung/Installation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Kompilierung/Installation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Zip-Datei an einem beliebigen Ort auf dem System entpacken.
+\end_layout
+
+\begin_layout Enumerate
+Ins entpackte Verzeichnis 
+\begin_inset Quotes fld
+\end_inset
+
+powerInNumbers
+\begin_inset Quotes frd
+\end_inset
+
+ navigieren.
+\end_layout
+
+\begin_layout Enumerate
+Ins Verzeichnis 
+\begin_inset Quotes fld
+\end_inset
+
+Release
+\begin_inset Quotes frd
+\end_inset
+
+ navigieren.
+\end_layout
+
+\begin_layout Enumerate
+Kompilieren mit make.
+\end_layout
+
+\begin_layout Standard
+Eine exemplarische Befehlsfolge ist nachfolgend aufgezeigt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+tar xvzf powerInNumbers20120812_3.tar.gz   /* Entpacken des Archivs */
+\end_layout
+
+\begin_layout Plain Layout
+
+cd powerInNumbers/Release/   /* Ins Release-Verzeichnis navigieren */
+\end_layout
+
+\begin_layout Plain Layout
+
+make clean   /* ev.
+ alte Binaries löschen */
+\end_layout
+
+\begin_layout Plain Layout
+
+make all   /* Kompilierung starten */
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wenn GNU-Make keine Fehler anzeigt, was in der Regel der Fall ist, ist das
+ Programm nun fertig kompiliert und kann verwendet werden.
+\end_layout
+
+\begin_layout Section*
+Verwendung
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Verwendung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Enumerate
+Konfigurationsdatei editieren, die Parameter sollten selbsterklärend sein.
+ Wichtige Hinweise sind mit Kommentaren in der Konfigurationsdatei vermerkt.
+ Die Konfigurationsdatei ist gelistet unter 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Entwurf-der-Konfigurationsdatei"
+
+\end_inset
+
+.
+ Editiert werden kann die Datei mit einem beliebigen Text-Editor.
+\end_layout
+
+\begin_layout Enumerate
+Programmausführung starten
+\end_layout
+
+\begin_layout Enumerate
+Resultat ansehen
+\end_layout
+
+\begin_layout Standard
+Eine exemplarische Befehlsfolge ist nachfolgend aufgezeigt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{verbatim}
+\end_layout
+
+\begin_layout Plain Layout
+
+cd powerInNumbers/Release/   /* Ins Release-Verzeichnis navigieren */
+\end_layout
+
+\begin_layout Plain Layout
+
+vim pin.conf   /* Editieren der Konfigurationsdatei */
+\end_layout
+
+\begin_layout Plain Layout
+
+./powerInNumbers   /* Programmausführung starten */
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+   /* Der Menüführung des Programs folgen und Konsolen-Outputs beachten.
+ */
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+cd output/   /* Ins Ausgabe-Verzeichnis navigieren.
+ */
+\end_layout
+
+\begin_layout Plain Layout
+
+cat e_{anzahl}_digits.txt   /* berechnetes Resultat ansehen.
+ */
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{verbatim}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Bekannte Probleme
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Bekannte Probleme}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Die Programmausführung kann nicht gestartet werden.
+ Lösung: der Benutzer, der 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ausführen will, muss auf der Datei 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ausführbare Rechte besitzen.
+\end_layout
+
+\begin_layout Itemize
+Es können keine Swap-Dateien geschrieben werden.
+ Lösung: der Benutzer, der 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+ausführen will, muss auf dem Dateipfad 
+\begin_inset Quotes fld
+\end_inset
+
+swap_space_location
+\begin_inset Quotes frd
+\end_inset
+
+ (spezifiziert in der Konfigurationsdatei) Schreibrechte besitzen.
+\end_layout
+
+\begin_layout Itemize
+Wenn auf sehr alten Systemen (langsam getaktete CPU) Dateien ausgelagert
+ werden müssen, überschreiben sich die Swap-Dateien des Memory-Managers.
+ Dies hängt mit der Dateipfad-Generierung der Swap-Dateien zusammen (Zeit
+ kann nicht präzise genug ausgelesen werden.) und muss in einem späteren
+ Release behoben werden.
+\end_layout
+
+\begin_layout Itemize
+Da es sich um ein Beta-Release handelt, gibt es noch einige Berechnungsalgorithm
+en zu optimieren.
+ Momentan macht es keinen Sinn, Zahlen mit einer Präzision von über 2000
+ Nachkommastellen auszurechnen, da die Wartezeit sonst viel zu lange wäre.
+\end_layout
+
+\begin_layout Itemize
+Je kleiner die Blockgrösse für die Auslagerung definiert wird (block_size_thresh
+old), desto langsamer wird die Ausführung des Programms.
+\end_layout
+
+\begin_layout Section*
+Deinstallation
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Deinstallation}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Um 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\backslash
+ 
+\end_layout
+
+\end_inset
+
+zu 
+\begin_inset Quotes fld
+\end_inset
+
+deinstallieren
+\begin_inset Quotes frd
+\end_inset
+
+, reicht es aus, den Anfangs bei der Installation entpackten Ordner (
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myProgName
+\end_layout
+
+\end_inset
+
+) wieder vom System zu löschen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Bedienungsanleitung}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Beispiel-Code}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Beispiel-Code}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Beispiel-Code
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Beispiel-Code}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Als Auszug aus dem Quellcode werden hier die Header- und die Implementierungsdat
+ei der Klasse CBigNumberFloat gezeigt.
+ Der restliche Quellcode befindet sich auf der CD, die dieser Dokumentation
+ beiliegt.
+\end_layout
+
+\begin_layout Section*
+Header 
+\begin_inset Quotes fld
+\end_inset
+
+CBigNumberFloat.h
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Header CBigNumberFloat.h}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[language=C++]{_srcListings/CBigNumberFloat.h}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Implementierung 
+\begin_inset Quotes fld
+\end_inset
+
+CBigNumberFloat.cpp
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{section}{Implementierung CBigNumberFloat.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[language=C++]{_srcListings/CBigNumberFloat.cpp}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Beispiel-Code}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Sitzungsprotokolle}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Sitzungsprotokolle}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Chapter*
+Sitzungsprotokolle
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Sitzungsprotokolle"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Sitzungsprotokolle}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/Betreuung-ProtokollNr1_gs.pdf
+	display false
+	scale 50
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Protokoll datiert vom 8.
+ Mai 2012 und fasst die erste Betreuersitzung zusammen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/Betreuung-ProtokollNr2_gs.pdf
+	display false
+	scale 71.400000000000006
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Protokoll datiert vom 14.
+ Juli 2012 und fasst die zweite Betreuersitzung zusammen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/Betreuung-ProtokollNr3_gs.pdf
+	display false
+	scale 71.400000000000006
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Protokoll datiert vom 6.
+ August 2012 und fasst die dritte Betreuersitzung zusammen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+framebox[1.0
+\backslash
+columnwidth]{
+\end_layout
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename _img/Betreuung-ProtokollNr4.eps
+	display false
+	scale 21
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das Protokoll datiert vom 16.
+ August 2012 und fasst die vierte Betreuersitzung zusammen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Sitzungsprotokolle}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Glossar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Glossar}
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset nomencl_print
+LatexCommand printnomenclature
+set_width "none"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Glossar}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList figure
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset FloatList table
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+lstlistlistingname}{Listingverzeichnis} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstlistoflistings 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Listings}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+bibfiles "_bibTexDb/bibliographyDa"
+options "gerplain"
+
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+addcontentsline{toc}{chapter}{Literaturverzeichnis}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
