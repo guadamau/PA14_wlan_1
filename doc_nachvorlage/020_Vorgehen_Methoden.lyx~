@@ -127,5 +127,116 @@ Vorgehen / Methoden
 (Theoretische Herleitung der Lösung)
 \end_layout
 
+\begin_layout Section
+Konzeptpapier
+\end_layout
+
+\begin_layout Subsection
+Einleitung
+\end_layout
+
+\begin_layout Standard
+Dieses Dokument geht konkret auf die funktionalen Anforderungen, welche
+ im Pflichtenheft gestellt werden ein und versucht anhand von verschiedenen
+ Varianten die geeignete Lösung für deren Umsetzung herauszufiltern.
+ Zunächst werden mögliche Projektrisiken aufgezeigt.
+\end_layout
+
+\begin_layout Subsection
+Projekt-Risikoanalyse
+\end_layout
+
+\begin_layout Subsubsection*
+Risikoidentifikation
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="35col%">
+<column alignment="left" valignment="top" width="56col%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Risiko
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mögliche Massnahmen
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+wenn die Polizei vorbei fährt ...
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Itemize
+...
+ halt ich erst mal an
+\end_layout
+
+\begin_layout Itemize
+ja
+\end_layout
+
+\begin_layout Itemize
+...
+ nimm ne Ziese aus der Schachtel
+\end_layout
+
+\begin_layout Itemize
+ja
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Projekt-Risikoanalyse 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document

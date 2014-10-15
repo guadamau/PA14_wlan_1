@@ -9,7 +9,6 @@
 
 % Variabeln
 \newcommand{\myTitle}{Performance-Evaluation Ethernet für Echtzeit-Datenerfassung}
-\newcommand{\myProgName}{powerInNumbers}
 
 % Package fuer Gesamtseitenzahl
 \usepackage{lastpage}
@@ -17,6 +16,8 @@
 % Kopf- und Fusszeilendefinition
 \lhead{\includegraphics[scale=1.0]{_img/InES_small.png}}
 \rhead{\nouppercase{\rightmark}}
+\renewcommand{\chaptermark}[1]{\markright{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
 \chead{}
 \lfoot{\myTitle}
 \rfoot{\thepage/\pageref{LastPage}}
@@ -122,6 +123,7 @@ keepaspectratio]{_img/InES.pdf}%
 \vfill
 }}}
 \end_preamble
+\options bibliography=totocnumbered,listof=totocnumbered
 \use_default_options true
 \maintain_unincluded_children false
 \language ngerman
@@ -301,19 +303,6 @@ filename "011_Theoretische_Grundlagen.lyx"
 
 \begin_layout Standard
 \begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Teil II}
-\end_layout
-
 \end_inset
 
 

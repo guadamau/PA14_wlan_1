@@ -85,20 +85,12 @@ status open
 
 
 \backslash
-markright{Kapitel 6: Verzeichnisse}
+markright{Literaturverzeichnis}
 \end_layout
 
 \end_inset
 
 
-\end_layout
-
-\begin_layout Chapter
-Verzeichnisse
-\end_layout
-
-\begin_layout Section
-Literaturverzeichnis
 \end_layout
 
 \begin_layout Standard
@@ -112,8 +104,22 @@ options "gerplain"
 
 \end_layout
 
-\begin_layout Section
-Glossar
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand{
+\backslash
+nomname}{Glossar}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -133,6 +139,37 @@ input{_tex/nomenclatureContents.tex}
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+stdchapter
+\backslash
+chapter 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+def
+\backslash
+chapter*#1{
+\backslash
+stdchapter{#1}}  
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 \begin_inset CommandInset nomencl_print
 LatexCommand printnomenclature
 set_width "none"
@@ -142,8 +179,60 @@ set_width "none"
 
 \end_layout
 
-\begin_layout Section
-Abbildungsverzeichnis
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+let
+\backslash
+chapter
+\backslash
+stdchapter
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+section*{Word of thanks
+\backslash
+markboth{
+\backslash
+MakeUppercase{Word of thanks}}{}}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Glossar}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -154,8 +243,20 @@ Abbildungsverzeichnis
 
 \end_layout
 
-\begin_layout Section
-Tabellenverzeichnis
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Abbildungsverzeichnis}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -166,8 +267,20 @@ Tabellenverzeichnis
 
 \end_layout
 
-\begin_layout Section
-Listingverzeichnis
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Tabellenverzeichnis}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -188,6 +301,22 @@ lstlistlistingname}{Listingverzeichnis}
 
 \backslash
 lstlistoflistings 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+markright{Listingverzeichnis}
 \end_layout
 
 \end_inset

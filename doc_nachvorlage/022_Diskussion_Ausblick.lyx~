@@ -97,154 +97,24 @@ markright{Kapitel 5: Diskussion und Ausblick}
 Diskussion und Ausblick
 \end_layout
 
-\begin_layout Standard
-Durch das Institute of Embedded Systems der ZHAW wurde den Autoren am 24.
- September 2014 eine Aufgabenstellung
-\begin_inset CommandInset citation
-LatexCommand cite
-key "Aufgabenstellung"
-
-\end_inset
-
- zugestellt, welche die nachfolgenden Hauptanforderungen umfasst:
+\begin_layout Itemize
+Bespricht die erzielten Ergebnisse bezüglich ihrer Erwartbarkeit, Aussagekraft
+ und Relevanz 
 \end_layout
 
-\begin_layout Section
-Anforderungen
+\begin_layout Itemize
+Interpretation und Validierung der Resultate
 \end_layout
 
-\begin_layout Subsection
-Modell für HSR-Knoten erweitern
+\begin_layout Itemize
+Rückblick auf Aufgabenstellung, erreicht bzw.
+ nicht erreicht
 \end_layout
 
-\begin_layout Standard
-Das betrachtete Netzwerk ist ein HSR-Ring.
- Die bestehende Simulationsumgebung 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VA_HSR_Simulation"
-
-\end_inset
-
- soll so erweitert bzw.
- angepasst werden, dass folgende Funktionen/Mechanismen simuliert werden
- können:
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #1.1
-\end_layout
-
-\begin_layout Standard
-Der Knoten soll zwei Prioritäten unterstützen, d.h.
- zwei Warteschlangen pro Interface bewirtschaften.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #1.2
-\end_layout
-
-\begin_layout Standard
-Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
- Express Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
-hen.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #1.3
-\end_layout
-
-\begin_layout Standard
-Der in den Ring einfliessende Traffic kann limitiert werden.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #1.4
-\end_layout
-
-\begin_layout Standard
-Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
- Frames, die in den Ring einfliessen, können variiert werden (z.B.
- 
-\begin_inset Quotes fld
-\end_inset
-
-zirkulierende Frames haben immer Vortritt
-\begin_inset Quotes frd
-\end_inset
-
- oder 
-\begin_inset Quotes fld
-\end_inset
-
-minimaler Zufluss wird garantiert
-\begin_inset Quotes frd
-\end_inset
-
-).
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #1.5
-\end_layout
-
-\begin_layout Standard
-Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
- Traffic und dem Bulk Traffic je eine Phase zuordnet.
-\end_layout
-
-\begin_layout Subsection
-Lastmodell beschreiben und implementieren
-\end_layout
-
-\begin_layout Standard
-Das durch die Anwendung generierte Verkehrsaufkommen ist zu studieren und
- zu beschreiben.
- Lastgeneratoren sollen implementiert werden, die das Verkehrsaufkommen
- für die Simulation generieren durch die Überlagerung von Strömen mit folgender
- Charakteristik:
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #2.1
-\end_layout
-
-\begin_layout Standard
-Lastgenerator mit konstanter Framerate.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #2.2
-\end_layout
-
-\begin_layout Standard
-Lastgenerator mit zufälliger zeitlicher Verteilung der Frames.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #2.3
-\end_layout
-
-\begin_layout Standard
-Lastgenerator, der spontane Einzelmeldungen erzeugt.
-\end_layout
-
-\begin_layout Subsection
-Simulationen durchführen und Resultate interpretieren
-\end_layout
-
-\begin_layout Standard
-Das Zeitverhalten der verschiedenen Weiterleitungsvarianten soll durch entsprech
-ende Simulationsläufe ermittelt werden.
- Die Resultate sind zu vergleichen und zu interpretieren.
-\end_layout
-
-\begin_layout Subsubsection
-Anforderung #3.1
-\end_layout
-
-\begin_layout Standard
-Simulationsresultate vergleichen und interpretieren.
+\begin_layout Itemize
+Legt dar, wie an die Resultate (konkret vom Industriepartner oder weiteren
+ Forschungsarbeiten; allgemein) angeschlossen werden kann; legt dar, welche
+ Chancen die Resultate bieten
 \end_layout
 
 \end_body

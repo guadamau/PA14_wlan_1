@@ -77,22 +77,6 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Kapitel 2: Theoretische Grundlagen}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 Theoretische Grundlagen
 \begin_inset CommandInset label
@@ -336,7 +320,7 @@ Interspersing Express Traffic (IET)
 \end_layout
 
 \begin_layout Section
-M-Frame
+Mframe
 \end_layout
 
 \end_body
