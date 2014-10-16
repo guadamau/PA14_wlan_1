@@ -40,40 +40,10 @@ typedef enum rbr redBoxConfiguration;
 /**
  * TODO - Generated class
  */
-class RedBoxSwitch : public cSimpleModule
+class RedBoxSwitch : public HsrSwitch
 {
 public:
-    const cGate*& getGateAIn() const {
-        return gateAIn;
-    }
 
-    const cGate*& getGateAOut() const {
-        return gateAOut;
-    }
-
-    const cGate*& getGateBIn() const {
-        return gateBIn;
-    }
-
-    const cGate*& getGateBOut() const {
-        return gateBOut;
-    }
-
-    const cGate*& getGateCpuIn() const {
-        return gateCpuIn;
-    }
-
-    const cGate*& getGateCpuOut() const {
-        return gateCpuOut;
-    }
-
-    const cGate*& getGateInterlinkIn() const {
-        return gateInterlinkIn;
-    }
-
-    const cGate*& getGateInterlinkOut() const {
-        return gateInterlinkOut;
-    }
 
   private:
     MACAddress myAddr;

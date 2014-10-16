@@ -740,11 +740,3 @@ void ModifiedEtherMACBase::startFrameTransmission()
     
     send(frame, physOutGate);
 }
-
-
-// void ModifiedEtherMACBase::updateHasSubcribers()
-// {
-//     hasSubscribers = nb->hasSubscribers(NF_PP_TX_BEGIN) ||
-//                      nb->hasSubscribers(NF_PP_TX_END) ||
-//                      nb->hasSubscribers(NF_PP_RX_END);
-// }

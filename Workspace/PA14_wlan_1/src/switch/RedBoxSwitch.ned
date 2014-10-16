@@ -18,16 +18,12 @@ package switch;
 //
 // TODO auto-generated module
 //
-simple RedBoxSwitch
+simple RedBoxSwitch extends HsrSwitch
 {
-    parameters:      
-        string myAddress;
+    parameters:
+    	@class( RedBoxSwitch );
         int redBoxCfg = default(0); //0=Regular , 1=HSR , 2=PRP-A , 3=PRP-B
-        int ringID; //ring number
         @display("i=abstract/switch");
     gates:
-        inout gateA;            // declare two way connections
-        inout gateB;            // declare two way connections
-        inout gateInterlink;    // declare two way connections
-        inout gateCPU;          // declare two way connections   
+        inout gateInterlink;    // declare two way connections   
 }

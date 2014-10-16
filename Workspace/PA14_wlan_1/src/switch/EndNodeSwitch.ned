@@ -15,18 +15,8 @@
 
 package switch;
 
-//
-// TODO auto-generated module
-//
-simple EndNodeSwitch
+
+simple EndNodeSwitch extends HsrSwitch
 {
-    parameters:      
-        string myAddress;
-        string schedulerMode = default("FCFS");
-        int ringID; //ring number
-        @display("i=abstract/switch");
-    gates:
-        inout gateA;    // declare two way connections
-        inout gateB;    // declare two way connections
-        inout gateCPU;  // declare two way connections   
+    @class( EndNodeSwitch );
 }

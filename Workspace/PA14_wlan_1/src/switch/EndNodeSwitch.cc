@@ -14,64 +14,40 @@
 //
 
 #include "EndNodeSwitch.h"
-#include "Scheduler.h"
 
-Define_Module(EndNodeSwitch)
-;
+Define_Module( EndNodeSwitch );
 
 
-nodeTable *EndNodeSwitch::getNodeTable()
+nodeTable* EndNodeSwitch::getNodeTable()
 {
     cModule *calleeModule = getParentModule();
 
-    if(calleeModule != NULL)
+    if( calleeModule != NULL )
     {
-        calleeModule = calleeModule->getSubmodule("nodeTable"); //TODO: Namen als Parameter �bergeben
-        return check_and_cast<nodeTable *>(calleeModule);
+        /* TODO: Namen als Parameter übergeben */
+        calleeModule = calleeModule->getSubmodule( "nodeTable" );
+        return check_and_cast<nodeTable*>( calleeModule );
     }
 
     return NULL;
 }
 
 
-void
-EndNodeSwitch::initialize()
+void EndNodeSwitch::initialize()
 {
-    //Initialize Scheduler
-    schedmode = par("schedulerMode").stringValue();
-    sched = new Scheduler(schedmode);
-
-    myAddr.setAddress(par("myAddress").stringValue());
-
-    if ((myAddr.isBroadcast()) || (myAddr.isMulticast()))
-    {
-        throw cRuntimeError("invalid Addr");
-    }
-
-    ringID = par("ringID");
-    if ((ringID < 1) || (ringID > 6))
-    {
-        throw cRuntimeError("invalid Ring ID");
-    }
-
-    sequenceNum = 0;
+    /* Call initialize of the base class. */
+    HsrSwitch::initialize();
 
     endNodeTable = getNodeTable();
-    if(endNodeTable == NULL)
+    if( endNodeTable == NULL )
     {
-        throw cRuntimeError("can't load node table");
+        throw cRuntimeError( "can't load node table" );
     }
-
-    gateAIn = gate("gateA$i");
-    gateAOut = gate("gateA$o");
-    gateBIn = gate("gateB$i");
-    gateBOut = gate("gateB$o");
-    gateCpuIn = gate("gateCPU$i");
-    gateCpuOut = gate("gateCPU$o");
 }
 
-EndNodeSwitch::~EndNodeSwitch() {
-    delete sched;
+EndNodeSwitch::~EndNodeSwitch()
+{
+    delete endNodeTable;
 }
 
 void EndNodeSwitch::DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
@@ -154,13 +130,14 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
 
 
 
-void
-EndNodeSwitch::handleMessage(cMessage *msg)
+void EndNodeSwitch::handleMessage(cMessage *msg)
 {
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
     // sched->enqueueMessage(msg);
+
+    /* Folgender Inhalt wird künftig im Scheduler abgehandelt. */
 
     cGate* arrivalGate = msg->getArrivalGate();
 

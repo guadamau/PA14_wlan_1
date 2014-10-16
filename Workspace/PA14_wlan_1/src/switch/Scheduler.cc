@@ -7,50 +7,22 @@
 
 #include "Scheduler.h"
 
-Scheduler::Scheduler(schedulerMode schedmode) {
+Scheduler::Scheduler(schedulerMode schedmode)
+{
     // TODO Auto-generated constructor stub
     this->queues = new cArray();
     this->queues->setCapacity(6);
     this->schedmode = schedmode;
 }
 
-Scheduler::~Scheduler() {
-    // TODO Auto-generated destructor stub
+
+Scheduler::~Scheduler()
+{
     delete queues;
 }
 
-void
-Scheduler::processQueues() {
-    switch (schedmode) {
-        case FCFS:
-        {
-            break;
-        }
 
-        case RING_FIRST:
-        {
-            break;
-        }
-
-        case ZIPPER:
-        {
-            break;
-        }
-
-        case TOKENS:
-        {
-            break;
-        }
-
-        default:
-        {
-            break;
-        }
-    }
-}
-
-void
-Scheduler::enqueueMessage(cMessage *msg)
+void Scheduler::enqueueMessage( cMessage *msg )
 {
     EthernetIIFrame *ethernetFrame = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;
@@ -76,15 +48,16 @@ Scheduler::enqueueMessage(cMessage *msg)
         frameprio = HIGH;
     }
 
-    switch(schedmode) {
-
+    switch( schedmode )
+    {
         ////////////////////////////////////////
         // FIRST COME FIRST SERVE
         ////////////////////////////////////////
         case FCFS:
         {
-
-            switch(frameprio) {
+            /* Enqueue a message according its priority. */
+            switch( frameprio )
+            {
 
                 case EXPRESS:
                 {
@@ -120,7 +93,8 @@ Scheduler::enqueueMessage(cMessage *msg)
             queues->addAt(queueName.HIGH_RING, new cQueue());
             queues->addAt(queueName.LOW_RING, new cQueue());
 
-            switch(frameprio) {
+            switch( frameprio )
+            {
 
                 case EXPRESS:
                 {
@@ -171,7 +145,37 @@ Scheduler::enqueueMessage(cMessage *msg)
         }
 
     }
-
-
 }
 
+
+void Scheduler::processQueues()
+{
+    switch( schedmode )
+    {
+        case FCFS:
+        {
+
+            break;
+        }
+
+        case RING_FIRST:
+        {
+            break;
+        }
+
+        case ZIPPER:
+        {
+            break;
+        }
+
+        case TOKENS:
+        {
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
+}

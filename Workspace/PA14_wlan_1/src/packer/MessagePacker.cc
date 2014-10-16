@@ -17,13 +17,12 @@
 
 MessagePacker::MessagePacker()
 {
-    // TODO Auto-generated constructor stub
 
 }
 
 MessagePacker::~MessagePacker()
 {
-    // TODO Auto-generated destructor stub
+
 }
 
 dataMessage *MessagePacker::createDataMessage(const char *name, int64 length, int messageCounter)
@@ -81,24 +80,7 @@ MessagePacker::generateEthMessage(EthernetIIFrame *ethTag, vlanMessage *vlanTag,
     EthernetIIFrame *result_ethTag = NULL;
     vlanMessage *result_vlanTag = NULL;
     hsrMessage *result_hsrTag = NULL;
-/*
-    if (ethTag != NULL)
-    {
-      EV << "ethTag  getBitLength " << ethTag->getBitLength() << endl;
-    }
-    if (vlanTag != NULL)
-    {
-        EV << "vlanTag  getBitLength " << vlanTag->getBitLength() << endl;
-    }
-    if (hsrTag != NULL)
-    {
-        EV << "hsrTag  getBitLength " << hsrTag->getBitLength() << endl;
-    }
-    if (messageData != NULL)
-    {
-        EV << "messageData  getBitLength " << messageData->getBitLength() << endl;
-    }
-*/
+
     if ((ethTag == NULL) || (messageData == NULL))
     {
         throw cRuntimeError("Can't generate Message without Address and Data ! \n");

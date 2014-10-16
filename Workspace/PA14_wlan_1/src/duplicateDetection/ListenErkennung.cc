@@ -82,7 +82,7 @@ ListenErkennung::finish()
         registerDuplicateEntry(dupplikatListe[c], true);
     }
 
-    //Sorgt dafür, das die Zeitskala stimmt
+    //Sorgt dafï¿½r, das die Zeitskala stimmt
     duplicateTimeLastWriteToNow.record(0);
     duplicateTimeLastReadToNow.record(0);
 
@@ -129,14 +129,14 @@ void
 ListenErkennung::handleMessage(cMessage *msg)
 {
     EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);
-   vlanMessage *vlanTag = NULL;
-   hsrMessage *hsrTag = NULL;
-   dataMessage *messageData = NULL;
+    vlanMessage *vlanTag = NULL;
+    hsrMessage *hsrTag = NULL;
+    dataMessage *messageData = NULL;
 
 
     if (checkFrame(check_and_cast<EthernetIIFrame *>(ethTag->dup())) == 1)
     {
-    	send(ethTag, gate("gate$o"));
+    	send(ethTag,    gate("gate$o"));
     }
     else
     {

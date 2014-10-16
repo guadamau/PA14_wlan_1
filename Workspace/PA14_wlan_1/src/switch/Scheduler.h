@@ -35,11 +35,11 @@ typedef enum
 
 class Scheduler {
 public:
-    Scheduler(schedulerMode schedmode);
+    Scheduler( schedulerMode schedmode );
     virtual ~Scheduler();
 
 protected:
-    virtual void enqueueMessage(cMessage *msg);
+    virtual void enqueueMessage( cMessage *msg );
     virtual void processQueues();
 
 private:

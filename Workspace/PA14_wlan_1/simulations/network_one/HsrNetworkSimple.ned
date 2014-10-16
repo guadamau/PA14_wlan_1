@@ -10,31 +10,31 @@ network HsrNetworkSimple
 
         R1EndNode1: HsrEndNode {
             @display("p=50,200");
-            myAddress = "00-15-12-14-88-01";
+            macAddress = "00-15-12-14-88-01";
             ringID = 1;
         }
 
         R1EndNode2: HsrEndNode {
             @display("p=150,200");
-            myAddress = "00-15-12-14-88-02";
+            macAddress = "00-15-12-14-88-02";
             ringID = 1;
         }
 
         R1EndNode3: HsrEndNode {
             @display("p=250,200");
-            myAddress = "00-15-12-14-88-03";
+            macAddress = "00-15-12-14-88-03";
             ringID = 1;
         }
 
         R1EndNode4: HsrEndNode {
             @display("p=350,200");
-            myAddress = "00-15-12-14-88-04";
+            macAddress = "00-15-12-14-88-04";
             ringID = 1;
         }
 
         R1RedBox1: HsrRedBox {
             @display("p=200,80");
-            myAddress = "00-15-12-14-88-0A";
+            macAddress = "00-15-12-14-88-0A";
             ringID = 1;
             redBoxCfg = 1;
         }
