@@ -319,8 +319,792 @@ DANP sind redundant angeschlossen Knoten, welche das PRP Protokoll verwenden.
 Interspersing Express Traffic (IET)
 \end_layout
 
+\begin_layout Standard
+Interspersing Express Traffic ist ein Entwurf des Standardisierungsgremiums
+ IEEE unter der Bezeichnung 
+\begin_inset Quotes fld
+\end_inset
+
+IEEE 802.3br
+\begin_inset Quotes frd
+\end_inset
+
+, welcher voraussichtlich Ende 2015 zum Standard werden soll 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_SCHEDULE"
+
+\end_inset
+
+.
+ Ziel ist es auf OSI Layer 2 
+\begin_inset Quotes fld
+\end_inset
+
+Data Link
+\begin_inset Quotes frd
+\end_inset
+
+ den Standard IEEE 802.3 
+\begin_inset Quotes fld
+\end_inset
+
+Ethernet
+\begin_inset Quotes frd
+\end_inset
+
+ zu erweitern, um IET zu ermöglichen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_PAR"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Mittels IET wird es möglich sein dass Geräte, die IET unterstützen, zwischen
+ sogenannten Express und Normal Frames unterscheiden, den Sendevorgang der
+ normalen Frames unterbrechen und somit Express Frames (auch IET Frames
+ genannt) schneller senden können.
+\end_layout
+
+\begin_layout Standard
+Der Grund dafür ist, dass neue Märkte wie zum Beispiel die industrielle
+ Automatisierung und Transport (Flugzeuge, Züge und grosse Fahrzeuge) Ethernet
+ adaptiert haben und die Nachfrage nach einer kleinen Latenz aufgrund von
+ ihrer Hochverfügbarkeit steigern 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_PAR"
+
+\end_inset
+
+.
+ Dringende Meldungen können dann dem üblichen Traffic vorgezogen und schneller
+ erkannt werden.
+\end_layout
+
+\begin_layout Standard
+Für den Standard ist unter anderem vorgesehen, dass das Ethernet-Frame-Format
+ beibehalten wird, keine Änderungen auf OSI Layer 1 
+\begin_inset Quotes fld
+\end_inset
+
+Physical
+\begin_inset Quotes frd
+\end_inset
+
+ gemacht werden und die Express Frames von Geräten, die nicht IET-fähig
+ sind, verworfen werden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+.
+ Die normalen Frames werden, wenn sie durch Express Frames unterbrochen
+ werden, aufgeteilt in Mframes (
+\begin_inset Quotes fld
+\end_inset
+
+MAC Merge Frame
+\begin_inset Quotes frd
+\end_inset
+
+, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Mframe"
+
+\end_inset
+
+), von denen man auf OSI Layer 1 nichts mitbekommt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+.
+ So wird das bereits Gesendete nicht verworfen, sondern wird mit dem später
+ ankommenden Rest wieder zusammengesetzt.
+ Express Frames werden nicht fragmentiert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/011_mac_merge.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+MAC Merge Layer 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Mframe
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Mframe"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ein Mframe (steht für 
+\begin_inset Quotes fld
+\end_inset
+
+MAC Merge Frame
+\begin_inset Quotes frd
+\end_inset
+
+) ist eine Einheit, welche ganze Frames und Fragmente von unterbrechbaren
+ Frames beinhalten kann und wie ein normales Frame auf dem OSI Layer 1 aussieht
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+.
+ Die Struktur eines Mframes ist dem eines Ethernet Frames sehr ähnlich.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/011_mframe_format.png
+	display false
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mframe Format 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Das SMD-Feld nach der Präämbel (anstelle des SFD (Start Frame Delimiter)
+ Feldes) wird in einem Mframe verwendet, um die Fragmente kennzuzeichnen.
+ So hat das erste Fragment einen SMD-Ix-Wert, um zu signalisieren, dass
+ es sich um das erste Fragment eines Frames handelt.
+ Die darauf folgenden Fragmente haben einen SMD-Cx-Wert und ein FragCount-Feld.
+ Im SMD-Ix- und SMD-Cx-Feld wird jeweils eine Framenummer vergeben, wobei
+ im FragCount-Feld die Nummer des Fragments steht.
+ Dabei wechselt jedes dieser Felder jeweils zwischen 4 verschiedenen Werten
+ (siehe Tabelle 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "table_smd_fragcount"
+
+\end_inset
+
+), das heisst, dass maximal 4 Frames aufs Mal von einem Express Frame unterbroch
+en werden können und dasselbe Frame in maximal 5 Fragmente aufgeteilt werden
+ kann.
+ Diese Werte haben jeweils eine Hamming-Distanz von 4zueinander, um den
+ Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="10" columns="3">
+<features rotate="0" tabularvalignment="top">
+<column alignment="left" valignment="top" width="45col%">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mframe Typ
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frame #
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SFD (express)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NA
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xD5
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-Ix
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xE6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x4C
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x7F
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xB3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SMD-Cx
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x61
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x52
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x9E
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xAD
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="45col%">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+FragCount
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Frag
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xE6
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x4C
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0x7F
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0xB3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+SMD und FragCount Codierungen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "table_smd_fragcount"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+MFCS ist die Blockprüfzeichenfolge (oder Frame Check Sequence (FCS)) eines
+ nicht-finalen Fragments, dessen Wert derselbe wie einer FCS ist, wobei
+ die ersten 2 der 4 Bytes invertiert sind (XOR FFFF0000).
+ Das letze Fragment hat dann wieder eine FCS anstelle einer MFCS, um zu
+ signalisieren, dass es sich um das letzte Fragment dieses Frames handelt
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+.
 \end_layout
 
 \end_body
