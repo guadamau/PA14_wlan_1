@@ -77,22 +77,6 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Kapitel 3: Vorgehen / Methoden}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 Vorgehen / Methoden
 \end_layout
@@ -125,6 +109,101 @@ Vorgehen / Methoden
 
 \begin_layout Itemize
 (Theoretische Herleitung der Lösung)
+\end_layout
+
+\begin_layout Section
+Aufbau der Netzwerkumgebung
+\end_layout
+
+\begin_layout Standard
+In OMNeT++ wird ein HSR-Ring-Netzwerk aufgebaut, in welchem der Traffic
+ simuliert wird.
+ Mittels Konfigurationsdatei kann man die zu verwendenden Prioritäten (siehe
+ Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Prioritäten-der-Ethernet-Frames"
+
+\end_inset
+
+) und Mechanismen (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Mechanismen-zur-Trafficregelung"
+
+\end_inset
+
+) definieren, welche in den weiteren Kapiteln genauer behandelt werden.
+\end_layout
+
+\begin_layout Subsection
+Prioritäten der Ethernet-Frames
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Prioritäten-der-Ethernet-Frames"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Für die Ethernet-Frames sind 3 verschiedene Prioritäten vorgesehen, nämlich
+ sogenannte Express-, High- und Low-Frames.
+ Dabei handelt es sich um das in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Interspersing-Express-Traffic"
+
+\end_inset
+
+ beschriebene Express-Frame, wobei die High- und Low-Frames als normales
+ Frame gelten und sich lediglich bei der Priorisierung unterscheiden.
+\end_layout
+
+\begin_layout Standard
+In dieser Arbeit werden wir diese Frames wie folgt auf technischer Ebene
+ unterscheiden:
+\end_layout
+
+\begin_layout Itemize
+Ein Express-Frame wird durch einen eigenen EtherType-Wert im Ethernet-Header
+ definiert.
+ So werden diese Frames auch nur von den Geräten erkannt, die diesen EtherType-W
+ert kennen.
+\end_layout
+
+\begin_layout Itemize
+Bei einem High-Frame handelt es sich um ein normales Ethernet-Frame das
+ über ein VLAN-Tag mit der Priorität 1 versehen ist.
+\end_layout
+
+\begin_layout Itemize
+Als ein Low-Frame werden alle Frames definiert, welche ein VLAN-Tag mit
+ der Priorität 0 oder keine besondere Kennzeichnung haben.
+\end_layout
+
+\begin_layout Subsection
+Mechanismen zur Trafficregelung
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Mechanismen-zur-Trafficregelung"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Limitierung des Traffics von Aussen
+\end_layout
+
+\begin_layout Subsubsection
+Vortrittsregeln bezüglich Frames im und zum Ring
+\end_layout
+
+\begin_layout Subsubsection
+Zeitschlitzverfahren
 \end_layout
 
 \begin_layout Section

@@ -317,6 +317,13 @@ DANP sind redundant angeschlossen Knoten, welche das PRP Protokoll verwenden.
 
 \begin_layout Section
 Interspersing Express Traffic (IET)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Interspersing-Express-Traffic"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -337,7 +344,37 @@ key "IET_DRAFT_SCHEDULE"
 \end_inset
 
 .
- Ziel ist es auf OSI Layer 2 
+ Die Recherche für den Entwurf wurde von einer Gruppe beim IEEE erarbeitet,
+ die unter dem Namen 
+\begin_inset Quotes fld
+\end_inset
+
+IEEE 802.3 Distinguished Minimum Latency Traffic in a Converged Traffic Environme
+nt (DMLT) Study Group
+\begin_inset Quotes frd
+\end_inset
+
+ daran gearbeitet hat.
+ Für das erarbeiten des Entwurfs ging die Gruppe dann zur 
+\begin_inset Quotes fld
+\end_inset
+
+IEEE P802.3br Interspersing Express Traffic Task Force
+\begin_inset Quotes frd
+\end_inset
+
+ über 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "DMLT_PAGE"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Ziel ist es auf OSI Layer 2 
 \begin_inset Quotes fld
 \end_inset
 
@@ -353,7 +390,11 @@ Ethernet
 \begin_inset Quotes frd
 \end_inset
 
- zu erweitern, um IET zu ermöglichen 
+ zu erweitern, um IET zu ermöglichen.
+ Mittels IET wird es möglich sein dass Geräte, die IET unterstützen, zwischen
+ sogenannten Express und Normal Frames unterscheiden, den Sendevorgang der
+ normalen Frames unterbrechen und somit Express Frames (auch IET Frames
+ genannt) schneller senden können 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "IET_DRAFT_PAR"
@@ -361,13 +402,6 @@ key "IET_DRAFT_PAR"
 \end_inset
 
 .
-\end_layout
-
-\begin_layout Standard
-Mittels IET wird es möglich sein dass Geräte, die IET unterstützen, zwischen
- sogenannten Express und Normal Frames unterscheiden, den Sendevorgang der
- normalen Frames unterbrechen und somit Express Frames (auch IET Frames
- genannt) schneller senden können.
 \end_layout
 
 \begin_layout Standard
