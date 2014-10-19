@@ -194,16 +194,231 @@ name "sub:Mechanismen-zur-Trafficregelung"
 
 \end_layout
 
+\begin_layout Standard
+In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
+ und in der Simulation implementiert werden.
+\end_layout
+
 \begin_layout Subsubsection
-Limitierung des Traffics von Aussen
+Limitierung des Zuflusses von neuem Traffic
+\end_layout
+
+\begin_layout Standard
+Jedes Gerät generiert intern mit einer fixen Rate eine Anzahl an Tokens
+ bis zu einem bestimmten Maximum.
+ Möchte das Gerät ein neues, intern generiertes Frame versenden, kann es
+ das Frame erst versenden wenn genügend Tokens vorhanden sind.
+ Dabei verbraucht ein Frame mit n Bytes genau n Tokens.
+ Wenn zum Beispiel ein Frame mit 800 Bytes versendet werden muss und nur
+ 600 Tokens vorhanden sind, muss das Gerät mit dem Versand warten bis genügend
+ Tokens vorhanden sind.
+\end_layout
+
+\begin_layout Standard
+So kann der Zufluss von neuem Traffic limitiert werden, womit kein Gerät
+ das Netzwerk mit neuen Frames überschütten kann.
 \end_layout
 
 \begin_layout Subsubsection
 Vortrittsregeln bezüglich Frames im und zum Ring
 \end_layout
 
+\begin_layout Standard
+Damit die Frames innerhalb des Rings (HSR-Netzwerks) schneller zum Ziel
+ kommen, kann diesen Frames der Vortritt gegenüber Frames von Aussen gewährt
+ werden.
+ Dies ist bei gleich priorisierten Frames der Fall.
+ 
+\end_layout
+
+\begin_layout Standard
+Je nach auftretenden Prioritäten kann es auch sein, dass von Aussen ein
+ Express-Frame und vom Ring ein High-Frame kommt.
+ Dann hat das Express-Frame trotz der Herkunft von Aussen aufgrund dessen
+ Priorität Vortritt.
+\end_layout
+
+\begin_layout Subsubsection
+Reissverschluss
+\end_layout
+
+\begin_layout Standard
+Ein Derivat des vorherigen Mechanismus ist, den Vortritt zwischen Frames
+ vom Ring und von Aussen zu alternieren.
+ Die Frames würden dann wie folgt priorisiert werden (Angenommen es kommen
+ alle 3 Prioritäten (Express, High und Low) vor):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+Liste 1
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+Express-Frame vom Ring
+\end_layout
+
+\begin_layout Enumerate
+Express-Frame von Aussen
+\end_layout
+
+\begin_layout Enumerate
+High-Frame vom Ring
+\end_layout
+
+\begin_layout Enumerate
+High-Frame von Aussen
+\end_layout
+
+\begin_layout Enumerate
+Low-Frame vom Ring
+\end_layout
+
+\begin_layout Enumerate
+Low-Frame von Aussen
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+Liste 2
+\end_layout
+
+\begin_layout Enumerate
+\noindent
+Express-Frame von Aussen
+\end_layout
+
+\begin_layout Enumerate
+Express-Frame vom Ring
+\end_layout
+
+\begin_layout Enumerate
+High-Frame von Aussen
+\end_layout
+
+\begin_layout Enumerate
+High-Frame vom Ring
+\end_layout
+
+\begin_layout Enumerate
+Low-Frame von Aussen
+\end_layout
+
+\begin_layout Enumerate
+Low-Frame vom Ring
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\noindent
+So würde die Priorisierung zwischen der aus Liste 1 und der aus Liste 2
+ nach jedem Frame-Versand abwechseln.
+\end_layout
+
 \begin_layout Subsubsection
 Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Standard
+Im Zeitschlitzverfahren werden Zeitschlitze definiert, in denen man High-
+ und Low-Frames senden kann, ein Express-Frame kann immer versendet werden.
+ 
+\end_layout
+
+\begin_layout Standard
+Jeder Zeitschlitz hat eine sogenannte Grün-Phase, in welcher High-Frames
+ gesendet werden können.
+ Den Rest des Zeitschlitzes wird für den Sendevorgang oder Low-Frames verwendet.
+ Sollten keine High-Frames da sein so können auch Low-Frames gesendet werden.
+ Dies wiederholt sich in jedem Zeitschlitz.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Zeitschlitzverfahren.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel von Frameabfolge mit Zeitschlitzverfahren
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section

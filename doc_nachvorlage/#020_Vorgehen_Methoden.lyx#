@@ -395,9 +395,9 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename _img/020_Zeitschlitzverfahren.png
+	filename _img/011_mframe_format.png
 	display false
-	scale 50
+	scale 30
 
 \end_inset
 
@@ -408,7 +408,14 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel von Frameabfolge mit Zeitschlitzverfahren
+Mframe Format 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "IET_DRAFT_IETTF"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
