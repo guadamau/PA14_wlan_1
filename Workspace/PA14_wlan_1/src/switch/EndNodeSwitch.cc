@@ -137,7 +137,7 @@ void EndNodeSwitch::handleMessage(cMessage *msg)
     ///////////////////////////////////////////////////////////////
     // sched->enqueueMessage(msg);
 
-    /* Folgender Inhalt wird künftig im Scheduler abgehandelt. */
+    /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 
     cGate* arrivalGate = msg->getArrivalGate();
 

@@ -317,6 +317,13 @@ DANP sind redundant angeschlossen Knoten, welche das PRP Protokoll verwenden.
 
 \begin_layout Section
 Interspersing Express Traffic (IET)
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Interspersing-Express-Traffic"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1132,6 +1139,18 @@ key "IET_DRAFT_IETTF"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Section
+Beispiel mit IET und Mframe
+\end_layout
+
+\begin_layout Standard
+Folgendes Szenario ist zu betrachten: Es wird gerade ein normales Frame
+ gesendet.
+ Während diesem Sendevorgang trifft ein Express-Frame ein.
+ Der Sendevorgang des normalen Frames muss nun unterbrochen werden, indem
+ das normale Frame 
 \end_layout
 
 \end_body

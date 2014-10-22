@@ -1141,5 +1141,17 @@ key "IET_DRAFT_IETTF"
 .
 \end_layout
 
+\begin_layout Section
+Beispiel mit IET und Mframe
+\end_layout
+
+\begin_layout Standard
+Folgendes Szenario ist zu betrachten: Es wird gerade ein normales Frame
+ gesendet.
+ Während diesem Sendevorgang trifft ein Express-Frame ein.
+ Der Sendevorgang des normalen Frames muss nun unterbrochen werden, indem
+ das normale Frame fragmentiert und in das Mframe Format umgewandelt wird.
+\end_layout
+
 \end_body
 \end_document

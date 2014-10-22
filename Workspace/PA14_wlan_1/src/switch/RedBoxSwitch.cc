@@ -100,7 +100,9 @@ RedBoxSwitch::handleMessage(cMessage *msg)
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
-    // sched->enqueueMessage(msg, schedmode);
+    // sched->enqueueMessage(msg);
+
+    /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 
     cGate* arrivalGate = msg->getArrivalGate();
 
