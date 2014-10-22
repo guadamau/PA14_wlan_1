@@ -20,9 +20,13 @@
 
 class EndNodeScheduler: public Scheduler
 {
+
 public:
-    EndNodeScheduler();
+    EndNodeScheduler( schedulerMode schedmode );
     virtual ~EndNodeScheduler();
+
+    void enqueueMessage( cMessage *msg );
+    void processQueues();
 };
 
 #endif /* ENDNODESCHEDULER_H_ */

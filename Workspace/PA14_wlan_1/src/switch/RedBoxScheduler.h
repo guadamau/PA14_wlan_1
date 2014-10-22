@@ -21,7 +21,7 @@
 class RedBoxScheduler: public Scheduler
 {
 public:
-    RedBoxScheduler();
+    RedBoxScheduler( schedulerMode schedmode );
     virtual ~RedBoxScheduler();
 };
 

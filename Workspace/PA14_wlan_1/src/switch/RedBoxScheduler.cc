@@ -15,12 +15,13 @@
 
 #include "RedBoxScheduler.h"
 
-RedBoxScheduler::RedBoxScheduler() {
-    // TODO Auto-generated constructor stub
-
+RedBoxScheduler::RedBoxScheduler( schedulerMode schedmode )
+{
+    this->Scheduler::Scheduler( schedmode );
 }
 
-RedBoxScheduler::~RedBoxScheduler() {
-    // TODO Auto-generated destructor stub
+RedBoxScheduler::~RedBoxScheduler()
+{
+    this->Scheduler::~Scheduler();
 }
 

@@ -3,11 +3,15 @@
  *
  *  Created on: Oct 9, 2014
  *      Author: guadagnini
+ *
+ *  This class represents an
+ *  "abstract class" of the scheduler.
  */
 
 #ifndef SCHEDULER_H_
 #define SCHEDULER_H_
 
+/* Enum type definitions */
 typedef enum
 {
     EXPRESS,
@@ -33,18 +37,26 @@ typedef enum
     TOKENS
 } schedulerMode;
 
-class Scheduler {
-public:
-    Scheduler( schedulerMode schedmode );
-    virtual ~Scheduler();
 
-protected:
-    virtual void enqueueMessage( cMessage *msg );
-    virtual void processQueues();
+class Scheduler {
 
 private:
     cArray* queues;
     schedulerMode schedmode;
+
+    void initScheduler( void );
+
+public:
+    Scheduler( schedulerMode schedmode );
+    virtual ~Scheduler();
+
+    /* Abstract methods */
+    virtual void enqueueMessage( cMessage *msg ) = 0;
+    virtual void processQueues() = 0;
+
+    /* Getters */
+    const cArray*& getQueues() const;
+    schedulerMode getSchedmode() const;
 };
 
 #endif /* SCHEDULER_H_ */

@@ -30,6 +30,7 @@ public:
     HsrSwitch();
     virtual ~HsrSwitch();
 
+    void setSched( const Scheduler*& sched );
 
 private:
 

@@ -91,11 +91,15 @@ unsigned int HsrSwitch::getSequenceNum() const {
 }
 
 
+/* Setters */
+void HsrSwitch::setSched(const Scheduler*& sched) {
+    this->sched = sched;
+}
+
 void HsrSwitch::initialize()
 {
     /* Initialize Scheduler */
     schedmode = par( "schedulerMode" ).stringValue();
-    sched = new Scheduler( schedmode );
 
     macAddress->setAddress( par("macAddress").stringValue() );
 
