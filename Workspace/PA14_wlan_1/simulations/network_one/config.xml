@@ -9,7 +9,8 @@
             <last>20</last>
             <maxlast>40</maxlast>               
             <destination>00-15-12-14-88-04</destination>    
-            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->        
+            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
+            <priority>EXPRESS</priority>		<!-- EXPRESS / HIGH / LOW -->            
         </lastmuster>                
     </source>  
 </simulation_behaviour>

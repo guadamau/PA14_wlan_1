@@ -11,7 +11,12 @@
 #include <omnetpp.h>
 #include "MACAddress.h"
 
-
+typedef enum
+{
+    EXPRESS,
+    HIGH,
+    LOW
+} framePriority;
 
 typedef enum
 {
@@ -34,6 +39,7 @@ typedef struct
     MACAddress destination;
     SendType  sendType;
     SendBehavior sendBehavior;
+    framePriority frameprio;
     simtime_t startTime;
     simtime_t stopTime;
 

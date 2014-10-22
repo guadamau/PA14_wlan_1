@@ -39,12 +39,27 @@ CPU::generateOnePacket(SendData sendData)
 {
 
     EthernetIIFrame *result_ethTag = MessagePacker::createETHTag("eth", sendData.destination, myAddr);
+    if (sendData.frameprio == EXPRESS)
+    {
+        ethTag->setEtherType(0x8500);
+    }
+
     dataMessage *result_messageData =MessagePacker::createDataMessage("std", sendData.paketgroesse, messageCount++);
     vlanMessage *result_vlanTag = NULL;
-    if (sendData.vlan != 0)
+
+    if (sendData.vlan != 0 || sendData.frameprio == HIGH || sendData.frameprio == LOW)
     {
-        result_vlanTag = MessagePacker::createVLANTag( "vlan", 0, 0, 0, 0 );
+        if(!(sendData.frameprio == HIGH || sendData.frameprio == LOW))
+        {
+            result_vlanTag = MessagePacker::createVLANTag( "vlan", 0, 0, 0, 0 );
+        }
+        else
+        {
+            result_vlanTag = MessagePacker::createVLANTag( "vlan", sendData.frameprio, 0, 0, 0 );
+        }
+
     }
+
     EthernetIIFrame *result_ethFrame = MessagePacker::generateEthMessage(result_ethTag, result_vlanTag, NULL, result_messageData);
     MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, NULL, &result_messageData);
 
@@ -108,6 +123,7 @@ CPU::printMessageinfo(SendData sendData)
     EV << "maxinterval " << sendData.maxInterval << endl;
     EV << "standardabweichung " << sendData.standardabweichung << endl;
     EV << "paketgroesse " << sendData.paketgroesse << endl;
+    EV << "frameprio " << sendData.frameprio << endl;
     EV << "simTime " << simTime() << endl;
     EV << "--------------------------------------------------------------------- \n";
 }
@@ -115,77 +131,73 @@ CPU::printMessageinfo(SendData sendData)
 bool
 CPU::scheduleMessage(SendData sendData)
 {
-    //dataMessage *msg = NULL;
     MACAddress nullAddr("00-00-00-00-00-00");
-    //Typ pr�fen
-    if ((sendData.sendType != TYPE_STD) && (sendData.sendType != TYPE_HSR))
-        return false;
 
-    //Ziel pr�fen
-    if (sendData.destination == nullAddr)
+    if (((sendData.sendType != TYPE_STD) && (sendData.sendType != TYPE_HSR)) || sendData.destination == nullAddr || sendData.paketgroesse == 0)
+    {
         return false;
+    }
 
-    //Paketgr�sse pr�fen
-    if (sendData.paketgroesse == 0)
-        return false;
-
-    //Rest ist abh�ngig vom verhalten
     switch (sendData.sendBehavior)
     {
-    case BEHAVIOR_CONSTANT_LOADGEN:
-    {
-        if (sendData.startTime >= sendData.stopTime)
-            return false;
-        if ((sendData.last <= 0) && (sendData.interval <= 0))
-            return false;
-        cpuSelfMessage *delayedMessage = new cpuSelfMessage();
-        delayedMessage->setSendData(sendData);
-        scheduleAt(sendData.startTime, delayedMessage);
-        return true;
-    }
-        break;
-    case BEHAVIOR_UNIFORM_LOADGEN:
-    {
-        if (sendData.startTime >= sendData.stopTime)
-            return false;
-        if (((sendData.last > 0) && (sendData.maxLast > sendData.last)) || ((sendData.interval > 0) && (sendData.maxInterval > sendData.interval)))
+        case BEHAVIOR_CONSTANT_LOADGEN:
         {
+            if (sendData.startTime >= sendData.stopTime)
+                return false;
+            if ((sendData.last <= 0) && (sendData.interval <= 0))
+                return false;
             cpuSelfMessage *delayedMessage = new cpuSelfMessage();
             delayedMessage->setSendData(sendData);
             scheduleAt(sendData.startTime, delayedMessage);
             return true;
         }
-    }
-        break;
-    case BEHAVIOR_NORMAL_LOADGEN:
-    {
-        if (sendData.startTime >= sendData.stopTime)
-            return false;
-        if (sendData.standardabweichung <= 0)
-            return false;
-        if ((sendData.last > 0) || (sendData.interval > 0))
-        {
-            cpuSelfMessage *delayedMessage = new cpuSelfMessage();
-            delayedMessage->setSendData(sendData);
-            scheduleAt(sendData.startTime, delayedMessage);
-            return true;
-        }
-    }
-        break;
-    case BEHAVIOR_STD:
-    {
-        cpuSelfMessage *delayedMessage = new cpuSelfMessage();
-        delayedMessage->setSendData(sendData);
-        scheduleAt(sendData.startTime, delayedMessage);
+            break;
 
-        return true;
-    }
-        break;
-    default:
-    {
-        throw cRuntimeError("CPU undefinierter zustand ! Panik ! \n");
-        //leerer defaultblock um warnungen zu verhindern
-    }
+        case BEHAVIOR_UNIFORM_LOADGEN:
+        {
+            if (sendData.startTime >= sendData.stopTime)
+                return false;
+            if (((sendData.last > 0) && (sendData.maxLast > sendData.last)) || ((sendData.interval > 0) && (sendData.maxInterval > sendData.interval)))
+            {
+                cpuSelfMessage *delayedMessage = new cpuSelfMessage();
+                delayedMessage->setSendData(sendData);
+                scheduleAt(sendData.startTime, delayedMessage);
+                return true;
+            }
+        }
+            break;
+
+        case BEHAVIOR_NORMAL_LOADGEN:
+        {
+            if (sendData.startTime >= sendData.stopTime)
+                return false;
+            if (sendData.standardabweichung <= 0)
+                return false;
+            if ((sendData.last > 0) || (sendData.interval > 0))
+            {
+                cpuSelfMessage *delayedMessage = new cpuSelfMessage();
+                delayedMessage->setSendData(sendData);
+                scheduleAt(sendData.startTime, delayedMessage);
+                return true;
+            }
+        }
+            break;
+
+        case BEHAVIOR_STD:
+        {
+            cpuSelfMessage *delayedMessage = new cpuSelfMessage();
+            delayedMessage->setSendData(sendData);
+            scheduleAt(sendData.startTime, delayedMessage);
+
+            return true;
+        }
+            break;
+
+        default:
+        {
+            throw cRuntimeError("CPU undefinierter zustand ! Panik ! \n");
+            //leerer defaultblock um warnungen zu verhindern
+        }
     }
 
     return false;
@@ -237,8 +249,8 @@ CPU::loadXMLFile()
                 sendData.standardabweichung = 0;
                 sendData.paketgroesse = 0;
                 sendData.vlan = 0;
+                sendData.frameprio = 0;
 
-                ///////////////////////////////////////// destination ///////////////////////////////////////////////////////////////
                 valueElement = paketElement->getFirstChildWithTag("destination");
                 if(valueElement != NULL)
                 {
@@ -252,7 +264,7 @@ CPU::loadXMLFile()
                         sendData.destination.setAddress(attributeTemp);
                     }
                 }
-                ///////////////////////////////////////// TYP ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("typ");
                 if(valueElement != NULL)
                 {
@@ -270,7 +282,7 @@ CPU::loadXMLFile()
                         sendData.sendType = TYPE_ERROR;
                     }
                 }
-                ///////////////////////////////////////// verhalten ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("verhalten");
                 if(valueElement != NULL)
                 {
@@ -296,14 +308,14 @@ CPU::loadXMLFile()
                         sendData.sendBehavior = BEHAVIOR_ERROR;
                     }
                 }
-                ///////////////////////////////////////// startzeit ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("startzeit");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.startTime = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// stopzeit ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("stopzeit");
                 if(valueElement != NULL)
                 {
@@ -311,54 +323,71 @@ CPU::loadXMLFile()
                     sendData.stopTime = atof(attributeTemp);
                 }
 
-                ///////////////////////////////////////// last ///////////////////////////////////////////////////////////////
                 valueElement = paketElement->getFirstChildWithTag("last");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.last = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// maxlast ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("maxlast");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.maxLast = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// interval ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("interval");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.interval = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// maxinterval ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("maxinterval");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.maxInterval = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// standardabweichung ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("standardabweichung");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.standardabweichung = atof(attributeTemp);
                 }
-                ///////////////////////////////////////// paketgroesse ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("paketgroesse");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.paketgroesse = atoi(attributeTemp);
                 }
-                ///////////////////////////////////////// vlan ///////////////////////////////////////////////////////////////
+
                 valueElement = paketElement->getFirstChildWithTag("vlan");
                 if(valueElement != NULL)
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.vlan = atoi(attributeTemp);
+                }
+
+                valueElement = paketElement->getFirstChildWithTag("priority");
+                if(valueElement != NULL)
+                {
+                    attributeTemp = (char*)valueElement->getNodeValue();
+                    if (strncasecmp("EXPRESS",attributeTemp,7) == 0)
+                    {
+                        sendData.frameprio = EXPRESS;
+                    }
+                    else if (strncasecmp("HIGH",attributeTemp,4) == 0)
+                    {
+                        sendData.frameprio = HIGH;
+                    }
+                    else
+                    {
+                        sendData.frameprio = LOW;
+                    }
                 }
 
                 if(sendData.destination != myAddr)
@@ -391,36 +420,6 @@ CPU::initialize()
     WATCH(numFramesSent);
     WATCH(numFramesReceived);    
 
-    //"01-to-01 Delay"  //15chars
-    /*
-    char temp[15];
-    memcpy(temp,"01-to-01 Delay",14);
-    temp[14] = 0;
-    temp[6] = par("myAddress").stringValue()[15];
-    temp[7] = par("myAddress").stringValue()[16];
-
-    temp[1] = '1';
-    endToEndDelayVec[0].setName(temp);
-    temp[1] = '2';
-    endToEndDelayVec[1].setName(temp);
-    temp[1] = '3';
-    endToEndDelayVec[2].setName(temp);
-    temp[1] = '4';
-    endToEndDelayVec[3].setName(temp);
-    temp[1] = '5';
-    endToEndDelayVec[4].setName(temp);
-    temp[1] = '6';
-    endToEndDelayVec[5].setName(temp);
-    temp[1] = '7';
-    endToEndDelayVec[6].setName(temp);
-    temp[1] = '8';
-    endToEndDelayVec[7].setName(temp);
-    temp[1] = '9';
-    endToEndDelayVec[8].setName(temp);
-    temp[0] = '1';
-    temp[1] = '0';
-    endToEndDelayVec[9].setName(temp);
-*/
     myAddr.setAddress(par("myAddress").stringValue());
 
     if ((myAddr.isBroadcast()) || (myAddr.isMulticast()))
@@ -444,16 +443,14 @@ CPU::initialize()
 void
 CPU::handleMessage(cMessage *msg)
 {
-
     if (msg->isSelfMessage())
     {
         cpuSelfMessage *delayedMessage = check_and_cast<cpuSelfMessage *> (msg);
         if ((simTime() < delayedMessage->getSendData().stopTime) && (delayedMessage->getSendData().sendBehavior != BEHAVIOR_STD))
         {
-
             double randomLast = 0;
             double randomInterval = 0;
-            //EV << " WTF: " << delayedMessage->getSendData().sendBehavior << "\n";
+
             switch (delayedMessage->getSendData().sendBehavior)
             {
 				case BEHAVIOR_CONSTANT_LOADGEN:
@@ -550,50 +547,15 @@ CPU::handleMessage(cMessage *msg)
         hsrMessage *hsrTag = NULL;
         MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
 
-
-        //result_messageData->setByteLength(sendData.paketgroesse);
-        /*
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-01")))
-            endToEndDelayVec[0].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-02")))
-            endToEndDelayVec[1].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-03")))
-            endToEndDelayVec[2].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-04")))
-            endToEndDelayVec[3].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-05")))
-            endToEndDelayVec[4].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-06")))
-            endToEndDelayVec[5].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-07")))
-            endToEndDelayVec[6].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-08")))
-            endToEndDelayVec[7].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-09")))
-            endToEndDelayVec[8].record(simTime() - messageData->getSendTime());
-        if(packet->getSrc().equals(MACAddress("00-15-12-14-88-10")))
-            endToEndDelayVec[9].record(simTime() - messageData->getSendTime());
-    */
-
-        //EV << "CPU: " << myAddr << " Multi- or Broadcast Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
-
-//        if(packet != NULL)
-//            delete packet;
-//        if(vlanTag != NULL)
-//            delete vlanTag;
-//        if(messageData != NULL)
-//            delete messageData;
     }
 }
 
 void
 CPU::finish()
 {
-    
     recordScalar("cpu frames sent",    numFramesSent);
     recordScalar("cpu frames rcvd",    numFramesReceived);
-    //testControl->printStat();
 }
 
 CPU::CPU()
@@ -601,6 +563,5 @@ CPU::CPU()
 }
 CPU::~CPU()
 {
-    //TestControl::delInstance();
     testControl = NULL;
 }
