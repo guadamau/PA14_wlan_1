@@ -77,22 +77,6 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Kapitel 1: Einleitung}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chapter
 Einleitung
 \end_layout
@@ -154,6 +138,32 @@ key "IET_DRAFT_SCHEDULE"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Aufgrund dieser Tatsache findet man im Internet kaum etwas zu IET sowie
+ dem Mframe-Format, ausser einigen Unterlagen vom IEEE-Verband, der den
+ Standard entwickelt.
+\end_layout
+
+\begin_layout Standard
+Bezüglich HSR (High Availability Seamless Redundancy) gibt es einiges mehr
+ zu finden.
+ Das HSR-Protokoll ist seit Februar 2010 unter dem Titlel «IEC 62439-3 Cl.
+ 5
+\begin_inset Quotes frd
+\end_inset
+
+ ein Standard und wurde schon bei einigen Firmen implementiert 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HSR_PPT"
+
+\end_inset
+
+.
+ Da IET noch nicht in Hardware implementiert wurde, existieren auch keine
+ Berichte zur Implementation von IET in einem HSR-Netzwerk.
 \end_layout
 
 \begin_layout Section

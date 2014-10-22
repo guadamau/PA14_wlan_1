@@ -146,7 +146,7 @@ keepaspectratio]{_img/InES.pdf}%
 \bibtex_command default
 \index_command default
 \paperfontsize 11
-\spacing other 1.2
+\spacing single
 \use_hyperref false
 \papersize a4paper
 \use_geometry true
@@ -181,7 +181,7 @@ keepaspectratio]{_img/InES.pdf}%
 \headsep 12mm
 \footskip 20mm
 \secnumdepth 3
-\tocdepth 3
+\tocdepth 2
 \paragraph_separation skip
 \defskip bigskip
 \quotes_language french
@@ -208,6 +208,8 @@ filename "_tex/titlepage.tex"
 \end_layout
 
 \begin_layout Standard
+\noindent
+\align center
 \begin_inset External
 	template PDFPages
 	filename _pdf/000_Erklaerung_PA.pdf
@@ -259,19 +261,6 @@ LatexCommand tableofcontents
 
 \begin_layout Standard
 \begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Teil I}
-\end_layout
-
 \end_inset
 
 
@@ -347,19 +336,6 @@ filename "022_Diskussion_Ausblick.lyx"
 \end_inset
 
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Teil III}
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Part
@@ -378,19 +354,6 @@ filename "030_Verzeichnisse.lyx"
 
 \begin_layout Standard
 \begin_inset Newpage newpage
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Teil IV}
-\end_layout
-
 \end_inset
 
 

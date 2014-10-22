@@ -586,6 +586,13 @@ key "IET_DRAFT_IETTF"
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "mframe-format-image"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -612,7 +619,7 @@ reference "table_smd_fragcount"
 ), das heisst, dass maximal 4 Frames aufs Mal von einem Express Frame unterbroch
 en werden können und dasselbe Frame in maximal 5 Fragmente aufgeteilt werden
  kann.
- Diese Werte haben jeweils eine Hamming-Distanz von 4zueinander, um den
+ Diese Werte haben jeweils eine Hamming-Distanz von 4 zueinander, um den
  Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -1150,7 +1157,73 @@ Folgendes Szenario ist zu betrachten: Es wird gerade ein normales Frame
  gesendet.
  Während diesem Sendevorgang trifft ein Express-Frame ein.
  Der Sendevorgang des normalen Frames muss nun unterbrochen werden, indem
- das normale Frame 
+ das normale Frame fragmentiert und in das Mframe Format umgewandelt wird.
+ Die Sequenz der zu sendenden Frame würde folgendermassen aussehen (für
+ das Mframe Format siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mframe-format-image"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/011_IET_Mframe_Example.png
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel eines Sendevorgangs, bei dem ein Express Frame ein normales Frame
+ unterbricht
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wie im Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Mframe"
+
+\end_inset
+
+ erwähnt, können maximal 4 Frames in je maximal 5 Fragmente aufgeteilt werden.
+ Sobald das letzte Fragment eintrifft wurde das Frame komplett übertragen
+ und dessen Framenummer (siehe Tabelle 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "table_smd_fragcount"
+
+\end_inset
+
+) wird wieder für ein neues Frame verfügbar.
 \end_layout
 
 \end_body

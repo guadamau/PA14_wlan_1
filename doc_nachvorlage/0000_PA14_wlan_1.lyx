@@ -146,7 +146,7 @@ keepaspectratio]{_img/InES.pdf}%
 \bibtex_command default
 \index_command default
 \paperfontsize 11
-\spacing other 1.2
+\spacing single
 \use_hyperref false
 \papersize a4paper
 \use_geometry true
@@ -181,7 +181,7 @@ keepaspectratio]{_img/InES.pdf}%
 \headsep 12mm
 \footskip 20mm
 \secnumdepth 3
-\tocdepth 3
+\tocdepth 2
 \paragraph_separation skip
 \defskip bigskip
 \quotes_language french
