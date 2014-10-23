@@ -15,7 +15,7 @@
 
 #include "HsrSwitch.h"
 
-Define_Module( HsrSwitch );
+
 
 HsrSwitch::HsrSwitch()
 {
@@ -34,72 +34,81 @@ HsrSwitch::~HsrSwitch()
      */
     delete macAddress;
 
-    delete gateAIn;
+    /* constructor and destructor of cGate are protected: only cModule is allowed
+     * to create and delete gates. Therefore the following lines are obsolete.
+
     delete gateAOut;
     delete gateBIn;
     delete gateBOut;
     delete gateCpuIn;
     delete gateCpuOut;
 
+    */
+
     delete sched;
 }
 
 
 /* Getters */
-const cGate*& HsrSwitch::getGateAIn() const {
+cGate* HsrSwitch::getGateAIn( void ) {
     return gateAIn;
 }
 
-const cGate*& HsrSwitch::getGateAOut() const {
+cGate* HsrSwitch::getGateAOut( void ) {
     return gateAOut;
 }
 
-const cGate*& HsrSwitch::getGateBIn() const {
+cGate* HsrSwitch::getGateBIn( void ) {
     return gateBIn;
 }
 
-const cGate*& HsrSwitch::getGateBOut() const {
+cGate* HsrSwitch::getGateBOut( void ) {
     return gateBOut;
 }
 
-const cGate*& HsrSwitch::getGateCpuIn() const {
+cGate* HsrSwitch::getGateCpuIn( void ) {
     return gateCpuIn;
 }
 
-const cGate*& HsrSwitch::getGateCpuOut() const {
+cGate* HsrSwitch::getGateCpuOut( void ) {
     return gateCpuOut;
 }
 
-const MACAddress*& HsrSwitch::getMacAddress() const {
+MACAddress* HsrSwitch::getMacAddress( void ) {
     return macAddress;
 }
 
-unsigned int HsrSwitch::getRingId() const {
+unsigned int HsrSwitch::getRingId( void ) {
     return ringID;
 }
 
-const Scheduler*& HsrSwitch::getSched() const {
+Scheduler* HsrSwitch::getSched( void ) {
     return sched;
 }
 
-schedulerMode HsrSwitch::getSchedmode() const {
+schedulerMode HsrSwitch::getSchedmode( void ) {
     return schedmode;
 }
 
-unsigned int HsrSwitch::getSequenceNum() const {
+unsigned int HsrSwitch::getSequenceNum( void ) {
     return sequenceNum;
 }
 
 
 /* Setters */
-void HsrSwitch::setSched(const Scheduler*& sched) {
+void HsrSwitch::setSched( Scheduler* sched ) {
     this->sched = sched;
 }
+
+void HsrSwitch::setSequenceNum( unsigned int sequenceNum ) {
+    this->sequenceNum = sequenceNum;
+}
+
 
 void HsrSwitch::initialize()
 {
     /* Initialize Scheduler */
-    schedmode = par( "schedulerMode" ).stringValue();
+    schedmode = static_cast<schedulerMode>( atoi( par( "schedulerMode" ).stringValue() ) );
 
     macAddress->setAddress( par("macAddress").stringValue() );
 

@@ -25,8 +25,8 @@ public:
     EndNodeScheduler( schedulerMode schedmode );
     virtual ~EndNodeScheduler();
 
-    void enqueueMessage( cMessage *msg );
-    void processQueues();
+    void enqueueMessage( cMessage *msg, HsrSwitch* parentModule );
+    void processQueues( HsrSwitch* parentModule );
 };
 
 #endif /* ENDNODESCHEDULER_H_ */

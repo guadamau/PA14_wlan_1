@@ -7,6 +7,7 @@
 
 #include "Scheduler.h"
 
+
 Scheduler::Scheduler( schedulerMode schedmode )
 {
     this->queues = new cArray();
@@ -16,12 +17,12 @@ Scheduler::Scheduler( schedulerMode schedmode )
 }
 
 
-const cArray*& Scheduler::getQueues() const {
+cArray* Scheduler::getQueues( void ) {
     return queues;
 }
 
 
-schedulerMode Scheduler::getSchedmode() const {
+schedulerMode Scheduler::getSchedmode( void ) {
     return schedmode;
 }
 
@@ -29,7 +30,7 @@ schedulerMode Scheduler::getSchedmode() const {
 Scheduler::~Scheduler()
 {
     /* do some garbage collection. */
-    unsigned int i;
+    int i;
 
     for( i = 0; i < queues->getCapacity(); i++ )
     {
@@ -44,9 +45,9 @@ Scheduler::~Scheduler()
 void Scheduler::initScheduler( void )
 {
     queues->setCapacity( 3 );
-    queues->addAt( queueName.EXPRESS_INTERNAL, new cQueue() );
-    queues->addAt( queueName.HIGH_INTERNAL, new cQueue() );
-    queues->addAt( queueName.LOW_INTERNAL, new cQueue() );
+    queues->addAt( EXPRESS_INTERNAL, new cQueue() );
+    queues->addAt( HIGH_INTERNAL, new cQueue() );
+    queues->addAt( LOW_INTERNAL, new cQueue() );
 
     switch( schedmode )
     {
@@ -55,9 +56,9 @@ void Scheduler::initScheduler( void )
         case TOKENS:
         {
             queues->setCapacity( 6 );
-            queues->addAt( queueName.EXPRESS_RING, new cQueue() );
-            queues->addAt( queueName.HIGH_RING, new cQueue() );
-            queues->addAt( queueName.LOW_RING, new cQueue() );
+            queues->addAt( EXPRESS_RING, new cQueue() );
+            queues->addAt( HIGH_RING, new cQueue() );
+            queues->addAt( LOW_RING, new cQueue() );
             break;
         }
 

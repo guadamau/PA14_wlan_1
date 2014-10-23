@@ -24,14 +24,6 @@
 
 class HsrSwitch : public cSimpleModule
 {
-
-public:
-
-    HsrSwitch();
-    virtual ~HsrSwitch();
-
-    void setSched( const Scheduler*& sched );
-
 private:
 
     MACAddress* macAddress;
@@ -56,6 +48,41 @@ protected:
 
       /* This behavior must be implemented by derived classes. */
       virtual void handleMessage( cMessage *msg ) = 0;
+
+public:
+
+    HsrSwitch();
+    virtual ~HsrSwitch();
+
+
+    /* Getters */
+    cGate* getGateAIn( void );
+
+    cGate* getGateAOut( void );
+
+    cGate* getGateBIn( void );
+
+    cGate* getGateBOut( void );
+
+    cGate* getGateCpuIn( void );
+
+    cGate* getGateCpuOut( void );
+
+    MACAddress* getMacAddress( void );
+
+    unsigned int getRingId( void );
+
+    Scheduler* getSched( void );
+
+    schedulerMode getSchedmode( void );
+
+    unsigned int getSequenceNum( void );
+
+
+    /* Setters */
+    void setSched( Scheduler* sched );
+
+    void setSequenceNum( unsigned int sequenceNum );
 
 };
 

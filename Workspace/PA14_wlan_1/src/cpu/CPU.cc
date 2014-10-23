@@ -27,7 +27,7 @@ CPU::getTestControlInstance()
     }
     if(calleeModule != NULL)
     {
-        calleeModule = calleeModule->getSubmodule("TestControl1"); //TODO: Namen als Parameter �bergeben
+        calleeModule = calleeModule->getSubmodule("TestControl1"); //TODO: Namen als Parameter übergeben
         return check_and_cast<TestControl *>(calleeModule);
     }
 
@@ -41,7 +41,7 @@ CPU::generateOnePacket(SendData sendData)
     EthernetIIFrame *result_ethTag = MessagePacker::createETHTag("eth", sendData.destination, myAddr);
     if (sendData.frameprio == EXPRESS)
     {
-        ethTag->setEtherType(0x8500);
+        result_ethTag->setEtherType(0x8500);
     }
 
     dataMessage *result_messageData =MessagePacker::createDataMessage("std", sendData.paketgroesse, messageCount++);
@@ -249,7 +249,7 @@ CPU::loadXMLFile()
                 sendData.standardabweichung = 0;
                 sendData.paketgroesse = 0;
                 sendData.vlan = 0;
-                sendData.frameprio = 0;
+                sendData.frameprio = LOW;
 
                 valueElement = paketElement->getFirstChildWithTag("destination");
                 if(valueElement != NULL)

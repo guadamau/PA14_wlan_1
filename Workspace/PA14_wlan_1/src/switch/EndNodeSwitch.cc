@@ -52,6 +52,13 @@ EndNodeSwitch::~EndNodeSwitch()
 
 void EndNodeSwitch::DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
 {
+    unsigned int ringID = HsrSwitch::getRingId();
+    unsigned int sequenceNum = HsrSwitch::getSequenceNum();
+
+    cGate* gateAOut = HsrSwitch::getGateAOut();
+    cGate* gateBOut = HsrSwitch::getGateBOut();
+
+
     //If this frame is HSR or the destination node has been registered as non-HSR
     if((*hsrTag != NULL)    or (endNodeTable->getNodeMode((*ethTag)->getSrc()) != NODETYPE_HSR))
     {
@@ -62,7 +69,7 @@ void EndNodeSwitch::DANH_receiving_from_its_link_layer_interface(EthernetIIFrame
         //Insert the HSR tag with the sequence number of the host;
         *hsrTag = MessagePacker::createHSRTag("HSR", ringID, sequenceNum);
         //Increment the sequence number, wrapping through 0
-        sequenceNum++;
+        HsrSwitch::setSequenceNum( sequenceNum++ );
     }
 
     //Duplicate the frame, enqueue it for sending into both HSR ports
@@ -75,6 +82,12 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
 {
     cGate* arrivalGate = (*ethTag)->getArrivalGate();
     cGate* tempOutGate;
+    cGate* gateAIn = HsrSwitch::getGateAIn();
+    cGate* gateAOut = HsrSwitch::getGateAOut();
+    cGate* gateBOut = HsrSwitch::getGateBOut();
+    cGate* gateCpuOut = HsrSwitch::getGateCpuOut();
+    MACAddress macAddress = *( HsrSwitch::getMacAddress() );
+
      if (arrivalGate == gateAIn)
      {
          tempOutGate = gateBOut;
@@ -90,11 +103,15 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
     {
         //Register the source in its node table as non-HSR node;
         if (arrivalGate == gateAIn)
+        {
             endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_A, NODETYPE_SAN);
+        }
         else
+        {
             endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_B, NODETYPE_SAN);
-        //Enqueue the unchanged frame for sending to its link layer interface.
-        if(((myAddr == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (myAddr != (*ethTag)->getSrc()))
+        }
+
+        if(((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc()))
         {
             send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), gateCpuOut);
         }
@@ -108,7 +125,7 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
         else
             endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_B, NODETYPE_HSR);
         //If this node is the (unicast or multicast) destination
-        if(((myAddr == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (myAddr != (*ethTag)->getSrc()))
+        if(((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc()))
         {
 	        send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), gateCpuOut);
         }
@@ -117,13 +134,14 @@ void EndNodeSwitch::DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vl
             //Do not send it over the link layer interface
         }
         //If this node is not the only destination (multicast or unicast for another node)
-        if(myAddr != (*ethTag)->getDest())
+        if( macAddress != (*ethTag)->getDest() )
         {
 	        send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
         }
         else//(If this node is the only (unicast) destination)
         {
             //Discard the frame
+            delete *ethTag;
         }
     }
 }
@@ -135,11 +153,15 @@ void EndNodeSwitch::handleMessage(cMessage *msg)
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
-    // sched->enqueueMessage(msg);
+    sched->enqueueMessage(msg, this);
 
     /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 
     cGate* arrivalGate = msg->getArrivalGate();
+
+    cGate* gateAIn = HsrSwitch::getGateAIn();
+    cGate* gateBIn = HsrSwitch::getGateBIn();
+    cGate* gateCpuIn = HsrSwitch::getGateCpuIn();
 
     EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;

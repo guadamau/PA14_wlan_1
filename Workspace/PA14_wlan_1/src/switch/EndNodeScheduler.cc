@@ -15,19 +15,27 @@
 
 #include "EndNodeScheduler.h"
 
-EndNodeScheduler::EndNodeScheduler( schedulerMode schedmode )
+#include <omnetpp.h>
+#include "MessagePacker.h"
+#include "hsrMessage_m.h"
+#include "prpMessage_m.h"
+#include "EtherFrame_m.h"
+#include "dataMessage_m.h"
+#include "vlanMessage_m.h"
+
+
+EndNodeScheduler::EndNodeScheduler( schedulerMode schedmode ) : Scheduler( schedmode )
 {
-    this->Scheduler::Scheduler( schedmode );
+
 }
 
 
 EndNodeScheduler::~EndNodeScheduler()
 {
-    this->Scheduler::~Scheduler();
 }
 
 
-void EndNodeScheduler::enqueueMessage( cMessage *msg )
+void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
 {
     EthernetIIFrame *ethernetFrame = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;
@@ -36,6 +44,9 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
     cGate* arrivalGate = msg->getArrivalGate();
 
     framePriority frameprio = LOW;
+
+    schedulerMode schedmode = Scheduler::getSchedmode();
+    cArray* queues = Scheduler::getQueues();
 
     MessagePacker::decapsulateMessage(&ethernetFrame, &vlanTag, &hsrTag, &messageData);
 
@@ -46,7 +57,7 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
     {
         frameprio = EXPRESS;
     }
-    else if (vlanTag->getUser_priority() == frameprio.HIGH)
+    else if (vlanTag->getUser_priority() == HIGH)
     {
         frameprio = HIGH;
     }
@@ -64,19 +75,19 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
 
                 case EXPRESS:
                 {
-                    queues->get(queueName.EXPRESS_INTERNAL)->insert(msg);
+                    queues->get(EXPRESS_INTERNAL)->insert(msg);
                     break;
                 }
 
                 case HIGH:
                 {
-                    queues->get(queueName.HIGH_INTERNAL)->insert(msg);
+                    queues->get(HIGH_INTERNAL)->insert(msg);
                     break;
                 }
 
                 default:
                 {
-                    queues->get(queueName.LOW_INTERNAL)->insert(msg);
+                    queues->get(LOW_INTERNAL)->insert(msg);
                     break;
                 }
 
@@ -148,6 +159,8 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
 
 void EndNodeScheduler::processQueues()
 {
+    schedulerMode schedmode = Scheduler::getSchedmode();
+
     switch( schedmode )
     {
         case FCFS:

@@ -11,13 +11,8 @@
 #ifndef SCHEDULER_H_
 #define SCHEDULER_H_
 
-/* Enum type definitions */
-typedef enum
-{
-    EXPRESS,
-    HIGH,
-    LOW
-} framePriority;
+#include "hsrDefines.h"
+#include "HsrSwitch.h"
 
 typedef enum
 {
@@ -51,12 +46,12 @@ public:
     virtual ~Scheduler();
 
     /* Abstract methods */
-    virtual void enqueueMessage( cMessage *msg ) = 0;
-    virtual void processQueues() = 0;
+    virtual void enqueueMessage( cMessage* msg, HsrSwitch* parentModule ) = 0;
+    virtual void processQueues( HsrSwitch* parentModule ) = 0;
 
     /* Getters */
-    const cArray*& getQueues() const;
-    schedulerMode getSchedmode() const;
+    cArray* getQueues( void );
+    schedulerMode getSchedmode( void );
 };
 
 #endif /* SCHEDULER_H_ */

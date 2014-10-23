@@ -50,6 +50,8 @@ void Txc1::handleMessage(cMessage *msg)
     // at the module. Here, we just send it to the other module, through
     // gate `out'. Because both `tic' and `toc' does the same, the message
     // will bounce between the two.
+    EV << "I'm looping\n";
     send(msg, "out");
+
 }
 

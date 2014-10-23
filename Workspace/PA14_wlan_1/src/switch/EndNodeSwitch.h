@@ -17,6 +17,8 @@
 #define __ENDNODESWITCH_H__
 
 #include <omnetpp.h>
+#include "HsrSwitch.h"
+
 #include "MessagePacker.h"
 #include "nodeTable.h"
 #include "ListenErkennung.h"

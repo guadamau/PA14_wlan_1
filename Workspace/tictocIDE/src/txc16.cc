@@ -53,9 +53,11 @@ void Txc16::initialize()
     if (getIndex()==0)
     {
         // Boot the process scheduling the initial message as a self-message.
-        TicTocMsg16 *msg = generateMessage();
-        scheduleAt(0.0, msg);
+        //TicTocMsg16 *msg = generateMessage();
+        //scheduleAt(0.0, msg);
     }
+    TicTocMsg16 *msg = generateMessage();
+    scheduleAt(0.0, msg);
 }
 
 void Txc16::handleMessage(cMessage *msg)
