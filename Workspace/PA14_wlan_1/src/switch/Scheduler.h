@@ -11,8 +11,9 @@
 #ifndef SCHEDULER_H_
 #define SCHEDULER_H_
 
+#include <omnetpp.h>
+
 #include "hsrDefines.h"
-#include "HsrSwitch.h"
 
 typedef enum
 {
@@ -33,7 +34,7 @@ typedef enum
 } schedulerMode;
 
 
-class Scheduler {
+class Scheduler : public cSimpleModule {
 
 private:
     cArray* queues;
@@ -43,11 +44,12 @@ private:
 
 public:
     Scheduler( schedulerMode schedmode );
+    Scheduler();
     virtual ~Scheduler();
 
     /* Abstract methods */
-    virtual void enqueueMessage( cMessage* msg, HsrSwitch* parentModule ) = 0;
-    virtual void processQueues( HsrSwitch* parentModule ) = 0;
+    virtual void enqueueMessage( cMessage* msg ) = 0;
+    virtual void processQueues( void ) = 0;
 
     /* Getters */
     cArray* getQueues( void );

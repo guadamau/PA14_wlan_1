@@ -17,7 +17,8 @@
 #define __RedBoxSwitch_H__
 
 #include <omnetpp.h>
-#include "MACAddress.h"
+#include "HsrSwitch.h"
+
 #include "MessagePacker.h"
 
 #include "hsrMessage_m.h"
@@ -37,35 +38,31 @@ enum rbr
 typedef enum rbr redBoxConfiguration;
 
 
-/**
- * TODO - Generated class
- */
 class RedBoxSwitch : public HsrSwitch
 {
+
+private:
+
+  redBoxConfiguration redBoxCfg;
+
+  cGate* gateInterlinkIn;
+  cGate* gateInterlinkOut;
+
+protected:
+
+  virtual void initialize();
+  virtual void handleMessage(cMessage *msg);
+
 public:
 
+    RedBoxSwitch();
+    virtual ~RedBoxSwitch();
 
-  private:
-    MACAddress myAddr;
-    redBoxConfiguration redBoxCfg;
+    cGate* getGateInterlinkIn();
+    cGate* getGateInterlinkOut();
 
-    unsigned int ringID;
-    unsigned int sequenceNum;    
-    
-    cGate* gateAIn;
-    cGate* gateAOut;
-    cGate* gateBIn;
-    cGate* gateBOut;
-    cGate* gateInterlinkIn;
-    cGate* gateInterlinkOut;
-    cGate* gateCpuIn;
-    cGate* gateCpuOut;
 
     void forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage *hsrTag, dataMessage *messageData);
-
-  protected:
-    virtual void initialize();
-    virtual void handleMessage(cMessage *msg);
 
 };
 

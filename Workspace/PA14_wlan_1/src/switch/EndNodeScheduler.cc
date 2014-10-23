@@ -17,31 +17,37 @@
 
 #include <omnetpp.h>
 #include "MessagePacker.h"
+#include "EndNodeSwitch.h"
 #include "hsrMessage_m.h"
 #include "prpMessage_m.h"
 #include "EtherFrame_m.h"
 #include "dataMessage_m.h"
 #include "vlanMessage_m.h"
 
+Define_Module( EndNodeScheduler );
 
 EndNodeScheduler::EndNodeScheduler( schedulerMode schedmode ) : Scheduler( schedmode )
 {
 
 }
 
+EndNodeScheduler::EndNodeScheduler()
+{
+}
 
 EndNodeScheduler::~EndNodeScheduler()
 {
 }
 
 
-void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
+void EndNodeScheduler::enqueueMessage( cMessage *msg )
 {
     EthernetIIFrame *ethernetFrame = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;
     hsrMessage *hsrTag = NULL;
     dataMessage *messageData = NULL;
     cGate* arrivalGate = msg->getArrivalGate();
+    EndNodeSwitch* parentModule = ( EndNodeSwitch* )getParentModule();
 
     framePriority frameprio = LOW;
 
@@ -75,19 +81,19 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
 
                 case EXPRESS:
                 {
-                    queues->get(EXPRESS_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(EXPRESS_INTERNAL) )->insert(msg);
                     break;
                 }
 
                 case HIGH:
                 {
-                    queues->get(HIGH_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(HIGH_INTERNAL) )->insert(msg);
                     break;
                 }
 
                 default:
                 {
-                    queues->get(LOW_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(LOW_INTERNAL) )->insert(msg);
                     break;
                 }
 
@@ -107,24 +113,24 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
             {
                 case EXPRESS:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn() ))
                     {
-                        queues->get(queueName.EXPRESS_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(EXPRESS_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.EXPRESS_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(EXPRESS_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
 
                 case HIGH:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn() ))
                     {
-                        queues->get(queueName.HIGH_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(HIGH_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.HIGH_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(HIGH_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
@@ -132,12 +138,12 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
                 case LOW:
                 default:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn() ))
                     {
-                        queues->get(queueName.LOW_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(LOW_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.LOW_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(LOW_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
@@ -157,7 +163,7 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg, HsrSwitch* parentModule )
 }
 
 
-void EndNodeScheduler::processQueues()
+void EndNodeScheduler::processQueues( void )
 {
     schedulerMode schedmode = Scheduler::getSchedmode();
 

@@ -23,10 +23,11 @@ class EndNodeScheduler: public Scheduler
 
 public:
     EndNodeScheduler( schedulerMode schedmode );
+    EndNodeScheduler();
     virtual ~EndNodeScheduler();
 
-    void enqueueMessage( cMessage *msg, HsrSwitch* parentModule );
-    void processQueues( HsrSwitch* parentModule );
+    void enqueueMessage( cMessage *msg );
+    void processQueues( void );
 };
 
 #endif /* ENDNODESCHEDULER_H_ */

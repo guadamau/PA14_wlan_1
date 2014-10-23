@@ -22,7 +22,11 @@ class RedBoxScheduler: public Scheduler
 {
 public:
     RedBoxScheduler( schedulerMode schedmode );
+    RedBoxScheduler();
     virtual ~RedBoxScheduler();
+
+    void enqueueMessage( cMessage *msg );
+    void processQueues( void );
 };
 
 #endif /* REDBOXSCHEDULER_H_ */

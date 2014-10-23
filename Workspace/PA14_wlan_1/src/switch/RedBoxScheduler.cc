@@ -15,25 +15,41 @@
 
 #include "RedBoxScheduler.h"
 
-RedBoxScheduler::RedBoxScheduler( schedulerMode schedmode )
+#include <omnetpp.h>
+#include "MessagePacker.h"
+#include "RedBoxSwitch.h"
+#include "hsrMessage_m.h"
+#include "prpMessage_m.h"
+#include "EtherFrame_m.h"
+#include "dataMessage_m.h"
+#include "vlanMessage_m.h"
+
+Define_Module( RedBoxScheduler );
+
+RedBoxScheduler::RedBoxScheduler( schedulerMode schedmode ) : Scheduler( schedmode )
 {
-    this->Scheduler::Scheduler( schedmode );
 }
+
+RedBoxScheduler::RedBoxScheduler()
+{}
 
 RedBoxScheduler::~RedBoxScheduler()
 {
-    this->Scheduler::~Scheduler();
 }
 
-void EndNodeScheduler::enqueueMessage( cMessage *msg )
+void RedBoxScheduler::enqueueMessage( cMessage *msg )
 {
     EthernetIIFrame *ethernetFrame = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;
     hsrMessage *hsrTag = NULL;
     dataMessage *messageData = NULL;
     cGate* arrivalGate = msg->getArrivalGate();
+    RedBoxSwitch* parentModule = ( RedBoxSwitch* )getParentModule();
 
     framePriority frameprio = LOW;
+
+    schedulerMode schedmode = Scheduler::getSchedmode();
+    cArray* queues = Scheduler::getQueues();
 
     MessagePacker::decapsulateMessage(&ethernetFrame, &vlanTag, &hsrTag, &messageData);
 
@@ -44,7 +60,7 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
     {
         frameprio = EXPRESS;
     }
-    else if (vlanTag->getUser_priority() == frameprio.HIGH)
+    else if (vlanTag->getUser_priority() == HIGH)
     {
         frameprio = HIGH;
     }
@@ -62,19 +78,19 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
 
                 case EXPRESS:
                 {
-                    queues->get(queueName.EXPRESS_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(EXPRESS_INTERNAL) )->insert(msg);
                     break;
                 }
 
                 case HIGH:
                 {
-                    queues->get(queueName.HIGH_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(HIGH_INTERNAL) )->insert(msg);
                     break;
                 }
 
                 default:
                 {
-                    queues->get(queueName.LOW_INTERNAL)->insert(msg);
+                    ( ( cQueue* )queues->get(LOW_INTERNAL) )->insert(msg);
                     break;
                 }
 
@@ -94,24 +110,24 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
             {
                 case EXPRESS:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn) || (arrivalGate == getParentModule()->gateInterlinkIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn()) || (arrivalGate == parentModule->getGateInterlinkIn()))
                     {
-                        queues->get(queueName.EXPRESS_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(EXPRESS_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.EXPRESS_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(EXPRESS_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
 
                 case HIGH:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn) || (arrivalGate == getParentModule()->gateInterlinkIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn()) || (arrivalGate == parentModule->getGateInterlinkIn()))
                     {
-                        queues->get(queueName.HIGH_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(HIGH_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.HIGH_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(HIGH_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
@@ -119,12 +135,12 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
                 case LOW:
                 default:
                 {
-                    if ((arrivalGate == getParentModule()->getGateAIn()) || (arrivalGate == getParentModule()->getGateBIn) || (arrivalGate == getParentModule()->gateInterlinkIn))
+                    if ((arrivalGate == parentModule->getGateAIn()) || (arrivalGate == parentModule->getGateBIn() ) || (arrivalGate == parentModule->getGateInterlinkIn()))
                     {
-                        queues->get(queueName.LOW_RING)->insert(msg);
+                        ( ( cQueue* )queues->get(LOW_RING) )->insert(msg);
                     }
-                    else if (arrivalGate == gateCpuIn) {
-                        queues->get(queueName.LOW_INTERNAL)->insert(msg);
+                    else if (arrivalGate == parentModule->getGateCpuIn() ) {
+                        ( ( cQueue* )queues->get(LOW_INTERNAL) )->insert(msg);
                     }
                     break;
                 }
@@ -141,4 +157,8 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
         }
 
     }
+}
+
+void RedBoxScheduler::processQueues( void )
+{
 }

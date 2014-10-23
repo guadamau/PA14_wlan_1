@@ -14,6 +14,7 @@
 //
 
 #include "EndNodeSwitch.h"
+#include "EndNodeScheduler.h"
 
 Define_Module( EndNodeSwitch );
 
@@ -36,13 +37,19 @@ nodeTable* EndNodeSwitch::getNodeTable()
 void EndNodeSwitch::initialize()
 {
     /* Call initialize of the base class. */
-    this->HsrSwitch::initialize();
+    HsrSwitch::initialize();
 
     endNodeTable = getNodeTable();
     if( endNodeTable == NULL )
     {
         throw cRuntimeError( "can't load node table" );
     }
+
+    HsrSwitch::setSched( new EndNodeScheduler( HsrSwitch::getSchedmode() ) );
+}
+
+EndNodeSwitch::EndNodeSwitch()
+{
 }
 
 EndNodeSwitch::~EndNodeSwitch()
@@ -153,7 +160,10 @@ void EndNodeSwitch::handleMessage(cMessage *msg)
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
-    sched->enqueueMessage(msg, this);
+    /*
+    Scheduler* sched = HsrSwitch::getSched();
+    sched->enqueueMessage( msg );
+    */
 
     /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 

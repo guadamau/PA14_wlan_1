@@ -114,7 +114,8 @@ void HsrSwitch::initialize()
 
     if( ( macAddress->isBroadcast() ) || ( macAddress->isMulticast() ) )
     {
-        throw cRuntimeError( "invalid Addr" );
+        throw cRuntimeError( "Illegal device address ! \n" );
+        endSimulation();
     }
 
     ringID = par( "ringID" );

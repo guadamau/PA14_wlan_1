@@ -14,28 +14,21 @@
 //
 
 #include "RedBoxSwitch.h"
+#include "RedBoxScheduler.h"
 
-Define_Module(RedBoxSwitch)
-;
+Define_Module( RedBoxSwitch );
+
+RedBoxSwitch::RedBoxSwitch()
+{}
+
+RedBoxSwitch::~RedBoxSwitch()
+{}
 
 void
 RedBoxSwitch::initialize()
 {
-    myAddr.setAddress(par("myAddress").stringValue());
-
-    if ((myAddr.isBroadcast()) || (myAddr.isMulticast()))
-    {
-        throw cRuntimeError("Illegal device address ! \n");
-        endSimulation();
-    }
-
-    ringID = par("ringID");
-    if ((ringID < 1) || (ringID > 6))
-    {
-        throw cRuntimeError("invalid Ring ID");
-    }
-
-    sequenceNum = 0;    
+    /* Call initialize of the base class. */
+    HsrSwitch::initialize();
     
     int temp = par("redBoxCfg");
     switch (temp)
@@ -57,15 +50,19 @@ RedBoxSwitch::initialize()
         endSimulation();
     }
 
-    gateAIn  = gate("gateA$i");
-    gateAOut = gate("gateA$o");
-    gateBIn  = gate("gateB$i");
-    gateBOut = gate("gateB$o");
     gateInterlinkIn  = gate("gateInterlink$i");
     gateInterlinkOut = gate("gateInterlink$o");
-    gateCpuIn  = gate("gateCPU$i");
-    gateCpuOut = gate("gateCPU$o");
 
+    HsrSwitch::setSched( new RedBoxScheduler( HsrSwitch::getSchedmode() ) );
+
+}
+
+cGate* RedBoxSwitch::getGateInterlinkIn(){
+    return gateInterlinkIn;
+}
+
+cGate* RedBoxSwitch::getGateInterlinkOut(){
+    return gateInterlinkOut;
 }
 
 void RedBoxSwitch::forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage *hsrTag, dataMessage *messageData)
@@ -94,18 +91,35 @@ void RedBoxSwitch::forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlan
     }
 }
 
+
+
 void
 RedBoxSwitch::handleMessage(cMessage *msg)
 {
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
-    // sched->enqueueMessage(msg);
+    /*
+    Scheduler* sched = HsrSwitch::getSched();
+    sched->enqueueMessage( msg );
+    */
 
     /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 
     cGate* arrivalGate = msg->getArrivalGate();
 
+    unsigned int ringID = HsrSwitch::getRingId();
+    unsigned int sequenceNum = HsrSwitch::getSequenceNum();
+
+    cGate* gateAIn = HsrSwitch::getGateAIn();
+    cGate* gateBIn = HsrSwitch::getGateBIn();
+    cGate* gateCpuIn = HsrSwitch::getGateCpuIn();
+
+    cGate* gateAOut = HsrSwitch::getGateAOut();
+    cGate* gateBOut = HsrSwitch::getGateBOut();
+    cGate* gateCpuOut = HsrSwitch::getGateCpuOut();
+
+    MACAddress macAddress = *( HsrSwitch::getMacAddress() );
     EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);
     vlanMessage *vlanTag = NULL;
     hsrMessage *hsrTag = NULL;
@@ -128,14 +142,14 @@ RedBoxSwitch::handleMessage(cMessage *msg)
         //HSR verarbeiten (an CPU und/oder an gate weiterleiten)
         //remove the HSR tagging and pass the modified frame to its higher protocol layer, if this is the first frame of a pair, otherwise:
 
-        if((myAddr == ethTag->getDest()) && (myAddr != ethTag->getSrc()))
+        if((macAddress == ethTag->getDest()) && (macAddress != ethTag->getSrc()))
         {
             // EV << "CPU \n";
             send(MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData), gateCpuOut);
         }
         else
         {
-            if ((ethTag->getDest().isBroadcast()) && (myAddr != ethTag->getSrc()))
+            if ((ethTag->getDest().isBroadcast()) && (macAddress != ethTag->getSrc()))
             {
                 //Broadcast -> CPU
                 //EV << "Broadcast \n";
@@ -158,7 +172,7 @@ RedBoxSwitch::handleMessage(cMessage *msg)
 		    //Insert the HSR tag with the sequence number of the host;
 		    hsrTag = MessagePacker::createHSRTag("HSR", ringID, sequenceNum);
 		    //Increment the sequence number, wrapping through 0
-		    sequenceNum++;
+		    HsrSwitch::setSequenceNum( sequenceNum++ );
 		}	    
 	    
         //Broadcast zum  Ring
@@ -170,14 +184,14 @@ RedBoxSwitch::handleMessage(cMessage *msg)
     {
         //TODO: Adressen lernen
 
-        if((myAddr == ethTag->getDest()) && (myAddr != ethTag->getSrc()))
+        if((macAddress == ethTag->getDest()) && (macAddress != ethTag->getSrc()))
         {
             // EV << "CPU \n";
             send(MessagePacker::generateEthMessage(ethTag, vlanTag, hsrTag, messageData), gateCpuOut);
         }
         else
         {
-            if ((ethTag->getDest().isBroadcast()) && (myAddr != ethTag->getSrc()))
+            if ((ethTag->getDest().isBroadcast()) && (macAddress != ethTag->getSrc()))
             {
                 //Broadcast -> CPU
                 //EV << "Broadcast \n";

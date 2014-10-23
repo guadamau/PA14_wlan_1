@@ -16,6 +16,9 @@ Scheduler::Scheduler( schedulerMode schedmode )
     initScheduler();
 }
 
+Scheduler::Scheduler()
+{
+}
 
 cArray* Scheduler::getQueues( void ) {
     return queues;
