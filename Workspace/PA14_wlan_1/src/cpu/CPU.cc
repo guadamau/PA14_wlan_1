@@ -38,7 +38,7 @@ EthernetIIFrame *
 CPU::generateOnePacket(SendData sendData)
 {
 
-    EthernetIIFrame *result_ethTag = MessagePacker::createETHTag("eth", sendData.destination, myAddr);
+    EthernetIIFrame *result_ethTag = MessagePacker::createETHTag("eth", sendData.destination, macAddress);
     if (sendData.frameprio == EXPRESS)
     {
         result_ethTag->setEtherType(0x8500);
@@ -218,7 +218,7 @@ CPU::loadXMLFile()
 
     MACAddress nullAddr("00-00-00-00-00-00");
 
-    snprintf(tagTemp, 18, "%02x-%02x-%02x-%02x-%02x-%02x", myAddr.getAddressByte(0), myAddr.getAddressByte(1), myAddr.getAddressByte(2), myAddr.getAddressByte(3), myAddr.getAddressByte(4), myAddr.getAddressByte(5));
+    snprintf(tagTemp, 18, "%02x-%02x-%02x-%02x-%02x-%02x", macAddress.getAddressByte(0), macAddress.getAddressByte(1), macAddress.getAddressByte(2), macAddress.getAddressByte(3), macAddress.getAddressByte(4), macAddress.getAddressByte(5));
     sourceElement = rootelement->getFirstChildWithTag("source");
     while(sourceElement != NULL)
     {
@@ -390,7 +390,7 @@ CPU::loadXMLFile()
                     }
                 }
 
-                if(sendData.destination != myAddr)
+                if(sendData.destination != macAddress)
                 {
                     if(scheduleMessage(sendData) == false)
                     {
@@ -420,9 +420,9 @@ CPU::initialize()
     WATCH(numFramesSent);
     WATCH(numFramesReceived);    
 
-    myAddr.setAddress(par("myAddress").stringValue());
+    macAddress.setAddress(par("macAddress").stringValue());
 
-    if ((myAddr.isBroadcast()) || (myAddr.isMulticast()))
+    if ((macAddress.isBroadcast()) || (macAddress.isMulticast()))
     {
         throw cRuntimeError("invalid Addr");
     }
@@ -432,7 +432,7 @@ CPU::initialize()
 
     rootelement = par("xmlparam").xmlValue();
 
-    if (testControl->registerCPU(myAddr) == false)
+    if (testControl->registerCPU(macAddress) == false)
     {
         throw cRuntimeError("CPU Adresskonflikt ! Panik ! \n");
     }
@@ -515,7 +515,7 @@ CPU::handleMessage(cMessage *msg)
             scheduleAt(sendTime, delayedMessage);
 
             EthernetIIFrame *dmsg = generateOnePacket(delayedMessage->getSendData());
-            testControl->registerSEND(myAddr, dmsg->dup(), simTime());
+            testControl->registerSEND(macAddress, dmsg->dup(), simTime());
             numFramesSent++;
             send(dmsg, gateOut);
         }
@@ -524,7 +524,7 @@ CPU::handleMessage(cMessage *msg)
             if(delayedMessage->getSendData().sendBehavior == BEHAVIOR_STD)
             {
                 EthernetIIFrame *outmsg = generateOnePacket(delayedMessage->getSendData());
-                testControl->registerSEND(myAddr, outmsg->dup(), delayedMessage->getSendData().startTime);
+                testControl->registerSEND(macAddress, outmsg->dup(), delayedMessage->getSendData().startTime);
                 numFramesSent++;
                 send(outmsg, gateOut);
             }
@@ -535,12 +535,12 @@ CPU::handleMessage(cMessage *msg)
     {
         EthernetIIFrame *packet = check_and_cast<EthernetIIFrame *>(msg);
         numFramesReceived++;
-        if((packet->getDest().isBroadcast() == false) && (packet->getDest().isMulticast() == false) && (packet->getDest() != myAddr))
+        if((packet->getDest().isBroadcast() == false) && (packet->getDest().isMulticast() == false) && (packet->getDest() != macAddress))
         {
-            EV << "CPU: " << myAddr << " Missroutet Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
+            EV << "CPU: " << macAddress << " Missroutet Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         }
 
-        testControl->registerRECV(myAddr, packet->dup(), simTime());
+        testControl->registerRECV(macAddress, packet->dup(), simTime());
 
         vlanMessage *vlanTag = NULL;
         dataMessage *messageData = NULL;

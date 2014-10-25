@@ -1,16 +1,16 @@
 ﻿<?xml version="1.0" ?>
 <simulation_behaviour>
-    <source>00-15-12-14-88-01
+    <source>00-15-12-14-88-02
         <lastmuster>
             <typ>hsr</typ>
             <verhalten>gleichverteilte last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.060</stopzeit>            
-            <last>20</last>
-            <maxlast>40</maxlast>               
-            <destination>00-15-12-14-88-04</destination>    
+            <last>1</last>
+            <maxlast>1</maxlast>               
+            <destination>00-15-12-14-88-01</destination>    
             <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
-            <priority>EXPRESS</priority>		<!-- EXPRESS / HIGH / LOW -->            
+            <priority>0</priority>		<!-- EXPRESS = 2 / HIGH = 1 / LOW = 0 -->
         </lastmuster>                
     </source>  
 </simulation_behaviour>

@@ -56,7 +56,7 @@ module HsrNode
 
         cpu: CPU {
             @display("p=342,389");
-            myAddress = myAddress;
+            macAddress = macAddress;
         }
         delay3: ForwardDelay {
             delay = delay;
@@ -74,7 +74,7 @@ module HsrNode
         mac1: ModifiedEtherMACBase {
             parameters:
                 promiscuous = true;
-                address = myAddress;
+                address = macAddress;
                 duplicateDetection = "duplikatlistePortA";
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=43,60");
@@ -89,7 +89,7 @@ module HsrNode
         mac2: ModifiedEtherMACBase {
             parameters:
                 promiscuous = true;
-                address = myAddress;
+                address = macAddress;
                 duplicateDetection = "duplikatlistePortB";
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=342,60");

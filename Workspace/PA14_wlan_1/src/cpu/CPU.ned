@@ -6,7 +6,7 @@ package cpu;
 simple CPU
 {
     parameters:
-        string myAddress;
+        string macAddress;
         xml xmlparam;
         @display("i=device/cpu");
     gates:

@@ -14,7 +14,7 @@
 class CPU : public cSimpleModule
 {
 private:
-  MACAddress myAddr;
+  MACAddress macAddress;
 
   cGate* gateIn;
   cGate* gateOut;
