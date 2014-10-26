@@ -17,6 +17,7 @@ module HsrEndNode extends HsrNode
         endNodeSwitch: EndNodeSwitch {
             macAddress = macAddress;
 			ringID = ringID;
+			//schedulerMode = schedulerMode;
             @display("p=167,216");
         }
         

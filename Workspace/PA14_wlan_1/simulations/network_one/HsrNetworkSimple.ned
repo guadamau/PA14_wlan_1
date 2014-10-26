@@ -11,7 +11,7 @@ network HsrNetworkSimple
         R1EndNode1: HsrEndNode {
             @display("p=50,200");
             macAddress = "00-15-12-14-88-01";
-            ringID = 1;
+            ringID = 1;        
         }
 
         R1EndNode2: HsrEndNode {

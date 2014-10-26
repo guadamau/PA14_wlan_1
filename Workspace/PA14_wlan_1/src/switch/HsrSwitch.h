@@ -44,7 +44,7 @@ private:
 
 protected:
 
-      virtual void initialize();
+      virtual void initialize(const char* schedcoice);
 
       /* This behavior must be implemented by derived classes. */
       virtual void handleMessage( cMessage *msg ) = 0;

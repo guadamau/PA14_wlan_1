@@ -104,11 +104,31 @@ void HsrSwitch::setSequenceNum( unsigned int sequenceNum ) {
     this->sequenceNum = sequenceNum;
 }
 
-
-void HsrSwitch::initialize()
+void HsrSwitch::initialize(const char* schedchoice)
 {
     /* Initialize Scheduler */
-    schedmode = static_cast<schedulerMode>( atoi( par( "schedulerMode" ).stringValue() ) );
+    //schedmode = static_cast<schedulerMode>( par( "schedulerMode" ).stringValue() );
+
+    if (strncasecmp("FCFS",schedchoice,4) == 0)
+    {
+       schedmode = FCFS;
+    }
+    else if (strncasecmp("RING_FIRST",schedchoice,10) == 0)
+    {
+        schedmode = RING_FIRST;
+    }
+    else if (strncasecmp("ZIPPER",schedchoice,6) == 0)
+    {
+        schedmode = ZIPPER;
+    }
+    else if (strncasecmp("TOKENS",schedchoice,6) == 0)
+    {
+        schedmode = TOKENS;
+    }
+    else
+    {
+        throw cRuntimeError( "Illegal scheduler mode ! \n" );
+    }
 
     macAddress = new MACAddress();
 

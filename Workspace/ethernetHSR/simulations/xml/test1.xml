@@ -36,4 +36,52 @@
             <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
         </lastmuster>                
     </source>    
+    <source>00-15-12-14-88-09
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>20</last>
+            <maxlast>40</maxlast>               
+            <destination>00-15-12-14-87-14</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-14
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>20</last>
+            <maxlast>40</maxlast>               
+            <destination>00-15-12-14-87-08</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-08
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>20</last>
+            <maxlast>40</maxlast>               
+            <destination>00-15-12-14-87-14</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>
+    <source>00-15-12-14-88-09
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>gleichverteilte last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <last>20</last>
+            <maxlast>40</maxlast>               
+            <destination>00-15-12-14-87-14</destination>    
+            <paketgroesse>64</paketgroesse>      <!-- 1486 -->        
+        </lastmuster>                
+    </source>
 </simulation_behaviour>

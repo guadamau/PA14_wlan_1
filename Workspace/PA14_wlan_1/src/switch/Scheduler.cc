@@ -45,9 +45,12 @@ void Scheduler::initScheduler( schedulerMode schedmode )
 {
     this->schedmode = schedmode;
 
-    queues->setCapacity( 3 );
+//    queues->setCapacity( 3 );
+    queues->addAt( EXPRESS_RING, new cQueue() );
     queues->addAt( EXPRESS_INTERNAL, new cQueue() );
+    queues->addAt( HIGH_RING, new cQueue() );
     queues->addAt( HIGH_INTERNAL, new cQueue() );
+    queues->addAt( LOW_RING, new cQueue() );
     queues->addAt( LOW_INTERNAL, new cQueue() );
 
     switch( schedmode )
@@ -56,10 +59,10 @@ void Scheduler::initScheduler( schedulerMode schedmode )
         case ZIPPER:
         case TOKENS:
         {
-            queues->setCapacity( 6 );
-            queues->addAt( EXPRESS_RING, new cQueue() );
-            queues->addAt( HIGH_RING, new cQueue() );
-            queues->addAt( LOW_RING, new cQueue() );
+//            queues->setCapacity( 6 );
+//            queues->addAt( EXPRESS_RING, new cQueue() );
+//            queues->addAt( HIGH_RING, new cQueue() );
+//            queues->addAt( LOW_RING, new cQueue() );
             break;
         }
 

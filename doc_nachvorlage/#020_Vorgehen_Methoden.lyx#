@@ -171,11 +171,15 @@ Ein Express-Frame wird durch einen eigenen EtherType-Wert im Ethernet-Header
  definiert.
  So werden diese Frames auch nur von den Geräten erkannt, die diesen EtherType-W
 ert kennen.
+ Bis jetzt gibt es noch keine konkreten Vorschläge wie ein Express-Frame
+ gekennzeichnet ist.
+ Die hier erwähnte Kennzeichnung ist eine der Autoren ausgedachten Lösungen.
 \end_layout
 
 \begin_layout Itemize
 Bei einem High-Frame handelt es sich um ein normales Ethernet-Frame das
  über ein VLAN-Tag mit der Priorität 1 versehen ist.
+ Da das VLAN-Priority-Feld 3 Bits 
 \end_layout
 
 \begin_layout Itemize
@@ -395,9 +399,9 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename _img/011_mframe_format.png
+	filename _img/020_Zeitschlitzverfahren.png
 	display false
-	scale 30
+	scale 60
 
 \end_inset
 
@@ -408,14 +412,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mframe Format 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "IET_DRAFT_IETTF"
-
-\end_inset
-
-
+Beispiel von Frameabfolge mit Zeitschlitzverfahren
 \end_layout
 
 \end_inset

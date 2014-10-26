@@ -28,7 +28,7 @@ void
 RedBoxSwitch::initialize()
 {
     /* Call initialize of the base class. */
-    HsrSwitch::initialize();
+    HsrSwitch::initialize("FCFS");
     
     int temp = par("redBoxCfg");
     switch (temp)
