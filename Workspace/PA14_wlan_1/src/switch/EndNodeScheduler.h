@@ -22,7 +22,6 @@ class EndNodeScheduler: public Scheduler
 {
 
 public:
-    EndNodeScheduler( schedulerMode schedmode );
     EndNodeScheduler();
     virtual ~EndNodeScheduler();
 

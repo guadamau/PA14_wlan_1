@@ -15,15 +15,13 @@
 
 package switch;
 
-//
-// TODO auto-generated module
-//
+
 simple RedBoxSwitch extends HsrSwitch
 {
-    parameters:
-    	@class( RedBoxSwitch );
+	parameters:
+        @class( RedBoxSwitch );
         int redBoxCfg = default(0); //0=Regular , 1=HSR , 2=PRP-A , 3=PRP-B
         @display("i=abstract/switch");
-    gates:
-        inout gateInterlink;    // declare two way connections   
+	gates:
+		inout gateInterlink; // declare two way connections
 }

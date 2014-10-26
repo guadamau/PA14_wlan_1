@@ -45,7 +45,9 @@ void EndNodeSwitch::initialize()
         throw cRuntimeError( "can't load node table" );
     }
 
-    HsrSwitch::setSched( new EndNodeScheduler( HsrSwitch::getSchedmode() ) );
+    HsrSwitch::setSched( new EndNodeScheduler() );
+    EndNodeScheduler* sched = ( EndNodeScheduler* )HsrSwitch::getSched();
+    sched->initScheduler( HsrSwitch::getSchedmode() );
 }
 
 EndNodeSwitch::EndNodeSwitch()
@@ -54,7 +56,10 @@ EndNodeSwitch::EndNodeSwitch()
 
 EndNodeSwitch::~EndNodeSwitch()
 {
-    delete endNodeTable;
+    if( endNodeTable != NULL )
+    {
+        delete endNodeTable;
+    }
 }
 
 void EndNodeSwitch::DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)

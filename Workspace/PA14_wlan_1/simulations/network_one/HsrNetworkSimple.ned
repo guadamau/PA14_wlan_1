@@ -1,8 +1,8 @@
 package network_one;
 import channels.MyFastChannel;
-import testControl.TestControl;
 import endDevices.HsrEndNode;
-import endDevices.HsrRedBox;
+import testControl.TestControl;
+
 
 network HsrNetworkSimple
 {
@@ -27,7 +27,7 @@ network HsrNetworkSimple
         }
 
 
-		TestControl1: TestControl {
+        TestControl1: TestControl {
             @display("p=500,100");
         }
 

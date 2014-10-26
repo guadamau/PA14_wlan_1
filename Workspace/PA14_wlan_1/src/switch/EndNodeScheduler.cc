@@ -26,10 +26,6 @@
 
 Define_Module( EndNodeScheduler );
 
-EndNodeScheduler::EndNodeScheduler( schedulerMode schedmode ) : Scheduler( schedmode )
-{
-
-}
 
 EndNodeScheduler::EndNodeScheduler()
 {

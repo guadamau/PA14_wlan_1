@@ -26,16 +26,14 @@
 
 Define_Module( RedBoxScheduler );
 
-RedBoxScheduler::RedBoxScheduler( schedulerMode schedmode ) : Scheduler( schedmode )
-{
-}
-
 RedBoxScheduler::RedBoxScheduler()
 {}
 
 RedBoxScheduler::~RedBoxScheduler()
 {
 }
+
+
 
 void RedBoxScheduler::enqueueMessage( cMessage *msg )
 {

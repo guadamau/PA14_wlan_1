@@ -53,7 +53,9 @@ RedBoxSwitch::initialize()
     gateInterlinkIn  = gate("gateInterlink$i");
     gateInterlinkOut = gate("gateInterlink$o");
 
-    HsrSwitch::setSched( new RedBoxScheduler( HsrSwitch::getSchedmode() ) );
+    HsrSwitch::setSched( new RedBoxScheduler() );
+    RedBoxScheduler* sched = ( RedBoxScheduler* )HsrSwitch::getSched();
+    sched->initScheduler( HsrSwitch::getSchedmode() );
 
 }
 

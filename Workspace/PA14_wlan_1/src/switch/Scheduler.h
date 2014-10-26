@@ -40,12 +40,12 @@ private:
     cArray* queues;
     schedulerMode schedmode;
 
-    void initScheduler( void );
 
 public:
-    Scheduler( schedulerMode schedmode );
     Scheduler();
     virtual ~Scheduler();
+
+    void initScheduler( schedulerMode schedmode );
 
     /* Abstract methods */
     virtual void enqueueMessage( cMessage* msg ) = 0;
@@ -54,6 +54,9 @@ public:
     /* Getters */
     cArray* getQueues( void );
     schedulerMode getSchedmode( void );
+
+    /* Setters */
+    void setSchedmode( schedulerMode schedmode );
 };
 
 #endif /* SCHEDULER_H_ */

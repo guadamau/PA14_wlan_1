@@ -7,10 +7,10 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.060</stopzeit>            
             <last>1</last>
-            <maxlast>1</maxlast>               
+            <maxlast>10</maxlast>               
             <destination>00-15-12-14-88-01</destination>    
             <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
-            <priority>0</priority>		<!-- EXPRESS = 2 / HIGH = 1 / LOW = 0 -->
+            <priority>LOW</priority>		<!-- EXPRESS = 2 / HIGH = 1 / LOW = 0 -->
         </lastmuster>                
     </source>  
 </simulation_behaviour>

@@ -18,5 +18,5 @@ package switch;
 
 simple EndNodeSwitch extends HsrSwitch
 {
-    @class( EndNodeSwitch );
+	@class( EndNodeSwitch );
 }

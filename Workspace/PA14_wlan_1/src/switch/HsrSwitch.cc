@@ -110,6 +110,8 @@ void HsrSwitch::initialize()
     /* Initialize Scheduler */
     schedmode = static_cast<schedulerMode>( atoi( par( "schedulerMode" ).stringValue() ) );
 
+    macAddress = new MACAddress();
+
     macAddress->setAddress( par("macAddress").stringValue() );
 
     if( ( macAddress->isBroadcast() ) || ( macAddress->isMulticast() ) )

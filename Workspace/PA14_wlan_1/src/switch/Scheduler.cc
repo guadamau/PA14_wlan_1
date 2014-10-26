@@ -8,22 +8,18 @@
 #include "Scheduler.h"
 
 
-Scheduler::Scheduler( schedulerMode schedmode )
-{
-    this->queues = new cArray();
-    this->schedmode = schedmode;
-
-    initScheduler();
-}
-
 Scheduler::Scheduler()
 {
+    this->queues = new cArray();
 }
 
 cArray* Scheduler::getQueues( void ) {
     return queues;
 }
 
+void Scheduler::setSchedmode(schedulerMode schedmode) {
+    this->schedmode = schedmode;
+}
 
 schedulerMode Scheduler::getSchedmode( void ) {
     return schedmode;
@@ -45,8 +41,10 @@ Scheduler::~Scheduler()
 
 
 /* private methods */
-void Scheduler::initScheduler( void )
+void Scheduler::initScheduler( schedulerMode schedmode )
 {
+    this->schedmode = schedmode;
+
     queues->setCapacity( 3 );
     queues->addAt( EXPRESS_INTERNAL, new cQueue() );
     queues->addAt( HIGH_INTERNAL, new cQueue() );
