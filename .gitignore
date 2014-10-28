@@ -25,3 +25,6 @@ Workspace/PA14_wlan_1/src/ethernetHSR
 Workspace/PA14_wlan_1/simulations/.tkenvlog
 Workspace/PA14_wlan_1/src/Makefile
 Workspace/PA14_wlan_1/src/PA14_wlan_1
+
+Workspace/PA14_wlan_1/simulations/network_one/.tkenvrc
+

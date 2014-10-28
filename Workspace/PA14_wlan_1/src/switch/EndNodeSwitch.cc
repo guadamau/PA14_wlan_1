@@ -165,10 +165,18 @@ void EndNodeSwitch::handleMessage(cMessage *msg)
     ///////////////////////////////////////////////////////////////
     // Will be implemented as soon as the function itself is implemented
     ///////////////////////////////////////////////////////////////
-    /*
+
     Scheduler* sched = HsrSwitch::getSched();
-    sched->enqueueMessage( msg );
-    */
+
+    if( msg->isSelfMessage() )
+    {
+        sched->processQueues();
+    }
+    else
+    {
+        sched->enqueueMessage( msg );
+    }
+
 
     /* Folgender Inhalt wird künftig in der send-methode abgehandelt. */
 

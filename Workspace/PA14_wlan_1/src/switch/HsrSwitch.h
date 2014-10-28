@@ -19,6 +19,7 @@
 #include <omnetpp.h>
 #include "MACAddress.h"
 #include "Scheduler.h"
+#include "hsrSwitchSelfMessage_m.h"
 
 /* Abstract class as a construction plan for the specific HSR-switches, baby! */
 
@@ -83,6 +84,9 @@ public:
     void setSched( Scheduler* sched );
 
     void setSequenceNum( unsigned int sequenceNum );
+
+    /* Generate switch self messages ... */
+    HsrSwitchSelfMessage* generateSelfMessage( void );
 
 };
 
