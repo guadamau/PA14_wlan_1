@@ -505,7 +505,7 @@ CPU::handleMessage(cMessage *msg)
             scheduleAt(sendTime, delayedMessage);
 
             EthernetIIFrame *dmsg = generateOnePacket(delayedMessage->getSendData());
-            testControl->registerSEND(macAddress, dmsg->dup(), simTime());
+            // testControl->registerSEND(macAddress, dmsg->dup(), simTime());
             numFramesSent++;
             send(dmsg, gateOut);
         }
@@ -514,7 +514,7 @@ CPU::handleMessage(cMessage *msg)
             if(delayedMessage->getSendData().sendBehavior == BEHAVIOR_STD)
             {
                 EthernetIIFrame *outmsg = generateOnePacket(delayedMessage->getSendData());
-                testControl->registerSEND(macAddress, outmsg->dup(), delayedMessage->getSendData().startTime);
+                // testControl->registerSEND(macAddress, outmsg->dup(), delayedMessage->getSendData().startTime);
                 numFramesSent++;
                 send(outmsg, gateOut);
             }
@@ -530,7 +530,7 @@ CPU::handleMessage(cMessage *msg)
             EV << "CPU: " << macAddress << " Missroutet Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         }
 
-        testControl->registerRECV(macAddress, packet->dup(), simTime());
+        // testControl->registerRECV(macAddress, packet->dup(), simTime());
 
         vlanMessage *vlanTag = NULL;
         dataMessage *messageData = NULL;
