@@ -69,7 +69,7 @@ cOutVector* Scheduler::getQueueLowIntVector( void ) {
     return queueLowIntVector;
 }
 
-void Scheduler::setQueueSizeLowInt( int nr )
+void Scheduler::setQueueSizeLowInt( unsigned long nr )
 {
     queuesize_low_int = nr;
 }

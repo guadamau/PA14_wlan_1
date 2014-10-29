@@ -88,6 +88,9 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
                 default:
                 {
                     ( check_and_cast<cQueue *>(queues->get(LOW_INTERNAL)) )->insert(msg);
+                    Scheduler::setQueueSizeLowInt(Scheduler::getQueueSizeLowInt()+1);
+                    Scheduler::getQueueLowIntVector()->record(Scheduler::getQueueSizeLowInt());
+                    EV << "Queue Size (" << simTime() << "): " << Scheduler::getQueueSizeLowInt() << endl;
                     break;
                 }
 
@@ -138,9 +141,6 @@ void EndNodeScheduler::enqueueMessage( cMessage *msg )
                     }
                     else if (arrivalGate == parentModule->getGateCpuIn() ) {
                         ( check_and_cast<cQueue *>(queues->get(LOW_INTERNAL)) )->insert(msg);
-                        Scheduler::setQueueSizeLowInt(Scheduler::getQueueSizeLowInt()+1);
-                        Scheduler::getQueueLowIntVector()->record(Scheduler::getQueueSizeLowInt());
-                        EV << "Queue Size (" << simTime() << "): " << Scheduler::getQueueSizeLowInt() << endl;
                     }
                     break;
                 }
@@ -246,7 +246,7 @@ void EndNodeScheduler::forwardFrame(cMessage* msg) {
         endSimulation();
     }
 
-    MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+    // MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
 }
 
 void EndNodeScheduler::sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)

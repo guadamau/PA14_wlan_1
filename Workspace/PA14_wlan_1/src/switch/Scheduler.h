@@ -40,7 +40,7 @@ private:
     cArray* queues;
     schedulerMode schedmode;
     cOutVector* queueLowIntVector;
-    int queuesize_low_int;
+    unsigned long queuesize_low_int;
 
 public:
     Scheduler();
@@ -60,7 +60,7 @@ public:
 
     /* Setters */
     void setSchedmode( schedulerMode schedmode );
-    void setQueueSizeLowInt( int nr );
+    void setQueueSizeLowInt( unsigned long nr );
 
 };
 
