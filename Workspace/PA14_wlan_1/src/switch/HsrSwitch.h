@@ -85,9 +85,6 @@ public:
 
     void setSequenceNum( unsigned int sequenceNum );
 
-    /* Generate switch self messages ... */
-    HsrSwitchSelfMessage* generateSelfMessage( void );
-
 };
 
 #endif /* HSRSWITCH_H_ */

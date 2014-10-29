@@ -39,7 +39,8 @@ class Scheduler : public cSimpleModule {
 private:
     cArray* queues;
     schedulerMode schedmode;
-
+    cOutVector* queueLowIntVector;
+    int queuesize_low_int;
 
 public:
     Scheduler();
@@ -54,9 +55,13 @@ public:
     /* Getters */
     cArray* getQueues( void );
     schedulerMode getSchedmode( void );
+    int getQueueSizeLowInt( void );
+    cOutVector* getQueueLowIntVector( void );
 
     /* Setters */
     void setSchedmode( schedulerMode schedmode );
+    void setQueueSizeLowInt( int nr );
+
 };
 
 #endif /* SCHEDULER_H_ */

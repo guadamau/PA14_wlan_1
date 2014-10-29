@@ -17,6 +17,18 @@
 #define ENDNODESCHEDULER_H_
 
 #include "Scheduler.h"
+#include <omnetpp.h>
+#include "HsrSwitch.h"
+
+#include "MessagePacker.h"
+#include "nodeTable.h"
+#include "ListenErkennung.h"
+
+#include "hsrMessage_m.h"
+#include "prpMessage_m.h"
+#include "EtherFrame_m.h"
+#include "dataMessage_m.h"
+#include "vlanMessage_m.h"
 
 class EndNodeScheduler: public Scheduler
 {
@@ -27,6 +39,10 @@ public:
 
     void enqueueMessage( cMessage *msg );
     void processQueues( void );
+
+    void forwardFrame( cMessage *msg );
+    void sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
+    void recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
 };
 
 #endif /* ENDNODESCHEDULER_H_ */

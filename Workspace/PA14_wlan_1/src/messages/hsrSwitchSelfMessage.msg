@@ -16,7 +16,14 @@
 //
 // TODO generated message class
 //
-message HsrSwitchSelfMessage {
-    int id;
-    string content;
+
+cplusplus {{
+#include "hsrDefines.h"   // let C++ know about it
+}}
+
+class noncobject SendData;
+
+message HsrSwitchSelfMessage 
+{    
+	   SendData sendData;
 }

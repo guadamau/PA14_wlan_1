@@ -40,6 +40,7 @@ public:
     static EthernetIIFrame *generateEthMessage(EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage  *hsrTag, dataMessage *messageData);
     static void deleteMessage(EthernetIIFrame **ethMessage, vlanMessage **vlanTag, hsrMessage  **hsrTag, dataMessage **messageData);
     static void decapsulateMessage(EthernetIIFrame **ethMessage, vlanMessage **vlanTag, hsrMessage  **hsrTag, dataMessage **messageData);
+    static void openMessage(EthernetIIFrame **ethMessage, vlanMessage **vlanTag, hsrMessage  **hsrTag, dataMessage **messageData);
 
 
     MessagePacker();

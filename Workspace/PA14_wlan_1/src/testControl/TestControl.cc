@@ -47,7 +47,7 @@ void TestControl::registerSEND(MACAddress cpu, EthernetIIFrame *data, simtime_t 
     dataMessage *messageData = NULL;
 
     MessagePacker::decapsulateMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-    MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+//    MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
 #endif
 }
 
@@ -76,7 +76,7 @@ void TestControl::registerRECV(MACAddress cpu, EthernetIIFrame *data, simtime_t 
 //    hitFlag = false;
 //    for( sIt = sendList.begin(); sIt != sendList.end(); ++sIt )
 //    {
-//        //&(* ist nötig, um an den Inhalt des Iterators zu kommen
+//        //&(* ist nï¿½tig, um an den Inhalt des Iterators zu kommen
 //        if(mdCompare(&(*sIt),&md) == true)
 //        {
 //            //treffer
@@ -103,7 +103,7 @@ void TestControl::registerRECV(MACAddress cpu, EthernetIIFrame *data, simtime_t 
     dataMessage *messageData = NULL;
 
     MessagePacker::decapsulateMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-    MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
+//    MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
 
 #endif
 }
@@ -167,7 +167,7 @@ void TestControl::searchMessage(MessageData *sourceMd, MACAddress cpu)
     for( rIt = recvList.begin(); rIt != recvList.end(); ++rIt )
     {
     	MessageData *recvMd = &(*rIt);
-        //&(* ist nötig, um an den Inhalt des Iterators zu kommen
+        //&(* ist nï¿½tig, um an den Inhalt des Iterators zu kommen
         if((mdCompare(sourceMd,recvMd) == true) && (cpu == recvMd->cpu))
         {
             //treffer
@@ -261,7 +261,7 @@ EV << "End sort \n";
 				if((sIt->result_ethTag->getDest().isBroadcast()) || (sIt->result_ethTag->getDest().isMulticast()))
 				{
 	            //Broadcast
-	                //für alle registrierten CPUs
+	                //fï¿½r alle registrierten CPUs
 	                if(*cIt != sIt->result_ethTag->getSrc() )
 	                {
 	                    //ohne den Absender
@@ -270,7 +270,7 @@ EV << "End sort \n";
 	            }
 				else
 				{
-	                //nur checken, wenn es den Zielknoten überhaupt gibt
+	                //nur checken, wenn es den Zielknoten ï¿½berhaupt gibt
 	                if(*cIt == sIt->result_ethTag->getDest() )
 	                {
 	                    searchMessage(&(*sIt), *cIt);

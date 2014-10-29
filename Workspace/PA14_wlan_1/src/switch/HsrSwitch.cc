@@ -155,15 +155,3 @@ void HsrSwitch::initialize(const char* schedchoice)
     gateCpuIn = gate("gateCPU$i");
     gateCpuOut = gate("gateCPU$o");
 }
-
-
-HsrSwitchSelfMessage*
-HsrSwitch::generateSelfMessage( void )
-{
-    EV << "Creating self message for an hsr-switch." << endl;
-
-    // Create message object and set source and destination field.
-    HsrSwitchSelfMessage* msg = new HsrSwitchSelfMessage( "hsrSwitchSelfMessage", 0 );
-
-    return msg;
-}

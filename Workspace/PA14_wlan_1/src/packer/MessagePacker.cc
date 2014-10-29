@@ -40,7 +40,7 @@ dataMessage *MessagePacker::createDataMessage(const char *name, int64 length, in
 
 EthernetIIFrame *MessagePacker::createETHTag(const char *name, MACAddress dest, MACAddress src)
 {
-    EthernetIIFrame *frm;
+    EthernetIIFrame *frm = NULL;
     frm = new EthernetIIFrame(name,0);
     frm->setByteLength(ETHER_MAC_FRAME_BYTES); //DEST + SRC + TYPE + CRC
     frm->setDest(dest);
@@ -96,16 +96,16 @@ MessagePacker::generateEthMessage(EthernetIIFrame *ethTag, vlanMessage *vlanTag,
         {
             result_vlanTag = vlanTag->dup();
             result_vlanTag->setOwnEtherType(0x88FB); //vlan zeigt auf hsr
-            result_vlanTag->encapsulate(result_hsrTag);
+            result_vlanTag->encapsulate(result_hsrTag->dup());
             result_ethTag = ethTag->dup();
             result_ethTag->setEtherType(0x8100); //eth zeigt auf vlan
-            result_ethTag->encapsulate(result_vlanTag);
+            result_ethTag->encapsulate(result_vlanTag->dup());
         }
         else
         {
             result_ethTag = ethTag->dup();
             result_ethTag->setEtherType(0x88FB); //eth zeigt auf hsr
-            result_ethTag->encapsulate(result_hsrTag);
+            result_ethTag->encapsulate(result_hsrTag->dup());
         }
     }
     else
@@ -117,7 +117,7 @@ MessagePacker::generateEthMessage(EthernetIIFrame *ethTag, vlanMessage *vlanTag,
             result_vlanTag->encapsulate(messageData->dup());
             result_ethTag = ethTag->dup();
             result_ethTag->setEtherType(0x8100); //eth zeigt auf vlan
-            result_ethTag->encapsulate(result_vlanTag);
+            result_ethTag->encapsulate(result_vlanTag->dup());
         }
         else
         {
@@ -188,5 +188,35 @@ MessagePacker::decapsulateMessage(EthernetIIFrame **ethTag, vlanMessage **vlanTa
     {
         //Alles anderere
         (*messageData) = check_and_cast<dataMessage *> ((*ethTag)->decapsulate());
+    }
+}
+
+void
+MessagePacker::openMessage(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
+{
+    if ((*ethTag)->getEtherType() == 0x8100) //if vlan
+    {
+        //VLAN TAG
+        (*vlanTag) = check_and_cast<vlanMessage *> ((*ethTag)->getEncapsulatedPacket());
+        if ((*vlanTag)->getOwnEtherType() == 0x88FB) //if hsr
+        {
+            (*hsrTag) = check_and_cast<hsrMessage *> ((*vlanTag)->getEncapsulatedPacket());
+            (*messageData) = check_and_cast<dataMessage *> ((*hsrTag)->getEncapsulatedPacket());
+        }
+        else
+        {
+            (*messageData) = check_and_cast<dataMessage *> ((*vlanTag)->getEncapsulatedPacket());
+        }
+    }
+    else if ((*ethTag)->getEtherType() == 0x88FB) //if hsr
+    {
+        //HSR TAG
+        (*hsrTag) = check_and_cast<hsrMessage *> ((*ethTag)->getEncapsulatedPacket());
+        (*messageData) = check_and_cast<dataMessage *> ((*hsrTag)->getEncapsulatedPacket());
+    }
+    else
+    {
+        //Alles anderere
+        (*messageData) = check_and_cast<dataMessage *> ((*ethTag)->getEncapsulatedPacket());
     }
 }

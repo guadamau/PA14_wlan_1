@@ -38,6 +38,7 @@ class EndNodeSwitch : public HsrSwitch
     EndNodeSwitch();
     virtual ~EndNodeSwitch();
 
+    nodeTable* getNodeTable();
 
   private:
 
@@ -49,10 +50,8 @@ class EndNodeSwitch : public HsrSwitch
 
     nodeTable* endNodeTable;
 
-    nodeTable* getNodeTable();
-
-    void DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
-    void DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
+//    void DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
+//    void DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
 
 
   protected:

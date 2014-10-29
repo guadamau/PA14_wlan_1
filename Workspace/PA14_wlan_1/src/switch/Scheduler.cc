@@ -39,19 +39,17 @@ Scheduler::~Scheduler()
     }
 
     delete queues;
+    delete queueLowIntVector;
 }
 
 
 void Scheduler::initScheduler( schedulerMode schedmode )
 {
     this->schedmode = schedmode;
+    setQueueSizeLowInt(0);
 
-
-    HsrSwitch* parentModule = ( HsrSwitch* )getParentModule();
-
-    HsrSwitchSelfMessage* switchSelfMessage = parentModule->generateSelfMessage();
-
-    unsigned int i;
+    queueLowIntVector = new cOutVector();
+    queueLowIntVector->setName("QueueSize Low Internal");
 
     queues->addAt( EXPRESS_RING, new cQueue() );
     queues->addAt( EXPRESS_INTERNAL, new cQueue() );
@@ -60,10 +58,18 @@ void Scheduler::initScheduler( schedulerMode schedmode )
     queues->addAt( LOW_RING, new cQueue() );
     queues->addAt( LOW_INTERNAL, new cQueue() );
 
-    /* set the times, where the scheduler should process its queues ... */
-    for( i = 0; i < 100000; i++ )
-    {
-        /* Schedule a self message every millisecond, with an offset of 0.2 seconds */
-        scheduleAt( ( 0.2 + i * 0.001 ), switchSelfMessage );
-    }
+}
+
+int Scheduler::getQueueSizeLowInt()
+{
+    return queuesize_low_int;
+}
+
+cOutVector* Scheduler::getQueueLowIntVector( void ) {
+    return queueLowIntVector;
+}
+
+void Scheduler::setQueueSizeLowInt( int nr )
+{
+    queuesize_low_int = nr;
 }

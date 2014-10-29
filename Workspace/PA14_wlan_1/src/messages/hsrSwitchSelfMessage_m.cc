@@ -57,8 +57,6 @@ Register_Class(HsrSwitchSelfMessage);
 
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const char *name, int kind) : ::cMessage(name,kind)
 {
-    this->id_var = 0;
-    this->content_var = 0;
 }
 
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const HsrSwitchSelfMessage& other) : ::cMessage(other)
@@ -80,42 +78,29 @@ HsrSwitchSelfMessage& HsrSwitchSelfMessage::operator=(const HsrSwitchSelfMessage
 
 void HsrSwitchSelfMessage::copy(const HsrSwitchSelfMessage& other)
 {
-    this->id_var = other.id_var;
-    this->content_var = other.content_var;
+    this->sendData_var = other.sendData_var;
 }
 
 void HsrSwitchSelfMessage::parsimPack(cCommBuffer *b)
 {
     ::cMessage::parsimPack(b);
-    doPacking(b,this->id_var);
-    doPacking(b,this->content_var);
+    doPacking(b,this->sendData_var);
 }
 
 void HsrSwitchSelfMessage::parsimUnpack(cCommBuffer *b)
 {
     ::cMessage::parsimUnpack(b);
-    doUnpacking(b,this->id_var);
-    doUnpacking(b,this->content_var);
+    doUnpacking(b,this->sendData_var);
 }
 
-int HsrSwitchSelfMessage::getId() const
+SendData& HsrSwitchSelfMessage::getSendData()
 {
-    return id_var;
+    return sendData_var;
 }
 
-void HsrSwitchSelfMessage::setId(int id)
+void HsrSwitchSelfMessage::setSendData(const SendData& sendData)
 {
-    this->id_var = id;
-}
-
-const char * HsrSwitchSelfMessage::getContent() const
-{
-    return content_var.c_str();
-}
-
-void HsrSwitchSelfMessage::setContent(const char * content)
-{
-    this->content_var = content;
+    this->sendData_var = sendData;
 }
 
 class HsrSwitchSelfMessageDescriptor : public cClassDescriptor
@@ -165,7 +150,7 @@ const char *HsrSwitchSelfMessageDescriptor::getProperty(const char *propertyname
 int HsrSwitchSelfMessageDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 2+basedesc->getFieldCount(object) : 2;
+    return basedesc ? 1+basedesc->getFieldCount(object) : 1;
 }
 
 unsigned int HsrSwitchSelfMessageDescriptor::getFieldTypeFlags(void *object, int field) const
@@ -177,10 +162,9 @@ unsigned int HsrSwitchSelfMessageDescriptor::getFieldTypeFlags(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     static unsigned int fieldTypeFlags[] = {
-        FD_ISEDITABLE,
-        FD_ISEDITABLE,
+        FD_ISCOMPOUND,
     };
-    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
 }
 
 const char *HsrSwitchSelfMessageDescriptor::getFieldName(void *object, int field) const
@@ -192,18 +176,16 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldName(void *object, int field
         field -= basedesc->getFieldCount(object);
     }
     static const char *fieldNames[] = {
-        "id",
-        "content",
+        "sendData",
     };
-    return (field>=0 && field<2) ? fieldNames[field] : NULL;
+    return (field>=0 && field<1) ? fieldNames[field] : NULL;
 }
 
 int HsrSwitchSelfMessageDescriptor::findField(void *object, const char *fieldName) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
-    if (fieldName[0]=='i' && strcmp(fieldName, "id")==0) return base+0;
-    if (fieldName[0]=='c' && strcmp(fieldName, "content")==0) return base+1;
+    if (fieldName[0]=='s' && strcmp(fieldName, "sendData")==0) return base+0;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
@@ -216,10 +198,9 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldTypeString(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     static const char *fieldTypeStrings[] = {
-        "int",
-        "string",
+        "SendData",
     };
-    return (field>=0 && field<2) ? fieldTypeStrings[field] : NULL;
+    return (field>=0 && field<1) ? fieldTypeStrings[field] : NULL;
 }
 
 const char *HsrSwitchSelfMessageDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
@@ -259,8 +240,7 @@ std::string HsrSwitchSelfMessageDescriptor::getFieldAsString(void *object, int f
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
-        case 0: return long2string(pp->getId());
-        case 1: return oppstring2string(pp->getContent());
+        case 0: {std::stringstream out; out << pp->getSendData(); return out.str();}
         default: return "";
     }
 }
@@ -275,8 +255,6 @@ bool HsrSwitchSelfMessageDescriptor::setFieldAsString(void *object, int field, i
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
-        case 0: pp->setId(string2long(value)); return true;
-        case 1: pp->setContent((value)); return true;
         default: return false;
     }
 }
@@ -290,6 +268,7 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldStructName(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     switch (field) {
+        case 0: return opp_typename(typeid(SendData));
         default: return NULL;
     };
 }
@@ -304,6 +283,7 @@ void *HsrSwitchSelfMessageDescriptor::getFieldStructPointer(void *object, int fi
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
+        case 0: return (void *)(&pp->getSendData()); break;
         default: return NULL;
     }
 }

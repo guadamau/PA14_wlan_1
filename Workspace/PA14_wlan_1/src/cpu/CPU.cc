@@ -47,18 +47,7 @@ CPU::generateOnePacket(SendData sendData)
     dataMessage *result_messageData =MessagePacker::createDataMessage("std", sendData.paketgroesse, messageCount++);
     vlanMessage *result_vlanTag = NULL;
 
-    if (sendData.vlan != 0 || sendData.frameprio == HIGH || sendData.frameprio == LOW)
-    {
-        if(!(sendData.frameprio == HIGH || sendData.frameprio == LOW))
-        {
-            result_vlanTag = MessagePacker::createVLANTag( "vlan", 0, 0, 0, 0 );
-        }
-        else
-        {
-            result_vlanTag = MessagePacker::createVLANTag( "vlan", sendData.frameprio, 0, 0, 0 );
-        }
-
-    }
+    result_vlanTag = MessagePacker::createVLANTag( "vlan", sendData.frameprio, 0, 0, 0 );
 
     EthernetIIFrame *result_ethFrame = MessagePacker::generateEthMessage(result_ethTag, result_vlanTag, NULL, result_messageData);
     MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, NULL, &result_messageData);
@@ -392,6 +381,7 @@ CPU::loadXMLFile()
 
                 if(sendData.destination != macAddress)
                 {
+                    EV << "Scheduling senddata";
                     if(scheduleMessage(sendData) == false)
                     {
                         throw cRuntimeError("Illegal XML configuration");

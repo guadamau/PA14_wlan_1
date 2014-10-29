@@ -3,14 +3,29 @@
     <source>00-15-12-14-88-02
         <lastmuster>
             <typ>hsr</typ>
-            <verhalten>gleichverteilte last</verhalten>         
+            <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.060</stopzeit>            
+            <stopzeit>0.060</stopzeit> 
+            <interval>0.000208</interval> 					<!-- 208 µs -->           
             <last>1</last>
             <maxlast>10</maxlast>               
             <destination>00-15-12-14-88-01</destination>    
             <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
             <priority>LOW</priority>		<!-- EXPRESS = 2 / HIGH = 1 / LOW = 0 -->
         </lastmuster>                
-    </source>  
+    </source>
+    <source>00-15-12-14-88-03
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>konstante last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.060</stopzeit>            
+            <interval>0.000208</interval> 					<!-- 208 µs -->
+            <last>1</last>
+            <maxlast>10</maxlast>               
+            <destination>00-15-12-14-88-01</destination>    
+            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
+            <priority>LOW</priority>		<!-- EXPRESS = 2 / HIGH = 1 / LOW = 0 -->
+        </lastmuster>                
+    </source>
 </simulation_behaviour>
