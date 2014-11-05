@@ -278,6 +278,7 @@ void EndNodeScheduler::sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTa
     //Duplicate the frame, enqueue it for sending into both HSR ports
     parentSwitch->send(MessagePacker::generateEthMessage(*ethTag, *vlanTag, *hsrTag, *messageData), gateAOut);
     parentSwitch->send(MessagePacker::generateEthMessage(*ethTag, *vlanTag, *hsrTag, *messageData), gateBOut);
+    this->send( MessagePacker::generateEthMessage(*ethTag, *vlanTag, *hsrTag, *messageData), gateAOut );
 }
 
 void EndNodeScheduler::recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
@@ -341,6 +342,9 @@ void EndNodeScheduler::recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **v
         if( macAddress != (*ethTag)->getDest() )
         {
             parentSwitch->send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
+            gateAOut->getChannel()->isBusy();
+            gateAOut->getChannel()->getTransmissionFinishTime();
+            gateAOut->getChannel()->callFinish();
         }
         else//(If this node is the only (unicast) destination)
         {
