@@ -179,7 +179,9 @@ ert kennen.
 \begin_layout Itemize
 Bei einem High-Frame handelt es sich um ein normales Ethernet-Frame das
  über ein VLAN-Tag mit der Priorität 1 versehen ist.
- Da das VLAN-Priority-Feld 3 Bits 
+ Da das VLAN-Priority-Feld 3 Bits gross ist wären 8 verschiedene Prioritäten
+ möglich, jedoch wird in dieser Arbeit keine Prioritätsnummer, die höher
+ als 1 ist, verwendet.
 \end_layout
 
 \begin_layout Itemize
@@ -225,6 +227,13 @@ So kann der Zufluss von neuem Traffic limitiert werden, womit kein Gerät
 
 \begin_layout Subsubsection
 Vortrittsregeln bezüglich Frames im und zum Ring
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Vortrittsregeln-bezüglich-Frames"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -386,6 +395,8 @@ Jeder Zeitschlitz hat eine sogenannte Grün-Phase, in welcher High-Frames
  Den Rest des Zeitschlitzes wird für den Sendevorgang oder Low-Frames verwendet.
  Sollten keine High-Frames da sein so können auch Low-Frames gesendet werden.
  Dies wiederholt sich in jedem Zeitschlitz.
+ Mit diesem Mechanismus wird verhindert, dass Low-Frames nicht gesendet
+ werden, wenn ständig High-Frames zum Senden bereitstehen.
 \end_layout
 
 \begin_layout Standard
@@ -423,6 +434,46 @@ Beispiel von Frameabfolge mit Zeitschlitzverfahren
 \end_inset
 
 
+\end_layout
+
+\begin_layout Subsection
+Abhandlung der Frames innerhalb eines Gerätes
+\end_layout
+
+\begin_layout Standard
+Jeder Node (DANH oder Redbox, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Gerätetypen HSR"
+
+\end_inset
+
+) im Netzwerk verfügt dabei über einen internen Switch, der entscheidet
+ wohin die Frames gesendet werden sollen.
+ Zum Beispiel verfügt ein DANH in der Simulation über 3 Ports, zwei für
+ die Frames vom und auf den Ring (Ethernet-Ports) und einen für die Frames
+ von und zur CPU.
+ Sobald ein Gerät ein Frame erhält, analysiert es das Frame und sortiert
+ es je nach Priorität (und eventuell nach Herkunft) in seine Queues ein.
+ Wenn nur auf die Prioritäten geachtet wird, sortiert das Gerät die Frames
+ in 3 verschiedene Queues (Express, High und Low) ein.
+ Wenn auch auf die Herkunft geachtet wird (wie z.B.
+ beim Mechanismus, bei dem die Frames vom Ring Vortritt haben, siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Vortrittsregeln-bezüglich-Frames"
+
+\end_inset
+
+), dann werden 6 Queues verwendet.
+ Bei diesen 6 Queues hat es pro Priorität 2 Queues (eine für die Frames
+ von Aussen und eine für die Frame vom Ring).
+\end_layout
+
+\begin_layout Standard
+Jedes Gerät verfügt über einen Scheduler, welcher die Queues je nach Mechanismus
+ abarbeitet.
 \end_layout
 
 \begin_layout Section

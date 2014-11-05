@@ -173,6 +173,13 @@ nummer, welche vom Sender für jedes Frame um eins inkrementiert wird.
 
 \begin_layout Subsection
 Gerätetypen
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Gerätetypen HSR"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

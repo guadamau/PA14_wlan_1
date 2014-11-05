@@ -208,8 +208,6 @@ filename "_tex/titlepage.tex"
 \end_layout
 
 \begin_layout Standard
-\noindent
-\align center
 \begin_inset External
 	template PDFPages
 	filename _pdf/000_Erklaerung_PA.pdf
