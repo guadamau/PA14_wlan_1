@@ -39,23 +39,28 @@ class Scheduler : public cSimpleModule {
 private:
     cArray* queues;
     schedulerMode schedmode;
+
+    cGate* schedOutGate;
+
+    /* Members to record statistics. */
     cOutVector* queueLowIntVector;
-    unsigned long queuesize_low_int;
+    unsigned long int queuesize_low_int;
 
 public:
     Scheduler();
     virtual ~Scheduler();
 
-    void initScheduler( schedulerMode schedmode );
+    void initScheduler( schedulerMode schedmode, cGate* schedOutGate );
 
-    /* Abstract methods */
-    virtual void enqueueMessage( cMessage* msg ) = 0;
-    virtual void processQueues( void ) = 0;
+    /* Main sched methods ... */
+    void enqueueMessage( cMessage* msg );
+    void processQueues( void );
 
     /* Getters */
     cArray* getQueues( void );
     schedulerMode getSchedmode( void );
-    int getQueueSizeLowInt( void );
+
+    unsigned long int getQueueSizeLowInt( void );
     cOutVector* getQueueLowIntVector( void );
 
     /* Setters */

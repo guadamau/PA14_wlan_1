@@ -39,10 +39,6 @@ public:
 
     void enqueueMessage( cMessage *msg );
     void processQueues( void );
-
-    void forwardFrame( cMessage *msg );
-    void sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
-    void recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
 };
 
 #endif /* ENDNODESCHEDULER_H_ */

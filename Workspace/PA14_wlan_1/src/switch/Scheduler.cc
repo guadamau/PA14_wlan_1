@@ -43,10 +43,10 @@ Scheduler::~Scheduler()
 }
 
 
-void Scheduler::initScheduler( schedulerMode schedmode )
+void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate )
 {
     this->schedmode = schedmode;
-    setQueueSizeLowInt(0);
+    setQueueSizeLowInt( 0 );
 
     queueLowIntVector = new cOutVector();
     queueLowIntVector->setName("QueueSize Low Internal");
@@ -58,9 +58,11 @@ void Scheduler::initScheduler( schedulerMode schedmode )
     queues->addAt( LOW_RING, new cQueue() );
     queues->addAt( LOW_INTERNAL, new cQueue() );
 
+    this->schedOutGate = schedOutGate;
+
 }
 
-int Scheduler::getQueueSizeLowInt()
+unsigned long int Scheduler::getQueueSizeLowInt()
 {
     return queuesize_low_int;
 }
@@ -69,7 +71,7 @@ cOutVector* Scheduler::getQueueLowIntVector( void ) {
     return queueLowIntVector;
 }
 
-void Scheduler::setQueueSizeLowInt( unsigned long nr )
+void Scheduler::setQueueSizeLowInt( unsigned long int nr )
 {
     queuesize_low_int = nr;
 }

@@ -39,7 +39,10 @@ private:
     cGate* gateCpuIn;
     cGate* gateCpuOut;
 
-    Scheduler* sched;
+    Scheduler* schedGateAOut;
+    Scheduler* schedGateBOut;
+    Scheduler* schedGateCpuOut;
+
     schedulerMode schedmode;
 
 
@@ -73,7 +76,11 @@ public:
 
     unsigned int getRingId( void );
 
-    Scheduler* getSched( void );
+    Scheduler* getSchedGateAOut( void );
+
+    Scheduler* getSchedGateBOut( void );
+
+    Scheduler* getSchedGateCpuOut( void );
 
     schedulerMode getSchedmode( void );
 
@@ -81,10 +88,14 @@ public:
 
 
     /* Setters */
-    void setSched( Scheduler* sched );
 
     void setSequenceNum( unsigned int sequenceNum );
 
+    void setSchedGateAOut( Scheduler* schedGateAOut );
+
+    void setSchedGateBOut( Scheduler* schedGateBOut );
+
+    void setSchedGateCpuOut( Scheduler* schedGateCpuOut );
 };
 
 #endif /* HSRSWITCH_H_ */

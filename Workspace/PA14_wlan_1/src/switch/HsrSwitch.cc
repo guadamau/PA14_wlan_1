@@ -82,9 +82,6 @@ unsigned int HsrSwitch::getRingId( void ) {
     return ringID;
 }
 
-Scheduler* HsrSwitch::getSched( void ) {
-    return sched;
-}
 
 schedulerMode HsrSwitch::getSchedmode( void ) {
     return schedmode;
@@ -95,6 +92,21 @@ unsigned int HsrSwitch::getSequenceNum( void ) {
 }
 
 
+Scheduler* HsrSwitch::getSchedGateAOut( void ) {
+    return schedGateAOut;
+}
+
+Scheduler* HsrSwitch::getSchedGateBOut( void ) {
+    return schedGateBOut;
+}
+
+Scheduler* HsrSwitch::getSchedGateCpuOut( void ) {
+    return schedGateCpuOut;
+}
+
+
+
+
 /* Setters */
 void HsrSwitch::setSched( Scheduler* sched ) {
     this->sched = sched;
@@ -103,6 +115,19 @@ void HsrSwitch::setSched( Scheduler* sched ) {
 void HsrSwitch::setSequenceNum( unsigned int sequenceNum ) {
     this->sequenceNum = sequenceNum;
 }
+
+void HsrSwitch::setSchedGateAOut(Scheduler* schedGateAOut) {
+    this->schedGateAOut = schedGateAOut;
+}
+
+void HsrSwitch::setSchedGateBOut(Scheduler* schedGateBOut) {
+    this->schedGateBOut = schedGateBOut;
+}
+
+void HsrSwitch::setSchedGateCpuOut(Scheduler* schedGateCpuOut) {
+    this->schedGateCpuOut = schedGateCpuOut;
+}
+
 
 void HsrSwitch::initialize(const char* schedchoice)
 {
@@ -155,3 +180,5 @@ void HsrSwitch::initialize(const char* schedchoice)
     gateCpuIn = gate("gateCPU$i");
     gateCpuOut = gate("gateCPU$o");
 }
+
+
