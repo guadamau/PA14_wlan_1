@@ -75,3 +75,100 @@ void Scheduler::setQueueSizeLowInt( unsigned long int nr )
 {
     queuesize_low_int = nr;
 }
+
+
+void Scheduler::handleMessage( cMessage *msg )
+{
+    if( msg->isSelfMessage() )
+    {
+        delete msg;
+        processQueues();
+    }
+}
+
+void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
+{
+    ( check_and_cast<cQueue*>( queues->get( queue ) ) )->insert( msg );
+
+    switch( queue )
+    {
+        case LOW_INTERNAL:
+        {
+            setQueueSizeLowInt( getQueueSizeLowInt() + 1 );
+            getQueueLowIntVector()->record( getQueueSizeLowInt() );
+            EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl;
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
+}
+
+
+void Scheduler::processQueues( void )
+{
+
+    switch( schedmode )
+    {
+        case FCFS:
+        {
+//            ( ( cQueue* )queues->get(EXPRESS_RING) );
+//            ( ( cQueue* )queues->get(EXPRESS_INTERNAL) );
+//            ( ( cQueue* )queues->get(HIGH_RING) );
+//            ( ( cQueue* )queues->get(HIGH_INTERNAL) );
+//            ( ( cQueue* )queues->get(LOW_RING) );
+//            ( ( cQueue* )queues->get(LOW_INTERNAL) );
+
+            for( int i = 0; i < queues->size(); i++ )
+            {
+                cQueue* currentQueue = ( ( cQueue* )queues->get( static_cast<schedulerMode>( i ) ) );
+
+                while( !currentQueue->isEmpty() )
+                {
+                    if( !( schedOutGate->getChannel()->isBusy() ) )
+                    {
+                        cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
+
+                        /* Channel is free. Send the frame. */
+                        getParentModule()->send( msg, schedOutGate );
+
+                        /* Some logging shizzle */
+                        setQueueSizeLowInt(getQueueSizeLowInt()-1);
+                        getQueueLowIntVector()->record(getQueueSizeLowInt());
+                        EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl;
+                    }
+                    else
+                    {
+                        /* Channel is currently busy. Have to reschedule the frame. */
+                        simtime_t finishTime = schedOutGate->getChannel()->getTransmissionFinishTime();
+                        scheduleAt( finishTime, new SchedulerSelfMessage() );
+                    }
+                }
+            }
+            break;
+        }
+
+        case RING_FIRST:
+        {
+            break;
+        }
+
+        case ZIPPER:
+        {
+            break;
+        }
+
+        case TOKENS:
+        {
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
+}

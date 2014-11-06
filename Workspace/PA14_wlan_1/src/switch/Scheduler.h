@@ -15,15 +15,6 @@
 
 #include "hsrDefines.h"
 
-typedef enum
-{
-    EXPRESS_RING,
-    EXPRESS_INTERNAL,
-    HIGH_RING,
-    HIGH_INTERNAL,
-    LOW_RING,
-    LOW_INTERNAL
-} queueName;
 
 typedef enum
 {
@@ -53,7 +44,7 @@ public:
     void initScheduler( schedulerMode schedmode, cGate* schedOutGate );
 
     /* Main sched methods ... */
-    void enqueueMessage( cMessage* msg );
+    void enqueueMessage( cMessage* msg, queueName queue );
     void processQueues( void );
 
     /* Getters */
@@ -66,6 +57,9 @@ public:
     /* Setters */
     void setSchedmode( schedulerMode schedmode );
     void setQueueSizeLowInt( unsigned long nr );
+
+protected:
+    virtual void handleMessage( cMessage *msg );
 
 };
 

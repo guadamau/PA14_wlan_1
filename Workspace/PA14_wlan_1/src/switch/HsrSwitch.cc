@@ -45,7 +45,10 @@ HsrSwitch::~HsrSwitch()
 
     */
 
-    delete sched;
+    delete schedGateAOut;
+    delete schedGateBOut;
+    delete schedGateCpuOut;
+
 }
 
 
@@ -179,6 +182,13 @@ void HsrSwitch::initialize(const char* schedchoice)
     gateBOut = gate("gateB$o");
     gateCpuIn = gate("gateCPU$i");
     gateCpuOut = gate("gateCPU$o");
+
+    schedGateAOut = new Scheduler();
+    schedGateAOut->initScheduler( schedmode, gateAOut );
+    schedGateBOut = new Scheduler();
+    schedGateBOut->initScheduler( schedmode, gateBOut );
+    schedGateCpuOut = new Scheduler();
+    schedGateCpuOut->initScheduler( schedmode, gateCpuOut );
 }
 
 

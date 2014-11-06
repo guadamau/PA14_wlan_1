@@ -64,20 +64,100 @@ EndNodeSwitch::~EndNodeSwitch()
 }
 
 
-void EndNodeSwitch::handleMessage(cMessage *msg)
+void EndNodeSwitch::handleMessage( cMessage *msg )
 {
-    Scheduler* sched = HsrSwitch::getSched();
+    /* Schedulers */
+    Scheduler* schedGateAOut = HsrSwitch::getSchedGateAOut();
+    Scheduler* schedGateBOut = HsrSwitch::getSchedGateBOut();
+    Scheduler* schedGateCpuOut = HsrSwitch::getSchedGateCpuOut();
 
-    if( msg->isSelfMessage() )
+    /* Gates */
+    cGate* gateAIn = HsrSwitch::getGateAIn();
+    cGate* gateBIn = HsrSwitch::getGateBIn();
+    cGate* gateCpuIn = HsrSwitch::getGateCpuIn();
+
+    /* Arrival Gate */
+    cGate* arrivalGate = msg->getArrivalGate();
+
+    /* Source and destination mac addresses */
+    MACAddress frameDestination = ethernetFrame->getDest();
+    MACAddress frameSource = ethernetFrame->getSrc();
+
+
+    EthernetIIFrame* ethernetFrame = check_and_cast<EthernetIIFrame *>( msg );
+    vlanMessage* vlanTag = NULL;
+    hsrMessage* hsrTag = NULL;
+    dataMessage* messageData = NULL;
+
+
+    framePriority frameprio = LOW;
+
+    MessagePacker::openMessage( &ethernetFrame, &vlanTag, &hsrTag, &messageData );
+
+
+    // determine package prio and set enum
+    if( ethernetFrame->getEtherType() == 0x8500 )
     {
-        delete msg;
-        sched->processQueues();
-        scheduleAt(simTime()+0.001, new HsrSwitchSelfMessage());
+        frameprio = EXPRESS;
     }
-    else
+    else if( vlanTag->getUser_priority() == HIGH )
     {
-        sched->enqueueMessage( msg );
+        frameprio = HIGH;
     }
+
+    /* Destination of the frame? */
+    if( *( macAddress ) == frameDestination ) /* for me */
+    {
+        /* broadcast or multicast and not from myself */
+        if( frameDestination.isBroadcast() || frameDestination.isMulticast() )
+        {
+            if( arrivalGate == gateCpuIn )
+            {
+                switch( frameprio )
+                {
+                    case EXPRESS:
+                    {
+                        schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                        schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                        break;
+                    }
+                    case HIGH:
+                    {
+                        schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
+                        schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
+                        break;
+                    }
+                    default:
+                    {
+                        schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
+                        schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
+                        break;
+                    }
+                }
+                schedGateAOut->processQueues();
+                schedGateBOut->processQueues();
+                // zu A und B
+
+            }
+            else if( arrivalGate == gateAIn )
+            {
+                // zur cpu + B
+            }
+            else if( arrivalGate == gateBIn )
+            {
+                // zur cpu + A
+            }
+        }
+        else
+        {
+
+        }
+    }
+
+    ((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc())
+
+
+
 }
 
 
@@ -110,7 +190,7 @@ void EndNodeSwitch::forwardFrame(cMessage* msg) {
     {
         //from somewhere else
         MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-        throw cRuntimeError("Get message from unknown gate! Panik ! \n");
+        throw cRuntimeError( "Get message from unknown gate! Panik ! \n" );
         endSimulation();
     }
 
@@ -165,7 +245,7 @@ void EndNodeSwitch::recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlan
 
 
     //If this frame is not HSR-tagged:
-    if((*hsrTag) == NULL)
+    if( (*hsrTag) == NULL )
     {
         //Register the source in its node table as non-HSR node;
         if (arrivalGate == gateAIn)
@@ -203,12 +283,6 @@ void EndNodeSwitch::recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlan
         if( macAddress != (*ethTag)->getDest() )
         {
             send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
-
-            /*
-            gateAOut->getChannel()->isBusy();
-            gateAOut->getChannel()->getTransmissionFinishTime();
-            gateAOut->getChannel()->callFinish();
-            */
         }
         else//(If this node is the only (unicast) destination)
         {

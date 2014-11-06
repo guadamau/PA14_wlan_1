@@ -20,6 +20,16 @@ typedef enum
 
 typedef enum
 {
+    EXPRESS_RING,
+    EXPRESS_INTERNAL,
+    HIGH_RING,
+    HIGH_INTERNAL,
+    LOW_RING,
+    LOW_INTERNAL
+} queueName;
+
+typedef enum
+{
 	TYPE_ERROR = 0,
 	TYPE_STD,
 	TYPE_HSR,
