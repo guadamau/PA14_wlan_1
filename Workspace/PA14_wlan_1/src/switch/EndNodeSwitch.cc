@@ -79,6 +79,9 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     /* Arrival Gate */
     cGate* arrivalGate = msg->getArrivalGate();
 
+    /* Switch mac address. */
+    MACAddress switchMacAddress = *( HsrSwitch::getMacAddress() );
+
     /* Source and destination mac addresses */
     MACAddress frameDestination = ethernetFrame->getDest();
     MACAddress frameSource = ethernetFrame->getSrc();
@@ -105,59 +108,236 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         frameprio = HIGH;
     }
 
-    /* Destination of the frame? */
-    if( *( macAddress ) == frameDestination ) /* for me */
+    /* If the following criteria is not checked,
+     * the ring can be flooded with
+     * broadcast / multicast traffic.
+     * Also circulating unicast frames will
+     * never be destroyed. */
+    if( *( macAddress ) == frameSource )
     {
-        /* broadcast or multicast and not from myself */
-        if( frameDestination.isBroadcast() || frameDestination.isMulticast() )
-        {
-            if( arrivalGate == gateCpuIn )
-            {
-                switch( frameprio )
-                {
-                    case EXPRESS:
-                    {
-                        schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
-                        schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
-                        break;
-                    }
-                    case HIGH:
-                    {
-                        schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
-                        schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
-                        break;
-                    }
-                    default:
-                    {
-                        schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
-                        schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
-                        break;
-                    }
-                }
-                schedGateAOut->processQueues();
-                schedGateBOut->processQueues();
-                // zu A und B
+        EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
+        delete msg;
+    }
 
-            }
-            else if( arrivalGate == gateAIn )
+    /* UNICAST TRAFFIC TO ME
+     *
+     * unicast traffic. frame only for me. */
+    else if( ( *( macAddress ) == frameDestination ) )
+    {
+        if( arrivalGate == gateAIn || arrivalGate == gateBIn )
+        {
+            switch( frameprio )
             {
-                // zur cpu + B
+                case EXPRESS:
+                {
+                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateCpuOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    break;
+                }
+                default:
+                {
+                    schedGateCpuOut->enqueueMessage( msg, LOW_INTERNAL );
+                    break;
+                }
             }
-            else if( arrivalGate == gateBIn )
-            {
-                // zur cpu + A
-            }
+            schedGateCpuOut->processQueues();
+        }
+        else if( arrivalGate == gateCpuIn )
+        {
+            EV << "Trying to send a self message within the HSR-Switch. Deleting frame ..." << endl;
+            delete msg;
         }
         else
         {
+            /* wrong gate */
+            delete msg;
+            throw cRuntimeError( "Got message from unknown gate! P A N I C ! \n" );
+            endSimulation();
+        }
+    } /* End of handling unicast traffic to me. */
+
+    /* BROADCAST AND MULTICAST TRAFFIC
+     *
+     * handle broadcast or multicast traffic */
+    else if( frameDestination.isBroadcast() || frameDestination.isMulticast() )
+    {
+        if( arrivalGate == gateCpuIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    break;
+                }
+                default:
+                {
+                    schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
+                    break;
+                }
+            }
+            schedGateAOut->processQueues();
+            schedGateBOut->processQueues();
+        }
+        else if( arrivalGate == gateAIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateBOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_RING );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateBOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateCpuOut->enqueueMessage( msg, HIGH_RING );
+                    break;
+                }
+                default:
+                {
+                    schedGateBOut->enqueueMessage( msg, LOW_RING );
+                    schedGateCpuOut->enqueueMessage( msg, LOW_RING );
+                    break;
+                }
+            }
+            schedGateBOut->processQueues();
+            schedGateCpuOut->processQueues();
+        }
+        else if( arrivalGate == gateBIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateAOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_RING );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateAOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateCpuOut->enqueueMessage( msg, HIGH_RING );
+                    break;
+                }
+                default:
+                {
+                    schedGateAOut->enqueueMessage( msg, LOW_RING );
+                    schedGateCpuOut->enqueueMessage( msg, LOW_RING );
+                    break;
+                }
+            }
+            schedGateAOut->processQueues();
+            schedGateCpuOut->processQueues();
+        }
+        else
+        {
+            /* wrong gate */
+            delete msg;
+            throw cRuntimeError( "Got message from unknown gate! P A N I C ! \n" );
+            endSimulation();
+        }
+    } /* End of handle broadcast or multicast traffic */
+
+    /* FORWARD IN THE RING / SEND TO RING
+     * UNICAST FRAMES
+     *
+     * Non multicast, non broadcast traffic.
+     * Frame is not for me, so we have to forward it. */
+    else
+    {
+        if( arrivalGate == gateCpuIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    break;
+                }
+                default:
+                {
+                    schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
+                    schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
+                    break;
+                }
+            }
+            schedGateAOut->processQueues();
+            schedGateBOut->processQueues();
 
         }
-    }
-
-    ((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc())
-
-
-
+        else if( arrivalGate == gateAIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateBOut->enqueueMessage( msg, EXPRESS_RING );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateBOut->enqueueMessage( msg, HIGH_RING );
+                    break;
+                }
+                default:
+                {
+                    schedGateBOut->enqueueMessage( msg, LOW_RING );
+                    break;
+                }
+            }
+            schedGateBOut->processQueues();
+        }
+        else if( arrivalGate == gateBIn )
+        {
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateAOut->enqueueMessage( msg, EXPRESS_RING );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateAOut->enqueueMessage( msg, HIGH_RING );
+                    break;
+                }
+                default:
+                {
+                    schedGateAOut->enqueueMessage( msg, LOW_RING );
+                    break;
+                }
+            }
+            schedGateAOut->processQueues();
+        }
+        else
+        {
+            /* wrong gate */
+            delete msg;
+            throw cRuntimeError( "Got message from unknown gate! P A N I C ! \n" );
+            endSimulation();
+        }
+    } /* End of handling frames to forward in the ring. */
 }
 
 
