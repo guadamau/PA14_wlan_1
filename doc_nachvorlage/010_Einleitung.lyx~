@@ -86,35 +86,7 @@ Ausgangslage
 \end_layout
 
 \begin_layout Subsection
-Bestehende Arbeiten
-\end_layout
-
-\begin_layout Standard
-Die bestehende Vertiefungsarbeit 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VA_HSR_Simulation"
-
-\end_inset
-
- behandelt das Simulieren von Frames in einem HSR-Netzwerk, jedoch ohne
- Priorisierung und IET-Implementation.
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Itemize
-Nennt bestehende Arbeiten/Literatur zum Thema --> Literaturrecherche
-\end_layout
-
-\begin_layout Subsection
 Stand der Technik
-\end_layout
-
-\begin_layout Itemize
-Stand der Technik: Bisherige Lösungen des Problems und deren Grenzen 
 \end_layout
 
 \begin_layout Standard
@@ -164,6 +136,25 @@ key "HSR_PPT"
 .
  Da IET noch nicht in Hardware implementiert wurde, existieren auch keine
  Berichte zur Implementation von IET in einem HSR-Netzwerk.
+\end_layout
+
+\begin_layout Subsection
+Bestehende Arbeiten
+\end_layout
+
+\begin_layout Standard
+Die bestehende Vertiefungsarbeit 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "VA_HSR_Simulation"
+
+\end_inset
+
+ behandelt das Simulieren von Frames in einem HSR-Netzwerk, jedoch ohne
+ IET-Implementation, die dazugehörige Frame-Priorisierung und dem Mframe-Format.
+ Aufgrund dem derzeitigen Stand der Technik wurden keine Arbeiten gefunden,
+ die sich mit unserer Thematik (HSR-Netzwerk mit IET-Implementation) beschäftige
+n.
 \end_layout
 
 \begin_layout Section
@@ -237,66 +228,185 @@ key "VA_HSR_Simulation"
  können:
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #1.1
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="left" valignment="top" width="60text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Anforderungs-Nr.
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Der Knoten soll zwei Prioritäten unterstützen, d.h.
  zwei Warteschlangen pro Interface bewirtschaften.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #1.2
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
  Express Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
 hen.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #1.3
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Der in den Ring einfliessende Traffic kann limitiert werden.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #1.4
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
  Frames, die in den Ring einfliessen, können variiert werden (z.B.
- 
-\begin_inset Quotes fld
-\end_inset
-
-zirkulierende Frames haben immer Vortritt
-\begin_inset Quotes frd
-\end_inset
-
- oder 
-\begin_inset Quotes fld
-\end_inset
-
-minimaler Zufluss wird garantiert
-\begin_inset Quotes frd
-\end_inset
-
-).
+ «zirkulierende Frames haben immer Vortritt» oder «minimaler Zufluss wird
+ garantiert»).
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #1.5
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
  Traffic und dem Bulk Traffic je eine Phase zuordnet.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Anforderungen an HSR-Knoten 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Aufgabenstellung"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -311,28 +421,134 @@ Das durch die Anwendung generierte Verkehrsaufkommen ist zu studieren und
  Charakteristik:
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #2.1
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="left" valignment="top" width="60text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Anforderungs-Nr.
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Lastgenerator mit konstanter Framerate.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #2.2
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.2
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Lastgenerator mit zufälliger zeitlicher Verteilung der Frames.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #2.3
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2.3
 \end_layout
 
-\begin_layout Standard
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Lastgenerator, der spontane Einzelmeldungen erzeugt.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Anforderungen an Lastmodell 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Aufgabenstellung"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -340,17 +556,99 @@ Simulationen durchführen und Resultate interpretieren
 \end_layout
 
 \begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="30text%">
+<column alignment="left" valignment="top" width="60text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Anforderungs-Nr.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\series bold
+Beschreibung
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
 Das Zeitverhalten der verschiedenen Weiterleitungsvarianten soll durch entsprech
 ende Simulationsläufe ermittelt werden.
  Die Resultate sind zu vergleichen und zu interpretieren.
 \end_layout
 
-\begin_layout Subsubsection
-Anforderung #3.1
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
 \end_layout
 
-\begin_layout Standard
-Simulationsresultate vergleichen und interpretieren.
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Allgemeine Anforderungen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Aufgabenstellung"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -359,7 +657,8 @@ Erwartetes Resultat
 
 \begin_layout Standard
 Das Resultat der Arbeit soll verschiedene Verhaltensweisen von Frames in
- einem HSR-Ring bei unterschiedlichen Bedingungen aufzeigen.
+ einem HSR-Ring mit IET-Implementation bei unterschiedlichen Bedingungen
+ aufzeigen.
  Durch eine Interpretation der Verhaltensweisen ist dann die bestmögliche
  Konfiguration des HSR-Rings zu ermitteln, mit welcher zeitkritische Frames
  am schnellsten übermittelt werden.

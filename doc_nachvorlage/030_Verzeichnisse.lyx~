@@ -207,26 +207,6 @@ status open
 
 
 \backslash
-section*{Word of thanks
-\backslash
-markboth{
-\backslash
-MakeUppercase{Word of thanks}}{}}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
 markright{Glossar}
 \end_layout
 

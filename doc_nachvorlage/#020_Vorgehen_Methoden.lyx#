@@ -448,32 +448,59 @@ reference "sub:Gerätetypen HSR"
 
 \end_inset
 
-) im Netzwerk verfügt dabei über einen internen Switch, der entscheidet
- wohin die Frames gesendet werden sollen.
+) im Netzwerk verfügt über einen internen Switch, der entscheidet wohin
+ die Frames gesendet werden sollen.
  Zum Beispiel verfügt ein DANH in der Simulation über 3 Ports, zwei für
  die Frames vom und auf den Ring (Ethernet-Ports) und einen für die Frames
  von und zur CPU.
- Sobald ein Gerät ein Frame erhält, analysiert es das Frame und sortiert
- es je nach Priorität (und eventuell nach Herkunft) in seine Queues ein.
- Wenn nur auf die Prioritäten geachtet wird, sortiert das Gerät die Frames
- in 3 verschiedene Queues (Express, High und Low) ein.
- Wenn auch auf die Herkunft geachtet wird (wie z.B.
- beim Mechanismus, bei dem die Frames vom Ring Vortritt haben, siehe Kapitel
- 
+\end_layout
+
+\begin_layout Standard
+Für jeden möglichen Ausgang ist ein Scheduler zuständig (d.h.
+ bei einem DANH-Gerät hat es 3 Scheduler), in welchem die Mechanismen zur
+ Trafficregelung (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Mechanismen-zur-Trafficregelung"
+
+\end_inset
+
+) implementiert sind und die Frames priorisiert abhandelt.
+ Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
+ Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
+ seinen Ausgang zu koordinieren hat.
+\end_layout
+
+\begin_layout Standard
+Sobald ein Gerät ein Frame erhält, wird es in dessen Switch analysiert und
+ die Herkunft und das Ziel ermittelt, um entscheiden zu können, an welchen
+ Ausgang das Frame weitergeleitet werden muss.
+ Je nach Ausgang wird das Frame dann an den jeweiligen Scheduler weitergeleitet.
+ Der Scheduler ermittelt dann die Priorität (und eventuell die Herkunft)
+ des Frames, um diese dann in die entsprechende Queue einzuordnen.
+ Die Herkunft ist nur je nach Mechanismus notwendig, wenn z.B.
+ Frames, die vom Ring kommen, priorisiert werden (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Vortrittsregeln-bezüglich-Frames"
 
 \end_inset
 
-), dann werden 6 Queues verwendet.
- Bei diesen 6 Queues hat es pro Priorität 2 Queues (eine für die Frames
- von Aussen und eine für die Frame vom Ring).
+).
 \end_layout
 
 \begin_layout Standard
-Jedes Gerät verfügt über einen Scheduler, welcher die Queues je nach Mechanismus
- abarbeitet.
+Bei einem Express-Frame muss der Scheduler sofort handeln und wenn möglich
+ das Frame, das gerade übertragen wird, fragmentieren.
+\end_layout
+
+\begin_layout Standard
+Der Scheduler arbeitet nach jedem neuen Frame seine Queues ab.
+ Dabei überprüft er, ob auf seinem Ausgang gerade etwas gesendet wird und
+ sendet bei einem freien Ausgang das nächste Frame, das je nach Priorität
+ und Mechanismus an der Reihe ist.
+ Wird gerade etwas auf dem Ausgang übertragen, versucht es der Scheduler
+ erst nochmals sobald die Übertragung zu Ende ist.
 \end_layout
 
 \begin_layout Section

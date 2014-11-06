@@ -466,6 +466,9 @@ reference "sub:Mechanismen-zur-Trafficregelung"
 \end_inset
 
 ) implementiert sind und die Frames priorisiert abhandelt.
+ Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
+ Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
+ seinen Ausgang zu koordinieren hat.
 \end_layout
 
 \begin_layout Standard
@@ -473,6 +476,9 @@ Sobald ein Gerät ein Frame erhält, wird es in dessen Switch analysiert und
  die Herkunft und das Ziel ermittelt, um entscheiden zu können, an welchen
  Ausgang das Frame weitergeleitet werden muss.
  Je nach Ausgang wird das Frame dann an den jeweiligen Scheduler weitergeleitet.
+ Muss ein Frame an alle Ethernet-Ports gesendet werden (wenn z.B.
+ ein Frame von der CPU des Gerätes generiert wird), dann wird dies vom Switch
+ dupliziert und an die betroffenen Scheduler gesendet.
  Der Scheduler ermittelt dann die Priorität (und eventuell die Herkunft)
  des Frames, um diese dann in die entsprechende Queue einzuordnen.
  Die Herkunft ist nur je nach Mechanismus notwendig, wenn z.B.
@@ -484,6 +490,43 @@ reference "sub:Vortrittsregeln-bezüglich-Frames"
 \end_inset
 
 ).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Ablauf_Frame_Switch.png
+	display false
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispielablauf und Schedulerzuordnung eines Frames in einem Switch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

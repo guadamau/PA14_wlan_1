@@ -86,35 +86,7 @@ Ausgangslage
 \end_layout
 
 \begin_layout Subsection
-Bestehende Arbeiten
-\end_layout
-
-\begin_layout Standard
-Die bestehende Vertiefungsarbeit 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VA_HSR_Simulation"
-
-\end_inset
-
- behandelt das Simulieren von Frames in einem HSR-Netzwerk, jedoch ohne
- Priorisierung und IET-Implementation.
-\end_layout
-
-\begin_layout Standard
-
-\end_layout
-
-\begin_layout Itemize
-Nennt bestehende Arbeiten/Literatur zum Thema --> Literaturrecherche
-\end_layout
-
-\begin_layout Subsection
 Stand der Technik
-\end_layout
-
-\begin_layout Itemize
-Stand der Technik: Bisherige Lösungen des Problems und deren Grenzen 
 \end_layout
 
 \begin_layout Standard
@@ -149,16 +121,40 @@ Aufgrund dieser Tatsache findet man im Internet kaum etwas zu IET sowie
 \begin_layout Standard
 Bezüglich HSR (High Availability Seamless Redundancy) gibt es einiges mehr
  zu finden.
- HSR ist seit Februar 2010 ein Standard unter dem Titlel 
-\begin_inset Quotes fld
-\end_inset
-
-IEC 62439-3 Cl.
+ Das HSR-Protokoll ist seit Februar 2010 unter dem Titlel «IEC 62439-3 Cl.
  5
 \begin_inset Quotes frd
 \end_inset
 
+ ein Standard und wurde schon bei einigen Firmen implementiert 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "HSR_PPT"
 
+\end_inset
+
+.
+ Da IET noch nicht in Hardware implementiert wurde, existieren auch keine
+ Berichte zur Implementation von IET in einem HSR-Netzwerk.
+\end_layout
+
+\begin_layout Subsection
+Bestehende Arbeiten
+\end_layout
+
+\begin_layout Standard
+Die bestehende Vertiefungsarbeit 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "VA_HSR_Simulation"
+
+\end_inset
+
+ behandelt das Simulieren von Frames in einem HSR-Netzwerk, jedoch ohne
+ IET-Implementation, die dazugehörige Frame-Priorisierung und dem Mframe-Format.
+ Aufgrund dem derzeitigen Stand der Technik wurden keine Arbeiten gefunden,
+ die sich mit unserer Thematik (HSR-Netzwerk mit IET-Implementation) beschäftige
+n.
 \end_layout
 
 \begin_layout Section
@@ -232,7 +228,7 @@ key "VA_HSR_Simulation"
  können:
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Standard
 Anforderung #1.1
 \end_layout
 

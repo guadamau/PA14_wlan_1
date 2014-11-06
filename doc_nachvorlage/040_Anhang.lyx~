@@ -143,8 +143,8 @@ a) Die Erhöhung der Datenrate (in diesem Fall von 100 MBit/s auf 1 GBit/s)
  Damit kann das Problem aber nicht prinzipiell gelöst, sondern lediglich
  auf ein anderes Niveau verschoben werden.
  Diesen "Brute Force"- Ansatz möchte man wegen den damit verbundenen sehr
- viel höheren Anfor- derungen an die Hardware wenn möglich vermeiden und
- stattdessen lieber einen effizienten Algorithmus verwenden.
+ viel höheren Anforderungen an die Hardware wenn möglich vermeiden und stattdess
+en lieber einen effizienten Algorithmus verwenden.
 \end_layout
 
 \begin_layout Description
@@ -285,6 +285,248 @@ Das zeitliche Verhalten einiger Konfigurationen ist für verschiedene Lastprofil
 
 \begin_layout Section
 Besprechungsprotokolle
+\end_layout
+
+\begin_layout Standard
+Die Besprechungsprotokolle wurden Stichwortartig in einem eigenen Wiki festgehal
+ten.
+ Der Inhalt dieser Protokolle lautet wie folgt:
+\end_layout
+
+\begin_layout Subsection
+Kalenderwoche 38: 17.09.2014
+\end_layout
+
+\begin_layout Itemize
+Allgemeine Info, um was geht es:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Echtzeit und Hochverfügbarkeit
+\end_layout
+
+\begin_layout Itemize
+HSR-Ring-Netzwerk-Aufbau
+\end_layout
+
+\begin_layout Itemize
+Diverse Mechanismen (Welches Frame hat Vortritt?)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Organisatorisches:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wöchentlicher Rapport via E-Mail vor der Besprechung
+\end_layout
+
+\begin_layout Itemize
+Wöchentliche Besprechung jeden Donnerstag um 12:00
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 40: 02.10.2014
+\end_layout
+
+\begin_layout Itemize
+Express-Priorität nicht anhand VLAN-Tag festlegen / feststellen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Z.B.
+ im EtherType-Feld definieren
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+IET spezifiziert, dass bereits gesendetes Fragment ankommen muss (Normales
+ Frame muss bei einem Express-Frame unterbrochen und darf nicht verworfen
+ werden)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Kein Fragment < 64 Bytes (min.
+ Size Ethernet Frame)
+\end_layout
+
+\begin_layout Itemize
+Zu Fragmentierendes Frame in richtige Teile aufsplitten
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+In unserem Fall ist das Netzwerk fehlerfrei
+\end_layout
+
+\begin_layout Itemize
+Express-Frames werden nicht fragmentiert
+\end_layout
+
+\begin_layout Itemize
+PHY Layer soll von Ganzem nicht merken
+\end_layout
+
+\begin_layout Itemize
+Jeder Switch in einem Gerät hat Scheduler
+\end_layout
+
+\begin_layout Subsection
+Kalenderwoche 41: 09.10.2014
+\end_layout
+
+\begin_layout Itemize
+Anhand Zeitpunkt Frameversand und dessen Grösse ist die Dauer berechenbar
+\end_layout
+
+\begin_layout Itemize
+Zeitberechnung
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Frames müssen nicht fragmentiert werden wie in der Realität
+\end_layout
+
+\begin_layout Itemize
+Wie lange hat ein normales Frame, wann ein Express-Frame dazwischenkommt?
+\end_layout
+
+\begin_layout Itemize
+Express-Frame zu welchem Zeitpunkt senden? (Wann wäre Frame-Fragment versendet
+ worden?)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Frame mehrmals unterbrechbar
+\end_layout
+
+\begin_layout Itemize
+Queuegrösse ist auch ein Faktor (Per INI-Datei der Simulation definierbar)
+\end_layout
+
+\begin_layout Subsection
+Kalenderwoche 42: 16.10.2014
+\end_layout
+
+\begin_layout Itemize
+Traffic-Pattern für Testing (wird noch gesandt)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mix konstanter Bitraten (Erzeugt Frame mit bestimmten Grösse jeden bestimmten
+ Zeitabstand, es können sich auch mehrere überlagern)
+\end_layout
+
+\begin_layout Itemize
+Random (Background-Traffic)
+\end_layout
+
+\begin_layout Itemize
+Ab und zu Express-Frame (Alarm)
+\end_layout
+
+\begin_layout Itemize
+Lastgenerator in Node, für jeden Knoten spezifisch definierbar
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Besprechung Zeitschlitzverfahren
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Zeitschlitze für High und Low, Express kann immer
+\end_layout
+
+\begin_layout Itemize
+Intervall wird vereinbart
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In Zeitschlitz muss man maximales Frame durchbringen
+\end_layout
+
+\begin_layout Itemize
+Zeitschlitz hat Grün-Phase, in der High Frames (zyklische Messwerte) gesendet
+ werden können, Rest der Zeit für Sendevorgang oder Low
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 43: 23.10.2014
+\end_layout
+
+\begin_layout Itemize
+Gerät soll sich selber benachrichtigen, sobald neues Frame zu versenden
+ ist
+\end_layout
+
+\begin_layout Itemize
+Lastgenerator Random Prioritäten, z.B.
+ 10% Express, 20% High, 70% Low
+\end_layout
+
+\begin_layout Itemize
+Gibt viel Multicast, wie senden?
+\end_layout
+
+\begin_layout Itemize
+Demnächst Simulation im kleinen Stil mit First Come First Serve zum Laufen
+ bringen
+\end_layout
+
+\begin_layout Subsection
+Kalenderwoche 44: 30.10.2014
+\end_layout
+
+\begin_layout Itemize
+Simulation läuft, aber stürzt nach 2 Frames ab
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Beinhaltet 3 DANH-Geräte, 2 verschiedene senden zeitgleich an anderen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Scheduler pro Port implementieren, bis jetzt ist Scheduler pro Gerät implementie
+rt
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Macht wenig Sinn, Switch kann auf freien Ports gleichzeitig versenden
+\end_layout
+
+\begin_layout Itemize
+Frame kommt an, wo muss es hin? Entsprechendem Scheduler zuweisen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Express: klein und selten, konstante Bitrate
+\end_layout
+
+\begin_layout Itemize
+High: normaler Verkehr (Monitoring, Netzwerkmanagement, ...)
+\end_layout
+
+\begin_layout Itemize
+Low: Background-Verkehr (z.B.
+ TCP), oft und klein & gross
 \end_layout
 
 \begin_layout Standard
