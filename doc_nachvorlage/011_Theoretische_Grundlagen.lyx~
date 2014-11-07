@@ -413,9 +413,9 @@ DANP
 \begin_inset Text
 
 \begin_layout Plain Layout
-Double Attached Node implementing PRP (siehe Kapitel 
+Double Attached Node implementing PRP (siehe Glossar 
 \begin_inset CommandInset ref
-LatexCommand vref
+LatexCommand vpageref
 reference "Glossar"
 
 \end_inset
@@ -765,11 +765,14 @@ reference "table_smd_fragcount"
 
 \end_inset
 
-), das heisst, dass maximal 4 Frames aufs Mal von einem Express Frame unterbroch
-en werden können und dasselbe Frame in maximal 5 Fragmente aufgeteilt werden
- kann.
- Diese Werte haben jeweils eine Hamming-Distanz von 4 zueinander, um den
- Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können 
+).
+ Für jedes neue Fragment wird das FragCount-Feld mittels Modulo-4-Zähler
+ hochgezählt.
+ Mittels FragCount-Feld wird davor geschützt, dass falsche Frames zusammengesetz
+t werden wenn bis zu 3 Fragmente verloren gegangen sind.
+ Die FragCount-Werte haben jeweils eine Hamming-Distanz von 4 zueinander,
+ um den Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können
+ 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "IET_DRAFT_IETTF"

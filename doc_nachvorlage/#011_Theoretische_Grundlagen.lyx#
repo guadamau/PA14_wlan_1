@@ -230,36 +230,12 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-framebox[1.0
-\backslash
-columnwidth]{
-\end_layout
-
-\end_inset
-
-
+\noindent
+\align center
 \begin_inset Graphics
 	filename ../doc/_img/HSR-Konzept.png
 	display false
 	width 120mm
-
-\end_inset
-
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-}
-\end_layout
 
 \end_inset
 
@@ -292,6 +268,7 @@ key "HSR_Konzept"
 
 \begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
 status open
@@ -303,7 +280,7 @@ status open
 <lyxtabular version="3" rows="6" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="20text%">
-<column alignment="left" valignment="top" width="80text%">
+<column alignment="left" valignment="top" width="70text%">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
@@ -393,7 +370,9 @@ QuadBox
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Dienen, um HSR-Ringe miteinander zu koppeln.
+ Eine Quadbox hat 4 Ethernet Ports.
+ Um zwei HSR-Ringe miteinander zu koppeln benötigt es zwei Quadboxen.
 \end_layout
 
 \end_inset
@@ -413,7 +392,8 @@ VDAN
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Virtual Doubly Attached Node: (Nicht HSR-fähige) Knoten, die mittels RedBox
+ am HSR-Netzwerk angeschlossen sind.
 \end_layout
 
 \end_inset
@@ -433,7 +413,17 @@ DANP
 \begin_inset Text
 
 \begin_layout Plain Layout
+Double Attached Node implementing PRP (siehe Glossar 
+\begin_inset CommandInset ref
+LatexCommand vpageref
+reference "Glossar"
 
+\end_inset
+
+): Endknoten in einem PRP-Netzwerk, welches über RedBoxes an einem HSR-Netzwerk
+ angeschlossen ist.
+ Ein DANP muss für die Kommunikation mit einem DANH das HSR-Protokoll nicht
+ kennen.
 \end_layout
 
 \end_inset
@@ -472,65 +462,6 @@ key "HSR_Konzept"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-DANH (Doubly Attached Node HSR)
-\end_layout
-
-\begin_layout Standard
-Ein DANH ist ein direkt und redundant an das HSR Netzwerk angeschlossener
- Netzwerkknoten mit zwei Ethernet Ports.
- 
-\end_layout
-
-\begin_layout Subsubsection
-RedBox (Redundancy Box)
-\end_layout
-
-\begin_layout Standard
-Eine RedBox wird benötigt, um das HSR Netzwerk mit anderen Netzwerken zu
- verbinden.
- Mit RedBoxen können entweder Standard-Ethernet, PRP oder andere HSR Netzwerke
- an ein HSR Netzwerk gekoppelt werden.
-\end_layout
-
-\begin_layout Subsubsection
-QuadBox
-\end_layout
-
-\begin_layout Standard
-Quadboxen sind Geräte mit vier Ethernet Ports.
- Sie werden benötigt, um zwei HSR Netzwerke miteinander zu verbinden.
- Es sind mindestens zwei Qaudboxen nötig, um zwei Netze redundant zu verbinden,
- da sonst ein Single Point of Failure entsteht.
-\end_layout
-
-\begin_layout Subsubsection
-VDAN (Virtual Doubly Attached Node)
-\end_layout
-
-\begin_layout Standard
-VDAN sind Knoten, die über eine Redbox mit dem redundanten Netzwerk verbunden
- sind.
- VDAN kennen das HSR Protokoll nicht und sind auch nicht redundant ans Netzwerk
- angeschlossen, können aber trotzdem transparent mit jedem redundanten Gerät
- im HSR Netzwerk kommunizieren.
-\end_layout
-
-\begin_layout Subsubsection
-DANP (Double Attached Node PRP)
-\end_layout
-
-\begin_layout Standard
-DANP sind redundant angeschlossen Knoten, welche das PRP Protokoll verwenden.
- Das PRP Protokoll arbeitet grundsätzlich mit dem gleichen Funktionsprinzip
- wie HSR, es gibt aber einige Unterschiede, wie beispielsweise das Frameformat.
- Durch die Ähnlichkeit können PRP Netzwerke über RedBoxen mit HSR Netzwerken
- gekoppelt werden.
- Die Kommunikation zwischen DANP und DANH ist transparent und redundant.
- Ein DANP muss das HSR Protokoll für die Kommunikation mit einem DANH nicht
- kennen.
 \end_layout
 
 \begin_layout Section
@@ -834,11 +765,10 @@ reference "table_smd_fragcount"
 
 \end_inset
 
-), das heisst, dass maximal 4 Frames aufs Mal von einem Express Frame unterbroch
-en werden können und dasselbe Frame in maximal 5 Fragmente aufgeteilt werden
- kann.
- Diese Werte haben jeweils eine Hamming-Distanz von 4 zueinander, um den
- Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können 
+).
+ Mittels FragCount-Feld wird Diese Werte haben jeweils eine Hamming-Distanz
+ von 4 zueinander, um den Wert bei Bitfehlern in der Übertragung trotzdem
+ erkennen zu können 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "IET_DRAFT_IETTF"
