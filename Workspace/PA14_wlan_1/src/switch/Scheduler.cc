@@ -43,7 +43,7 @@ Scheduler::~Scheduler()
 }
 
 
-void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate )
+void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate, cGate* schedOutGateExp )
 {
     this->schedmode = schedmode;
     setQueueSizeLowInt( 0 );
@@ -59,6 +59,7 @@ void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate )
     queues->addAt( LOW_INTERNAL, new cQueue() );
 
     this->schedOutGate = schedOutGate;
+    this->schedOutGateExp = schedOutGateExp;
 
 }
 
@@ -132,8 +133,17 @@ void Scheduler::processQueues( void )
                     {
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
-                        /* Channel is free. Send the frame. */
-                        getParentModule()->send( msg, schedOutGate );
+                        /* Channel is free. Send the frame.
+                           If Express Prio send via ExpressGate */
+                        if( i == EXPRESS_RING || i == EXPRESS_INTERNAL )
+                        {
+                            getParentModule()->send( msg, schedOutGateExp );
+                        }
+                        else
+                        {
+                            getParentModule()->send( msg, schedOutGate );
+                        }
+
 
                         /* Some logging shizzle */
                         setQueueSizeLowInt(getQueueSizeLowInt()-1);

@@ -34,42 +34,25 @@ module HsrNode
     gates:
         
         inout gateA;  // declare two way connections
+        inout gateAExp;  // declare two way connections
         inout gateB;  // declare two way connections
+        inout gateBExp;  // declare two way connections
         
     submodules:
        
-
-        duplikatlistePortA: ListenErkennung {
-            ListSize = duplicateDetectionListSize;
-            @display("p=43,144");
-        }
-
-        duplikatlistePortB: ListenErkennung {
-            ListSize = duplicateDetectionListSize;
-            @display("p=282,144");
-        }
-
         duplikatlistePortCPU: ListenErkennung {
             ListSize = duplicateDetectionListSize;
             @display("p=243,238");
         }
+        duplikatlistePortCPUExp: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=353,188");
+        }
 
         cpu: CPU {
-            @display("p=342,389");
+            @display("p=242,389");
             macAddress = macAddress;
         }
-        delay3: ForwardDelay {
-            delay = delay;
-            storeAndForward = storeAndForward;
-            @display("p=206,296");
-        }
-
-        delay1: ForwardDelay {
-            delay = delay;
-            storeAndForward = storeAndForward;
-            @display("p=113,60");
-        }
-
 
         mac1: ModifiedEtherMACBase {
             parameters:
@@ -78,12 +61,6 @@ module HsrNode
                 duplicateDetection = "duplikatlistePortA";
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=43,60");
-        }
-
-        delay2: ForwardDelay {
-            delay = delay;
-            storeAndForward = storeAndForward;
-            @display("p=282,60");
         }
 
         mac2: ModifiedEtherMACBase {

@@ -33,15 +33,24 @@ private:
     unsigned int sequenceNum;
 
     cGate* gateAIn;
+    cGate* gateAInExp;
     cGate* gateAOut;
+    cGate* gateAOutExp;
     cGate* gateBIn;
+    cGate* gateBInExp;
     cGate* gateBOut;
+    cGate* gateBOutExp;
     cGate* gateCpuIn;
+    cGate* gateCpuInExp;
     cGate* gateCpuOut;
+    cGate* gateCpuOutExp;
 
     Scheduler* schedGateAOut;
+    Scheduler* schedGateAOutExp;
     Scheduler* schedGateBOut;
+    Scheduler* schedGateBOutExp;
     Scheduler* schedGateCpuOut;
+    Scheduler* schedGateCpuOutExp;
 
     schedulerMode schedmode;
 
@@ -72,6 +81,18 @@ public:
 
     cGate* getGateCpuOut( void );
 
+    cGate* getGateAInExp( void );
+
+    cGate* getGateAOutExp( void );
+
+    cGate* getGateBInExp( void );
+
+    cGate* getGateBOutExp( void );
+
+    cGate* getGateCpuInExp( void );
+
+    cGate* getGateCpuOutExp( void );
+
     MACAddress* getMacAddress( void );
 
     unsigned int getRingId( void );
@@ -81,6 +102,12 @@ public:
     Scheduler* getSchedGateBOut( void );
 
     Scheduler* getSchedGateCpuOut( void );
+
+    Scheduler* getSchedGateAOutExp( void );
+
+    Scheduler* getSchedGateBOutExp( void );
+
+    Scheduler* getSchedGateCpuOutExp( void ) ;
 
     schedulerMode getSchedmode( void );
 
@@ -96,6 +123,12 @@ public:
     void setSchedGateBOut( Scheduler* schedGateBOut );
 
     void setSchedGateCpuOut( Scheduler* schedGateCpuOut );
+
+    void setSchedGateAOutExp( Scheduler* schedGateAOutExp );
+
+    void setSchedGateBOutExp( Scheduler* schedGateBOutExp );
+
+    void setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp );
 };
 
 #endif /* HSRSWITCH_H_ */

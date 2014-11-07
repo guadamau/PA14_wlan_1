@@ -11,4 +11,5 @@ simple CPU
         @display("i=device/cpu");
     gates:
         inout gate;  // declare two way connections
+        inout gateExp;  // declare two way connections
 }

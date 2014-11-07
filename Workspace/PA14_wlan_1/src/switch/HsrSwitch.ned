@@ -23,6 +23,9 @@ simple HsrSwitch
 		@display("i=abstract/switch");
 	gates:
         inout gateA; // declare two way connections
+        inout gateAExp; // declare two way connections
         inout gateB; // declare two way connections
+        inout gateBExp; // declare two way connections
         inout gateCPU; // declare two way connections
+        inout gateCPUExp; // declare two way connections
 }

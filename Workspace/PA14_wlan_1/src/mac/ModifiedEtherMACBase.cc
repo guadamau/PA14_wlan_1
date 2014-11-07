@@ -67,6 +67,7 @@ ModifiedEtherMACBase::~ModifiedEtherMACBase()
 void ModifiedEtherMACBase::initialize()
 {
     physOutGate = gate("phys$o");
+    physOutGateExp = gate("physExp$o");
 
     initializeFlags();
 
@@ -114,36 +115,6 @@ void ModifiedEtherMACBase::initialize()
 
     beginSendFrames();
 }
-
-
-// void ModifiedEtherMACBase::initializeMACAddress()
-// {
-//     const char *addrstr = par("address");
-
-//     if (!strcmp(addrstr,"auto"))
-//     {
-//         // assign automatic address
-//         address = MACAddress::generateAutoAddress();
-
-//         // change module parameter from "auto" to concrete address
-//         par("address").setStringValue(address.str().c_str());
-//     }
-//     else
-//     {
-//         address.setAddress(addrstr);
-//     }
-// }
-
-// void ModifiedEtherMACBase::initializeNotificationBoard()
-// {
-// //     hasSubscribers = false;
-// //     if (interfaceEntry) {
-// //         nb = NotificationBoardAccess().getIfExists();
-// //         notifDetails.setInterfaceEntry(interfaceEntry);
-// //         nb->subscribe(this, NF_SUBSCRIBERLIST_CHANGED);
-// //         //updateHasSubcribers();
-// //     }
-// }
 
 void ModifiedEtherMACBase::initializeFlags()
 {
@@ -200,46 +171,6 @@ void ModifiedEtherMACBase::initializeStatistics()
     queueLengthVector.setName("queue length");
     numDroppedQueueFullVector.setName("framesDroppedQueueFull");
 }
-
-// void ModifiedEtherMACBase::registerInterface(double txrate)
-// {
-//     IInterfaceTable *ift = InterfaceTableAccess().getIfExists();
-//     if (!ift)
-//         return;
-
-//     interfaceEntry = new InterfaceEntry();
-
-//     // interface name: our module name without special characters ([])
-//     char *interfaceName = new char[strlen(getParentModule()->getFullName())+1];
-//     char *d=interfaceName;
-//     for (const char *s=getParentModule()->getFullName(); *s; s++)
-//         if (isalnum(*s))
-//             *d++ = *s;
-//     *d = '\0';
-
-//     interfaceEntry->setName(interfaceName);
-//     delete [] interfaceName;
-
-//     // data rate
-//     interfaceEntry->setDatarate(txrate);
-
-//     // generate a link-layer address to be used as interface token for IPv6
-//     interfaceEntry->setMACAddress(address);
-//     interfaceEntry->setInterfaceToken(address.formInterfaceIdentifier());
-//     //InterfaceToken token(0, simulation.getUniqueNumber(), 64);
-//     //interfaceEntry->setInterfaceToken(token);
-
-//     // MTU: typical values are 576 (Internet de facto), 1500 (Ethernet-friendly),
-//     // 4000 (on some point-to-point links), 4470 (Cisco routers default, FDDI compatible)
-//     interfaceEntry->setMtu(par("mtu"));
-
-//     // capabilities
-//     interfaceEntry->setMulticast(true);
-//     interfaceEntry->setBroadcast(true);
-
-//     // add
-//     ift->addInterface(interfaceEntry, this);
-// }
 
 
 bool ModifiedEtherMACBase::checkDestinationAddress(EtherFrame *frame)
@@ -337,11 +268,6 @@ void ModifiedEtherMACBase::processFrameFromUpperLayer(EtherFrame *frame)
             MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
             MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
 
-//                EV << "txQueue overflow" << endl;
-//                error("txQueue length exceeds %d -- this is probably due to "
-//                      "a bogus app model generating excessive traffic "
-//                      "(or if this is normal, increase txQueueLimit!)",
-//                      txQueueLimit);
 
             numFramesDroppedQueueFull++;
             numDroppedQueueFullVector.record(numFramesDroppedQueueFull);
@@ -394,12 +320,6 @@ void ModifiedEtherMACBase::processMsgFromNetwork(cPacket *frame)
         processReceivedDataFrame(Eframe);
 }
 
-// void ModifiedEtherMACBase::frameReceptionComplete(EtherFrame *frame)
-// {
-
-//         processReceivedDataFrame((EtherFrame *)frame);
-// }
-
 void ModifiedEtherMACBase::processReceivedDataFrame(EtherFrame *frame)
 {
     // bit errors
@@ -433,7 +353,14 @@ void ModifiedEtherMACBase::processReceivedDataFrame(EtherFrame *frame)
     numFramesPassedToHLVector.record(numFramesPassedToHL);
 
     // pass up to upper layer
-    send(frame, "upperLayerOut");
+    if(frame->getArrivalGate() == gate("physExp$i"))
+    {
+        send(frame, "upperLayerOutExp");
+    }
+    else
+    {
+        send(frame, "upperLayerOut");
+    }
 }
 
 void ModifiedEtherMACBase::handleEndIFGPeriod()
@@ -674,9 +601,9 @@ void ModifiedEtherMACBase::handleMessage(cMessage *msg)
     }
     else
     {
-        if (msg->getArrivalGate() == gate("upperLayerIn"))
+        if (msg->getArrivalGate() == gate("upperLayerIn") || msg->getArrivalGate() == gate("upperLayerInExp"))
             processFrameFromUpperLayer(check_and_cast<EtherFrame *>(msg));
-        else if (msg->getArrivalGate() == gate("phys$i"))
+        else if (msg->getArrivalGate() == gate("phys$i") || msg->getArrivalGate() == gate("physExp$i"))
             processMsgFromNetwork(check_and_cast<EtherFrame *>(msg));
         else
             error("Message received from unknown gate!");
@@ -738,5 +665,14 @@ void ModifiedEtherMACBase::startFrameTransmission()
         framesSentInBurst++;
     }    
     
-    send(frame, physOutGate);
+    if(frame->getArrivalGate() == gate("upperLayerInExp$i"))
+    {
+        send(frame, physOutGateExp);
+    }
+    else
+    {
+        send(frame, physOutGate);
+    }
+
+
 }

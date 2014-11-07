@@ -45,9 +45,6 @@ void EndNodeSwitch::initialize()
         throw cRuntimeError( "can't load node table" );
     }
 
-    HsrSwitch::setSched( new EndNodeScheduler() );
-    EndNodeScheduler* sched = ( EndNodeScheduler* )HsrSwitch::getSched();
-    sched->initScheduler( HsrSwitch::getSchedmode() );
     scheduleAt( SIMTIME_ZERO,  new HsrSwitchSelfMessage() );
 }
 
@@ -76,18 +73,23 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     cGate* gateBIn = HsrSwitch::getGateBIn();
     cGate* gateCpuIn = HsrSwitch::getGateCpuIn();
 
+    cGate* gateAInExp = HsrSwitch::getGateAInExp();
+    cGate* gateBInExp = HsrSwitch::getGateBInExp();
+    cGate* gateCpuInExp = HsrSwitch::getGateCpuInExp();
+
     /* Arrival Gate */
     cGate* arrivalGate = msg->getArrivalGate();
 
     /* Switch mac address. */
     MACAddress switchMacAddress = *( HsrSwitch::getMacAddress() );
 
+    EthernetIIFrame* ethernetFrame = check_and_cast<EthernetIIFrame*>( msg );
+
     /* Source and destination mac addresses */
     MACAddress frameDestination = ethernetFrame->getDest();
     MACAddress frameSource = ethernetFrame->getSrc();
 
 
-    EthernetIIFrame* ethernetFrame = check_and_cast<EthernetIIFrame *>( msg );
     vlanMessage* vlanTag = NULL;
     hsrMessage* hsrTag = NULL;
     dataMessage* messageData = NULL;
@@ -113,7 +115,7 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
      * broadcast / multicast traffic.
      * Also circulating unicast frames will
      * never be destroyed. */
-    if( *( macAddress ) == frameSource )
+    if( switchMacAddress == frameSource )
     {
         EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
         delete msg;
@@ -122,7 +124,7 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     /* UNICAST TRAFFIC TO ME
      *
      * unicast traffic. frame only for me. */
-    else if( ( *( macAddress ) == frameDestination ) )
+    else if( switchMacAddress == frameDestination )
     {
         if( arrivalGate == gateAIn || arrivalGate == gateBIn )
         {

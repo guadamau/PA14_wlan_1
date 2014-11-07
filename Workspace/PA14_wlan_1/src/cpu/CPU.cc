@@ -417,8 +417,10 @@ CPU::initialize()
         throw cRuntimeError("invalid Addr");
     }
 
-    gateIn = gate("gate$i");
-    gateOut = gate("gate$o");
+    gateIn = gate( "gate$i" );
+    gateInExp = gate( "gateExp$i" );
+    gateOut = gate( "gate$o" );
+    gateOutExp = gate( "gateExp$o" );
 
     rootelement = par("xmlparam").xmlValue();
 
@@ -507,7 +509,19 @@ CPU::handleMessage(cMessage *msg)
             EthernetIIFrame *dmsg = generateOnePacket(delayedMessage->getSendData());
             // testControl->registerSEND(macAddress, dmsg->dup(), simTime());
             numFramesSent++;
-            send(dmsg, gateOut);
+
+            /* Ethertype 0x8500 is an express frame. */
+            if( dmsg->getEtherType() == 0x8500 )
+            {
+                /* Use the express channel. */
+                send( dmsg, gateOutExp );
+            }
+            else
+            {
+                /* Use the normal channel. */
+                send( dmsg, gateOut );
+            }
+
         }
         else
         {
@@ -516,7 +530,18 @@ CPU::handleMessage(cMessage *msg)
                 EthernetIIFrame *outmsg = generateOnePacket(delayedMessage->getSendData());
                 // testControl->registerSEND(macAddress, outmsg->dup(), delayedMessage->getSendData().startTime);
                 numFramesSent++;
-                send(outmsg, gateOut);
+
+                /* Ethertype 0x8500 is an express frame. */
+                if( outmsg->getEtherType() == 0x8500 )
+                {
+                    /* Use the express channel. */
+                    send( outmsg, gateOutExp );
+                }
+                else
+                {
+                    /* Use the normal channel. */
+                    send( outmsg, gateOut );
+                }
             }
             delete msg;
         }

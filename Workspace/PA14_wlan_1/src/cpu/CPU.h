@@ -17,7 +17,9 @@ private:
   MACAddress macAddress;
 
   cGate* gateIn;
+  cGate* gateInExp;
   cGate* gateOut;
+  cGate* gateOutExp;
 
   cXMLElement* rootelement;
   TestControl* testControl;
@@ -39,7 +41,7 @@ protected:
   unsigned long numFramesReceived;  
 
   virtual void initialize();
-  virtual void handleMessage(cMessage *msg);
+  virtual void handleMessage( cMessage *msg );
   virtual void finish();
 
 public:

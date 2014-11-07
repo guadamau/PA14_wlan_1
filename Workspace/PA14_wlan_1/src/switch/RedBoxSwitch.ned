@@ -24,4 +24,5 @@ simple RedBoxSwitch extends HsrSwitch
         @display("i=abstract/switch");
 	gates:
 		inout gateInterlink; // declare two way connections
+		inout gateInterlinkExp; // declare two way connections
 }

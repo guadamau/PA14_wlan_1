@@ -34,20 +34,18 @@ HsrSwitch::~HsrSwitch()
      */
     delete macAddress;
 
-    /* constructor and destructor of cGate are protected: only cModule is allowed
+    /*
+     * Constructor and destructor of cGate are protected: only cModule is allowed
      * to create and delete gates. Therefore the following lines are obsolete.
-
-    delete gateAOut;
-    delete gateBIn;
-    delete gateBOut;
-    delete gateCpuIn;
-    delete gateCpuOut;
-
-    */
+     * The gates are deleted automatically so they don't have to be deleted here.
+     */
 
     delete schedGateAOut;
+    delete schedGateAOutExp;
     delete schedGateBOut;
+    delete schedGateBOutExp;
     delete schedGateCpuOut;
+    delete schedGateCpuOutExp;
 
 }
 
@@ -75,6 +73,30 @@ cGate* HsrSwitch::getGateCpuIn( void ) {
 
 cGate* HsrSwitch::getGateCpuOut( void ) {
     return gateCpuOut;
+}
+
+cGate* HsrSwitch::getGateAInExp() {
+    return gateAInExp;
+}
+
+cGate* HsrSwitch::getGateAOutExp() {
+    return gateAOutExp;
+}
+
+cGate* HsrSwitch::getGateBInExp() {
+    return gateBInExp;
+}
+
+cGate* HsrSwitch::getGateBOutExp() {
+    return gateBOutExp;
+}
+
+cGate* HsrSwitch::getGateCpuInExp() {
+    return gateCpuInExp;
+}
+
+cGate* HsrSwitch::getGateCpuOutExp() {
+    return gateCpuOutExp;
 }
 
 MACAddress* HsrSwitch::getMacAddress( void ) {
@@ -107,28 +129,46 @@ Scheduler* HsrSwitch::getSchedGateCpuOut( void ) {
     return schedGateCpuOut;
 }
 
+Scheduler* HsrSwitch::getSchedGateAOutExp() {
+    return schedGateAOutExp;
+}
 
+Scheduler* HsrSwitch::getSchedGateBOutExp() {
+    return schedGateBOutExp;
+}
+
+Scheduler* HsrSwitch::getSchedGateCpuOutExp() {
+    return schedGateCpuOutExp;
+}
 
 
 /* Setters */
-void HsrSwitch::setSched( Scheduler* sched ) {
-    this->sched = sched;
-}
-
 void HsrSwitch::setSequenceNum( unsigned int sequenceNum ) {
     this->sequenceNum = sequenceNum;
 }
 
-void HsrSwitch::setSchedGateAOut(Scheduler* schedGateAOut) {
+void HsrSwitch::setSchedGateAOut( Scheduler* schedGateAOut ) {
     this->schedGateAOut = schedGateAOut;
 }
 
-void HsrSwitch::setSchedGateBOut(Scheduler* schedGateBOut) {
+void HsrSwitch::setSchedGateBOut( Scheduler* schedGateBOut ) {
     this->schedGateBOut = schedGateBOut;
 }
 
-void HsrSwitch::setSchedGateCpuOut(Scheduler* schedGateCpuOut) {
+void HsrSwitch::setSchedGateCpuOut( Scheduler* schedGateCpuOut ) {
     this->schedGateCpuOut = schedGateCpuOut;
+}
+
+void HsrSwitch::setSchedGateAOutExp( Scheduler* schedGateAOutExp ) {
+    this->schedGateAOutExp = schedGateAOutExp;
+}
+
+void HsrSwitch::setSchedGateBOutExp( Scheduler* schedGateBOutExp ) {
+    this->schedGateBOutExp = schedGateBOutExp;
+}
+
+void HsrSwitch::setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp ) {
+    this->schedGateCpuOutExp = schedGateCpuOutExp;
 }
 
 
@@ -176,19 +216,25 @@ void HsrSwitch::initialize(const char* schedchoice)
 
     sequenceNum = 0;
 
-    gateAIn = gate("gateA$i");
-    gateAOut = gate("gateA$o");
-    gateBIn = gate("gateB$i");
-    gateBOut = gate("gateB$o");
-    gateCpuIn = gate("gateCPU$i");
-    gateCpuOut = gate("gateCPU$o");
+    gateAIn = gate( "gateA$i" );
+    gateAInExp = gate( "gateAExp$i" );
+    gateAOut = gate( "gateA$o" );
+    gateAOutExp = gate( "gateAExp$o" );
+    gateBIn = gate( "gateB$i" );
+    gateBInExp = gate( "gateBExp$i" );
+    gateBOut = gate( "gateB$o" );
+    gateBOutExp = gate( "gateBExp$o" );
+    gateCpuIn = gate( "gateCPU$i" );
+    gateCpuInExp = gate( "gateCPUExp$i" );
+    gateCpuOut = gate( "gateCPU$o" );
+    gateCpuOut = gate( "gateCPUExp$o" );
 
     schedGateAOut = new Scheduler();
-    schedGateAOut->initScheduler( schedmode, gateAOut );
+    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp );
     schedGateBOut = new Scheduler();
-    schedGateBOut->initScheduler( schedmode, gateBOut );
+    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp );
     schedGateCpuOut = new Scheduler();
-    schedGateCpuOut->initScheduler( schedmode, gateCpuOut );
+    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp );
 }
 
 

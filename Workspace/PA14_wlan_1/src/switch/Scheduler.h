@@ -32,6 +32,7 @@ private:
     schedulerMode schedmode;
 
     cGate* schedOutGate;
+    cGate* schedOutGateExp;
 
     /* Members to record statistics. */
     cOutVector* queueLowIntVector;
@@ -41,7 +42,7 @@ public:
     Scheduler();
     virtual ~Scheduler();
 
-    void initScheduler( schedulerMode schedmode, cGate* schedOutGate );
+    void initScheduler( schedulerMode schedmode, cGate* schedOutGate, cGate* scheduOutGateExp );
 
     /* Main sched methods ... */
     void enqueueMessage( cMessage* msg, queueName queue );

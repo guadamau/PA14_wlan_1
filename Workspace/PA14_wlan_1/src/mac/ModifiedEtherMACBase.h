@@ -87,6 +87,7 @@ class INET_API ModifiedEtherMACBase : public cSimpleModule //, public INotifiabl
     //IPassiveQueue *queueModule;     // optional module to receive messages from
 
     cGate *physOutGate;             // pointer to the "phys$o" gate
+    cGate *physOutGateExp;             // pointer to the "phys$o" gate
 
     // notification stuff
     InterfaceEntry *interfaceEntry;  // points into IInterfaceTable
