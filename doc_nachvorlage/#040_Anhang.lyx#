@@ -328,9 +328,13 @@ Wöchentlicher Rapport via E-Mail vor der Besprechung
 Wöchentliche Besprechung jeden Donnerstag um 12:00
 \end_layout
 
+\begin_layout Itemize
+Nächste Besprechung fällt aus
+\end_layout
+
 \end_deeper
 \begin_layout Subsection
-Kalenderwoche 39: 02.10.2014
+Kalenderwoche 40: 02.10.2014
 \end_layout
 
 \begin_layout Itemize
@@ -378,7 +382,7 @@ Jeder Switch in einem Gerät hat Scheduler
 \end_layout
 
 \begin_layout Subsection
-Kalenderwoche 40: 09.10.2014
+Kalenderwoche 41: 09.10.2014
 \end_layout
 
 \begin_layout Itemize
@@ -413,7 +417,7 @@ Queuegrösse ist auch ein Faktor (Per INI-Datei der Simulation definierbar)
 \end_layout
 
 \begin_layout Subsection
-Kalenderwoche 41: 16.10.2014
+Kalenderwoche 42: 16.10.2014
 \end_layout
 
 \begin_layout Itemize
@@ -465,7 +469,7 @@ Zeitschlitz hat Grün-Phase, in der High Frames (zyklische Messwerte) gesendet
 \end_deeper
 \end_deeper
 \begin_layout Subsection
-Kalenderwoche 42: 23.10.2014
+Kalenderwoche 43: 23.10.2014
 \end_layout
 
 \begin_layout Itemize
@@ -488,7 +492,7 @@ Demnächst Simulation im kleinen Stil mit First Come First Serve zum Laufen
 \end_layout
 
 \begin_layout Subsection
-Kalenderwoche 43: 30.10.2014
+Kalenderwoche 44: 30.10.2014
 \end_layout
 
 \begin_layout Itemize
@@ -502,9 +506,79 @@ Beinhaltet 3 DANH-Geräte, 2 verschiedene senden zeitgleich an anderen
 
 \end_deeper
 \begin_layout Itemize
-Scheduler pro Port implementieren, bis jetzt 
+Scheduler pro Port implementieren, bis jetzt ist Scheduler pro Gerät implementie
+rt
 \end_layout
 
+\begin_deeper
+\begin_layout Itemize
+Macht wenig Sinn, Switch kann auf freien Ports gleichzeitig versenden
+\end_layout
+
+\begin_layout Itemize
+Frame kommt an, wo muss es hin? Entsprechendem Scheduler zuweisen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Express: klein und selten, konstante Bitrate
+\end_layout
+
+\begin_layout Itemize
+High: normaler Verkehr (Monitoring, Netzwerkmanagement, ...)
+\end_layout
+
+\begin_layout Itemize
+Low: Background-Verkehr (z.B.
+ TCP), oft und klein & gross
+\end_layout
+
+\begin_layout Subsection
+Kalenderwoche 45: 06.11.2014
+\end_layout
+
+\begin_layout Itemize
+Gedanken zu IET (Zeitberechnung):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Sender behält normales Frame, um zu sagen wann Express-Frame versendet werden
+ soll
+\end_layout
+
+\begin_layout Itemize
+Empfänger verlängert 
+\begin_inset Quotes fld
+\end_inset
+
+fragmentiertes Frame
+\begin_inset Quotes frd
+\end_inset
+
+ um die Dauer des dazwischen versendeten Express-Frames + IFG
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Empf.
+ überprüft, ob Sendezeit des Express-Frames zwischen Sende- und Ankunftszeit
+ des normalen Frames ist.
+ Wenn ja, wird das normale Frame verlängert
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zweiter Kanal für Express Frame?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wenn Channel busy ist, kann Express-Frame gesendet werden?
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Standard
 ------------------------------------
 \end_layout

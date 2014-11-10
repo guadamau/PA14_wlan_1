@@ -533,6 +533,84 @@ Low: Background-Verkehr (z.B.
  TCP), oft und klein & gross
 \end_layout
 
+\begin_layout Subsection
+Kalenderwoche 45: 06.11.2014
+\end_layout
+
+\begin_layout Itemize
+Gedanken zu IET (Zeitberechnung):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Sender behält normales Frame, um zu sagen wann Express-Frame versendet werden
+ soll
+\end_layout
+
+\begin_layout Itemize
+Empfänger verlängert 
+\begin_inset Quotes fld
+\end_inset
+
+fragmentiertes Frame
+\begin_inset Quotes frd
+\end_inset
+
+ um die Dauer des dazwischen versendeten Express-Frames + IFG
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Empf.
+ überprüft, ob Sendezeit des Express-Frames zwischen Sende- und Ankunftszeit
+ des normalen Frames ist.
+ Wenn ja, wird das normale Frame verlängert
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zweiter Kanal für Express Frame?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wenn Channel busy ist, kann Express-Frame gesendet werden?
+\end_layout
+
+\begin_layout Itemize
+Zweiter Kanal nur für Express Frames
+\end_layout
+
+\begin_layout Itemize
+Keine wirkliche Fragmentierung in Simulation vornehmen, Zeitrechnung reicht
+ aus
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+FragCount sagt nicht max.
+ 5 Fragmente, sondern ist ein Modulo-4-Counter
+\end_layout
+
+\begin_layout Itemize
+Frame abbrechen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nur wenn Rest genug lang ist
+\end_layout
+
+\begin_layout Itemize
+Express muss Fragmentlänge + IFG abwarten
+\end_layout
+
+\begin_layout Itemize
+Normal Frame Ankunftszeit um Express + IFG verlängern
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Standard
 ------------------------------------
 \end_layout

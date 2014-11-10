@@ -543,6 +543,79 @@ Der Scheduler arbeitet nach jedem neuen Frame seine Queues ab.
  erst nochmals sobald die Übertragung zu Ende ist.
 \end_layout
 
+\begin_layout Subsection
+Generierung von Traffic (Lastprofile)
+\end_layout
+
+\begin_layout Standard
+In jedem Node ist ein Generator implementiert, welcher mittels Konfigurationspar
+ameter Frames in verschiedenen Folgemustern generieren kann.
+ In diesem Kapitel werden verschiedene Muster von Traffic (Lastprofile)
+ aufgezeigt, die in der Simulation generiert werden können.
+\end_layout
+
+\begin_layout Standard
+Die Lastprofile teilen dabei folgende Eigenschaften bezüglich der Prioritäten
+ der Frames:
+\end_layout
+
+\begin_layout Itemize
+Express-Frames sind klein und kommen selten vor.
+ Sie sollen Alarme in einem System darstellen, welche schnellstmöglich übermitte
+lt werden müssen.
+\end_layout
+
+\begin_layout Itemize
+Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+High
+\begin_inset Quotes frd
+\end_inset
+
+ stellen den normalen Verkehr dar.
+ Dies kann unter anderem Down- und Upload von Dateien, Monitoring, etc.
+ sein.
+ Die Grösse der Frames kann klein und gross sein.
+\end_layout
+
+\begin_layout Itemize
+Die Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+Low
+\begin_inset Quotes frd
+\end_inset
+
+ bilden den Background-Traffic, der oft vorkommt und wie der normale Verkehr
+ verschieden gross sein kann.
+\end_layout
+
+\begin_layout Standard
+Bezüglich der Auftretenswahrscheinlichkeit der Frames lässt sich demnach
+ folgendes sagen: Je höher die Priorität, desto seltener kommt das Frame
+ vor.
+\end_layout
+
+\begin_layout Subsubsection
+Lastprofil ##: xxxxxxxxxxxxxxxxxxxxxxx
+\end_layout
+
+\begin_layout Standard
+Mechanismen:
+\end_layout
+
+\begin_layout Standard
+Keine, Zuflusslimitierung, Vortritt Ring / von Aussen, Reissverschluss,
+ Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Section
+Experimente
+\end_layout
+
 \begin_layout Section
 Konzeptpapier
 \end_layout
