@@ -46,23 +46,33 @@ private:
   redBoxConfiguration redBoxCfg;
 
   cGate* gateInterlinkIn;
+  cGate* gateInterlinkInExp;
   cGate* gateInterlinkOut;
+  cGate* gateInterlinkOutExp;
+
+  Scheduler* schedGateInterlinkOut;
+  Scheduler* schedGateInterlinkOutExp;
 
 protected:
 
   virtual void initialize();
-  virtual void handleMessage(cMessage *msg);
+  virtual void handleMessage( cMessage *msg );
 
 public:
 
     RedBoxSwitch();
     virtual ~RedBoxSwitch();
 
-    cGate* getGateInterlinkIn();
-    cGate* getGateInterlinkOut();
+    cGate* getGateInterlinkIn( void );
+    cGate* getGateInterlinkInExp( void );
+    cGate* getGateInterlinkOut( void );
+    cGate* getGateInterlinkOutExp( void );
+
+    Scheduler* getSchedGateInterLinkOut( void );
+    Scheduler* getSchedGateInterlinkOutExp( void );
 
 
-    void forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage *hsrTag, dataMessage *messageData);
+    void forwardToInterlink( EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage *hsrTag, dataMessage *messageData );
 
 };
 

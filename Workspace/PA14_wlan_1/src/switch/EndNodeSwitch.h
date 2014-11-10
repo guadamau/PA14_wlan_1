@@ -40,10 +40,6 @@ class EndNodeSwitch : public HsrSwitch
 
     nodeTable* getNodeTable();
 
-    void forwardFrame( cMessage *msg );
-    void sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
-    void recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
-
   private:
 
     unsigned long cntTotalSentA; //number of frames sent over network interface A
@@ -54,8 +50,8 @@ class EndNodeSwitch : public HsrSwitch
 
     nodeTable* endNodeTable;
 
-//    void DANH_receiving_from_its_link_layer_interface(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
-//    void DANH_receiving_from_an_HSR_port(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData);
+    void hsrTagSendToRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag );
+    void hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag, cGate* arrivalGate );
 
 
   protected:

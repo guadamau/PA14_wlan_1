@@ -84,7 +84,7 @@ void ModifiedEtherMACBase::initialize()
     cModule *calleeModule = getParentModule();
     const char *duplicateDetectionString = par("duplicateDetection");
     calleeModule = calleeModule->getSubmodule(duplicateDetectionString); 
-    duplicateDetection = check_and_cast<ListenErkennung *>(calleeModule);    
+    duplicateDetection = check_and_cast<ListenErkennung*>(calleeModule);
     
     //return NULL;
 

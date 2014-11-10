@@ -36,4 +36,8 @@ network HsrNetworkSimple
         R1EndNode1.gateA <--> MyFastChannel <--> R1EndNode2.gateB;
         R1EndNode2.gateA <--> MyFastChannel <--> R1EndNode3.gateB;
         R1EndNode3.gateA <--> MyFastChannel <--> R1EndNode1.gateB;
+        
+        R1EndNode1.gateAExp <--> MyFastChannel <--> R1EndNode2.gateBExp;
+        R1EndNode2.gateAExp <--> MyFastChannel <--> R1EndNode3.gateBExp;
+        R1EndNode3.gateAExp <--> MyFastChannel <--> R1EndNode1.gateBExp;
 }

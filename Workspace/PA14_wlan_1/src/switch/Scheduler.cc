@@ -8,6 +8,7 @@
 #include "Scheduler.h"
 #include "HsrSwitch.h"
 #include "hsrSwitchSelfMessage_m.h"
+#include "schedulerSelfMessage_m.h"
 
 
 Scheduler::Scheduler()
@@ -111,51 +112,63 @@ void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 
 void Scheduler::processQueues( void )
 {
+    HsrSwitch* parentModule = check_and_cast<HsrSwitch*>( getParentModule() );
+    cQueue* currentQueue = NULL;
+    queueName currentQueueName;
+    cGate* selectedOutGate = NULL;
 
     switch( schedmode )
     {
+        /*
+         * FCFS Try to process all queues in the order of the queueName-enum.
+         *
+         * EXPRESS_RING,
+         * EXPRESS_INTERNAL,
+         * HIGH_RING,
+         * HIGH_INTERNAL,
+         * LOW_RING,
+         * LOW_INTERNAL
+         * */
         case FCFS:
         {
-//            ( ( cQueue* )queues->get(EXPRESS_RING) );
-//            ( ( cQueue* )queues->get(EXPRESS_INTERNAL) );
-//            ( ( cQueue* )queues->get(HIGH_RING) );
-//            ( ( cQueue* )queues->get(HIGH_INTERNAL) );
-//            ( ( cQueue* )queues->get(LOW_RING) );
-//            ( ( cQueue* )queues->get(LOW_INTERNAL) );
-
             for( int i = 0; i < queues->size(); i++ )
             {
-                cQueue* currentQueue = ( ( cQueue* )queues->get( static_cast<schedulerMode>( i ) ) );
+                currentQueueName = static_cast<queueName>( i );
+                currentQueue = check_and_cast<cQueue*>( queues->get( currentQueueName ) );
 
                 while( !currentQueue->isEmpty() )
                 {
-                    if( !( schedOutGate->getChannel()->isBusy() ) )
+                    /* Decide if the express channel has to be used. */
+                    if( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL )
+                    {
+                        selectedOutGate = schedOutGateExp;
+                    }
+                    else
+                    {
+                        selectedOutGate = schedOutGate;
+                    }
+
+                    if( !( selectedOutGate->getChannel()->isBusy() ) )
                     {
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
                         /* Channel is free. Send the frame.
                            If Express Prio send via ExpressGate */
-                        if( i == EXPRESS_RING || i == EXPRESS_INTERNAL )
-                        {
-                            getParentModule()->send( msg, schedOutGateExp );
-                        }
-                        else
-                        {
-                            getParentModule()->send( msg, schedOutGate );
-                        }
+                        parentModule->send( msg, selectedOutGate );
 
 
                         /* Some logging shizzle */
-                        setQueueSizeLowInt(getQueueSizeLowInt()-1);
-                        getQueueLowIntVector()->record(getQueueSizeLowInt());
+                        setQueueSizeLowInt( getQueueSizeLowInt()-1 );
+                        getQueueLowIntVector()->record( getQueueSizeLowInt() );
                         EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl;
                     }
                     else
                     {
                         /* Channel is currently busy. Have to reschedule the frame. */
-                        simtime_t finishTime = schedOutGate->getChannel()->getTransmissionFinishTime();
+                        simtime_t finishTime = selectedOutGate->getChannel()->getTransmissionFinishTime();
                         scheduleAt( finishTime, new SchedulerSelfMessage() );
                     }
+
                 }
             }
             break;

@@ -14,7 +14,6 @@
 //
 
 #include "RedBoxSwitch.h"
-#include "RedBoxScheduler.h"
 
 Define_Module( RedBoxSwitch );
 
@@ -28,9 +27,9 @@ void
 RedBoxSwitch::initialize()
 {
     /* Call initialize of the base class. */
-    HsrSwitch::initialize("FCFS");
+    HsrSwitch::initialize( "FCFS" );
     
-    int temp = par("redBoxCfg");
+    int temp = par( "redBoxCfg" );
     switch (temp)
     {
     case 0:
@@ -50,12 +49,13 @@ RedBoxSwitch::initialize()
         endSimulation();
     }
 
-    gateInterlinkIn  = gate("gateInterlink$i");
-    gateInterlinkOut = gate("gateInterlink$o");
+    gateInterlinkIn  = gate( "gateInterlink$i" );
+    gateInterlinkInExp = gate( "gateInterlinkExp$i" );
+    gateInterlinkOut = gate(" gateInterlink$o" );
+    gateInterlinkOutExp = gate( "gateInterlinkExp$o" );
 
-    HsrSwitch::setSched( new RedBoxScheduler() );
-    RedBoxScheduler* sched = ( RedBoxScheduler* )HsrSwitch::getSched();
-    sched->initScheduler( HsrSwitch::getSchedmode() );
+    schedGateInterlinkOut = new Scheduler();
+    schedGateInterlinkOut->initScheduler( HsrSwitch::getSchedmode(), gateInterlinkOut, gateInterlinkOutExp );
 
 }
 
@@ -65,6 +65,16 @@ cGate* RedBoxSwitch::getGateInterlinkIn(){
 
 cGate* RedBoxSwitch::getGateInterlinkOut(){
     return gateInterlinkOut;
+}
+
+Scheduler* RedBoxSwitch::getSchedGateInterLinkOut( void )
+{
+    return this->schedGateInterlinkOut;
+}
+
+Scheduler* RedBoxSwitch::getSchedGateInterlinkOutExp( void )
+{
+    return this->schedGateInterlinkOutExp;
 }
 
 void RedBoxSwitch::forwardToInterlink(EthernetIIFrame *ethTag, vlanMessage *vlanTag, hsrMessage *hsrTag, dataMessage *messageData)

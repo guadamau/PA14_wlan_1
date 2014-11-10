@@ -14,7 +14,6 @@
 //
 
 #include "EndNodeSwitch.h"
-#include "EndNodeScheduler.h"
 
 Define_Module( EndNodeSwitch );
 
@@ -94,7 +93,6 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     hsrMessage* hsrTag = NULL;
     dataMessage* messageData = NULL;
 
-
     framePriority frameprio = LOW;
 
     MessagePacker::openMessage( &ethernetFrame, &vlanTag, &hsrTag, &messageData );
@@ -126,8 +124,11 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
      * unicast traffic. frame only for me. */
     else if( switchMacAddress == frameDestination )
     {
-        if( arrivalGate == gateAIn || arrivalGate == gateBIn )
+        if( arrivalGate == gateAIn || arrivalGate == gateAInExp ||
+            arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
+            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -148,7 +149,7 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
             }
             schedGateCpuOut->processQueues();
         }
-        else if( arrivalGate == gateCpuIn )
+        else if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
             EV << "Trying to send a self message within the HSR-Switch. Deleting frame ..." << endl;
             delete msg;
@@ -167,8 +168,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
      * handle broadcast or multicast traffic */
     else if( frameDestination.isBroadcast() || frameDestination.isMulticast() )
     {
-        if( arrivalGate == gateCpuIn )
+        if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
+            hsrTagSendToRingRoutine( ethernetFrame, hsrTag );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -193,8 +196,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
             schedGateAOut->processQueues();
             schedGateBOut->processQueues();
         }
-        else if( arrivalGate == gateAIn )
+        else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
+            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -219,8 +224,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
             schedGateBOut->processQueues();
             schedGateCpuOut->processQueues();
         }
-        else if( arrivalGate == gateBIn )
+        else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
+            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -261,8 +268,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
      * Frame is not for me, so we have to forward it. */
     else
     {
-        if( arrivalGate == gateCpuIn )
+        if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
+            hsrTagSendToRingRoutine( ethernetFrame, hsrTag );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -288,8 +297,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
             schedGateBOut->processQueues();
 
         }
-        else if( arrivalGate == gateAIn )
+        else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
+            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -310,8 +321,10 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
             }
             schedGateBOut->processQueues();
         }
-        else if( arrivalGate == gateBIn )
+        else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
+            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+
             switch( frameprio )
             {
                 case EXPRESS:
@@ -343,133 +356,58 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
 }
 
 
-void EndNodeSwitch::forwardFrame(cMessage* msg) {
-
-    cGate* arrivalGate = msg->getArrivalGate();
-
-    cGate* gateAIn = HsrSwitch::getGateAIn();
-    cGate* gateBIn = HsrSwitch::getGateBIn();
-    cGate* gateCpuIn = HsrSwitch::getGateCpuIn();
-
-    EthernetIIFrame *ethTag = check_and_cast<EthernetIIFrame *> (msg);
-    vlanMessage *vlanTag = NULL;
-    hsrMessage *hsrTag = NULL;
-    dataMessage *messageData = NULL;
-
-    MessagePacker::decapsulateMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-
-    if ((arrivalGate == gateAIn) || (arrivalGate == gateBIn))
-    {
-        //5.3.3 DANH receiving from an HSR port
-        recieveFromRing(&ethTag, &vlanTag, &hsrTag, &messageData);
-    }
-    else if (arrivalGate == gateCpuIn)
-    {
-        //5.3.2 DANH receiving from its link layer interface
-        sendToRing(&ethTag, &vlanTag, &hsrTag, &messageData);
-    }
-    else
-    {
-        //from somewhere else
-        MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-        throw cRuntimeError( "Get message from unknown gate! Panik ! \n" );
-        endSimulation();
-    }
-
-    // MessagePacker::deleteMessage(&ethTag, &vlanTag, &hsrTag, &messageData);
-}
-
-void EndNodeSwitch::sendToRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
+void EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag )
 {
     unsigned int ringID = HsrSwitch::getRingId();
     unsigned int sequenceNum = HsrSwitch::getSequenceNum();
 
-    cGate* gateAOut = HsrSwitch::getGateAOut();
-    cGate* gateBOut = HsrSwitch::getGateBOut();
-
-
-    //If this frame is HSR or the destination node has been registered as non-HSR
-    if((*hsrTag != NULL)    or (endNodeTable->getNodeMode((*ethTag)->getSrc()) != NODETYPE_HSR))
+    /* If this frame is HSR or
+     * the destination node has been
+     * registered as non-HSR */
+    if( ( hsrTag != NULL ) ||
+        ( endNodeTable->getNodeMode( ethernetFrame->getSrc() ) != NODETYPE_HSR ) )
     {
-        //Do not modify the frame;
+        /* Do not modify the frame. */
     }
-    else //(non-HSR frame and destination node not registered as non-HSR)
+    else /* (non-HSR frame and destination node not registered as non-HSR) */
     {
-        //Insert the HSR tag with the sequence number of the host;
-        *hsrTag = MessagePacker::createHSRTag("HSR", ringID, sequenceNum);
-        //Increment the sequence number, wrapping through 0
+        /* Insert the HSR tag with the sequence number of the host */
+        hsrTag = MessagePacker::createHSRTag( "HSR", ringID, sequenceNum );
+
+        /* Increment the sequence number, wrapping through 0 */
         HsrSwitch::setSequenceNum( sequenceNum++ );
     }
-
-    //Duplicate the frame, enqueue it for sending into both HSR ports
-    send(MessagePacker::generateEthMessage(*ethTag, *vlanTag, *hsrTag, *messageData), gateAOut);
-    send(MessagePacker::generateEthMessage(*ethTag, *vlanTag, *hsrTag, *messageData), gateBOut);
 }
 
-void EndNodeSwitch::recieveFromRing(EthernetIIFrame **ethTag, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData)
+void EndNodeSwitch::hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag, cGate* arrivalGate )
 {
-    cGate* arrivalGate = (*ethTag)->getArrivalGate();
-    cGate* tempOutGate;
     cGate* gateAIn = HsrSwitch::getGateAIn();
-    cGate* gateAOut = HsrSwitch::getGateAOut();
-    cGate* gateBOut = HsrSwitch::getGateBOut();
-    cGate* gateCpuOut = HsrSwitch::getGateCpuOut();
-    MACAddress macAddress = *( HsrSwitch::getMacAddress() );
+    cGate* gateAInExp = HsrSwitch::getGateAInExp();
 
-     if (arrivalGate == gateAIn)
-     {
-         tempOutGate = gateBOut;
-     }
-     else
-     {
-         tempOutGate = gateAOut;
-     }
-
-
-    //If this frame is not HSR-tagged:
-    if( (*hsrTag) == NULL )
+    /* Non-HSR-tagged frame */
+    if( hsrTag == NULL )
     {
-        //Register the source in its node table as non-HSR node;
-        if (arrivalGate == gateAIn)
+        /* Register the source in its node table as non-HSR node */
+        if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
-            endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_A, NODETYPE_SAN);
+            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_A, NODETYPE_SAN );
         }
         else
         {
-            endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_B, NODETYPE_SAN);
+            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_B, NODETYPE_SAN );
         }
-
-        if(((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc()))
-        {
-            send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), gateCpuOut);
-        }
-        //(the frame is not forwarded)
     }
-    else //(HSR-tagged frame)
+    /* HSR-tagged frame */
+    else
     {
-        //Register the source in its node table as HSR node
-        if (arrivalGate == gateAIn)
-            endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_A, NODETYPE_HSR);
+        /* Register the source in its node table as HSR node */
+        if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
+        {
+            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_A, NODETYPE_HSR );
+        }
         else
-            endNodeTable->pushNode((*ethTag)->getSrc(), PORTNAME_B, NODETYPE_HSR);
-        //If this node is the (unicast or multicast) destination
-        if(((macAddress == (*ethTag)->getDest()) || ((*ethTag)->getDest().isBroadcast()) || ((*ethTag)->getDest().isMulticast())) && (macAddress != (*ethTag)->getSrc()))
         {
-            send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), gateCpuOut);
-        }
-        else //(if this node is not a destination)
-        {
-            //Do not send it over the link layer interface
-        }
-        //If this node is not the only destination (multicast or unicast for another node)
-        if( macAddress != (*ethTag)->getDest() )
-        {
-            send(MessagePacker::generateEthMessage((*ethTag), (*vlanTag), (*hsrTag), (*messageData)), tempOutGate);
-        }
-        else//(If this node is the only (unicast) destination)
-        {
-            //Discard the frame
-            delete *ethTag;
+            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_B, NODETYPE_HSR );
         }
     }
 }

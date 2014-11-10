@@ -172,7 +172,7 @@ void HsrSwitch::setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp ) {
 }
 
 
-void HsrSwitch::initialize(const char* schedchoice)
+void HsrSwitch::initialize( const char* schedchoice )
 {
     /* Initialize Scheduler */
     //schedmode = static_cast<schedulerMode>( par( "schedulerMode" ).stringValue() );
