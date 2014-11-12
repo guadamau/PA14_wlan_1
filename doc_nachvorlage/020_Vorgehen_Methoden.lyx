@@ -207,6 +207,13 @@ In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
 
 \begin_layout Subsubsection
 Limitierung des Zuflusses von neuem Traffic
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Limitierung-des-Zuflusses"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -241,7 +248,8 @@ Damit die Frames innerhalb des Rings (HSR-Netzwerks) schneller zum Ziel
  kommen, kann diesen Frames der Vortritt gegenüber Frames von Aussen gewährt
  werden.
  Dies ist bei gleich priorisierten Frames der Fall.
- 
+ Es kann hier jedoch die Möglichkeit geben, dass so nie Frames von Aussen
+ versendet werden.
 \end_layout
 
 \begin_layout Standard
@@ -249,6 +257,15 @@ Je nach auftretenden Prioritäten kann es auch sein, dass von Aussen ein
  Express-Frame und vom Ring ein High-Frame kommt.
  Dann hat das Express-Frame trotz der Herkunft von Aussen aufgrund dessen
  Priorität Vortritt.
+\end_layout
+
+\begin_layout Standard
+Die andere Möglichkeit ist, den Frames, die auf den Ring sollen, den Vortritt
+ zu gewähren.
+ So kann ein minimaler Zufluss auf den Ring garantiert werden.
+ Hier kann es den umgekehrten Fall wie wenn die Frames vom Ring Vortritt
+ haben geben: Wenn ständig neue Frames von Aussen kommen, werden die Frames
+ vom Ring nie versendet.
 \end_layout
 
 \begin_layout Subsubsection
