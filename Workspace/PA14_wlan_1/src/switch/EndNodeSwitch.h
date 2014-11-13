@@ -50,8 +50,9 @@ class EndNodeSwitch : public HsrSwitch
 
     nodeTable* endNodeTable;
 
-    void hsrTagSendToRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag );
-    void hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag, cGate* arrivalGate );
+    /* They both return a packed Ethernetframe* which can be delivered to a foreign host ... */
+    EthernetIIFrame* hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vlanTag, hsrMessage* hsrTag, dataMessage* messageData, cGate* arrivalGate );
+    EthernetIIFrame* hsrTagSendToRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vlanTag, hsrMessage* hsrTag, dataMessage* messageData );
 
 
   protected:

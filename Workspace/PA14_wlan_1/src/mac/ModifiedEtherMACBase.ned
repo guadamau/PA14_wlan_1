@@ -153,13 +153,15 @@ simple ModifiedEtherMACBase
                                 // additional frames are dropped. Only used if queueModule==""
         //string queueModule = default("");    // name of optional external queue module
         
-        string duplicateDetection;
         @display("i=block/ifcard");
+    
     gates:
+
         input upperLayerIn;    // to EtherLLC or MACRelayUnitPP
         input upperLayerInExp;    // to EtherLLC or MACRelayUnitPP
         output upperLayerOut;  // to EtherLLC or MACRelayUnitPP
         output upperLayerOutExp;  // to EtherLLC or MACRelayUnitPP
+        
         inout phys;            // to physical layer or the network
         inout physExp;
 }

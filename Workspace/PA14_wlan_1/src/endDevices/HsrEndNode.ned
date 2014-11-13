@@ -1,6 +1,7 @@
 package endDevices;
 
 import switch.EndNodeSwitch;
+import channels.MyInternalChannel;
 
 module HsrEndNode extends HsrNode
 {
@@ -24,30 +25,30 @@ module HsrEndNode extends HsrNode
     connections:
 
         //Gate A 
-        gateA <--> mac1.phys;
-        gateAExp <--> mac1.physExp;
+        gateA <--> eth0.phys;
+        gateAExp <--> eth0Exp.phys;
 
-        mac1.upperLayerIn <-- endNodeSwitch.gateA$o;
-        mac1.upperLayerInExp <-- endNodeSwitch.gateAExp$o;
-        mac1.upperLayerOut --> endNodeSwitch.gateA$i;
-        mac1.upperLayerOutExp --> endNodeSwitch.gateAExp$i;
+        eth0.upperLayerIn <-- MyInternalChannel <-- endNodeSwitch.gateA$o;
+        eth0Exp.upperLayerIn <-- MyInternalChannel <-- endNodeSwitch.gateAExp$o;
+        eth0.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateA$i;
+        eth0Exp.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateAExp$i;
 
 
         //Gate B
-        gateB <--> mac2.phys;
-        gateBExp <--> mac2.physExp;
+        gateB <--> eth1.phys;
+        gateBExp <--> eth1Exp.phys;
 
-        mac2.upperLayerIn <-- endNodeSwitch.gateB$o;
-        mac2.upperLayerInExp <-- endNodeSwitch.gateBExp$o;
-        mac2.upperLayerOut --> endNodeSwitch.gateB$i;
-        mac2.upperLayerOutExp --> endNodeSwitch.gateBExp$i;
+        eth1.upperLayerIn <-- MyInternalChannel <-- endNodeSwitch.gateB$o;
+        eth1Exp.upperLayerIn <-- MyInternalChannel <-- endNodeSwitch.gateBExp$o;
+        eth1.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateB$i;
+        eth1Exp.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateBExp$i;
 
         //CPU      
         cpu.gate$i <-- duplikatlistePortCPU.gate$o;
         cpu.gateExp$i <-- duplikatlistePortCPUExp.gate$o;
-        duplikatlistePortCPU.gate$i <-- endNodeSwitch.gateCPU$o;
-        duplikatlistePortCPUExp.gate$i <-- endNodeSwitch.gateCPUExp$o;
-        cpu.gate$o --> endNodeSwitch.gateCPU$i;
-        cpu.gateExp$o --> endNodeSwitch.gateCPUExp$i;
+        duplikatlistePortCPU.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateCPU$o;
+        duplikatlistePortCPUExp.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateCPUExp$o;
+        cpu.gate$o --> MyInternalChannel --> endNodeSwitch.gateCPU$i;
+        cpu.gateExp$o --> MyInternalChannel --> endNodeSwitch.gateCPUExp$i;
 
 }

@@ -36,15 +36,19 @@ nodeTable* EndNodeSwitch::getNodeTable()
 void EndNodeSwitch::initialize()
 {
     /* Call initialize of the base class. */
-    HsrSwitch::initialize("FCFS");
+    HsrSwitch::initialize( "FCFS" );
 
+    this->endNodeTable = new nodeTable();
+    /*
     endNodeTable = getNodeTable();
     if( endNodeTable == NULL )
     {
         throw cRuntimeError( "can't load node table" );
     }
+    */
 
-    scheduleAt( SIMTIME_ZERO,  new HsrSwitchSelfMessage() );
+    // scheduleAt( SIMTIME_ZERO,  new HsrSwitchSelfMessage() );
+
 }
 
 EndNodeSwitch::EndNodeSwitch()
@@ -60,8 +64,13 @@ EndNodeSwitch::~EndNodeSwitch()
 }
 
 
-void EndNodeSwitch::handleMessage( cMessage *msg )
+void EndNodeSwitch::handleMessage( cMessage* msg )
 {
+    if( msg->isSelfMessage() )
+    {
+        return;
+    }
+
     /* Schedulers */
     Scheduler* schedGateAOut = HsrSwitch::getSchedGateAOut();
     Scheduler* schedGateBOut = HsrSwitch::getSchedGateBOut();
@@ -76,44 +85,70 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     cGate* gateBInExp = HsrSwitch::getGateBInExp();
     cGate* gateCpuInExp = HsrSwitch::getGateCpuInExp();
 
+    /* Make a clone of the frame and take ownership.
+     * Then we have to downcast the Message as an ethernet frame. */
+    cMessage* switchesMsg = msg->dup();
+    this->take( switchesMsg );
+
+
+    /* delete original incoming message ... */
+    delete msg;
+
     /* Arrival Gate */
-    cGate* arrivalGate = msg->getArrivalGate();
+    cGate* arrivalGate = switchesMsg->getArrivalGate();
 
     /* Switch mac address. */
     MACAddress switchMacAddress = *( HsrSwitch::getMacAddress() );
 
-    EthernetIIFrame* ethernetFrame = check_and_cast<EthernetIIFrame*>( msg );
+    EthernetIIFrame* ethernetFrame = check_and_cast<EthernetIIFrame*>( switchesMsg );
 
     /* Source and destination mac addresses */
     MACAddress frameDestination = ethernetFrame->getDest();
     MACAddress frameSource = ethernetFrame->getSrc();
 
-
+    EthernetIIFrame* ethTag = NULL;
     vlanMessage* vlanTag = NULL;
     hsrMessage* hsrTag = NULL;
     dataMessage* messageData = NULL;
 
+    EthernetIIFrame* frameToDeliver = NULL;
+    EthernetIIFrame* frameToDeliverClone = NULL;
+
     framePriority frameprio = LOW;
 
-    MessagePacker::openMessage( &ethernetFrame, &vlanTag, &hsrTag, &messageData );
+    MessagePacker::decapsulateMessage( &ethernetFrame, &vlanTag, &hsrTag, &messageData );
+
+    /* After decapsulating the whole ethernet frame becomes a ethernet tag
+     * (only the header of an ethernet frame)
+     * ethTag variable just there for a better understanding. */
+    ethTag = ethernetFrame;
+
+    /* determine package prio and set enum */
+    if( vlanTag != NULL )
+    {
+        if( vlanTag->getUser_priority() == EXPRESS )
+        {
+            frameprio = EXPRESS;
+        }
+        else if( vlanTag->getUser_priority() == HIGH )
+        {
+            frameprio = HIGH;
+        }
+    }
+    else
+    {
+        EV << "No vlan for this frame. Unable to determine frames priority." << endl;
+    }
 
 
-    // determine package prio and set enum
-    if( ethernetFrame->getEtherType() == 0x8500 )
-    {
-        frameprio = EXPRESS;
-    }
-    else if( vlanTag->getUser_priority() == HIGH )
-    {
-        frameprio = HIGH;
-    }
 
     /* If the following criteria is not checked,
      * the ring can be flooded with
      * broadcast / multicast traffic.
      * Also circulating unicast frames will
      * never be destroyed. */
-    if( switchMacAddress == frameSource )
+    if( switchMacAddress == frameSource &&
+      ( arrivalGate != gateCpuIn && arrivalGate != gateCpuInExp ) )
     {
         EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
         delete msg;
@@ -127,23 +162,23 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         if( arrivalGate == gateAIn || arrivalGate == gateAInExp ||
             arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
-            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, EXPRESS_INTERNAL );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateCpuOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, HIGH_INTERNAL );
                     break;
                 }
                 default:
                 {
-                    schedGateCpuOut->enqueueMessage( msg, LOW_INTERNAL );
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, LOW_INTERNAL );
                     break;
                 }
             }
@@ -170,26 +205,27 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     {
         if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
-            hsrTagSendToRingRoutine( ethernetFrame, hsrTag );
+            frameToDeliver = hsrTagSendToRingRoutine( ethTag, vlanTag, hsrTag, messageData );
+            frameToDeliverClone = frameToDeliver->dup();
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, EXPRESS_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, EXPRESS_INTERNAL );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, HIGH_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, HIGH_INTERNAL );
                     break;
                 }
                 default:
                 {
-                    schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, LOW_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, LOW_INTERNAL );
                     break;
                 }
             }
@@ -198,26 +234,27 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         }
         else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
-            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
+            frameToDeliverClone = frameToDeliver->dup();
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateBOut->enqueueMessage( msg, EXPRESS_RING );
-                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, EXPRESS_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, EXPRESS_RING );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateBOut->enqueueMessage( msg, HIGH_RING );
-                    schedGateCpuOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, HIGH_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, HIGH_RING );
                     break;
                 }
                 default:
                 {
-                    schedGateBOut->enqueueMessage( msg, LOW_RING );
-                    schedGateCpuOut->enqueueMessage( msg, LOW_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, LOW_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, LOW_RING );
                     break;
                 }
             }
@@ -226,26 +263,27 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         }
         else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
-            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
+            frameToDeliverClone = frameToDeliver->dup();
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateAOut->enqueueMessage( msg, EXPRESS_RING );
-                    schedGateCpuOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, EXPRESS_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, EXPRESS_RING );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateAOut->enqueueMessage( msg, HIGH_RING );
-                    schedGateCpuOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, HIGH_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, HIGH_RING );
                     break;
                 }
                 default:
                 {
-                    schedGateAOut->enqueueMessage( msg, LOW_RING );
-                    schedGateCpuOut->enqueueMessage( msg, LOW_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, LOW_RING );
+                    schedGateCpuOut->enqueueMessage( frameToDeliverClone, LOW_RING );
                     break;
                 }
             }
@@ -270,26 +308,27 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
     {
         if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
-            hsrTagSendToRingRoutine( ethernetFrame, hsrTag );
+            frameToDeliver = hsrTagSendToRingRoutine( ethTag, vlanTag, hsrTag, messageData );
+            frameToDeliverClone = frameToDeliver->dup();
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateAOut->enqueueMessage( msg, EXPRESS_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, EXPRESS_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, EXPRESS_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, EXPRESS_INTERNAL );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateAOut->enqueueMessage( msg, HIGH_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, HIGH_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, HIGH_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, HIGH_INTERNAL );
                     break;
                 }
                 default:
                 {
-                    schedGateAOut->enqueueMessage( msg, LOW_INTERNAL );
-                    schedGateBOut->enqueueMessage( msg, LOW_INTERNAL );
+                    schedGateAOut->enqueueMessage( frameToDeliver, LOW_INTERNAL );
+                    schedGateBOut->enqueueMessage( frameToDeliverClone, LOW_INTERNAL );
                     break;
                 }
             }
@@ -299,23 +338,23 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         }
         else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
-            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateBOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, EXPRESS_RING );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateBOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, HIGH_RING );
                     break;
                 }
                 default:
                 {
-                    schedGateBOut->enqueueMessage( msg, LOW_RING );
+                    schedGateBOut->enqueueMessage( frameToDeliver, LOW_RING );
                     break;
                 }
             }
@@ -323,23 +362,23 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
         }
         else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
-            hsrTagReceiveFromRingRoutine( ethernetFrame, hsrTag, arrivalGate );
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
 
             switch( frameprio )
             {
                 case EXPRESS:
                 {
-                    schedGateAOut->enqueueMessage( msg, EXPRESS_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, EXPRESS_RING );
                     break;
                 }
                 case HIGH:
                 {
-                    schedGateAOut->enqueueMessage( msg, HIGH_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, HIGH_RING );
                     break;
                 }
                 default:
                 {
-                    schedGateAOut->enqueueMessage( msg, LOW_RING );
+                    schedGateAOut->enqueueMessage( frameToDeliver, LOW_RING );
                     break;
                 }
             }
@@ -356,16 +395,19 @@ void EndNodeSwitch::handleMessage( cMessage *msg )
 }
 
 
-void EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag )
+EthernetIIFrame*
+EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vlanTag, hsrMessage* hsrTag, dataMessage* messageData )
 {
     unsigned int ringID = HsrSwitch::getRingId();
     unsigned int sequenceNum = HsrSwitch::getSequenceNum();
+
+    EthernetIIFrame* frameReadyToProcess = NULL;
 
     /* If this frame is HSR or
      * the destination node has been
      * registered as non-HSR */
     if( ( hsrTag != NULL ) ||
-        ( endNodeTable->getNodeMode( ethernetFrame->getSrc() ) != NODETYPE_HSR ) )
+        ( endNodeTable->getNodeMode( ethTag->getSrc() ) != NODETYPE_HSR ) )
     {
         /* Do not modify the frame. */
     }
@@ -377,12 +419,19 @@ void EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethernetFrame, hsr
         /* Increment the sequence number, wrapping through 0 */
         HsrSwitch::setSequenceNum( sequenceNum++ );
     }
+
+    frameReadyToProcess = MessagePacker::generateEthMessage( ethTag, vlanTag, hsrTag, messageData );
+
+    return frameReadyToProcess;
 }
 
-void EndNodeSwitch::hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame, hsrMessage* hsrTag, cGate* arrivalGate )
+EthernetIIFrame*
+EndNodeSwitch::hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vlanTag, hsrMessage* hsrTag, dataMessage* messageData, cGate* arrivalGate )
 {
     cGate* gateAIn = HsrSwitch::getGateAIn();
     cGate* gateAInExp = HsrSwitch::getGateAInExp();
+
+    EthernetIIFrame* frameReadyToProcess = NULL;
 
     /* Non-HSR-tagged frame */
     if( hsrTag == NULL )
@@ -390,11 +439,11 @@ void EndNodeSwitch::hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame
         /* Register the source in its node table as non-HSR node */
         if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
-            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_A, NODETYPE_SAN );
+            endNodeTable->pushNode( ethTag->getSrc(), PORTNAME_A, NODETYPE_SAN );
         }
         else
         {
-            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_B, NODETYPE_SAN );
+            endNodeTable->pushNode( ethTag->getSrc(), PORTNAME_B, NODETYPE_SAN );
         }
     }
     /* HSR-tagged frame */
@@ -403,11 +452,15 @@ void EndNodeSwitch::hsrTagReceiveFromRingRoutine( EthernetIIFrame* ethernetFrame
         /* Register the source in its node table as HSR node */
         if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
-            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_A, NODETYPE_HSR );
+            endNodeTable->pushNode( ethTag->getSrc(), PORTNAME_A, NODETYPE_HSR );
         }
         else
         {
-            endNodeTable->pushNode( ethernetFrame->getSrc(), PORTNAME_B, NODETYPE_HSR );
+            endNodeTable->pushNode( ethTag->getSrc(), PORTNAME_B, NODETYPE_HSR );
         }
     }
+
+    frameReadyToProcess = MessagePacker::generateEthMessage( ethTag, vlanTag, hsrTag, messageData );
+
+    return frameReadyToProcess;
 }

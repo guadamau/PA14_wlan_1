@@ -37,20 +37,30 @@ CPU::getTestControlInstance()
 EthernetIIFrame *
 CPU::generateOnePacket(SendData sendData)
 {
-
-    EthernetIIFrame *result_ethTag = MessagePacker::createETHTag("eth", sendData.destination, macAddress);
+    /*
     if (sendData.frameprio == EXPRESS)
     {
         result_ethTag->setEtherType(0x8500);
     }
+    */
 
-    dataMessage *result_messageData =MessagePacker::createDataMessage("std", sendData.paketgroesse, messageCount++);
+    EthernetIIFrame *result_ethTag = NULL;
+    result_ethTag = MessagePacker::createETHTag( "eth", sendData.destination, macAddress );
+
+
     vlanMessage *result_vlanTag = NULL;
-
     result_vlanTag = MessagePacker::createVLANTag( "vlan", sendData.frameprio, 0, 0, 0 );
 
-    EthernetIIFrame *result_ethFrame = MessagePacker::generateEthMessage(result_ethTag, result_vlanTag, NULL, result_messageData);
-    MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, NULL, &result_messageData);
+    dataMessage* result_dataMessage = NULL;
+    result_dataMessage = MessagePacker::createDataMessage( "stdData", sendData.paketgroesse, messageCount++ );
+
+    EthernetIIFrame* result_ethFrame = NULL;
+    result_ethFrame = MessagePacker::generateEthMessage( result_ethTag, result_vlanTag, NULL, result_dataMessage );
+
+
+    MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, NULL, &result_dataMessage);
+
+    EV << "[ OK ] " << sendData.frameprio << " Message created at: " << result_ethFrame->getCreationTime() << " created." << endl;
 
     return result_ethFrame;
 }
@@ -494,7 +504,6 @@ CPU::handleMessage(cMessage *msg)
             }
             else
             {
-
                 double byteProSec = randomLast * 1024.0 * 1024.0 / 8.0; //bytes pro sec berechnen
                 //EV << "byteProSec "<< byteProSec <<" \n";
                 double anzahlPaketeProSec = byteProSec / (delayedMessage->getSendData().paketgroesse + 32); //Die 32 extrabytes die sp�ter hinzukommen bestehen aus : 2 EtherType + 4CRC + 6 Source + 6 Destination + 4 HSR Tag + 2HSR Ethertype +1 SFD + 7 Pr�ambel
@@ -510,6 +519,7 @@ CPU::handleMessage(cMessage *msg)
             // testControl->registerSEND(macAddress, dmsg->dup(), simTime());
             numFramesSent++;
 
+            /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
             /* Ethertype 0x8500 is an express frame. */
             if( dmsg->getEtherType() == 0x8500 )
             {
@@ -561,6 +571,8 @@ CPU::handleMessage(cMessage *msg)
         dataMessage *messageData = NULL;
         hsrMessage *hsrTag = NULL;
         MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
+
+        EV << "[ OK ] CPU: Message " << msg->getCreationTime() << "  |  Prio: " << vlanTag->getUser_priority() << endl;
 
         MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
     }

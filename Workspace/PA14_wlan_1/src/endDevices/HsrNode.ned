@@ -15,11 +15,15 @@
 
 package endDevices;
 
+import inet.linklayer.ethernet.EtherMACFullDuplex;
+
 import cpu.CPU;
 import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import mac.ModifiedEtherMACBase;
 import nodeTable.nodeTable;
+
+
 
 module HsrNode
 {
@@ -50,30 +54,64 @@ module HsrNode
         }
 
         cpu: CPU {
-            @display("p=242,389");
+            @display("p=390,489");
             macAddress = macAddress;
         }
 
-        mac1: ModifiedEtherMACBase {
+//        mac1: ModifiedEtherMACBase {
+//            parameters:
+//                promiscuous = true;
+//                address = macAddress;
+//                txQueueLimit = outputQueueCapacityPerPort;
+//                @display("p=43,60");
+//        }
+//
+//        mac2: ModifiedEtherMACBase {
+//            parameters:
+//                promiscuous = true;
+//                address = macAddress;
+//                txQueueLimit = outputQueueCapacityPerPort;
+//                @display("p=342,60");
+//        }
+        
+        eth0: EtherMACFullDuplex
+        {
             parameters:
                 promiscuous = true;
                 address = macAddress;
-                duplicateDetection = "duplikatlistePortA";
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=43,60");
         }
-
-        mac2: ModifiedEtherMACBase {
+        
+        eth0Exp: EtherMACFullDuplex
+        {
             parameters:
                 promiscuous = true;
                 address = macAddress;
-                duplicateDetection = "duplikatlistePortB";
+                txQueueLimit = outputQueueCapacityPerPort;
+                @display("p=43,160");
+        }
+        
+        eth1: EtherMACFullDuplex
+        {
+            parameters:
+                promiscuous = true;
+                address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=342,60");
         }
+        
+        eth1Exp: EtherMACFullDuplex
+        {
+            parameters:
+                promiscuous = true;
+                address = macAddress;
+                txQueueLimit = outputQueueCapacityPerPort;
+                @display("p=442,60");
+        }
 
         nodeTable: nodeTable {
-            @display("p=69,358");
+            @display("p=569,358");
         }
         
     connections:

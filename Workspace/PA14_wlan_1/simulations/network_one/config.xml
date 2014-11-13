@@ -21,7 +21,7 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit>            
-            <interval>0.000208</interval> 					<!-- 208 µs -->
+            <interval>0.000010</interval> 					<!-- 208 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-01</destination>    

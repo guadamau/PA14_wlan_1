@@ -86,8 +86,21 @@ class INET_API ModifiedEtherMACBase : public cSimpleModule //, public INotifiabl
     cQueue txQueue;                 // output queue
     //IPassiveQueue *queueModule;     // optional module to receive messages from
 
-    cGate *physOutGate;             // pointer to the "phys$o" gate
-    cGate *physOutGateExp;             // pointer to the "phys$o" gate
+    /* Frames to the physical layer */
+    cGate* physOutGate;             // pointer to the "phys$o" gate
+    cGate* physOutGateExp;             // pointer to the "phys$o" gate
+
+    /* Frames from the physical layer */
+    cGate* physInGate;
+    cGate* physInGateExp;
+
+    /* Frames from hsr switch */
+    cGate* switchInGate;
+    cGate* switchInGateExp;
+
+    /* Frames to the hsr switch */
+    cGate* switchOutGate;
+    cGate* switchOutGateExp;
 
     // notification stuff
     InterfaceEntry *interfaceEntry;  // points into IInterfaceTable
@@ -122,7 +135,6 @@ class INET_API ModifiedEtherMACBase : public cSimpleModule //, public INotifiabl
     cOutVector numDroppedQueueFullVector;
     cOutVector numFramesPassedToHLVector;
 
-    ListenErkennung *duplicateDetection;
     
   public:
     ModifiedEtherMACBase();

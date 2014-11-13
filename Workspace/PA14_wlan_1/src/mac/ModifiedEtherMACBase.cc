@@ -66,8 +66,16 @@ ModifiedEtherMACBase::~ModifiedEtherMACBase()
 
 void ModifiedEtherMACBase::initialize()
 {
-    physOutGate = gate("phys$o");
-    physOutGateExp = gate("physExp$o");
+    physInGate = gate( "phys$i" );
+    physInGateExp = gate( "physExp$i" );
+    physOutGate = gate( "phys$o" );
+    physOutGateExp = gate( "physExp$o" );
+
+    switchInGate = gate( "upperLayerIn" );
+    switchInGateExp = gate( "upperLayerInExp" );
+
+    switchOutGate = gate( "upperLayerOut" );
+    switchOutGate = gate( "upperLayerOutExp" );
 
     initializeFlags();
 
@@ -79,14 +87,6 @@ void ModifiedEtherMACBase::initialize()
 
     const char *addrstr = par("address");
     address.setAddress(addrstr);
-
-//  duplicate detection
-    cModule *calleeModule = getParentModule();
-    const char *duplicateDetectionString = par("duplicateDetection");
-    calleeModule = calleeModule->getSubmodule(duplicateDetectionString); 
-    duplicateDetection = check_and_cast<ListenErkennung*>(calleeModule);
-    
-    //return NULL;
 
 //    initializeNotificationBoard();
     initializeStatistics();
@@ -620,27 +620,27 @@ void ModifiedEtherMACBase::startFrameTransmission()
     EtherFrame *origFrame = (EtherFrame *)txQueue.front();
     //EV << "Transmitting a copy of frame " << origFrame << endl;
 
-    while(duplicateDetection->checkFrame(check_and_cast<EthernetIIFrame *>(origFrame->dup())) != 1)
-    {
-        txQueue.pop();
-    	EthernetIIFrame *packet = check_and_cast<EthernetIIFrame *>(origFrame);
-        vlanMessage *vlanTag = NULL;
-        dataMessage *messageData = NULL;
-        hsrMessage *hsrTag = NULL;
-        MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
-        MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
-        origFrame = NULL;
-        
-        if(txQueue.empty()){
-            //only duplicates in queue
-            transmitState = TX_IDLE_STATE;
-            return;
-        }            
-        origFrame = (EtherFrame *)txQueue.front();
-    }
+//    while(duplicateDetection->checkFrame(check_and_cast<EthernetIIFrame *>(origFrame->dup())) != 1)
+//    {
+//        txQueue.pop();
+//    	EthernetIIFrame *packet = check_and_cast<EthernetIIFrame *>(origFrame);
+//        vlanMessage *vlanTag = NULL;
+//        dataMessage *messageData = NULL;
+//        hsrMessage *hsrTag = NULL;
+//        MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
+//        MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
+//        origFrame = NULL;
+//
+//        if(txQueue.empty()){
+//            //only duplicates in queue
+//            transmitState = TX_IDLE_STATE;
+//            return;
+//        }
+//        origFrame = (EtherFrame *)txQueue.front();
+//    }
     
     EtherFrame *frame = (EtherFrame *) origFrame->dup();
-    frame->addByteLength(PREAMBLE_BYTES+SFD_BYTES);
+    frame->addByteLength( PREAMBLE_BYTES+SFD_BYTES );
 
     if (hasSubscribers)
     {

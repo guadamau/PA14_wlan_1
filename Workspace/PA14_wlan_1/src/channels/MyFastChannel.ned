@@ -14,10 +14,20 @@
 // 
 package channels;
 
-        channel MyFastChannel extends ned.DelayChannel 
-        {
+//        channel MyFastChannel extends ned.DelayChannel 
+//        {
+//            delay = uniform(300ns, 400ns);
+//            //datarate = 100Mbps;
+//            //per = 1; //paketerror
+//            //ber = 0.00001; //biterror
+//        }
+        
+        channel MyFastChannel extends ned.DatarateChannel {
             delay = uniform(300ns, 400ns);
-            //datarate = 100Mbps;
-            //per = 1; //paketerror
-            //ber = 0.00001; //biterror
+            datarate = 100Mbps;
+        }
+        
+        channel MyInternalChannel extends ned.DatarateChannel {
+              delay = 25us;
+//              datarate = 100Mbps;
         }

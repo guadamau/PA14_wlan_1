@@ -1,5 +1,7 @@
 package endDevices;
 
+import inet.linklayer.ethernet.EtherMACFullDuplex;
+
 import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import switch.RedBoxSwitch;
@@ -26,36 +28,58 @@ module HsrRedBox extends HsrNode
             ringID = ringID;
             @display("p=167,216");
         }
-
-        mac3: ModifiedEtherMACBase {
+        
+        duplikatlistePortInterlink: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=63,280");
+        }
+        
+        duplikatlistePortInterlinkExp: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=170,400");
+        }
+        
+        ethInterlink: EtherMACFullDuplex
+        {
             parameters:
                 promiscuous = true;
-                address = myAddress;
-                duplicateDetection = "duplikatlistePortInterlink";
+                address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=30,389");
+        }
+        
+        ethInterlinkExp: EtherMACFullDuplex
+        {
+            parameters:
+                promiscuous = true;
+                address = macAddress;
+                txQueueLimit = outputQueueCapacityPerPort;
+                @display("p=250,489");
         }
         
     connections:
 
         //Macs
-        mac1.upperLayerIn <-- redBoxSwitch.gateA$o;
-        mac1.upperLayerInExp <-- redBoxSwitch.gateAExp$o;
+        eth0.upperLayerIn <-- redBoxSwitch.gateA$o;
+        eth0Exp.upperLayerIn <-- redBoxSwitch.gateAExp$o;
 
-        mac1.upperLayerOut --> redBoxSwitch.gateA$i;
-        mac1.upperLayerOutExp --> redBoxSwitch.gateAExp$i;
+        eth0.upperLayerOut --> redBoxSwitch.gateA$i;
+        eth0Exp.upperLayerOut --> redBoxSwitch.gateAExp$i;
 
-		mac2.upperLayerIn <-- redBoxSwitch.gateB$o;
-		mac2.upperLayerInExp <-- redBoxSwitch.gateBExp$o;
+		eth1.upperLayerIn <-- redBoxSwitch.gateB$o;
+		eth1Exp.upperLayerIn <-- redBoxSwitch.gateBExp$o;
 
-        mac2.upperLayerOut --> redBoxSwitch.gateB$i;
-        mac2.upperLayerOutExp --> redBoxSwitch.gateBExp$i;
+        eth1.upperLayerOut --> redBoxSwitch.gateB$i;
+        eth1Exp.upperLayerOut --> redBoxSwitch.gateBExp$i;
 
-		mac3.upperLayerIn <-- redBoxSwitch.gateInterlink$o;
-		mac3.upperLayerInExp <-- redBoxSwitch.gateInterlinkExp$o;
-
-        mac3.upperLayerOut --> redBoxSwitch.gateInterlink$i;
-        mac3.upperLayerOutExp --> redBoxSwitch.gateInterlinkExp$i;
+        
+        ethInterlink.upperLayerOut --> redBoxSwitch.gateInterlink$i;
+        duplikatlistePortInterlink.gate$i <-- redBoxSwitch.gateInterlink$o;
+        duplikatlistePortInterlink.gate$o --> ethInterlink.upperLayerIn;
+        
+        ethInterlinkExp.upperLayerOut --> redBoxSwitch.gateInterlinkExp$i;
+        duplikatlistePortInterlinkExp.gate$i <-- redBoxSwitch.gateInterlinkExp$o;
+        duplikatlistePortInterlinkExp.gate$o --> ethInterlinkExp.upperLayerIn;
 
 
 		//CPU        
@@ -68,10 +92,11 @@ module HsrRedBox extends HsrNode
 		cpu.gateExp$o --> redBoxSwitch.gateCPUExp$i;
 
 		//Gegen aussen
-        gateA <--> mac1.phys;
-        gateAExp <--> mac1.physExp;
-        gateB <--> mac2.phys;
-        gateBExp <--> mac2.physExp;
-        gateInterlink <--> mac3.phys;
-        gateInterlinkExp <--> mac3.physExp;
+        gateA <--> eth0.phys;
+        gateAExp <--> eth0Exp.phys;
+        gateB <--> eth1.phys;
+        gateBExp <--> eth1Exp.phys;
+        
+        gateInterlink <--> ethInterlink.phys;
+        gateInterlinkExp <--> ethInterlinkExp.phys;
 }

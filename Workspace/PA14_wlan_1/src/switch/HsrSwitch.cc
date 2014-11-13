@@ -16,7 +16,6 @@
 #include "HsrSwitch.h"
 
 
-
 HsrSwitch::HsrSwitch()
 {
     /*
@@ -32,7 +31,10 @@ HsrSwitch::~HsrSwitch()
      * Don't know what the hell omnet++ does in the background with its modules.
      * Therefore just to be sure, delete referenced members to prevent memleaks.
      */
-    delete macAddress;
+    if( macAddress != NULL )
+    {
+        delete macAddress;
+    }
 
     /*
      * Constructor and destructor of cGate are protected: only cModule is allowed

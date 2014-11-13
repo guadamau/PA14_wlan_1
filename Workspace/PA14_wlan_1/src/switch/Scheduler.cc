@@ -5,6 +5,7 @@
  *      Author: guadagnini
  */
 
+
 #include "Scheduler.h"
 #include "HsrSwitch.h"
 #include "hsrSwitchSelfMessage_m.h"
@@ -92,13 +93,15 @@ void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 {
     ( check_and_cast<cQueue*>( queues->get( queue ) ) )->insert( msg );
 
+    EV << "[ OK ] Enqueued Message created at: " << msg->getCreationTime() << " to queue: " << static_cast<queueName>( queue ) << endl;
+
     switch( queue )
     {
         case LOW_INTERNAL:
         {
             setQueueSizeLowInt( getQueueSizeLowInt() + 1 );
             getQueueLowIntVector()->record( getQueueSizeLowInt() );
-            EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl;
+            /* EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl; */
             break;
         }
 
@@ -113,6 +116,7 @@ void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 void Scheduler::processQueues( void )
 {
     HsrSwitch* parentModule = check_and_cast<HsrSwitch*>( getParentModule() );
+
     cQueue* currentQueue = NULL;
     queueName currentQueueName;
     cGate* selectedOutGate = NULL;
@@ -148,22 +152,28 @@ void Scheduler::processQueues( void )
                         selectedOutGate = schedOutGate;
                     }
 
-                    if( !( selectedOutGate->getChannel()->isBusy() ) )
+                    if( !( selectedOutGate->getTransmissionChannel()->isBusy() ) )
                     {
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
+                        EV << "!!!!!!!!!!!!!!!!!!!!!!!!! TransmissionTime: " << selectedOutGate->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
+
                         /* Channel is free. Send the frame.
                            If Express Prio send via ExpressGate */
-                        parentModule->send( msg, selectedOutGate );
+                        EV << "[ OK ] Message created at: " << msg->getCreationTime() << " sent." << endl;
 
+                        Enter_Method_Silent();
+                        parentModule->send( msg, selectedOutGate );
 
                         /* Some logging shizzle */
                         setQueueSizeLowInt( getQueueSizeLowInt()-1 );
                         getQueueLowIntVector()->record( getQueueSizeLowInt() );
-                        EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl;
+                        /* EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl; */
+                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedOutGate->getTransmissionChannel()->getTransmissionFinishTime() << endl;
                     }
                     else
                     {
+                        EV << "[ !! ] Transmission channel: " << selectedOutGate->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
                         /* Channel is currently busy. Have to reschedule the frame. */
                         simtime_t finishTime = selectedOutGate->getChannel()->getTransmissionFinishTime();
                         scheduleAt( finishTime, new SchedulerSelfMessage() );
