@@ -112,7 +112,7 @@ Vorgehen / Methoden
 \end_layout
 
 \begin_layout Section
-Aufbau der Netzwerkumgebung
+Aufbau der Simulation
 \end_layout
 
 \begin_layout Standard
@@ -203,10 +203,19 @@ name "sub:Mechanismen-zur-Trafficregelung"
 \begin_layout Standard
 In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
  und in der Simulation implementiert werden.
+ Es besteht dann die Möglichkeit für jeden Knoten zwischen den Mechanismen
+ auszuwählen oder diese sogar zu kombinieren.
 \end_layout
 
 \begin_layout Subsubsection
 Limitierung des Zuflusses von neuem Traffic
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Limitierung-des-Zuflusses"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -241,7 +250,8 @@ Damit die Frames innerhalb des Rings (HSR-Netzwerks) schneller zum Ziel
  kommen, kann diesen Frames der Vortritt gegenüber Frames von Aussen gewährt
  werden.
  Dies ist bei gleich priorisierten Frames der Fall.
- 
+ Es kann hier jedoch die Möglichkeit geben, dass so nie Frames von Aussen
+ versendet werden.
 \end_layout
 
 \begin_layout Standard
@@ -249,6 +259,15 @@ Je nach auftretenden Prioritäten kann es auch sein, dass von Aussen ein
  Express-Frame und vom Ring ein High-Frame kommt.
  Dann hat das Express-Frame trotz der Herkunft von Aussen aufgrund dessen
  Priorität Vortritt.
+\end_layout
+
+\begin_layout Standard
+Die andere Möglichkeit ist, den Frames, die auf den Ring sollen, den Vortritt
+ zu gewähren.
+ So kann ein minimaler Zufluss auf den Ring garantiert werden.
+ Hier kann es den umgekehrten Fall wie wenn die Frames vom Ring Vortritt
+ haben geben: Wenn ständig neue Frames von Aussen kommen, werden die Frames
+ vom Ring nie versendet.
 \end_layout
 
 \begin_layout Subsubsection
@@ -476,6 +495,9 @@ Sobald ein Gerät ein Frame erhält, wird es in dessen Switch analysiert und
  die Herkunft und das Ziel ermittelt, um entscheiden zu können, an welchen
  Ausgang das Frame weitergeleitet werden muss.
  Je nach Ausgang wird das Frame dann an den jeweiligen Scheduler weitergeleitet.
+ Muss ein Frame an alle Ethernet-Ports gesendet werden (wenn z.B.
+ ein Frame von der CPU des Gerätes generiert wird), dann wird dies vom Switch
+ dupliziert und an die betroffenen Scheduler gesendet.
  Der Scheduler ermittelt dann die Priorität (und eventuell die Herkunft)
  des Frames, um diese dann in die entsprechende Queue einzuordnen.
  Die Herkunft ist nur je nach Mechanismus notwendig, wenn z.B.
@@ -490,8 +512,40 @@ reference "sub:Vortrittsregeln-bezüglich-Frames"
 \end_layout
 
 \begin_layout Standard
-Bei einem Express-Frame muss der Scheduler sofort handeln und wenn möglich
- das Frame, das gerade übertragen wird, fragmentieren.
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Ablauf_Frame_Switch.png
+	display false
+	scale 90
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispielablauf und Schedulerzuordnung eines Frames in einem Switch
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -501,6 +555,371 @@ Der Scheduler arbeitet nach jedem neuen Frame seine Queues ab.
  und Mechanismus an der Reihe ist.
  Wird gerade etwas auf dem Ausgang übertragen, versucht es der Scheduler
  erst nochmals sobald die Übertragung zu Ende ist.
+\end_layout
+
+\begin_layout Subsubsection
+Express-Frame
+\end_layout
+
+\begin_layout Standard
+Bei einem Express-Frame muss der Scheduler sofort handeln.
+ Anders als bei einem normalen Frame muss das Express-Frame auch bei einem
+ besetzten Ausgang versendet werden, weshalb das Frame, das gerade übertragen
+ wird, wenn möglich fragmentiert werden muss.
+ 
+\end_layout
+
+\begin_layout Standard
+Wichtig ist, dass kein Fragment unter der kleinstmöglichen Ethernet-Frame-Grösse
+ von 64 Bytes liegt.
+ Aus diesem Grund kann es sein, dass Frames manchmal nicht fragmentiert
+ werden können und der Scheduler warten muss bis dieses versendet wurde.
+\end_layout
+
+\begin_layout Standard
+Kann das Frame jedoch fragmentiert werden, so wird das derzeitige Fragment
+ zu Ende gesendet und dann das Express-Frame versendet.
+ Danach werden die restlichen Fragmente versendet.
+\end_layout
+
+\begin_layout Subsubsection
+Fragmentierung
+\end_layout
+
+\begin_layout Standard
+In der Simulation findet jedoch keine richtige Fragmentierung statt, jedoch
+ wird diese über Zeitberechnung miteinbezogen.
+ Das heisst, dass ein Express-Frame bei einem belegten Ausgang gesendet
+ wird, wenn das Fragment inklusive IFG versendet worden wäre.
+ Die Ankunftszeit des 
+\begin_inset Quotes fld
+\end_inset
+
+fragmentierten
+\begin_inset Quotes frd
+\end_inset
+
+ Frame wird dann um die Dauer des Express-Frames inkl.
+ dessen IFG verlängert.
+\end_layout
+
+\begin_layout Standard
+Da keine wirkliche Fragmentierung statt findet, ist der Ausgang bei dem
+ das zu unterbrechende Frame gesendet wird immer noch belegt.
+ Aus diesem Grund gibt es für jeden Ausgang einen weiteren Ausgang ausschliessli
+ch für Express-Frames.
+\end_layout
+
+\begin_layout Standard
+Somit sind die Ankunfts- und Sendezeiten der Frames die Selben wie wenn
+ eine tatsächliche Fragmentierung stattgefunden hätte.
+\end_layout
+
+\begin_layout Subsection
+Generierung von Traffic (Lastprofile)
+\end_layout
+
+\begin_layout Standard
+In jedem Node ist ein Generator implementiert, welcher mittels Konfigurationspar
+ameter Frames in verschiedenen Folgemustern generieren kann.
+ In diesem Kapitel werden verschiedene Muster von Traffic (Lastprofile)
+ aufgezeigt, die in der Simulation generiert werden können.
+\end_layout
+
+\begin_layout Standard
+Die Lastprofile teilen dabei folgende Eigenschaften bezüglich der Prioritäten
+ der Frames:
+\end_layout
+
+\begin_layout Itemize
+Express-Frames sind klein und kommen selten vor.
+ Sie sollen Alarme in einem System darstellen, welche schnellstmöglich übermitte
+lt werden müssen.
+\end_layout
+
+\begin_layout Itemize
+Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+High
+\begin_inset Quotes frd
+\end_inset
+
+ stellen den normalen Verkehr dar.
+ Dies kann unter anderem Down- und Upload von Dateien, Monitoring, etc.
+ sein.
+ Die Grösse der Frames kann klein und gross sein.
+\end_layout
+
+\begin_layout Itemize
+Die Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+Low
+\begin_inset Quotes frd
+\end_inset
+
+ bilden den Background-Traffic, der oft vorkommt und wie der normale Verkehr
+ verschieden gross sein kann.
+\end_layout
+
+\begin_layout Standard
+Bezüglich der Auftretenswahrscheinlichkeit der Frames lässt sich demnach
+ folgendes sagen: Je höher die Priorität, desto seltener kommt das Frame
+ vor.
+\end_layout
+
+\begin_layout Section
+Überprüfung der Implementation
+\end_layout
+
+\begin_layout Standard
+Damit man sich sicher sein kann, dass die Simulation wie geplant verläuft,
+ wird die Implementation vor der Simulation der Szenarien überprüft.
+\end_layout
+
+\begin_layout Subsection
+Aufbau der Testumgebung
+\end_layout
+
+\begin_layout Standard
+Für die Tests wird in der Simulation ein HSR-Ring mit 5 DANH-Geräten implementie
+rt.
+\end_layout
+
+\begin_layout Subsection
+Verhaltensüberprüfung
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Soll
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ein Frame wird von einem Knoten, der nicht der einzige Empfänger des Frames
+ ist, an den nächsten Knoten weitergeleitet.
+ Das Frame wird bei einem Unicast-Frame vom Empfänger und bei einem Multi-/Broad
+cast-Frame vom Sender vom Netz entfernt.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ist
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Test: Frameablauf in der Testumgebung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Soll
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ein Frame wird von einem Knoten, der nicht der einzige Empfänger des Frames
+ ist, an den nächsten Knoten weitergeleitet.
+ Das Frame wird bei einem Unicast-Frame vom Empfänger und bei einem Multi-/Broad
+cast-Frame vom Sender vom Netz entfernt.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ist
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Test: Frameablauf in der Testumgebung
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Verhält sich Frame wie geplant?
+\end_layout
+
+\begin_layout Standard
+Was wenn....?
+\end_layout
+
+\begin_layout Section
+Szenarien
+\end_layout
+
+\begin_layout Subsubsection
+Szenario ##: xxxxxxxxxxxxxxxxxxxxxxx
+\end_layout
+
+\begin_layout Standard
+Mechanismen:
+\end_layout
+
+\begin_layout Standard
+Keine (FCFS), Zuflusslimitierung, Vortritt Ring / von Aussen, Reissverschluss,
+ Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Section
+Experimente
 \end_layout
 
 \begin_layout Section

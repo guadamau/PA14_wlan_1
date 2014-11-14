@@ -533,6 +533,214 @@ Low: Background-Verkehr (z.B.
  TCP), oft und klein & gross
 \end_layout
 
+\begin_layout Subsection
+Kalenderwoche 45: 06.11.2014
+\end_layout
+
+\begin_layout Itemize
+Gedanken zu IET (Zeitberechnung):
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Sender behält normales Frame, um zu sagen wann Express-Frame versendet werden
+ soll
+\end_layout
+
+\begin_layout Itemize
+Empfänger verlängert 
+\begin_inset Quotes fld
+\end_inset
+
+fragmentiertes Frame
+\begin_inset Quotes frd
+\end_inset
+
+ um die Dauer des dazwischen versendeten Express-Frames + IFG
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Empf.
+ überprüft, ob Sendezeit des Express-Frames zwischen Sende- und Ankunftszeit
+ des normalen Frames ist.
+ Wenn ja, wird das normale Frame verlängert
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zweiter Kanal für Express Frame?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wenn Channel busy ist, kann Express-Frame gesendet werden?
+\end_layout
+
+\begin_layout Itemize
+Zweiter Kanal nur für Express Frames
+\end_layout
+
+\begin_layout Itemize
+Keine wirkliche Fragmentierung in Simulation vornehmen, Zeitrechnung reicht
+ aus
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+FragCount sagt nicht max.
+ 5 Fragmente, sondern ist ein Modulo-4-Counter
+\end_layout
+
+\begin_layout Itemize
+Frame abbrechen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nur wenn Rest genug lang ist
+\end_layout
+
+\begin_layout Itemize
+Express muss Fragmentlänge + IFG abwarten
+\end_layout
+
+\begin_layout Itemize
+Normal Frame Ankunftszeit um Express + IFG verlängern
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 46: 13.11.2014
+\end_layout
+
+\begin_layout Itemize
+Anwendungsfall: Substation Automation
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Schutz von Schaltungen und Leitungen sicherstellen
+\end_layout
+
+\begin_layout Itemize
+Merging Units (MUs) erfassen Messwerte
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+7 Messwerte (4x Spannung, 3x Strom) in einem Frame plus Zeitstempel und
+ sonst.
+ Steuerinfos
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+High-Priority Frame von total 160 Bytes
+\end_layout
+
+\begin_layout Itemize
+Konstant 4000x pro Sekunde pro MU
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Spontane Einzelmeldungen (Express-Frame, selten und kurz, ca.
+ 100 Bytes)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wird zufällig mit bestimmter Wahrscheinlichkeit versendet, z.B.
+ bei 20% Wahrscheinlichkeit wenn Randomwert von 0 bis 1 zwischen 0 und 0.2
+ liegt
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Frames werden via Multicast verteilt (Publisher / Subscriber Modell)
+\end_layout
+
+\begin_layout Itemize
+Ziel sind Protection Units (PUs), welche anhand der erhaltenen Werte Entscheidun
+gen treffen und doppelt vorhanden sind
+\end_layout
+
+\begin_layout Itemize
+Max.
+ Anzahl an MUs: 19 Stk., schauen wie es z.B.
+ mit 10 ist
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Background-Traffic (TCP, nicht wirklich simulierbar, Unicast, meistens mit
+ Gerät ausserhalb Ring)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+TCP-ähnlichen Traffic in 2 Knoten generieren
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+200 Frames à 1500 Bytes pro Sekunde von A nach B
+\end_layout
+
+\begin_layout Itemize
+200 Frames à 64 Bytes pro Sekunde von B nach A
+\end_layout
+
+\end_deeper
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Was Intern generiert wird wird gleich behandelt wie das was von Aussen kommt
+\end_layout
+
+\begin_layout Itemize
+Queue-Limit spielt keine allzu grosse Rolle
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wie lange ein Frame warten muss oder wie viele Frames verloren gehen sind
+ äquivalente Aussagen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Man muss am Schluss etwas zur Delay-Charakteristik von Strömen und Express-Frame
+s sagen können
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wann generiert und wann Ankunft? Differenz ist Übermittlungszeit
+\end_layout
+
+\begin_layout Itemize
+Ankunftszeit dort feststellen, wo das Frame vom Netz entfernt wird
+\end_layout
+
+\begin_layout Itemize
+Nicht besseren, sondern schlechteren Fall anschauen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Duplikat anschauen (Was als 2tes ankommt)
+\end_layout
+
+\begin_layout Itemize
+Best-/Worst-Case spielt nur bei Unicast eine Rolle, bei Multi-/Broadcast
+ macht es wahrscheinlich keinen grossen Unterschied
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Standard
 ------------------------------------
 \end_layout

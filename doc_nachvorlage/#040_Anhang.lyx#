@@ -577,6 +577,86 @@ Zweiter Kanal für Express Frame?
 Wenn Channel busy ist, kann Express-Frame gesendet werden?
 \end_layout
 
+\begin_layout Itemize
+Zweiter Kanal nur für Express Frames
+\end_layout
+
+\begin_layout Itemize
+Keine wirkliche Fragmentierung in Simulation vornehmen, Zeitrechnung reicht
+ aus
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+FragCount sagt nicht max.
+ 5 Fragmente, sondern ist ein Modulo-4-Counter
+\end_layout
+
+\begin_layout Itemize
+Frame abbrechen
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nur wenn Rest genug lang ist
+\end_layout
+
+\begin_layout Itemize
+Express muss Fragmentlänge + IFG abwarten
+\end_layout
+
+\begin_layout Itemize
+Normal Frame Ankunftszeit um Express + IFG verlängern
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 46: 13.11.2014
+\end_layout
+
+\begin_layout Itemize
+Anwendungsfall: Substation Automation
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Schutz von Schaltungen und Leitungen sicherstellen
+\end_layout
+
+\begin_layout Itemize
+Merging Units (MUs) erfassen Messwerte
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+7 Messwerte (4x Spannung, 3x Strom) in einem Frame plus Zeitstempel und
+ sonst.
+ Steuerinfos
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+High-Priority Frame von total 160 Bytes
+\end_layout
+
+\begin_layout Itemize
+Konstant 4000x pro Sekunde pro MU
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Spontane Einzelmeldungen (Express-Frame, selten und kurz, ca.
+ 100 Bytes)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Wird zufällig mit bestimmter Wahrscheinlichkeit versendet, z.B.
+ bei 20% Wahrscheinlichkeit wenn Randomwert von 0
+\end_layout
+
+\end_deeper
 \end_deeper
 \end_deeper
 \begin_layout Standard
