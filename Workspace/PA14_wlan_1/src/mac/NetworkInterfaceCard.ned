@@ -12,22 +12,16 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package channels;
 
-//        channel MyFastChannel extends ned.DelayChannel 
-//        {
-//            delay = uniform(300ns, 400ns);
-//            //datarate = 100Mbps;
-//            //per = 1; //paketerror
-//            //ber = 0.00001; //biterror
-//        }
-        
-        channel MyFastChannel extends ned.DatarateChannel {
-            delay = uniform(300ns, 400ns);
-            datarate = 100Mbps;
-        }
-        
-        channel MyInternalChannel extends ned.DatarateChannel {
-//              delay = 25us;
-//              datarate = 100Mbps;
-        }
+package mac;
+
+import inet.linklayer.ethernet.EtherMACFullDuplex;
+
+//
+// TODO auto-generated type
+//
+simple NetworkInterfaceCard extends EtherMACFullDuplex
+{
+        @class( NetworkInterfaceCard );
+        @display( "i=block/ifcard" );
+}

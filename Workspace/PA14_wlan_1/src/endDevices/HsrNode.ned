@@ -20,8 +20,8 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 import cpu.CPU;
 import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
-import mac.ModifiedEtherMACBase;
 import nodeTable.nodeTable;
+import mac.NetworkInterfaceCard;
 
 
 
@@ -57,24 +57,8 @@ module HsrNode
             @display("p=390,489");
             macAddress = macAddress;
         }
-
-//        mac1: ModifiedEtherMACBase {
-//            parameters:
-//                promiscuous = true;
-//                address = macAddress;
-//                txQueueLimit = outputQueueCapacityPerPort;
-//                @display("p=43,60");
-//        }
-//
-//        mac2: ModifiedEtherMACBase {
-//            parameters:
-//                promiscuous = true;
-//                address = macAddress;
-//                txQueueLimit = outputQueueCapacityPerPort;
-//                @display("p=342,60");
-//        }
         
-        eth0: EtherMACFullDuplex
+        eth0: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;
@@ -83,7 +67,7 @@ module HsrNode
                 @display("p=43,60");
         }
         
-        eth0Exp: EtherMACFullDuplex
+        eth0Exp: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;
@@ -92,7 +76,7 @@ module HsrNode
                 @display("p=43,160");
         }
         
-        eth1: EtherMACFullDuplex
+        eth1: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;
@@ -101,7 +85,7 @@ module HsrNode
                 @display("p=342,60");
         }
         
-        eth1Exp: EtherMACFullDuplex
+        eth1Exp: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;

@@ -45,7 +45,9 @@ Scheduler::~Scheduler()
 }
 
 
-void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate, cGate* schedOutGateExp )
+void Scheduler::initScheduler( schedulerMode schedmode,
+                               cGate* schedOutGate, cGate* schedOutGateExp,
+                               cGate* schedTransmissionGate, cGate* schedTransmissionGateExp )
 {
     this->schedmode = schedmode;
     setQueueSizeLowInt( 0 );
@@ -63,6 +65,8 @@ void Scheduler::initScheduler( schedulerMode schedmode, cGate* schedOutGate, cGa
     this->schedOutGate = schedOutGate;
     this->schedOutGateExp = schedOutGateExp;
 
+    this->schedTransmissionGate = schedTransmissionGate;
+    this->schedTransmissionGateExp = schedTransmissionGateExp;
 }
 
 unsigned long int Scheduler::getQueueSizeLowInt()
@@ -120,6 +124,7 @@ void Scheduler::processQueues( void )
     cQueue* currentQueue = NULL;
     queueName currentQueueName;
     cGate* selectedOutGate = NULL;
+    cGate* selectedTransmissionGate = NULL;
 
     switch( schedmode )
     {
@@ -146,21 +151,25 @@ void Scheduler::processQueues( void )
                     if( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL )
                     {
                         selectedOutGate = schedOutGateExp;
+                        selectedTransmissionGate = schedTransmissionGateExp;
                     }
                     else
                     {
                         selectedOutGate = schedOutGate;
+                        selectedTransmissionGate = schedTransmissionGateExp;
                     }
 
-                    if( !( selectedOutGate->getTransmissionChannel()->isBusy() ) )
+                    if( !( selectedTransmissionGate->getTransmissionChannel()->isBusy() ) )
                     {
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
-                        EV << "!!!!!!!!!!!!!!!!!!!!!!!!! TransmissionTime: " << selectedOutGate->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
+                        EV << "!!!!!!!!!!!!!!!!!!!!!!!!! Transmission Duration: " << selectedTransmissionGate->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
 
                         /* Channel is free. Send the frame.
                            If Express Prio send via ExpressGate */
                         EV << "[ OK ] Message created at: " << msg->getCreationTime() << " sent." << endl;
+
+                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedTransmissionGate->getTransmissionChannel()->getTransmissionFinishTime() << endl;
 
                         Enter_Method_Silent();
                         parentModule->send( msg, selectedOutGate );
@@ -169,13 +178,13 @@ void Scheduler::processQueues( void )
                         setQueueSizeLowInt( getQueueSizeLowInt()-1 );
                         getQueueLowIntVector()->record( getQueueSizeLowInt() );
                         /* EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl; */
-                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedOutGate->getTransmissionChannel()->getTransmissionFinishTime() << endl;
+
                     }
                     else
                     {
-                        EV << "[ !! ] Transmission channel: " << selectedOutGate->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
+                        EV << "[ !! ] Transmission channel: " << selectedTransmissionGate->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
                         /* Channel is currently busy. Have to reschedule the frame. */
-                        simtime_t finishTime = selectedOutGate->getChannel()->getTransmissionFinishTime();
+                        simtime_t finishTime = selectedTransmissionGate->getChannel()->getTransmissionFinishTime();
                         scheduleAt( finishTime, new SchedulerSelfMessage() );
                     }
 

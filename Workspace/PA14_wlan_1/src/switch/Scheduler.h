@@ -34,6 +34,9 @@ private:
     cGate* schedOutGate;
     cGate* schedOutGateExp;
 
+    cGate* schedTransmissionGate;
+    cGate* schedTransmissionGateExp;
+
     /* Members to record statistics. */
     cOutVector* queueLowIntVector;
     unsigned long int queuesize_low_int;
@@ -42,7 +45,9 @@ public:
     Scheduler();
     virtual ~Scheduler();
 
-    void initScheduler( schedulerMode schedmode, cGate* schedOutGate, cGate* scheduOutGateExp );
+    void initScheduler( schedulerMode schedmode,
+                        cGate* schedOutGate, cGate* schedOutGateExp,
+                        cGate* schedTransmissionGate, cGate* schedTransmissionGateExp );
 
     /* Main sched methods ... */
     void enqueueMessage( cMessage* msg, queueName queue );

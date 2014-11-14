@@ -14,6 +14,7 @@
 // 
 
 #include "HsrSwitch.h"
+#include "NetworkInterfaceCard.h"
 
 
 HsrSwitch::HsrSwitch()
@@ -231,12 +232,18 @@ void HsrSwitch::initialize( const char* schedchoice )
     gateCpuOut = gate( "gateCPU$o" );
     gateCpuOut = gate( "gateCPUExp$o" );
 
+    NetworkInterfaceCard* eth0 = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth0" ) );
+    NetworkInterfaceCard* eth0Exp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth0Exp" ) );
+    NetworkInterfaceCard* eth1 = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth1" ) );
+    NetworkInterfaceCard* eth1Exp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth1Exp" ) );
+
     schedGateAOut = new Scheduler();
-    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp );
+    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp, eth0->getPhysOutGate(), eth0Exp->getPhysOutGate() );
     schedGateBOut = new Scheduler();
-    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp );
+    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp, eth1->getPhysOutGate(), eth1Exp->getPhysOutGate() );
     schedGateCpuOut = new Scheduler();
-    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp );
+    /* cpu has no external transmission gate, so we pass the internal gates twice here. */
+    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp, gateCpuOut, gateCpuOutExp );
 }
 
 

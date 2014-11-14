@@ -14,6 +14,7 @@
 //
 
 #include "RedBoxSwitch.h"
+#include "NetworkInterfaceCard.h"
 
 Define_Module( RedBoxSwitch );
 
@@ -54,8 +55,11 @@ RedBoxSwitch::initialize()
     gateInterlinkOut = gate(" gateInterlink$o" );
     gateInterlinkOutExp = gate( "gateInterlinkExp$o" );
 
+    NetworkInterfaceCard* ethInterlink = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.ethInterlink" ) );
+    NetworkInterfaceCard* ethInterlinkExp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.ethInterlinkExp" ) );
+
     schedGateInterlinkOut = new Scheduler();
-    schedGateInterlinkOut->initScheduler( HsrSwitch::getSchedmode(), gateInterlinkOut, gateInterlinkOutExp );
+    schedGateInterlinkOut->initScheduler( HsrSwitch::getSchedmode(), gateInterlinkOut, gateInterlinkOutExp, ethInterlink->getPhysOutGate(), ethInterlinkExp->getPhysOutGate() );
 
 }
 

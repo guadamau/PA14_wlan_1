@@ -5,7 +5,7 @@ import inet.linklayer.ethernet.EtherMACFullDuplex;
 import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import switch.RedBoxSwitch;
-import mac.ModifiedEtherMACBase;
+import mac.NetworkInterfaceCard;
 
 
 module HsrRedBox extends HsrNode
@@ -39,7 +39,7 @@ module HsrRedBox extends HsrNode
             @display("p=170,400");
         }
         
-        ethInterlink: EtherMACFullDuplex
+        ethInterlink: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;
@@ -48,7 +48,7 @@ module HsrRedBox extends HsrNode
                 @display("p=30,389");
         }
         
-        ethInterlinkExp: EtherMACFullDuplex
+        ethInterlinkExp: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;

@@ -12,22 +12,23 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
-package channels;
 
-//        channel MyFastChannel extends ned.DelayChannel 
-//        {
-//            delay = uniform(300ns, 400ns);
-//            //datarate = 100Mbps;
-//            //per = 1; //paketerror
-//            //ber = 0.00001; //biterror
-//        }
-        
-        channel MyFastChannel extends ned.DatarateChannel {
-            delay = uniform(300ns, 400ns);
-            datarate = 100Mbps;
-        }
-        
-        channel MyInternalChannel extends ned.DatarateChannel {
-//              delay = 25us;
-//              datarate = 100Mbps;
-        }
+#ifndef NETWORKINTERFACECARD_H_
+#define NETWORKINTERFACECARD_H_
+
+#include <omnetpp.h>
+#include <EtherMACFullDuplex.h>
+
+class NetworkInterfaceCard : public EtherMACFullDuplex
+{
+
+    public:
+        NetworkInterfaceCard();
+        virtual ~NetworkInterfaceCard();
+
+        cGate* getPhysOutGate( void );
+        cChannel* getTransmissionChannel( void );
+
+};
+
+#endif /* NETWORKINTERFACECARD_H_ */
