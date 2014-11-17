@@ -14,6 +14,7 @@
 #include <omnetpp.h>
 
 #include "hsrDefines.h"
+#include "NetworkInterfaceCard.h"
 
 
 typedef enum
@@ -34,8 +35,8 @@ private:
     cGate* schedOutGate;
     cGate* schedOutGateExp;
 
-    cGate* schedTransmissionGate;
-    cGate* schedTransmissionGateExp;
+    NetworkInterfaceCard* schedNic;
+    NetworkInterfaceCard* schedNicExp;
 
     /* Members to record statistics. */
     cOutVector* queueLowIntVector;
@@ -47,7 +48,7 @@ public:
 
     void initScheduler( schedulerMode schedmode,
                         cGate* schedOutGate, cGate* schedOutGateExp,
-                        cGate* schedTransmissionGate, cGate* schedTransmissionGateExp );
+                        NetworkInterfaceCard* schedNic, NetworkInterfaceCard* schedNicExp );
 
     /* Main sched methods ... */
     void enqueueMessage( cMessage* msg, queueName queue );

@@ -19,7 +19,7 @@
         <lastmuster>
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
+            <startzeit>0.001080</startzeit>            
             <stopzeit>0.06</stopzeit>            
             <interval>0.000010</interval> 					<!-- 208 µs -->
             <last>0.0</last>

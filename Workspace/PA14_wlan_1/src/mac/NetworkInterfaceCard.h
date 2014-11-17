@@ -19,6 +19,8 @@
 #include <omnetpp.h>
 #include <EtherMACFullDuplex.h>
 
+
+
 class NetworkInterfaceCard : public EtherMACFullDuplex
 {
 
@@ -28,7 +30,7 @@ class NetworkInterfaceCard : public EtherMACFullDuplex
 
         cGate* getPhysOutGate( void );
         cChannel* getTransmissionChannel( void );
-
+        unsigned char getDeviceTransmitState( void );
 };
 
 #endif /* NETWORKINTERFACECARD_H_ */

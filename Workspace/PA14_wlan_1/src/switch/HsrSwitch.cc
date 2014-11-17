@@ -238,12 +238,12 @@ void HsrSwitch::initialize( const char* schedchoice )
     NetworkInterfaceCard* eth1Exp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth1Exp" ) );
 
     schedGateAOut = new Scheduler();
-    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp, eth0->getPhysOutGate(), eth0Exp->getPhysOutGate() );
+    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp, eth0, eth0Exp );
     schedGateBOut = new Scheduler();
-    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp, eth1->getPhysOutGate(), eth1Exp->getPhysOutGate() );
+    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp, eth1, eth1Exp );
     schedGateCpuOut = new Scheduler();
     /* cpu has no external transmission gate, so we pass the internal gates twice here. */
-    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp, gateCpuOut, gateCpuOutExp );
+    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp, NULL, NULL );
 }
 
 

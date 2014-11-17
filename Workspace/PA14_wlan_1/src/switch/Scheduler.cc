@@ -11,6 +11,8 @@
 #include "hsrSwitchSelfMessage_m.h"
 #include "schedulerSelfMessage_m.h"
 
+Define_Module( Scheduler );
+
 
 Scheduler::Scheduler()
 {
@@ -47,7 +49,7 @@ Scheduler::~Scheduler()
 
 void Scheduler::initScheduler( schedulerMode schedmode,
                                cGate* schedOutGate, cGate* schedOutGateExp,
-                               cGate* schedTransmissionGate, cGate* schedTransmissionGateExp )
+                               NetworkInterfaceCard* schedNic, NetworkInterfaceCard* schedNicExp )
 {
     this->schedmode = schedmode;
     setQueueSizeLowInt( 0 );
@@ -65,8 +67,8 @@ void Scheduler::initScheduler( schedulerMode schedmode,
     this->schedOutGate = schedOutGate;
     this->schedOutGateExp = schedOutGateExp;
 
-    this->schedTransmissionGate = schedTransmissionGate;
-    this->schedTransmissionGateExp = schedTransmissionGateExp;
+    this->schedNic = schedNic;
+    this->schedNicExp = schedNicExp;
 }
 
 unsigned long int Scheduler::getQueueSizeLowInt()
@@ -124,7 +126,7 @@ void Scheduler::processQueues( void )
     cQueue* currentQueue = NULL;
     queueName currentQueueName;
     cGate* selectedOutGate = NULL;
-    cGate* selectedTransmissionGate = NULL;
+    NetworkInterfaceCard* selectedNic = NULL;
 
     switch( schedmode )
     {
@@ -151,25 +153,28 @@ void Scheduler::processQueues( void )
                     if( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL )
                     {
                         selectedOutGate = schedOutGateExp;
-                        selectedTransmissionGate = schedTransmissionGateExp;
+                        selectedNic = schedNicExp;
                     }
                     else
                     {
                         selectedOutGate = schedOutGate;
-                        selectedTransmissionGate = schedTransmissionGateExp;
+                        selectedNic = schedNic;
                     }
 
-                    if( !( selectedTransmissionGate->getTransmissionChannel()->isBusy() ) )
+                    /* check if the transmit state of the nic is idle.
+                     * refers to the enum MACTransmitState of EtherMACBase.h */
+                    if( selectedNic->getDeviceTransmitState() == 1 )
+                    /* if( !( selectedTransmissionGate->getTransmissionChannel()->isBusy() ) ) */
                     {
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
-                        EV << "!!!!!!!!!!!!!!!!!!!!!!!!! Transmission Duration: " << selectedTransmissionGate->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
+                        EV << "Transmission Duration: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
 
                         /* Channel is free. Send the frame.
                            If Express Prio send via ExpressGate */
                         EV << "[ OK ] Message created at: " << msg->getCreationTime() << " sent." << endl;
 
-                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedTransmissionGate->getTransmissionChannel()->getTransmissionFinishTime() << endl;
+                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime() << endl;
 
                         Enter_Method_Silent();
                         parentModule->send( msg, selectedOutGate );
@@ -182,9 +187,10 @@ void Scheduler::processQueues( void )
                     }
                     else
                     {
-                        EV << "[ !! ] Transmission channel: " << selectedTransmissionGate->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
+                        EV << "[ !! ] Transmission channel: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
                         /* Channel is currently busy. Have to reschedule the frame. */
-                        simtime_t finishTime = selectedTransmissionGate->getChannel()->getTransmissionFinishTime();
+                        simtime_t finishTime = selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime();
+                        EV << "[ !! ] Rescheduling time is: " << finishTime << endl;
                         scheduleAt( finishTime, new SchedulerSelfMessage() );
                     }
 

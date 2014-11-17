@@ -59,7 +59,7 @@ RedBoxSwitch::initialize()
     NetworkInterfaceCard* ethInterlinkExp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.ethInterlinkExp" ) );
 
     schedGateInterlinkOut = new Scheduler();
-    schedGateInterlinkOut->initScheduler( HsrSwitch::getSchedmode(), gateInterlinkOut, gateInterlinkOutExp, ethInterlink->getPhysOutGate(), ethInterlinkExp->getPhysOutGate() );
+    schedGateInterlinkOut->initScheduler( HsrSwitch::getSchedmode(), gateInterlinkOut, gateInterlinkOutExp, ethInterlink, ethInterlinkExp );
 
 }
 

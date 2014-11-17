@@ -31,3 +31,8 @@ cChannel* NetworkInterfaceCard::getTransmissionChannel( void )
     return this->transmissionChannel;
 }
 
+unsigned char NetworkInterfaceCard::getDeviceTransmitState( void )
+{
+    return this->transmitState;
+}
+
