@@ -272,7 +272,8 @@ Die Unterbrechung findet nicht wirklich, sondern nur in der Zeitberechnung
  des zu unterbrechenden Frames übertragen wurde, mit Interframe Gap (IFG),
  versendet.
  Danach wird die Zeit, die für die Übertragung des Express-Frames plus IFG
- verwendet wurde, dem 
+ und Grösse der neu entstandenen Felder der weiteren Fragmente verwendet
+ wurde, dem 
 \begin_inset Quotes fld
 \end_inset
 

@@ -767,7 +767,16 @@ reference "table_smd_fragcount"
 
 ).
  Für jedes neue Fragment wird das FragCount-Feld mittels Modulo-4-Zähler
- hochgezählt.
+ hochgezählt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+.
+ Gibt es dann ein Fragment mit dem FragCount Wert 3, so hat das nächjste
+ Frame wieder den FragCount-Wert 0.
  Mittels FragCount-Feld wird davor geschützt, dass falsche Frames zusammengesetz
 t werden wenn bis zu 3 Fragmente verloren gegangen sind.
  Die FragCount-Werte haben jeweils eine Hamming-Distanz von 4 zueinander,
@@ -1285,13 +1294,20 @@ name "table_smd_fragcount"
 
 \end_layout
 
-\begin_layout Plain Layout
-
-\end_layout
-
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Die Grösse des Data-Felds umfasst vom ersten Oktett nach dem SFD/SMD-Feld
+ bis und mit dem letzten Oktett vor dem CRC und hat mindestens eine Grösse
+ von 60 Bytes.
+ Da im ersten Fragment im Data-Bereich mehr als nur Daten sind, beträgt
+ dort der effektiv kleinste Datenbereich (abzüglich MAC-Empfänger-, MAC-Sender-A
+dresse und EtherType-Feld, also 14 Bytes) 46 Bytes.
+ Hat das ursprüngliche Frame zudem ein VLAN-Tag können die effektiven Daten
+ mindestens 42 Bytes gross sein.
 \end_layout
 
 \begin_layout Standard

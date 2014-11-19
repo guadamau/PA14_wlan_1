@@ -31,7 +31,7 @@ module HsrRedBox extends HsrNode
         
         duplikatlistePortInterlink: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=63,280");
+            @display("p=103,480");
         }
         
         duplikatlistePortInterlinkExp: ListenErkennung {
@@ -45,7 +45,7 @@ module HsrRedBox extends HsrNode
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
-                @display("p=30,389");
+                @display("p=40,389");
         }
         
         ethInterlinkExp: NetworkInterfaceCard
@@ -60,14 +60,18 @@ module HsrRedBox extends HsrNode
     connections:
 
         //Macs
-        eth0.upperLayerIn <-- redBoxSwitch.gateA$o;
-        eth0Exp.upperLayerIn <-- redBoxSwitch.gateAExp$o;
+        eth0.upperLayerIn <-- duplikatlistePortEth0.gate$o;
+        duplikatlistePortEth0.gate$i <-- redBoxSwitch.gateA$o;
+        eth0Exp.upperLayerIn <-- duplikatlistePortEth0Exp.gate$o;
+        duplikatlistePortEth0Exp.gate$i <-- redBoxSwitch.gateAExp$o;
 
         eth0.upperLayerOut --> redBoxSwitch.gateA$i;
         eth0Exp.upperLayerOut --> redBoxSwitch.gateAExp$i;
 
-		eth1.upperLayerIn <-- redBoxSwitch.gateB$o;
-		eth1Exp.upperLayerIn <-- redBoxSwitch.gateBExp$o;
+		eth1.upperLayerIn <-- duplikatlistePortEth1.gate$o;
+        duplikatlistePortEth1.gate$i <-- redBoxSwitch.gateB$o;
+		eth1Exp.upperLayerIn <-- duplikatlistePortEth1Exp.gate$o;
+        duplikatlistePortEth1Exp.gate$i <-- redBoxSwitch.gateBExp$o;
 
         eth1.upperLayerOut --> redBoxSwitch.gateB$i;
         eth1Exp.upperLayerOut --> redBoxSwitch.gateBExp$i;

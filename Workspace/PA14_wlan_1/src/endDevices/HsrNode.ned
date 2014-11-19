@@ -46,16 +46,25 @@ module HsrNode
        
         duplikatlistePortCPU: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=243,238");
+            @display("p=333,288");
         }
         duplikatlistePortCPUExp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=353,188");
+            @display("p=473,258");
         }
 
         cpu: CPU {
             @display("p=390,489");
             macAddress = macAddress;
+        }
+        
+        duplikatlistePortEth0: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=143,60");
+        }
+        duplikatlistePortEth0Exp: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=83,280");
         }
         
         eth0: NetworkInterfaceCard
@@ -76,13 +85,22 @@ module HsrNode
                 @display("p=43,160");
         }
         
+        duplikatlistePortEth1: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=400,60");
+        }
+        duplikatlistePortEth1Exp: ListenErkennung {
+            ListSize = duplicateDetectionListSize;
+            @display("p=520,163");
+        }
+        
         eth1: NetworkInterfaceCard
         {
             parameters:
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
-                @display("p=342,60");
+                @display("p=302,60");
         }
         
         eth1Exp: NetworkInterfaceCard
@@ -91,7 +109,7 @@ module HsrNode
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
-                @display("p=442,60");
+                @display("p=520,60");
         }
 
         nodeTable: nodeTable {
