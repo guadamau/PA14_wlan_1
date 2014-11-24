@@ -2,7 +2,6 @@
 #define __CPU_H__
 
 #include <omnetpp.h>
-#include "TestControl.h"
 #include "cpuSelfMessage_m.h"
 #include "hsrDefines.h"
 #include "EtherFrame_m.h"
@@ -22,11 +21,12 @@ private:
   cGate* gateOutExp;
 
   cXMLElement* rootelement;
-  TestControl* testControl;
+
+  unsigned int sequenceNumber;
+
+  int multicastListener;
 
   static unsigned long messageCount;
-
-  TestControl *getTestControlInstance();
 
   EthernetIIFrame *generateOnePacket(SendData sendData);
   bool scheduleMessage(SendData sendData);

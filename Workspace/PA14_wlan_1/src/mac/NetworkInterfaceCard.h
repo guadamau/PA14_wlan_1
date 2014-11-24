@@ -20,9 +20,15 @@
 #include <EtherMACFullDuplex.h>
 
 
-
 class NetworkInterfaceCard : public EtherMACFullDuplex
 {
+    private:
+        unsigned char transmitLock;
+        cGate* upperLayerOut;
+
+    protected:
+        virtual void initialize( int stage );
+        virtual void handleMessage( cMessage *msg );
 
     public:
         NetworkInterfaceCard();
@@ -31,6 +37,10 @@ class NetworkInterfaceCard : public EtherMACFullDuplex
         cGate* getPhysOutGate( void );
         cChannel* getTransmissionChannel( void );
         unsigned char getDeviceTransmitState( void );
+        unsigned char isLocked( void );
+        void lock( void );
+        void unlock( void );
+        cMessage* getEndIFGMsg( void );
 };
 
 #endif /* NETWORKINTERFACECARD_H_ */

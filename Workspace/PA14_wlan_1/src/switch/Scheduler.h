@@ -16,6 +16,7 @@
 #include "hsrDefines.h"
 #include "NetworkInterfaceCard.h"
 
+class HsrSwitch;
 
 typedef enum
 {
@@ -25,12 +26,16 @@ typedef enum
     TOKENS
 } schedulerMode;
 
-
-class Scheduler : public cSimpleModule {
+class Scheduler {
 
 private:
     cArray* queues;
+    unsigned long int queueSizes[QUEUES_COUNT];
+    cArray* queueVectors;
     schedulerMode schedmode;
+    HsrSwitch* parentSwitch;
+
+    simtime_t finishTime;
 
     cGate* schedOutGate;
     cGate* schedOutGateExp;
@@ -38,15 +43,13 @@ private:
     NetworkInterfaceCard* schedNic;
     NetworkInterfaceCard* schedNicExp;
 
-    /* Members to record statistics. */
-    cOutVector* queueLowIntVector;
-    unsigned long int queuesize_low_int;
+    unsigned char schedID; // GateA = A, GateB = B, GateCPU = C, GateInterlink = I
 
 public:
     Scheduler();
     virtual ~Scheduler();
 
-    void initScheduler( schedulerMode schedmode,
+    void initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, schedulerMode schedmode,
                         cGate* schedOutGate, cGate* schedOutGateExp,
                         NetworkInterfaceCard* schedNic, NetworkInterfaceCard* schedNicExp );
 
@@ -58,15 +61,12 @@ public:
     cArray* getQueues( void );
     schedulerMode getSchedmode( void );
 
-    unsigned long int getQueueSizeLowInt( void );
-    cOutVector* getQueueLowIntVector( void );
-
     /* Setters */
     void setSchedmode( schedulerMode schedmode );
-    void setQueueSizeLowInt( unsigned long nr );
 
 protected:
     virtual void handleMessage( cMessage *msg );
+    void sendMessage( cMessage* msg, cGate* outGate );
 
 };
 
