@@ -4,11 +4,56 @@
 #include "Ieee802Ctrl_m.h"
 #include "MessagePacker.h"
 
-#include <sstream>
-
 Define_Module(CPU);
 
 unsigned long CPU::messageCount = 0;
+
+/*
+ * Creates a string of the length 10,
+ * to have sequence number represented as string.
+ */
+char* CPU::seqNumToString( unsigned int seqNum )
+{
+    char* resultStr = ( char* )malloc( sizeof( char ) * 11 );
+
+    /* for loop counter */
+    unsigned char i;
+    /* reverse counter in the for loop, to adress the correct digit in the display_state array */
+    unsigned char j = 9;
+
+    for( i = 0; i < 10; i++ )
+    {
+            /* *********************************************************************************
+                 Literal description for the case i = 0
+
+                 display_state[ 7 ] = ( unsigned char )( ( time_in_seconds % 10^1 ) / 10^0 );
+                 time_in_seconds -= display_state[ 7 ] * 10^0;
+               ********************************************************************************* */
+
+            /* Add 0x30 to the converted char. It is the ASCII-Offset for string representation. */
+            *( resultStr + j ) = ( char )( ( ( seqNum % power( 10, ( i + 1 ) ) ) / power( 10, i ) ) + 0x30 );
+            seqNum -= *( resultStr + j ) * power( 10, i );
+            j--;
+    }
+
+    /* add a string termination null at the end of the string */
+    *( resultStr + 10 ) = '\0';
+
+    return resultStr;
+}
+
+unsigned long int CPU::power( unsigned char base, unsigned char exp )
+{
+        unsigned char i;
+        unsigned long int result = 0x00000001;
+
+        for( i = 0; i < exp; i++ )
+        {
+                result = result * base;
+        }
+
+        return result;
+}
 
 EthernetIIFrame *
 CPU::generateOnePacket(SendData sendData)
@@ -21,20 +66,23 @@ CPU::generateOnePacket(SendData sendData)
     */
 
     EthernetIIFrame *result_ethTag = NULL;
-    char* ethFrameName = "eth Unicast";
+    char* ethFrameName = ( char* )malloc( sizeof( char ) * 32 );
+    char* seqNumStr = NULL;
+
+    ethFrameName = "eth Unicast #";
+
     if(sendData.destination.isMulticast()) {
-        ethFrameName = "eth Multicast";
+        ethFrameName = "eth Multicast #";
     }
     else if(sendData.destination.isBroadcast()) {
-        ethFrameName = "eth Broadcast";
+        ethFrameName = "eth Broadcast #";
     }
 
     /*
      * NEEDS STRINGCAT TO DISPLAY SEQNUMBER IN GUI
      */
-//    std::ostringstream oss;
-//    oss << sequenceNumber;
-//    strcat(ethFrameName, oss.str().c_str());
+    seqNumStr = seqNumToString( sequenceNumber );
+    strcat( ethFrameName, seqNumStr );
 
     result_ethTag = MessagePacker::createETHTag( ethFrameName, sendData.destination, macAddress );
 

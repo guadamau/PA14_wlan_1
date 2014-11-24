@@ -33,6 +33,9 @@ private:
   void loadXMLFile();
   void printMessageinfo(SendData sendData);
 
+  char* seqNumToString( unsigned int seqNum );
+  unsigned long int power( unsigned char base, unsigned char exp );
+
 protected:
   //cOutVector endToEndDelayVec[10];
 
