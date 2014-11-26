@@ -57,6 +57,7 @@ Register_Class(HsrSwitchSelfMessage);
 
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const char *name, int kind) : ::cMessage(name,kind)
 {
+    this->schedulerName_var = 0;
 }
 
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const HsrSwitchSelfMessage& other) : ::cMessage(other)
@@ -78,29 +79,29 @@ HsrSwitchSelfMessage& HsrSwitchSelfMessage::operator=(const HsrSwitchSelfMessage
 
 void HsrSwitchSelfMessage::copy(const HsrSwitchSelfMessage& other)
 {
-    this->sendData_var = other.sendData_var;
+    this->schedulerName_var = other.schedulerName_var;
 }
 
 void HsrSwitchSelfMessage::parsimPack(cCommBuffer *b)
 {
     ::cMessage::parsimPack(b);
-    doPacking(b,this->sendData_var);
+    doPacking(b,this->schedulerName_var);
 }
 
 void HsrSwitchSelfMessage::parsimUnpack(cCommBuffer *b)
 {
     ::cMessage::parsimUnpack(b);
-    doUnpacking(b,this->sendData_var);
+    doUnpacking(b,this->schedulerName_var);
 }
 
-SendData& HsrSwitchSelfMessage::getSendData()
+unsigned char HsrSwitchSelfMessage::getSchedulerName() const
 {
-    return sendData_var;
+    return schedulerName_var;
 }
 
-void HsrSwitchSelfMessage::setSendData(const SendData& sendData)
+void HsrSwitchSelfMessage::setSchedulerName(unsigned char schedulerName)
 {
-    this->sendData_var = sendData;
+    this->schedulerName_var = schedulerName;
 }
 
 class HsrSwitchSelfMessageDescriptor : public cClassDescriptor
@@ -162,7 +163,7 @@ unsigned int HsrSwitchSelfMessageDescriptor::getFieldTypeFlags(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     static unsigned int fieldTypeFlags[] = {
-        FD_ISCOMPOUND,
+        FD_ISEDITABLE,
     };
     return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
 }
@@ -176,7 +177,7 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldName(void *object, int field
         field -= basedesc->getFieldCount(object);
     }
     static const char *fieldNames[] = {
-        "sendData",
+        "schedulerName",
     };
     return (field>=0 && field<1) ? fieldNames[field] : NULL;
 }
@@ -185,7 +186,7 @@ int HsrSwitchSelfMessageDescriptor::findField(void *object, const char *fieldNam
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
-    if (fieldName[0]=='s' && strcmp(fieldName, "sendData")==0) return base+0;
+    if (fieldName[0]=='s' && strcmp(fieldName, "schedulerName")==0) return base+0;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
@@ -198,7 +199,7 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldTypeString(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     static const char *fieldTypeStrings[] = {
-        "SendData",
+        "unsigned char",
     };
     return (field>=0 && field<1) ? fieldTypeStrings[field] : NULL;
 }
@@ -240,7 +241,7 @@ std::string HsrSwitchSelfMessageDescriptor::getFieldAsString(void *object, int f
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
-        case 0: {std::stringstream out; out << pp->getSendData(); return out.str();}
+        case 0: return ulong2string(pp->getSchedulerName());
         default: return "";
     }
 }
@@ -255,6 +256,7 @@ bool HsrSwitchSelfMessageDescriptor::setFieldAsString(void *object, int field, i
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
+        case 0: pp->setSchedulerName(string2ulong(value)); return true;
         default: return false;
     }
 }
@@ -268,7 +270,6 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldStructName(void *object, int
         field -= basedesc->getFieldCount(object);
     }
     switch (field) {
-        case 0: return opp_typename(typeid(SendData));
         default: return NULL;
     };
 }
@@ -283,7 +284,6 @@ void *HsrSwitchSelfMessageDescriptor::getFieldStructPointer(void *object, int fi
     }
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
-        case 0: return (void *)(&pp->getSendData()); break;
         default: return NULL;
     }
 }

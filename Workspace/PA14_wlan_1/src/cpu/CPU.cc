@@ -8,30 +8,51 @@ Define_Module(CPU);
 
 unsigned long CPU::messageCount = 0;
 
-TestControl *
-CPU::getTestControlInstance()
+/*
+ * Creates a string of the length 10,
+ * to have sequence number represented as string.
+ */
+char* CPU::seqNumToString( unsigned int seqNum )
 {
-    cModule *calleeModule = getParentModule();
+    char* resultStr = ( char* )malloc( sizeof( char ) * 11 );
 
-    while (calleeModule != NULL)
+    /* for loop counter */
+    unsigned char i;
+    /* reverse counter in the for loop, to adress the correct digit in the display_state array */
+    unsigned char j = 9;
+
+    for( i = 0; i < 10; i++ )
     {
-        EV<< "getClassName():  " << calleeModule->getFullName() << " \n";
-        if(calleeModule->getParentModule() != NULL)
-        {
-            calleeModule= calleeModule->getParentModule();
-        }
-        else
-        {
-            break;
-        }
-    }
-    if(calleeModule != NULL)
-    {
-        calleeModule = calleeModule->getSubmodule("TestControl1"); //TODO: Namen als Parameter übergeben
-        return check_and_cast<TestControl *>(calleeModule);
+            /* *********************************************************************************
+                 Literal description for the case i = 0
+
+                 display_state[ 7 ] = ( unsigned char )( ( time_in_seconds % 10^1 ) / 10^0 );
+                 time_in_seconds -= display_state[ 7 ] * 10^0;
+               ********************************************************************************* */
+
+            /* Add 0x30 to the converted char. It is the ASCII-Offset for string representation. */
+            *( resultStr + j ) = ( char )( ( ( seqNum % power( 10, ( i + 1 ) ) ) / power( 10, i ) ) + 0x30 );
+            seqNum -= *( resultStr + j ) * power( 10, i );
+            j--;
     }
 
-    return NULL;
+    /* add a string termination null at the end of the string */
+    *( resultStr + 10 ) = '\0';
+
+    return resultStr;
+}
+
+unsigned long int CPU::power( unsigned char base, unsigned char exp )
+{
+        unsigned char i;
+        unsigned long int result = 0x00000001;
+
+        for( i = 0; i < exp; i++ )
+        {
+                result = result * base;
+        }
+
+        return result;
 }
 
 EthernetIIFrame *
@@ -45,8 +66,28 @@ CPU::generateOnePacket(SendData sendData)
     */
 
     EthernetIIFrame *result_ethTag = NULL;
-    result_ethTag = MessagePacker::createETHTag( "eth", sendData.destination, macAddress );
+    char* ethFrameName = ( char* )malloc( sizeof( char ) * 32 );
+    char* seqNumStr = NULL;
 
+    ethFrameName = "eth Unicast #";
+
+    if(sendData.destination.isMulticast()) {
+        ethFrameName = "eth Multicast #";
+    }
+    else if(sendData.destination.isBroadcast()) {
+        ethFrameName = "eth Broadcast #";
+    }
+
+    /*
+     * NEEDS STRINGCAT TO DISPLAY SEQNUMBER IN GUI
+     */
+    seqNumStr = seqNumToString( sequenceNumber );
+    strcat( ethFrameName, seqNumStr );
+
+    result_ethTag = MessagePacker::createETHTag( ethFrameName, sendData.destination, macAddress );
+
+    hsrMessage *result_hsrTag = NULL;
+    result_hsrTag = MessagePacker::createHSRTag( "HSR", 1, sequenceNumber );
 
     vlanMessage *result_vlanTag = NULL;
     result_vlanTag = MessagePacker::createVLANTag( "vlan", sendData.frameprio, 0, 0, 0 );
@@ -55,12 +96,13 @@ CPU::generateOnePacket(SendData sendData)
     result_dataMessage = MessagePacker::createDataMessage( "stdData", sendData.paketgroesse, messageCount++ );
 
     EthernetIIFrame* result_ethFrame = NULL;
-    result_ethFrame = MessagePacker::generateEthMessage( result_ethTag, result_vlanTag, NULL, result_dataMessage );
+    result_ethFrame = MessagePacker::generateEthMessage( result_ethTag, result_vlanTag, result_hsrTag, result_dataMessage );
 
 
-    MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, NULL, &result_dataMessage);
+    MessagePacker::deleteMessage(&result_ethTag, &result_vlanTag, &result_hsrTag, &result_dataMessage);
 
-    EV << "[ OK ] " << sendData.frameprio << " Message created at: " << result_ethFrame->getCreationTime() << " created." << endl;
+    EV << "[ OK ] " << sendData.frameprio << " Message created at: " << result_ethFrame->getCreationTime() << " created." << "  |  Seq#: " << sequenceNumber << endl;
+    sequenceNumber++;
 
     return result_ethFrame;
 }
@@ -408,11 +450,7 @@ CPU::loadXMLFile()
 void
 CPU::initialize()
 {
-    testControl = getTestControlInstance();
-    if (testControl == NULL)
-    {
-        throw cRuntimeError("can not get TestControlInstance");
-    }
+    sequenceNumber = 0;
     
     numFramesSent = 0;
     numFramesReceived = 0;      
@@ -434,10 +472,7 @@ CPU::initialize()
 
     rootelement = par("xmlparam").xmlValue();
 
-    if (testControl->registerCPU(macAddress) == false)
-    {
-        throw cRuntimeError("CPU Adresskonflikt ! Panik ! \n");
-    }
+    multicastListener = par("multicastListener");
 
     loadXMLFile();
 }
@@ -516,7 +551,6 @@ CPU::handleMessage(cMessage *msg)
             scheduleAt(sendTime, delayedMessage);
 
             EthernetIIFrame *dmsg = generateOnePacket(delayedMessage->getSendData());
-            // testControl->registerSEND(macAddress, dmsg->dup(), simTime());
             numFramesSent++;
 
             /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -538,7 +572,6 @@ CPU::handleMessage(cMessage *msg)
             if(delayedMessage->getSendData().sendBehavior == BEHAVIOR_STD)
             {
                 EthernetIIFrame *outmsg = generateOnePacket(delayedMessage->getSendData());
-                // testControl->registerSEND(macAddress, outmsg->dup(), delayedMessage->getSendData().startTime);
                 numFramesSent++;
 
                 /* Ethertype 0x8500 is an express frame. */
@@ -562,17 +595,22 @@ CPU::handleMessage(cMessage *msg)
         numFramesReceived++;
         if((packet->getDest().isBroadcast() == false) && (packet->getDest().isMulticast() == false) && (packet->getDest() != macAddress))
         {
-            EV << "CPU: " << macAddress << " Missroutet Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
+            EV << "CPU: " << macAddress << " Missrouted Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         }
-
-        // testControl->registerRECV(macAddress, packet->dup(), simTime());
+        else if(packet->getDest() == macAddress) {
+            getParentModule()->bubble("Recieved unicast!");
+        }
 
         vlanMessage *vlanTag = NULL;
         dataMessage *messageData = NULL;
         hsrMessage *hsrTag = NULL;
         MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
 
-        EV << "[ OK ] CPU: Message " << msg->getCreationTime() << "  |  Prio: " << vlanTag->getUser_priority() << endl;
+//        EV << "[ OK ] CPU: Message " << msg->getCreationTime() << "  |  Prio: " << vlanTag->getUser_priority() << endl;
+        if(multicastListener == 1)
+        {
+            getParentModule()->bubble("Recieved multicast!");
+        }
 
         MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
     }
@@ -590,5 +628,4 @@ CPU::CPU()
 }
 CPU::~CPU()
 {
-    testControl = NULL;
 }

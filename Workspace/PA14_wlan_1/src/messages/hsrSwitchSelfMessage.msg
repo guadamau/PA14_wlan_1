@@ -16,14 +16,6 @@
 //
 // TODO generated message class
 //
-
-cplusplus {{
-#include "hsrDefines.h"   // let C++ know about it
-}}
-
-class noncobject SendData;
-
-message HsrSwitchSelfMessage 
-{    
-	   SendData sendData;
+message HsrSwitchSelfMessage {
+    unsigned char schedulerName; //A = A, B = B, C = CPU
 }

@@ -11,6 +11,8 @@
 #include <omnetpp.h>
 #include "MACAddress.h"
 
+#define QUEUES_COUNT 6
+
 typedef enum
 {
     EXPRESS,

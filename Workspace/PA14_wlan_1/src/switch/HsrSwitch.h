@@ -20,6 +20,7 @@
 #include "MACAddress.h"
 #include "Scheduler.h"
 #include "hsrSwitchSelfMessage_m.h"
+#include <float.h>
 
 /* Abstract class as a construction plan for the specific HSR-switches, baby! */
 
@@ -30,7 +31,7 @@ private:
     MACAddress* macAddress;
 
     unsigned int ringID;
-    unsigned int sequenceNum;
+    short sequenceNum;
 
     cGate* gateAIn;
     cGate* gateAInExp;
@@ -59,8 +60,9 @@ protected:
 
       virtual void initialize(const char* schedcoice);
 
-      /* This behavior must be implemented by derived classes. */
       virtual void handleMessage( cMessage *msg ) = 0;
+
+      virtual void scheduleProcessQueues( unsigned char schedID );
 
 public:
 
@@ -129,6 +131,10 @@ public:
     void setSchedGateBOutExp( Scheduler* schedGateBOutExp );
 
     void setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp );
+
+
+    void scheduleMessage( simtime_t finishTime, unsigned char schedID );
+
 };
 
 #endif /* HSRSWITCH_H_ */

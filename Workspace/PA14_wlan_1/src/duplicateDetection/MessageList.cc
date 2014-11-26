@@ -25,7 +25,7 @@ unsigned long long MessageList::MacToLonglong(MACAddress &mac)
 	return temp;
 }
 
-void MessageList::addMessage(MACAddress& source, short sequencenumber)
+void MessageList::addMessage(MACAddress& source, unsigned int sequencenumber)
 {
     //SequenceInfoMap::iterator seqIter;
     //SourceInfoMap::iterator sourceIter;
@@ -40,7 +40,7 @@ void MessageList::addMessage(MACAddress& source, short sequencenumber)
 	}
 }
 
-bool MessageList::limitCheck(MACAddress& source, short sequencenumber, int limit)
+bool MessageList::limitCheck(MACAddress& source, unsigned int sequencenumber, int limit)
 {
 
 	keyMSG templ(MacToLonglong(source),sequencenumber);
@@ -62,7 +62,7 @@ bool MessageList::limitCheck(MACAddress& source, short sequencenumber, int limit
     }
 }
 
-bool MessageList::duplicateCheck(MACAddress& source, short sequencenumber)
+bool MessageList::duplicateCheck(MACAddress& source, unsigned int sequencenumber)
 {
 	return limitCheck(source, sequencenumber, 1);
 }
