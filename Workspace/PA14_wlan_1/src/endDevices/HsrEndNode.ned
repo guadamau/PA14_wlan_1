@@ -7,7 +7,7 @@ module HsrEndNode extends HsrNode
 {
     parameters:
 
-        @display("i=hsr/endnode;bgl=2");
+       
 
     gates:
 

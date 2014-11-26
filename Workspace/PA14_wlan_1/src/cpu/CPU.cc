@@ -545,13 +545,17 @@ CPU::handleMessage(cMessage *msg)
     else
     {
         EthernetIIFrame *packet = check_and_cast<EthernetIIFrame *>(msg);
+
+        std::stringstream ss;
+        ss << "Recieved " << packet->getName();
+
         numFramesReceived++;
         if((packet->getDest().isBroadcast() == false) && (packet->getDest().isMulticast() == false) && (packet->getDest() != macAddress))
         {
             EV << "CPU: " << macAddress << " Missrouted Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         }
         else if(packet->getDest() == macAddress) {
-            getParentModule()->bubble("Recieved unicast!");
+            getParentModule()->bubble( ss.str().c_str() );
         }
 
         vlanMessage *vlanTag = NULL;
@@ -562,10 +566,8 @@ CPU::handleMessage(cMessage *msg)
 //        EV << "[ OK ] CPU: Message " << msg->getCreationTime() << "  |  Prio: " << vlanTag->getUser_priority() << endl;
         if(multicastListener == 1)
         {
-            std::stringstream ss;
-            ss << "Recieved " << packet->getName();
-            getParentModule()->bubble( ss.str().c_str() );
 
+            getParentModule()->bubble( ss.str().c_str() );
         }
 
         MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);

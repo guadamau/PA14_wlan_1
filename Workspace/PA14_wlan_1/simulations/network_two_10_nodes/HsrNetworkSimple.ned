@@ -11,61 +11,61 @@ network HsrNetworkSimple
         MU1: HsrEndNode {
             macAddress = "00-15-12-14-88-01";
             ringID = 1;
-            @display("p=124,96");
+            @display("i=devices/mu;p=124,96");
         }
 
         MU2: HsrEndNode {
             macAddress = "00-15-12-14-88-02";
             ringID = 1;
-            @display("p=124,257");
+            @display("i=devices/mu;p=124,257");
         }
 
         MU3: HsrEndNode {
             macAddress = "00-15-12-14-88-03";
             ringID = 1;
-            @display("p=240,257");
+            @display("i=devices/mu;p=240,257");
         }
 
         MU4: HsrEndNode {
             macAddress = "00-15-12-14-88-04";
             ringID = 1;
-            @display("p=354,257");
+            @display("i=devices/mu;p=354,257");
         }
 
         MU5: HsrEndNode {
             macAddress = "00-15-12-14-88-05";
             ringID = 1;
-            @display("p=450,257");
+            @display("i=devices/mu;p=450,257");
         }
 
         MU6: HsrEndNode {
             macAddress = "00-15-12-14-88-06";
             ringID = 1;
-            @display("p=560,257");
+            @display("i=devices/mu;p=560,257");
         }
 
         MU7: HsrEndNode {
             macAddress = "00-15-12-14-88-07";
             ringID = 1;
-            @display("p=658,257");
+            @display("i=devices/mu;p=658,257");
         }
 
         MU8: HsrEndNode {
             macAddress = "00-15-12-14-88-08";
             ringID = 1;
-            @display("p=658,96");
+            @display("i=devices/mu;p=658,96");
         }
 
         PU1: HsrEndNode {
             macAddress = "00-15-12-14-88-0A";
             ringID = 1;
-            @display("p=504,96");
+            @display("i=devices/pu;p=504,96");
         }
 
         PU2: HsrEndNode {
             macAddress = "00-15-12-14-88-0B";
             ringID = 1;
-            @display("p=287,96");
+            @display("i=devices/pu;p=287,96");
         }
 
     connections:
