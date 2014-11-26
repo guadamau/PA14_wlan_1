@@ -770,7 +770,7 @@ O=F-V+12
 
 \begin_layout Enumerate
 Wenn V grösser gleich 72 Bytes und IFG (von der Simulationsumgebung vorgegeben)
- zusammen beträgt, V durch 4 geteilt 0 ergibt und O grösser als 72 Bytes
+ zusammen beträgt, V durch 4 geteilt Null ergibt und O grösser als 72 Bytes
  ist (Data-Felder je mindestens 60 Bytes), kann das Express-Frame jetzt
  gesendet werden.
  Die weiteren Schritte müssen nicht mehr erledigt werden, da das Express-Frame
@@ -801,21 +801,14 @@ I=Interframe\, Gap\, in\, Bytes
 \begin_inset Formula 
 \[
 t=\begin{cases}
-V\geqq72 & \: simtime+\frac{(4-(V\,\%\,4)+I)*8}{datarate}\\
-V<72 & \: simtime+\frac{(72-V+(4-(V\,\%\,4))+I)*8}{datarate}
+\\
+\\
 \end{cases}
 \]
 
 \end_inset
 
-Diese Formel berechnet den nächsten Zeitpunkt, ab dem eine Fragmentierung
- möglich wäre.
- Ist V schon über oder gleich der Minimalgrösse (72 Bytes), muss lediglich
- abgewartet werden bis dessen Grösse durch 4 dividiert 0 ergibt und der
- IFG versendet wurde.
- Ist V kleiner als die Minimalgrösse, muss abgewartet werden bis diese erfüllt
- ist und die Selben Bedingungen erfüllt sind wie wenn V die Minimalgrösse
- schon erreicht hat.
+Diese Formel 
 \end_layout
 
 \begin_layout Enumerate
@@ -897,8 +890,8 @@ Aufbau der Testumgebung
 \end_layout
 
 \begin_layout Standard
-Für die Tests wird in der Simulation ein HSR-Ring mit 10 DANH-Geräten implementi
-ert.
+Für die Tests wird in der Simulation ein HSR-Ring mit 5 DANH-Geräten implementie
+rt.
 \end_layout
 
 \begin_layout Subsection
@@ -959,21 +952,7 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Der sich im Knoten befindende Switch analysiert die Quell- und Ziel-Adresse
- und den Herkunftsport des Frames und leitet es an den entsprechenden Port
- (links, rechts auf den Ring oder zur CPU) weiter.
- 
-\end_layout
 
-\begin_layout Plain Layout
-Frames, welche vom eigenen Switch stammen und nicht von der CPU kommen werden
- entfernt, um zirkulierende Frames (können Uni-, Multi- oder Broadcast sein)
- zu verhindern.
-\end_layout
-
-\begin_layout Plain Layout
-Multi- und Broadcast-Frames (die nicht vom Knoten selbst stammen) werden
- an alle Ports ausser dem Herkunftsport weitergeleitet.
 \end_layout
 
 \end_inset
@@ -1075,8 +1054,7 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Der sich im Knoten befindende Switch hat für jeden seiner Ports einen Scheduler.
- Jeder dieser Scheduler verfügt über
+
 \end_layout
 
 \end_inset

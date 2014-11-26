@@ -897,8 +897,8 @@ Aufbau der Testumgebung
 \end_layout
 
 \begin_layout Standard
-Für die Tests wird in der Simulation ein HSR-Ring mit 10 DANH-Geräten implementi
-ert.
+Für die Tests wird in der Simulation ein HSR-Ring mit 5 DANH-Geräten implementie
+rt.
 \end_layout
 
 \begin_layout Subsection
@@ -959,21 +959,7 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Der sich im Knoten befindende Switch analysiert die Quell- und Ziel-Adresse
- und den Herkunftsport des Frames und leitet es an den entsprechenden Port
- (links, rechts auf den Ring oder zur CPU) weiter.
- 
-\end_layout
 
-\begin_layout Plain Layout
-Frames, welche vom eigenen Switch stammen und nicht von der CPU kommen werden
- entfernt, um zirkulierende Frames (können Uni-, Multi- oder Broadcast sein)
- zu verhindern.
-\end_layout
-
-\begin_layout Plain Layout
-Multi- und Broadcast-Frames (die nicht vom Knoten selbst stammen) werden
- an alle Ports ausser dem Herkunftsport weitergeleitet.
 \end_layout
 
 \end_inset
@@ -1075,43 +1061,7 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Der sich im Knoten befindende Switch hat für jeden seiner Ports einen Scheduler.
- Jeder dieser Scheduler verfügt über Queues, für jede Priorität und Herkunft
- (von Ring oder Aussen) eine, also total 6 Queues.
- Der Switch fügt ein ankommendes Frame beim jeweiligen Scheduler in die
- jeweilige Queue ein.
- Der Scheduler beginnt darauf mit dem Abarbeiten der Queues und startet
- dabei mit der Queue der höchsten Priorität.
-\end_layout
 
-\begin_layout Plain Layout
-Wenn z.B.
- zwei Frames, eines mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und eines mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- zur exakt selben Zeit bei einem Scheduler eingereiht werden, wird garantiert
- das Frame mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- zuerst versendet.
 \end_layout
 
 \end_inset
