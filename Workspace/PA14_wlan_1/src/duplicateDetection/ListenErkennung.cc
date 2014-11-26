@@ -133,6 +133,7 @@ ListenErkennung::handleMessage(cMessage *msg)
     hsrMessage *hsrTag = NULL;
     dataMessage *messageData = NULL;
 
+
     if (checkFrame(check_and_cast<EthernetIIFrame *>(ethTag->dup())) == 1)
     {
     	send(ethTag,    gate("gate$o"));
@@ -160,7 +161,7 @@ ListenErkennung::handleMessage(cMessage *msg)
 }
 
 long
-ListenErkennung::searchMessage(MACAddress& source, unsigned int sequencenumber)
+ListenErkennung::searchMessage(MACAddress& source, short sequencenumber)
 {
     //EV << "ListenErkennung searchMessage1 " << source << " " << destination << " " << sequencenumber << " " << ((int)(path)) << " \n";
     //EV << "dupplikatListenPointer " << dupplikatListenPointer << " \n";
@@ -198,10 +199,10 @@ ListenErkennung::searchMessage(MACAddress& source, unsigned int sequencenumber)
 }
 
 void
-ListenErkennung::addMessage(MACAddress& source, unsigned int sequencenumber)
+ListenErkennung::addMessage(MACAddress& source, short sequencenumber)
 {
     //EV << "ListenErkennung add " << source << " " << destination << " " << sequencenumber << " " << ((int)(path)) << " \n";
-    // Enter_Method("addMessage(MACAddress& source, short sequencenumber)");
+    Enter_Method("addMessage(MACAddress& source, short sequencenumber)");
     long pointer = searchMessage(source, sequencenumber);
 
     if (pointer != -1)
@@ -237,9 +238,9 @@ ListenErkennung::addMessage(MACAddress& source, unsigned int sequencenumber)
 }
 
 bool
-ListenErkennung::limitCheck(MACAddress& source, unsigned int sequencenumber, int limit)
+ListenErkennung::limitCheck(MACAddress& source, short sequencenumber, int limit)
 {
-//    Enter_Method("limitCheck(MACAddress& source, short sequencenumber, int limit)");
+    Enter_Method("limitCheck(MACAddress& source, short sequencenumber, int limit)");
     //EV << "ListenErkennung limitCheck " << source << " " << destination << " " << sequencenumber << " " << ((int)(path)) << " " << limit <<" \n";
 
     bool result = backup->limitCheck(source, sequencenumber, limit);

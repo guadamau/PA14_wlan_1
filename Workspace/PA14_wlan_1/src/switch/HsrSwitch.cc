@@ -230,7 +230,7 @@ void HsrSwitch::initialize( const char* schedchoice )
     gateCpuIn = gate( "gateCPU$i" );
     gateCpuInExp = gate( "gateCPUExp$i" );
     gateCpuOut = gate( "gateCPU$o" );
-    gateCpuOutExp = gate( "gateCPUExp$o" );
+    gateCpuOut = gate( "gateCPUExp$o" );
 
     NetworkInterfaceCard* eth0 = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth0" ) );
     NetworkInterfaceCard* eth0Exp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth0Exp" ) );
@@ -238,27 +238,12 @@ void HsrSwitch::initialize( const char* schedchoice )
     NetworkInterfaceCard* eth1Exp = check_and_cast<NetworkInterfaceCard*>( getModuleByPath( "^.eth1Exp" ) );
 
     schedGateAOut = new Scheduler();
-    schedGateAOut->initScheduler( 'A', this, schedmode, gateAOut, gateAOutExp, eth0, eth0Exp );
+    schedGateAOut->initScheduler( schedmode, gateAOut, gateAOutExp, eth0, eth0Exp );
     schedGateBOut = new Scheduler();
-    schedGateBOut->initScheduler( 'B', this, schedmode, gateBOut, gateBOutExp, eth1, eth1Exp );
+    schedGateBOut->initScheduler( schedmode, gateBOut, gateBOutExp, eth1, eth1Exp );
     schedGateCpuOut = new Scheduler();
     /* cpu has no external transmission gate, so we pass the internal gates twice here. */
-    schedGateCpuOut->initScheduler( 'C', this, schedmode, gateCpuOut, gateCpuOutExp, NULL, NULL );
+    schedGateCpuOut->initScheduler( schedmode, gateCpuOut, gateCpuOutExp, NULL, NULL );
 }
 
-void HsrSwitch::scheduleMessage( simtime_t finishTime, unsigned char schedID )
-{
-//    if( finishTime >= simTime() )
-//    {
-//        HsrSwitchSelfMessage* newmsg = new HsrSwitchSelfMessage();
-//        newmsg->setSchedulerName(schedID);
-//        scheduleAt(finishTime, newmsg);
-//    }
-}
 
-void HsrSwitch::scheduleProcessQueues( unsigned char schedID )
-{
-    HsrSwitchSelfMessage* enqSelfMsg = new HsrSwitchSelfMessage();
-    enqSelfMsg->setSchedulerName(schedID);
-    scheduleAt(simTime()+DBL_MIN, enqSelfMsg);
-}

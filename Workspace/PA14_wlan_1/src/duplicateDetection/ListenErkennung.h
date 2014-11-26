@@ -19,14 +19,14 @@
 #include <omnetpp.h>
 #include "MACAddress.h"
 #include "MessageList.h"
+#include "TestControl.h"
 #include "hsrDefines.h"
-#include "EtherFrame_m.h"
 
 typedef struct
 {
     //Inhalt
     MACAddress source;
-    unsigned int  sequencenumber;
+    unsigned short sequencenumber;
 
     //Verwaltungsinformationen
     long addcount;
@@ -55,7 +55,7 @@ private:
     cOutVector duplicateAddIndexMinusAccessIndex;
 
     void registerDuplicateEntry (ListItemData entry, bool finish);
-    long searchMessage(MACAddress& source,unsigned int sequencenumber);
+    long searchMessage(MACAddress& source,short sequencenumber);
 
 
 
@@ -69,9 +69,9 @@ public:
     ListenErkennung();
     virtual ~ListenErkennung();
 
-    void addMessage(MACAddress& source, unsigned int sequencenumber);
-    bool limitCheck(MACAddress& source, unsigned int sequencenumber, int limit);
-    //bool duplicateCheck(MACAddress& source, unsigned int sequencenumber);
+    void addMessage(MACAddress& source, short sequencenumber);
+    bool limitCheck(MACAddress& source, short sequencenumber, int limit);
+    //bool duplicateCheck(MACAddress& source, short sequencenumber);
     
     int  checkFrame(EthernetIIFrame *ethTag);
     

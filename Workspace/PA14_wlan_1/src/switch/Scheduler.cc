@@ -5,17 +5,18 @@
  *      Author: guadagnini
  */
 
-#include <Ethernet.h>
+
 #include "Scheduler.h"
 #include "HsrSwitch.h"
 #include "hsrSwitchSelfMessage_m.h"
 #include "schedulerSelfMessage_m.h"
 
+Define_Module( Scheduler );
+
 
 Scheduler::Scheduler()
 {
     this->queues = new cArray();
-    this->queueVectors = new cArray();
 }
 
 cArray* Scheduler::getQueues( void ) {
@@ -42,20 +43,19 @@ Scheduler::~Scheduler()
     }
 
     delete queues;
-    delete queueVectors;
+    delete queueLowIntVector;
 }
 
 
-void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, schedulerMode schedmode,
+void Scheduler::initScheduler( schedulerMode schedmode,
                                cGate* schedOutGate, cGate* schedOutGateExp,
                                NetworkInterfaceCard* schedNic, NetworkInterfaceCard* schedNicExp )
 {
-    this->schedID = schedID;
-    this->finishTime = SIMTIME_ZERO;
-
-    this->parentSwitch = parentSwitch;
-
     this->schedmode = schedmode;
+    setQueueSizeLowInt( 0 );
+
+    queueLowIntVector = new cOutVector();
+    queueLowIntVector->setName("QueueSize Low Internal");
 
     queues->addAt( EXPRESS_RING, new cQueue() );
     queues->addAt( EXPRESS_INTERNAL, new cQueue() );
@@ -69,28 +69,22 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
 
     this->schedNic = schedNic;
     this->schedNicExp = schedNicExp;
-
-
-    /* Members to record statistics. */
-    const char* queueNamesStr[ QUEUES_COUNT ]={
-            "QueueSize EXPRESS from Ring",
-            "QueueSize EXPRESS from Internal",
-            "QueueSize HIGH from Ring",
-            "QueueSize HIGH from Internal",
-            "QueueSize LOW from Ring",
-            "QueueSize LOW from Internal"
-    };
-
-    for(int i = 0; i < QUEUES_COUNT; i++)
-    {
-        queueSizes[i] = 0;
-
-        cOutVector* queueVector = new cOutVector();
-        queueVector->setName( queueNamesStr[i] );
-        queueVector->record( queueSizes[i] );
-        queueVectors->addAt(i, queueVector);
-    }
 }
+
+unsigned long int Scheduler::getQueueSizeLowInt()
+{
+    return queuesize_low_int;
+}
+
+cOutVector* Scheduler::getQueueLowIntVector( void ) {
+    return queueLowIntVector;
+}
+
+void Scheduler::setQueueSizeLowInt( unsigned long int nr )
+{
+    queuesize_low_int = nr;
+}
+
 
 void Scheduler::handleMessage( cMessage *msg )
 {
@@ -105,23 +99,34 @@ void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 {
     ( check_and_cast<cQueue*>( queues->get( queue ) ) )->insert( msg );
 
-//    EV << "[ Enqueue " << simTime() << " ] " << parentSwitch->getParentModule()->getFullName() << " - Message " << msg->getCreationTime() << " from Gate " << msg->getArrivalGate()->getFullName() << endl << endl;
+    EV << "[ OK ] Enqueued Message created at: " << msg->getCreationTime() << " to queue: " << static_cast<queueName>( queue ) << endl;
 
-    /* LOGGING */
-    cOutVector* currentQueueSizeVector = check_and_cast<cOutVector*>( queueVectors->get( queue ) );
-    currentQueueSizeVector->record( queueSizes[queue]++ );
+    switch( queue )
+    {
+        case LOW_INTERNAL:
+        {
+            setQueueSizeLowInt( getQueueSizeLowInt() + 1 );
+            getQueueLowIntVector()->record( getQueueSizeLowInt() );
+            /* EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl; */
+            break;
+        }
+
+        default:
+        {
+            break;
+        }
+    }
 }
+
 
 void Scheduler::processQueues( void )
 {
-    cPacket* ifgmsg = new cPacket();
-    ifgmsg->setBitLength(INTERFRAME_GAP_BITS);
+    HsrSwitch* parentModule = check_and_cast<HsrSwitch*>( getParentModule() );
 
     cQueue* currentQueue = NULL;
     queueName currentQueueName;
     cGate* selectedOutGate = NULL;
     NetworkInterfaceCard* selectedNic = NULL;
-    unsigned char transmitLock = 1;
 
     switch( schedmode )
     {
@@ -142,7 +147,7 @@ void Scheduler::processQueues( void )
                 currentQueueName = static_cast<queueName>( i );
                 currentQueue = check_and_cast<cQueue*>( queues->get( currentQueueName ) );
 
-                if( !currentQueue->isEmpty() )
+                while( !currentQueue->isEmpty() )
                 {
                     /* Decide if the express channel has to be used. */
                     if( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL )
@@ -157,66 +162,40 @@ void Scheduler::processQueues( void )
                     }
 
                     /* check if the transmit state of the nic is idle.
-                     * refers to the enum MACTransmitState of EtherMACBase.h
-                     *
-                     * CPU has no NICs */
-                    if( schedID != 'C' )
+                     * refers to the enum MACTransmitState of EtherMACBase.h */
+                    if( selectedNic->getDeviceTransmitState() == 1 )
+                    /* if( !( selectedTransmissionGate->getTransmissionChannel()->isBusy() ) ) */
                     {
-                        transmitLock = selectedNic->isLocked();
-                    }
-
-                    if( transmitLock == 0 || schedID == 'C')
-                    {
-
                         cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
+                        EV << "Transmission Duration: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->calculateDuration( msg ) << " s" << endl;
 
                         /* Channel is free. Send the frame.
                            If Express Prio send via ExpressGate */
-//                        EV << "[ OK ] Message " << msg->getId() << " created at: " << msg->getCreationTime() << " sent." << endl;
+                        EV << "[ OK ] Message created at: " << msg->getCreationTime() << " sent." << endl;
 
-                        if(schedID != 'C') {
-                            selectedNic->lock();
+                        EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime() << endl;
 
-                            //EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime() << endl;
-                            finishTime = simTime() + selectedNic->getPhysOutGate()->getTransmissionChannel()->calculateDuration( msg ) + selectedNic->getPhysOutGate()->getTransmissionChannel()->calculateDuration( ifgmsg );
-//                            EV << "SimTime: " << simTime() << " TransmissionFinishTime: " << finishTime << endl;
-                        }
+                        Enter_Method_Silent();
+                        parentModule->send( msg, selectedOutGate );
 
-//                        EV << "[ Sending " << simTime() << " ] " << parentSwitch->getParentModule()->getFullName() << " - Message " << msg->getCreationTime() << " to Gate " << schedID << " - Finished at " << finishTime << "  | Popping from Queue: " << currentQueueName << endl << endl;
+                        /* Some logging shizzle */
+                        setQueueSizeLowInt( getQueueSizeLowInt()-1 );
+                        getQueueLowIntVector()->record( getQueueSizeLowInt() );
+                        /* EV << "Queue Size (" << simTime() << "): " << getQueueSizeLowInt() << endl; */
 
-
-                        /* Tell the switch to send the message now */
-                        sendMessage( msg, selectedOutGate );
-
-                        /* LOGGING */
-                        cOutVector* currentQueueSizeVector = check_and_cast<cOutVector*>( queueVectors->get( i ) );
-                        currentQueueSizeVector->record( queueSizes[i]-- );
                     }
                     else
                     {
-//                        EV << "[ !! ] Transmission channel: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
+                        EV << "[ !! ] Transmission channel: " << selectedNic->getPhysOutGate()->getTransmissionChannel()->getFullName() << " currently busy. Have to reschedule frame transmission." << endl;
                         /* Channel is currently busy. Have to reschedule the frame. */
-//                        simtime_t finishTime = selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime();
-//                        EV << "[ !! ] Rescheduling time is: " << finishTime << endl;
-
-//                        EV << "[ Resched " << simTime() << " ] " << parentSwitch->getParentModule()->getFullName() << " at " << finishTime << " on Gate " << schedID << endl << endl;
-
-                        /*
-                         * EXPRESS HANDLING
-                         */
-
-//                        parentModule->scheduleMessage( finishTime, schedID );
-                        //break;
+                        simtime_t finishTime = selectedNic->getPhysOutGate()->getTransmissionChannel()->getTransmissionFinishTime();
+                        EV << "[ !! ] Rescheduling time is: " << finishTime << endl;
+                        scheduleAt( finishTime, new SchedulerSelfMessage() );
                     }
 
-                    /*
-                     * processed one filled or all empty queues -> done
-                     */
-                    return;
                 }
             }
-
             break;
         }
 
@@ -240,10 +219,4 @@ void Scheduler::processQueues( void )
             break;
         }
     }
-}
-
-void Scheduler::sendMessage( cMessage* msg, cGate* outGate )
-{
-    parentSwitch->send( msg, outGate );
-    return;
 }

@@ -13,24 +13,11 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef NETWORKINTERFACECARD_H_
-#define NETWORKINTERFACECARD_H_
-
-#include <omnetpp.h>
-#include <EtherMACFullDuplex.h>
-
-
-
-class NetworkInterfaceCard : public EtherMACFullDuplex
+package testControl;
+//
+// TODO auto-generated module
+//
+simple TestControl
 {
-
-    public:
-        NetworkInterfaceCard();
-        virtual ~NetworkInterfaceCard();
-
-        cGate* getPhysOutGate( void );
-        cChannel* getTransmissionChannel( void );
-        unsigned char getDeviceTransmitState( void );
-};
-
-#endif /* NETWORKINTERFACECARD_H_ */
+    @display("i=device/terminal");
+}

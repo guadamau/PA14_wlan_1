@@ -14,7 +14,6 @@
 //
 
 #include "EndNodeSwitch.h"
-#include <schedulerSelfMessage_m.h>
 
 Define_Module( EndNodeSwitch );
 
@@ -40,6 +39,16 @@ void EndNodeSwitch::initialize()
     HsrSwitch::initialize( "FCFS" );
 
     this->endNodeTable = new nodeTable();
+    /*
+    endNodeTable = getNodeTable();
+    if( endNodeTable == NULL )
+    {
+        throw cRuntimeError( "can't load node table" );
+    }
+    */
+
+    // scheduleAt( SIMTIME_ZERO,  new HsrSwitchSelfMessage() );
+
 }
 
 EndNodeSwitch::EndNodeSwitch()
@@ -54,34 +63,18 @@ EndNodeSwitch::~EndNodeSwitch()
     }
 }
 
+
 void EndNodeSwitch::handleMessage( cMessage* msg )
 {
+    if( msg->isSelfMessage() )
+    {
+        return;
+    }
+
     /* Schedulers */
     Scheduler* schedGateAOut = HsrSwitch::getSchedGateAOut();
     Scheduler* schedGateBOut = HsrSwitch::getSchedGateBOut();
     Scheduler* schedGateCpuOut = HsrSwitch::getSchedGateCpuOut();
-
-    if( msg->isSelfMessage() )
-    {
-        HsrSwitchSelfMessage* selfmsg = check_and_cast<HsrSwitchSelfMessage*>(msg);
-        unsigned char schedname = selfmsg->getSchedulerName();
-        if( schedname == 'A' ) {
-            schedGateAOut->processQueues();
-        }
-        else if( schedname == 'B' ) {
-            schedGateBOut->processQueues();
-        }
-        else if( schedname == 'C' ) {
-            schedGateCpuOut->processQueues();
-        }
-        else {
-            delete selfmsg;
-            throw cRuntimeError( "Scheduler not found for reprocessing! \n" );
-        }
-
-        delete selfmsg;
-        return;
-    }
 
     /* Gates */
     cGate* gateAIn = HsrSwitch::getGateAIn();
@@ -92,55 +85,14 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
     cGate* gateBInExp = HsrSwitch::getGateBInExp();
     cGate* gateCpuInExp = HsrSwitch::getGateCpuInExp();
 
-
     /* Make a clone of the frame and take ownership.
      * Then we have to downcast the Message as an ethernet frame. */
-    cMessage* switchesMsg = msg;
+    cMessage* switchesMsg = msg->dup();
     this->take( switchesMsg );
 
 
-//    EV << "LE GATE: " << msg->getArrivalGate()->getFullName() << endl;
-
-    if( typeid( *msg ) == typeid( SchedulerSelfMessage ) )
-    {
-        /*
-         * Check if endIFGMsg
-         */
-        if( msg->getArrivalGate() == gateAIn )
-        {
-            schedGateAOut->processQueues();
-
-        }
-        else if ( msg->getArrivalGate() == gateAInExp )
-        {
-            schedGateAOut->processQueues();
-
-        }
-        else if ( msg->getArrivalGate() == gateBIn )
-        {
-            schedGateBOut->processQueues();
-
-        }
-        else if ( msg->getArrivalGate() == gateBInExp )
-        {
-            schedGateBOut->processQueues();
-
-        }
-        else
-        {
-            throw cRuntimeError( "Could not find a valid arrival gate for Scheduler-Self-Message.\n" );
-        }
-        delete msg;
-        return;
-    }
-
-
-
-
-
-
-//    /* delete original incoming message ... */
-//    delete msg;
+    /* delete original incoming message ... */
+    delete msg;
 
     /* Arrival Gate */
     cGate* arrivalGate = switchesMsg->getArrivalGate();
@@ -230,7 +182,7 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('C');
+            schedGateCpuOut->processQueues();
         }
         else if( arrivalGate == gateCpuIn || arrivalGate == gateCpuInExp )
         {
@@ -277,8 +229,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('A');
-            scheduleProcessQueues('B');
+            schedGateAOut->processQueues();
+            schedGateBOut->processQueues();
         }
         else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
         {
@@ -306,8 +258,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('B');
-            scheduleProcessQueues('C');
+            schedGateBOut->processQueues();
+            schedGateCpuOut->processQueues();
         }
         else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
@@ -335,8 +287,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('A');
-            scheduleProcessQueues('C');
+            schedGateAOut->processQueues();
+            schedGateCpuOut->processQueues();
         }
         else
         {
@@ -380,8 +332,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('A');
-            scheduleProcessQueues('B');
+            schedGateAOut->processQueues();
+            schedGateBOut->processQueues();
 
         }
         else if( arrivalGate == gateAIn || arrivalGate == gateAInExp )
@@ -406,7 +358,7 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('B');
+            schedGateBOut->processQueues();
         }
         else if( arrivalGate == gateBIn || arrivalGate == gateBInExp )
         {
@@ -430,7 +382,7 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
                     break;
                 }
             }
-            scheduleProcessQueues('A');
+            schedGateAOut->processQueues();
         }
         else
         {
@@ -446,6 +398,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
 EthernetIIFrame*
 EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vlanTag, hsrMessage* hsrTag, dataMessage* messageData )
 {
+    unsigned int ringID = HsrSwitch::getRingId();
+    unsigned int sequenceNum = HsrSwitch::getSequenceNum();
 
     EthernetIIFrame* frameReadyToProcess = NULL;
 
@@ -459,11 +413,11 @@ EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vl
     }
     else /* (non-HSR frame and destination node not registered as non-HSR) */
     {
-//        /* Insert the HSR tag with the sequence number of the host */
-//        hsrTag = MessagePacker::createHSRTag( "HSR", ringID, sequenceNum );
-//
-//        /* Increment the sequence number, wrapping through 0 */
-//        HsrSwitch::setSequenceNum( sequenceNum++ );
+        /* Insert the HSR tag with the sequence number of the host */
+        hsrTag = MessagePacker::createHSRTag( "HSR", ringID, sequenceNum );
+
+        /* Increment the sequence number, wrapping through 0 */
+        HsrSwitch::setSequenceNum( sequenceNum++ );
     }
 
     frameReadyToProcess = MessagePacker::generateEthMessage( ethTag, vlanTag, hsrTag, messageData );

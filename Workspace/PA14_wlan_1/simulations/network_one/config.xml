@@ -6,30 +6,28 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.0000208</interval> 					<!-- 20,8 µs -->           
+            <interval>0.000208</interval> 					<!-- 208 µs -->           
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-01</destination>    
-            <paketgroesse>1476</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
             <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
     </source>
     
-    <source>00-15-12-14-88-02
+    <source>00-15-12-14-88-03
         <lastmuster>
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
-            <interval>0.0000208</interval> 					<!-- 20,8 µs -->           
+            <startzeit>0.001080</startzeit>            
+            <stopzeit>0.06</stopzeit>            
+            <interval>0.000010</interval> 					<!-- 208 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-01</destination>    
-            <paketgroesse>46</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>HIGH</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
-        </lastmuster> 
+            <paketgroesse>1486</paketgroesse>      <!-- 1486 -->
+            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+        </lastmuster>                
     </source>
     
-    
 </simulation_behaviour>
-

@@ -1,6 +1,7 @@
 package network_one;
 import channels.MyFastChannel;
 import endDevices.HsrEndNode;
+import testControl.TestControl;
 
 
 network HsrNetworkSimple
@@ -23,6 +24,11 @@ network HsrNetworkSimple
             @display("p=250,200");
             macAddress = "00-15-12-14-88-03";
             ringID = 1;
+        }
+
+
+        TestControl1: TestControl {
+            @display("p=500,100");
         }
 
     connections:

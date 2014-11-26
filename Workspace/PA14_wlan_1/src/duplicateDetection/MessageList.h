@@ -36,9 +36,9 @@ public:
 	MessageList();
 	virtual ~MessageList();
 
-	void addMessage(MACAddress& source, unsigned int sequencenumber);
-	bool duplicateCheck(MACAddress& source, unsigned int sequencenumber);
-    bool limitCheck(MACAddress& source, unsigned int sequencenumber, int limit);
+	void addMessage(MACAddress& source, short sequencenumber);
+	bool duplicateCheck(MACAddress& source, short sequencenumber);
+    bool limitCheck(MACAddress& source, short sequencenumber, int limit);
 
 };
 

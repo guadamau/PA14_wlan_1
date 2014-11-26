@@ -99,7 +99,7 @@ long nodeTable::getNextFreeIndex()
 
 bool nodeTable::pushNode(MACAddress& nodeMacAddress, PortName pn, NodeType nodeType)
 {
-//    Enter_Method("pushNode(MACAddress& nodeMacAddress, PortName pn, NodeType nodeType)");
+    Enter_Method("pushNode(MACAddress& nodeMacAddress, PortName pn, NodeType nodeType)");
 
 //    //EV << "nodeTableArray pushNode: ";
 //    if(nodeTableArray != NULL)
@@ -144,7 +144,7 @@ bool nodeTable::pushNode(MACAddress& nodeMacAddress, PortName pn, NodeType nodeT
 
 NodeType nodeTable::getNodeMode(MACAddress& nodeMacAddress)
 {
-//    Enter_Method("getNodeMode(MACAddress& nodeMacAddress)");
+    Enter_Method("getNodeMode(MACAddress& nodeMacAddress)");
     NodeType result = NODETYPE_HSR;
 //    if(nodeTableArray != NULL)
 //    {
