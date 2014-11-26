@@ -769,15 +769,19 @@ O=F-V+12
 \end_layout
 
 \begin_layout Enumerate
-Wenn V mehr als 72 Bytes und IFG (von der Simulationsumgebung vorgegeben)
- zusammen beträgt und O grösser als 72 Bytes ist, kann das Express-Frame
- jetzt gesendet werden.
+Wenn V grösser gleich 72 Bytes und IFG (von der Simulationsumgebung vorgegeben)
+ zusammen beträgt, V durch 4 geteilt Null ergibt und O grösser als 72 Bytes
+ ist (Data-Felder je mindestens 60 Bytes), kann das Express-Frame jetzt
+ gesendet werden.
+ Die weiteren Schritte müssen nicht mehr erledigt werden, da das Express-Frame
+ versandt wurde und der Vorgang somit erfolgreich war.
 \end_layout
 
 \begin_layout Enumerate
-Wenn V nicht mehr als 72 Bytes und IFG zusammen beträgt, O aber grösser
- als 72 Bytes ist, dann muss abgewartet werden bis folgender Zeitpunkt (in
- der folgenden Rechnung 
+Wenn V nicht grösser gleich 72 Bytes und IFG zusammen beträgt oder bei der
+ Division durch 4 nicht 0 ergibt, O aber grösser gleich 72 Bytes ist, dann
+ muss abgewartet werden bis folgender Zeitpunkt (in der folgenden Rechnung
+ 
 \begin_inset Quotes fld
 \end_inset
 
@@ -796,25 +800,24 @@ I=Interframe\, Gap\, in\, Bytes
 
 \begin_inset Formula 
 \[
-t=simtime+\frac{(72+I)*8}{datarate}
+t=\begin{cases}
+\\
+\\
+\end{cases}
 \]
 
 \end_inset
 
-
+Diese Formel 
 \end_layout
 
 \begin_layout Enumerate
-Wenn V mehr als 72 Bytes + IFG beträgt oder der in Schritt 5 berechnete
- Zeitpunkt 
-\begin_inset Quotes fld
-\end_inset
-
-t
-\begin_inset Quotes frd
-\end_inset
-
- erreicht wurde, muss O (und somit auch V) neu berechnet und überprüft werden
+Ist der Zeitpunkt erreicht, muss O und somit auch V neu berechnet werden
+ (Siehe Schritt 3 und 4).
+ Ist O nicht mehr grösser gleich 72 Bytes, muss man mit dem Senden des Express-F
+rames warten, bis das ganze Frame versendet wurde.
+ Ist O aber jetzt noch grösser gleich 72 Bytes, kann das Express-Frame jetzt
+ versendet werden.
 \end_layout
 
 \begin_layout Subsection

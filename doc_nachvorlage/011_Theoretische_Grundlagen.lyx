@@ -1315,6 +1315,15 @@ key "Draft_Standart"
 dresse und EtherType-Feld, also 14 Bytes) 46 Bytes.
  Hat das ursprüngliche Frame zudem ein VLAN-Tag können die effektiven Daten
  mindestens 42 Bytes gross sein.
+ Eine Fragmentierung findet jedoch nur statt wenn mindestens 60 Data-Bytes
+ versendet und mindestens 60 Data-Bytes noch ausstehen 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard

@@ -1302,7 +1302,14 @@ name "table_smd_fragcount"
 \begin_layout Standard
 Die Grösse des Data-Felds umfasst vom ersten Oktett nach dem SFD/SMD-Feld
  bis und mit dem letzten Oktett vor dem CRC und hat mindestens eine Grösse
- von 60 Bytes.
+ von 60 Bytes 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+.
  Da im ersten Fragment im Data-Bereich mehr als nur Daten sind, beträgt
  dort der effektiv kleinste Datenbereich (abzüglich MAC-Empfänger-, MAC-Sender-A
 dresse und EtherType-Feld, also 14 Bytes) 46 Bytes.
