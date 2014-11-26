@@ -14,12 +14,20 @@
 // 
 
 #include <NetworkInterfaceCard.h>
+#include "schedulerSelfMessage_m.h"
 
 Define_Module( NetworkInterfaceCard );
 
 NetworkInterfaceCard::NetworkInterfaceCard() {}
 
 NetworkInterfaceCard::~NetworkInterfaceCard() {}
+
+void NetworkInterfaceCard::initialize(int stage)
+{
+    EtherMACFullDuplex::initialize( stage );
+    upperLayerOut = gate("upperLayerOut");
+    this->transmitLock = 0;
+}
 
 cGate* NetworkInterfaceCard::getPhysOutGate( void )
 {
@@ -36,3 +44,37 @@ unsigned char NetworkInterfaceCard::getDeviceTransmitState( void )
     return this->transmitState;
 }
 
+void NetworkInterfaceCard::handleMessage( cMessage *msg )
+{
+    EtherMACFullDuplex::handleMessage( msg );
+    if( msg == endIFGMsg && transmitState == TX_IDLE_STATE )
+    {
+        transmitLock = 0;
+        EV << "[ NIC " << simTime() << " ] ENDIFG reached! Unlock NIC!" << endl << endl;
+        send( new SchedulerSelfMessage(), upperLayerOut );
+    }
+    else if( msg->getArrivalGate() == upperLayerInGate )
+    {
+//        transmitLock = 1;
+    }
+}
+
+unsigned char NetworkInterfaceCard::isLocked( void )
+{
+    return this->transmitLock;
+}
+
+void NetworkInterfaceCard::lock( void )
+{
+    this->transmitLock = 1;
+}
+
+void NetworkInterfaceCard::unlock( void )
+{
+    this->transmitLock = 0;
+}
+
+cMessage* NetworkInterfaceCard::getEndIFGMsg( void )
+{
+    return this->endIFGMsg;
+}
