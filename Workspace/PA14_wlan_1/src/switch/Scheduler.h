@@ -30,7 +30,7 @@ class Scheduler {
 
 private:
     cArray* queues;
-    unsigned long int queueSizes[QUEUES_COUNT];
+    unsigned long int queueSizes[ QUEUES_COUNT ];
     cArray* queueVectors;
     schedulerMode schedmode;
     HsrSwitch* parentSwitch;
@@ -44,6 +44,14 @@ private:
     NetworkInterfaceCard* schedNicExp;
 
     unsigned char schedID; // GateA = A, GateB = B, GateCPU = C, GateInterlink = I
+
+    queueName fcfsSortOrder[ QUEUES_COUNT ];
+    queueName ringFirstSortOrder[ QUEUES_COUNT ];
+    queueName zipperSortOrder[ QUEUES_COUNT ];
+    queueName tokenizerSortOrder[ QUEUES_COUNT ];
+
+    void sendMessage( cMessage* msg, cGate* outGate );
+    void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
 
 public:
     Scheduler();
@@ -66,7 +74,6 @@ public:
 
 protected:
     virtual void handleMessage( cMessage *msg );
-    void sendMessage( cMessage* msg, cGate* outGate );
 
 };
 

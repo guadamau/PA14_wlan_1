@@ -136,12 +136,6 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
 
 
 
-
-
-
-//    /* delete original incoming message ... */
-//    delete msg;
-
     /* Arrival Gate */
     cGate* arrivalGate = switchesMsg->getArrivalGate();
 
@@ -449,22 +443,12 @@ EndNodeSwitch::hsrTagSendToRingRoutine( EthernetIIFrame* ethTag, vlanMessage* vl
 
     EthernetIIFrame* frameReadyToProcess = NULL;
 
-    /* If this frame is HSR or
-     * the destination node has been
-     * registered as non-HSR */
-    if( ( hsrTag != NULL ) ||
-        ( endNodeTable->getNodeMode( ethTag->getSrc() ) != NODETYPE_HSR ) )
-    {
-        /* Do not modify the frame. */
-    }
-    else /* (non-HSR frame and destination node not registered as non-HSR) */
-    {
-//        /* Insert the HSR tag with the sequence number of the host */
-//        hsrTag = MessagePacker::createHSRTag( "HSR", ringID, sequenceNum );
-//
-//        /* Increment the sequence number, wrapping through 0 */
-//        HsrSwitch::setSequenceNum( sequenceNum++ );
-    }
+    /*
+     * Deleted some lines here. Check earlier revisions
+     * for more information.
+     * Lines became deprecated due to generating
+     * a HSR-Tag for every frame created by a CPU.
+     * */
 
     frameReadyToProcess = MessagePacker::generateEthMessage( ethTag, vlanTag, hsrTag, messageData );
 
