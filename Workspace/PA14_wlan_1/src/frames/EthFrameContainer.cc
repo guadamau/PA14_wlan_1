@@ -15,12 +15,47 @@
 
 #include <frames/EthFrameContainer.h>
 
-EthFrameContainer::EthFrameContainer() {
-    // TODO Auto-generated constructor stub
+EthFrameContainer::EthFrameContainer()
+{
+    this->frameTransmissionTime = 0.0;
+    this->frameTransmissionTimeVector = new cOutVector();
 
+    frameTransmissionTimeVector->setName( "---- noname frame ----" );
+    frameTransmissionTimeVector->record( frameTransmissionTime );
 }
 
-EthFrameContainer::~EthFrameContainer() {
-    // TODO Auto-generated destructor stub
+EthFrameContainer::~EthFrameContainer()
+{
+    delete this->frameTransmissionTimeVector;
+}
+
+void EthFrameContainer::calcAndRecordTransmissionTime( void )
+{
+    simtime_t creationTime = check_and_cast<simtime_t>( EthernetIIFrame::getCreationTime() );
+    simtime_t arrivalTime = simTime();
+
+    EthernetIIFrame* tempFrame = check_and_cast<EthernetIIFrame*>( this->dup() );
+    vlanMessage** vlanTag = NULL;
+    hsrMessage** hsrTag = NULL;
+    dataMessage** messageData = NULL;
+
+    MessagePacker::decapsulateMessage( EthernetIIFrame **tempFrame, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData );
+
+    frameTransmissionTime = arrivalTime - creationTime;
+
+    for(int i = 0; i < QUEUES_COUNT; i++)
+            {
+                queueSizes[i] = 0;
+
+                cOutVector* queueVector = new cOutVector();
+
+                std::stringstream ss;
+                ss << schedID << ": " << queueNamesStr[i];
+                queueVector->setName( ss.str().c_str() );
+
+                queueVector->record( queueSizes[ i ] );
+                queueVectors->addAt( i, queueVector );
+            }
+
 }
 

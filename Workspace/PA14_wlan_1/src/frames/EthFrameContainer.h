@@ -16,16 +16,20 @@
 #ifndef ETHFRAMECONTAINER_H_
 #define ETHFRAMECONTAINER_H_
 
+#include <omnetpp.h>
 #include <EtherFrame_m.h>
 
 class EthFrameContainer: public EthernetIIFrame {
 
 private:
+    simtime_t frameTransmissionTime;
+    cOutVector* frameTransmissionTimeVector;
 
 public:
     EthFrameContainer();
     virtual ~EthFrameContainer();
-
+    void calcAndRecordTransmissionTime( void );
+    const char* getDisplayString( void ) const;
 };
 
 #endif /* ETHFRAMECONTAINER_H_ */
