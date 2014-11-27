@@ -14,6 +14,10 @@
 // 
 
 #include <frames/EthFrameContainer.h>
+#include "hsrMessage_m.h"
+#include "prpMessage_m.h"
+#include "dataMessage_m.h"
+#include "vlanMessage_m.h"
 
 EthFrameContainer::EthFrameContainer()
 {
@@ -31,7 +35,7 @@ EthFrameContainer::~EthFrameContainer()
 
 void EthFrameContainer::calcAndRecordTransmissionTime( void )
 {
-    simtime_t creationTime = check_and_cast<simtime_t>( EthernetIIFrame::getCreationTime() );
+    //simtime_t creationTime = EthernetIIFrame::getCreationTime();
     simtime_t arrivalTime = simTime();
 
     EthernetIIFrame* tempFrame = check_and_cast<EthernetIIFrame*>( this->dup() );
@@ -39,23 +43,28 @@ void EthFrameContainer::calcAndRecordTransmissionTime( void )
     hsrMessage** hsrTag = NULL;
     dataMessage** messageData = NULL;
 
-    MessagePacker::decapsulateMessage( EthernetIIFrame **tempFrame, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData );
+    //MessagePacker::decapsulateMessage( EthernetIIFrame **tempFrame, vlanMessage **vlanTag, hsrMessage **hsrTag, dataMessage **messageData );
 
-    frameTransmissionTime = arrivalTime - creationTime;
+    // frameTransmissionTime = arrivalTime - creationTime;
 
-    for(int i = 0; i < QUEUES_COUNT; i++)
-            {
-                queueSizes[i] = 0;
+//    for(int i = 0; i < QUEUES_COUNT; i++)
+//            {
+//                queueSizes[i] = 0;
+//
+//                cOutVector* queueVector = new cOutVector();
+//
+//                std::stringstream ss;
+//                ss << schedID << ": " << queueNamesStr[i];
+//                queueVector->setName( ss.str().c_str() );
+//
+//                queueVector->record( queueSizes[ i ] );
+//                queueVectors->addAt( i, queueVector );
+//            }
 
-                cOutVector* queueVector = new cOutVector();
+}
 
-                std::stringstream ss;
-                ss << schedID << ": " << queueNamesStr[i];
-                queueVector->setName( ss.str().c_str() );
-
-                queueVector->record( queueSizes[ i ] );
-                queueVectors->addAt( i, queueVector );
-            }
-
+const char* EthFrameContainer::getDisplayString( void ) const
+{
+    return NULL;
 }
 

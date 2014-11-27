@@ -93,8 +93,8 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
             ss << schedID << ": " << queueNamesStr[i];
             queueVector->setName( ss.str().c_str() );
 
-            queueVector->record( queueSizes[i] );
-            queueVectors->addAt(i, queueVector);
+            queueVector->record( queueSizes[ i ] );
+            queueVectors->addAt( i, queueVector );
         }
     }
 
