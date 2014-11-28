@@ -432,7 +432,7 @@ CPU::initialize()
     /* There must be a delay logger on top of the current simulation.
      * Otherwise the following lines will result in an error. */
     const char* delayLoggerModulePath = par( "delayLogger" );
-    cModule* modp = simulation.moduleByPath( delayLoggerModulePath );
+    cModule* modp = simulation.getModuleByPath( delayLoggerModulePath );
 
     this->delayLogger = check_and_cast<DelayLogger*>( modp );
 }

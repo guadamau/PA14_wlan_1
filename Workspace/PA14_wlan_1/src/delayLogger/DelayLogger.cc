@@ -55,7 +55,7 @@ void DelayLogger::initialize()
 
 void DelayLogger::addDelay( cMessage* msg )
 {
-    EthernetIIFrame* ethTag = NULL;
+    EthernetIIFrame* frame = NULL;
     vlanMessage* vlanTag = NULL;
     hsrMessage* hsrTag = NULL;
     dataMessage* messageData = NULL;
@@ -63,17 +63,16 @@ void DelayLogger::addDelay( cMessage* msg )
     framePriority frameprio;
 
     /* Lets get the priority and the creation time of the message. */
-    EthernetIIFrame* frame = check_and_cast<EthernetIIFrame*>( msg );
+    frame = check_and_cast<EthernetIIFrame*>( msg );
 
     simtime_t frameCreationTime = frame->getCreationTime();
 
-    simtime_t msgDelay = simtime() - frameCreationTime;
+    simtime_t msgDelay = simTime() - frameCreationTime;
 
     MessagePacker::decapsulateMessage( &frame, &vlanTag, &hsrTag, &messageData );
-    /* This pointer assignment is just for better understanding. */
-    ethTag = frame;
 
-    frameprio = vlanTag->getUser_priority();
+    frameprio = static_cast<framePriority>( vlanTag->getUser_priority() );
+
 
     if( frameprio != LOW && frameprio != HIGH && frameprio != EXPRESS )
     {

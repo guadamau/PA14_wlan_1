@@ -18,7 +18,7 @@
 
 #include <omnetpp.h>
 
-class DelayLogger : cSimpleModule
+class DelayLogger : public cSimpleModule
 {
 
 private:
