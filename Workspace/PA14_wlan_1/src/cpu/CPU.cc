@@ -428,6 +428,13 @@ CPU::initialize()
     multicastListener = par("multicastListener");
 
     loadXMLFile();
+
+    /* There must be a delay logger on top of the current simulation.
+     * Otherwise the following lines will result in an error. */
+    const char* delayLoggerModulePath = par( "delayLogger" );
+    cModule* modp = simulation.moduleByPath( delayLoggerModulePath );
+
+    this->delayLogger = check_and_cast<DelayLogger*>( modp );
 }
 
 void
@@ -554,7 +561,7 @@ CPU::handleMessage(cMessage *msg)
         {
             EV << "CPU: " << macAddress << " Missrouted Message ARRIVED! Gate: " << msg->getArrivalGate()->getBaseName() << " \n";
         }
-        else if(packet->getDest() == macAddress) {
+        else if( packet->getDest() == macAddress ) {
             getParentModule()->bubble( ss.str().c_str() );
         }
 
@@ -563,14 +570,25 @@ CPU::handleMessage(cMessage *msg)
         hsrMessage *hsrTag = NULL;
         MessagePacker::decapsulateMessage(&packet, &vlanTag, &hsrTag , &messageData);
 
-//        EV << "[ OK ] CPU: Message " << msg->getCreationTime() << "  |  Prio: " << vlanTag->getUser_priority() << endl;
+
         if(multicastListener == 1)
         {
-
             getParentModule()->bubble( ss.str().c_str() );
         }
 
-        MessagePacker::deleteMessage(&packet, &vlanTag, &hsrTag , &messageData);
+        /* Log circulation multicast frames */
+        if( macAddress == packet->getSrc() &&
+            packet->getSrc().isMulticast() )
+        {
+            this->delayLogger->addDelay( msg->dup() );
+        }
+        /* Log also unicast frames to me ... */
+        else if( macAddress == packet->getDest() )
+        {
+            this->delayLogger->addDelay( msg->dup() );
+        }
+
+        MessagePacker::deleteMessage( &packet, &vlanTag, &hsrTag , &messageData );
     }
 }
 

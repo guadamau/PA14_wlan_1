@@ -99,8 +99,6 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
     this->take( switchesMsg );
 
 
-//    EV << "LE GATE: " << msg->getArrivalGate()->getFullName() << endl;
-
     if( typeid( *msg ) == typeid( SchedulerSelfMessage ) )
     {
         /*
@@ -192,8 +190,42 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
     if( switchMacAddress == frameSource &&
       ( arrivalGate != gateCpuIn && arrivalGate != gateCpuInExp ) )
     {
-        EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
-        delete msg;
+        /*
+         * TODO: What to do with broadcast frames?
+         */
+
+        /* If it is a circulating multicast frame,
+         * we have to send it to the cpu and log it. */
+        if( frameDestination.isMulticast() )
+        {
+            frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
+
+            switch( frameprio )
+            {
+                case EXPRESS:
+                {
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, EXPRESS_INTERNAL );
+                    break;
+                }
+                case HIGH:
+                {
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, HIGH_INTERNAL );
+                    break;
+                }
+                default:
+                {
+                    schedGateCpuOut->enqueueMessage( frameToDeliver, LOW_INTERNAL );
+                    break;
+                }
+            }
+            scheduleProcessQueues('C');
+        }
+        else
+        {
+            /* Break the circulation and drop the frame at this point. */
+            EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
+            delete msg;
+        }
     }
 
     /* UNICAST TRAFFIC TO ME

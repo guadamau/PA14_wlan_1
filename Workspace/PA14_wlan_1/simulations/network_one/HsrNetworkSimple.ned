@@ -1,12 +1,15 @@
 package network_one;
 import channels.MyFastChannel;
 import endDevices.HsrEndNode;
+import delayLogger.DelayLogger;
 
 
 network HsrNetworkSimple
 {
     submodules:
 
+		delayLogger : DelayLogger { @display( "i=block/wheelbarrow" ); }
+        
         R1EndNode1: HsrEndNode {
             @display("p=50,200");
             macAddress = "00-15-12-14-88-01";

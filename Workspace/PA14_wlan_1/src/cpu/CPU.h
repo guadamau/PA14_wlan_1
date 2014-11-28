@@ -7,6 +7,8 @@
 #include "EtherFrame_m.h"
 #include "vlanMessage_m.h"
 
+#include "DelayLogger.h"
+
 /**
  * TODO - Generated class
  */
@@ -27,6 +29,8 @@ private:
   int multicastListener;
 
   static unsigned long messageCount;
+
+  DelayLogger* delayLogger;
 
   EthernetIIFrame *generateOnePacket(SendData sendData);
   bool scheduleMessage(SendData sendData);

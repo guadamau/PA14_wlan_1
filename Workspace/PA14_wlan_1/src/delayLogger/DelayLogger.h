@@ -13,23 +13,33 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-#ifndef ETHFRAMECONTAINER_H_
-#define ETHFRAMECONTAINER_H_
+#ifndef DELAYLOGGER_H_
+#define DELAYLOGGER_H_
 
 #include <omnetpp.h>
-#include <EtherFrame_m.h>
 
-class EthFrameContainer: public EthernetIIFrame {
+class DelayLogger : cSimpleModule
+{
 
 private:
-    simtime_t frameTransmissionTime;
-    cOutVector* frameTransmissionTimeVector;
+
+    cOutVector* endToEndDelayVecExpress;
+    cOutVector* endToEndDelayVecHigh;
+    cOutVector* endToEndDelayVecLow;
+
+    cDoubleHistogram* endToEndDelayStatsExpress;
+    cDoubleHistogram* endToEndDelayStatsHigh;
+    cDoubleHistogram* endToEndDelayStatsLow;
+
+protected:
+    virtual void initialize( void );
 
 public:
-    EthFrameContainer();
-    virtual ~EthFrameContainer();
-    void calcAndRecordTransmissionTime( void );
-    const char* getDisplayString( void ) const;
+    DelayLogger();
+    virtual ~DelayLogger();
+    void addDelay( cMessage* msg );
+    void finish( void );
+
 };
 
-#endif /* ETHFRAMECONTAINER_H_ */
+#endif /* DELAYLOGGER_H_ */
