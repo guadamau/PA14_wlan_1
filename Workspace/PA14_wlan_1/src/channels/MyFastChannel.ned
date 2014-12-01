@@ -24,7 +24,7 @@ package channels;
         
         channel MyFastChannel extends ned.DatarateChannel {
             delay = uniform(300ns, 400ns);
-            datarate = 10Mbps;
+            datarate = 100Mbps;
             @display("ls=red,3");
         }
         

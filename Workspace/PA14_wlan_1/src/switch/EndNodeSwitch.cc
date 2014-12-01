@@ -48,10 +48,13 @@ EndNodeSwitch::EndNodeSwitch()
 
 EndNodeSwitch::~EndNodeSwitch()
 {
-    if( endNodeTable != NULL )
-    {
-        delete endNodeTable;
-    }
+    /*
+     * Don't know what the hell omnet++ does in the background with its modules.
+     * "Generally" the omnet++ kernel cleans up a network after running.
+     * So we do not manually delete referenced mebers here as we should in "normal c++".
+     * Otherwise a failure will be thrown in omnet++s "network-cleanup".
+     * This is wtf.
+     */
 }
 
 void EndNodeSwitch::handleMessage( cMessage* msg )

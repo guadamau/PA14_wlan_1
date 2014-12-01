@@ -431,10 +431,16 @@ CPU::initialize()
 
     /* There must be a delay logger on top of the current simulation.
      * Otherwise the following lines will result in an error. */
-    const char* delayLoggerModulePath = par( "delayLogger" );
-    cModule* modp = simulation.getModuleByPath( delayLoggerModulePath );
 
-    this->delayLogger = check_and_cast<DelayLogger*>( modp );
+    if( getModuleByPath( "HsrNetworkSimple.delayLogger" ) != NULL )
+    {
+        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "HsrNetworkSimple.delayLogger" ) );
+    }
+    else
+    {
+        throw cRuntimeError( "No delayLogger found. Is the name of the delayLogger set correct?" );
+        endSimulation();
+    }
 }
 
 void
@@ -551,6 +557,7 @@ CPU::handleMessage(cMessage *msg)
     }
     else
     {
+        cMessage* frameForDelayLogger = msg->dup();
         EthernetIIFrame *packet = check_and_cast<EthernetIIFrame *>(msg);
 
         std::stringstream ss;
@@ -578,14 +585,14 @@ CPU::handleMessage(cMessage *msg)
 
         /* Log circulation multicast frames */
         if( macAddress == packet->getSrc() &&
-            packet->getSrc().isMulticast() )
+            packet->getDest().isMulticast() )
         {
-            this->delayLogger->addDelay( msg->dup() );
+            this->delayLogger->addDelay( frameForDelayLogger );
         }
         /* Log also unicast frames to me ... */
         else if( macAddress == packet->getDest() )
         {
-            this->delayLogger->addDelay( msg->dup() );
+            this->delayLogger->addDelay( frameForDelayLogger );
         }
 
         MessagePacker::deleteMessage( &packet, &vlanTag, &hsrTag , &messageData );

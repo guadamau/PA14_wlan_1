@@ -30,26 +30,11 @@ HsrSwitch::~HsrSwitch()
 {
     /*
      * Don't know what the hell omnet++ does in the background with its modules.
-     * Therefore just to be sure, delete referenced members to prevent memleaks.
+     * "Generally" the omnet++ kernel cleans up a network after running.
+     * So we do not manually delete referenced mebers here as we should in "normal c++".
+     * Otherwise a failure will be thrown in omnet++s "network-cleanup".
+     * This is wtf.
      */
-    if( macAddress != NULL )
-    {
-        delete macAddress;
-    }
-
-    /*
-     * Constructor and destructor of cGate are protected: only cModule is allowed
-     * to create and delete gates. Therefore the following lines are obsolete.
-     * The gates are deleted automatically so they don't have to be deleted here.
-     */
-
-    delete schedGateAOut;
-    delete schedGateAOutExp;
-    delete schedGateBOut;
-    delete schedGateBOutExp;
-    delete schedGateCpuOut;
-    delete schedGateCpuOutExp;
-
 }
 
 

@@ -17,5 +17,13 @@ package delayLogger;
 
 
 simple DelayLogger
-{
+{    
+    // Number of histogram cells
+    int histogramNumCells = default( 100 );
+    
+    // Number of observations used for range estimation
+    int numFirstVals = default( 50 );
+    
+    // Range extension factor (usually 1.0 .. 2)
+    double rangeExtFactor = default( 1.3 );
 }

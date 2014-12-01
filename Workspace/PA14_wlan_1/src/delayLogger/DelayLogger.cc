@@ -14,6 +14,7 @@
 // 
 
 #include "hsrDefines.h"
+#include "math.h"
 #include <delayLogger/DelayLogger.h>
 
 #include "MessagePacker.h"
@@ -40,17 +41,27 @@ DelayLogger::~DelayLogger()
 
 void DelayLogger::initialize()
 {
+    int histogramNumCells = par( "histogramNumCells" );
+    int numFirstVals = par( "numFirstVals" );
+    double rangeExtFactor = par( "rangeExtFactor" );
+
     this->endToEndDelayVecExpress = new cOutVector();
     this->endToEndDelayVecHigh = new cOutVector();
     this->endToEndDelayVecLow = new cOutVector();
 
-    this->endToEndDelayStatsExpress = new cDoubleHistogram();
-    this->endToEndDelayStatsHigh = new cDoubleHistogram();
-    this->endToEndDelayStatsLow = new cDoubleHistogram();
+    this->endToEndDelayStatsExpress = new cDoubleHistogram( "Express Prio Delay", histogramNumCells );
+    this->endToEndDelayStatsHigh = new cDoubleHistogram( "High Prio Delay", histogramNumCells );
+    this->endToEndDelayStatsLow = new cDoubleHistogram( "Low Prio Delay", histogramNumCells );
 
-    endToEndDelayVecExpress->setName( "End-to-End Delay EXP" );
-    endToEndDelayVecHigh->setName( "End-to-End Delay HIGH" );
-    endToEndDelayVecLow->setName( "End-to-End Delay LOW" );
+
+    this->endToEndDelayVecExpress->setName( "End-to-End Delay EXP" );
+    this->endToEndDelayVecHigh->setName( "End-to-End Delay HIGH" );
+    this->endToEndDelayVecLow->setName( "End-to-End Delay LOW" );
+
+    // 0.0 is lower limit
+    this->endToEndDelayStatsExpress->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
+    this->endToEndDelayStatsHigh->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
+    this->endToEndDelayStatsLow->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
 }
 
 void DelayLogger::addDelay( cMessage* msg )
@@ -61,6 +72,8 @@ void DelayLogger::addDelay( cMessage* msg )
     dataMessage* messageData = NULL;
 
     framePriority frameprio;
+
+    take( msg );
 
     /* Lets get the priority and the creation time of the message. */
     frame = check_and_cast<EthernetIIFrame*>( msg );
@@ -105,7 +118,7 @@ void DelayLogger::addDelay( cMessage* msg )
         }
     }
 
-    delete msg;
+    MessagePacker::deleteMessage( &frame, &vlanTag, &hsrTag, &messageData );
 }
 
 void DelayLogger::finish( void )
