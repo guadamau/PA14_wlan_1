@@ -160,7 +160,17 @@ void Scheduler::processQueues( void )
     switch( schedmode )
     {
         /*
-         * FCFS Try to process all queues in the order of the queueName-enum.
+         * FCFS: we have no distinction between Ring- and Internal frames.
+         * See the function above "enqueueMessage". Frames ordered to the ring queues
+         * are redirected to the internal queues.
+         * Due to the above description, the behaviour FCFS and RING_FIRST have not to
+         * be distinguished here.
+         *
+         * The Ring queues of each level are processed first,
+         * which is part of the RING_FIRST policy.
+         *
+         * In case of FCFS-scheduling-mode the ring queues are just always empty,
+         * see enqueueMessage-function.
          *
          * EXPRESS_RING,
          * EXPRESS_INTERNAL,
@@ -170,6 +180,7 @@ void Scheduler::processQueues( void )
          * LOW_INTERNAL
          * */
         case FCFS:
+        case RING_FIRST:
         {
             for( unsigned char i = 0; i < queues->size(); i++ )
             {
@@ -187,26 +198,6 @@ void Scheduler::processQueues( void )
             }
 
             /* break belongs to case FCFS */
-            break;
-        }
-
-        /*
-         * RING_FIRST-Policy
-         * The Ring-Queues are privileged here.
-         * And are processed before the queues
-         * containing Messages coming from the CPU.
-         *
-         * Processing order of the queues:
-         * EXPRESS_RING,
-         * HIGH_RING,
-         * LOW_RING,
-         * EXPRESS_INTERNAL,
-         * HIGH_INTERNAL,
-         * LOW_INTERNAL
-         * */
-        case RING_FIRST:
-        {
-            /* break belongs to case RING_FIRST */
             break;
         }
 

@@ -6,7 +6,8 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.0000208</interval> 					<!-- 20,8 µs -->           
+            <interval>0.0000208</interval> 					<!-- 20,8 µs -->
+            <epsilon>0.000003</epsilon>           			<!-- 3 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-01</destination>    
@@ -21,7 +22,8 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.0000208</interval> 					<!-- 20,8 µs -->           
+            <interval>0.0000208</interval> 					<!-- 20,8 µs -->
+            <epsilon>0.000003</epsilon>           			<!-- 3 µs -->           
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-01</destination>    

@@ -32,17 +32,15 @@ private:
 
   DelayLogger* delayLogger;
 
+  unsigned long numFramesSent;
+  unsigned long numFramesReceived;
+
   EthernetIIFrame *generateOnePacket(SendData sendData);
   bool scheduleMessage(SendData sendData);
   void loadXMLFile();
   void printMessageinfo(SendData sendData);
 
 protected:
-  //cOutVector endToEndDelayVec[10];
-
-  // statistics
-  unsigned long numFramesSent;
-  unsigned long numFramesReceived;  
 
   virtual void initialize();
   virtual void handleMessage( cMessage *msg );

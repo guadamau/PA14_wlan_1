@@ -58,6 +58,7 @@ typedef struct
     double last;
     double maxLast;
     double interval;
+    double epsilon;
     double maxInterval;
 
     double standardabweichung ;

@@ -22,6 +22,7 @@ typedef enum
 {
     FCFS,
     RING_FIRST,
+    INTERNAL_FIRST,
     ZIPPER,
     TOKENS
 } schedulerMode;

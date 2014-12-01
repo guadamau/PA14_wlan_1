@@ -239,6 +239,7 @@ CPU::loadXMLFile()
                 sendData.last = 0;
                 sendData.maxLast = 0;
                 sendData.interval = 0;
+                sendData.epsilon = 0.0;
                 sendData.maxInterval = 0;
                 sendData.standardabweichung = 0;
                 sendData.paketgroesse = 0;
@@ -336,6 +337,13 @@ CPU::loadXMLFile()
                 {
                     attributeTemp = (char*)valueElement->getNodeValue();
                     sendData.interval = atof(attributeTemp);
+                }
+
+                valueElement = paketElement->getFirstChildWithTag( "epsilon" );
+                if( valueElement != NULL )
+                {
+                    attributeTemp = ( char* )valueElement->getNodeValue();
+                    sendData.epsilon = atof( attributeTemp );
                 }
 
                 valueElement = paketElement->getFirstChildWithTag("maxinterval");
@@ -452,7 +460,8 @@ CPU::handleMessage(cMessage *msg)
         if ((simTime() < delayedMessage->getSendData().stopTime) && (delayedMessage->getSendData().sendBehavior != BEHAVIOR_STD))
         {
             double randomLast = 0;
-            double randomInterval = 0;
+            double interval = 0.0;
+            double epsilon = 0.0;
 
             switch (delayedMessage->getSendData().sendBehavior)
             {
@@ -460,7 +469,15 @@ CPU::handleMessage(cMessage *msg)
 				{
 					if (delayedMessage->getSendData().last == 0)
 					{
-						randomInterval = delayedMessage->getSendData().interval;
+						interval = delayedMessage->getSendData().interval;
+
+						if( delayedMessage->getSendData().epsilon > 0.0 )
+						{
+                            epsilon = delayedMessage->getSendData().epsilon;
+                            interval = uniform( interval, ( interval + epsilon ) );
+                            /* next line just for console output */
+                            epsilon = interval - delayedMessage->getSendData().interval;
+						}
 					}
 					else
 					{
@@ -472,7 +489,7 @@ CPU::handleMessage(cMessage *msg)
 				{
 					if (delayedMessage->getSendData().last == 0)
 					{
-						randomInterval = uniform(delayedMessage->getSendData().interval, delayedMessage->getSendData().maxInterval);
+						interval = uniform(delayedMessage->getSendData().interval, delayedMessage->getSendData().maxInterval);
 					}
 					else
 					{
@@ -484,7 +501,7 @@ CPU::handleMessage(cMessage *msg)
 				{
 					if (delayedMessage->getSendData().last == 0)
 					{
-						randomInterval = truncnormal(delayedMessage->getSendData().interval, delayedMessage->getSendData().standardabweichung);
+						interval = truncnormal(delayedMessage->getSendData().interval, delayedMessage->getSendData().standardabweichung);
 					}
 					else
 					{
@@ -501,7 +518,9 @@ CPU::handleMessage(cMessage *msg)
             simtime_t sendTime;
             if (randomLast == 0)
             {
-                sendTime = randomInterval + simTime();
+                EV << "Random generated epsilon: " << epsilon << endl;
+                EV << "Interval for sending: " << interval << endl;
+                sendTime = interval + simTime();
             }
             else
             {

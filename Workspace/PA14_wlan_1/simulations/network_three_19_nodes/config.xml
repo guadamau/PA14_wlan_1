@@ -9,7 +9,8 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <interval>0.00025</interval> 					<!-- 4000x per second -->
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->           
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -25,6 +26,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -40,6 +42,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -55,6 +58,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -70,6 +74,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -85,6 +90,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -100,6 +106,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -115,6 +122,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -130,6 +138,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -145,6 +154,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -160,6 +170,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -175,6 +186,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -190,6 +202,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -205,6 +218,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -220,6 +234,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -235,6 +250,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -250,6 +266,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
+            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -268,6 +285,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.005</interval> 					<!-- 200x per second -->           
+            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-0A</destination>    
@@ -283,6 +301,7 @@
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
             <interval>0.005</interval> 					<!-- 200x per second -->           
+            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-05</destination>    

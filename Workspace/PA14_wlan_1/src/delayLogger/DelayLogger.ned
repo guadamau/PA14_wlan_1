@@ -22,8 +22,8 @@ simple DelayLogger
     int histogramNumCells = default( 100 );
     
     // Number of observations used for range estimation
-    int numFirstVals = default( 50 );
+    int numFirstVals = default( 300 );
     
     // Range extension factor (usually 1.0 .. 2)
-    double rangeExtFactor = default( 1.3 );
+    double rangeExtFactor = default( 1.2 );
 }
