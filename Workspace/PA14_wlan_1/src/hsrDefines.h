@@ -32,6 +32,12 @@ typedef enum
 
 typedef enum
 {
+    RING,
+    INTERNAL
+} queueState;
+
+typedef enum
+{
 	TYPE_ERROR = 0,
 	TYPE_STD,
 	TYPE_HSR,

@@ -36,6 +36,8 @@ private:
     schedulerMode schedmode;
     HsrSwitch* parentSwitch;
 
+    unsigned long int availableTokens;
+
     simtime_t finishTime;
 
     cGate* schedOutGate;
@@ -46,13 +48,15 @@ private:
 
     unsigned char schedID; // GateA = A, GateB = B, GateCPU = C, GateInterlink = I
 
-    queueName fcfsSortOrder[ QUEUES_COUNT ];
     queueName ringFirstSortOrder[ QUEUES_COUNT ];
-    queueName zipperSortOrder[ QUEUES_COUNT ];
-    queueName tokenizerSortOrder[ QUEUES_COUNT ];
+    queueName internalFirstSortOrder[ QUEUES_COUNT ];
+
+    /* To alternate between Ring and Internal (Zipper mechanism) */
+    queueState curQueueState;
 
     void sendMessage( cMessage* msg, cGate* outGate );
     void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
+    void loopQueues( queueName* currentSortOrder );
 
 public:
     Scheduler();

@@ -72,6 +72,8 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     this->schedNic = schedNic;
     this->schedNicExp = schedNicExp;
 
+    this->curQueueState = RING;
+
     /* Members to record statistics. */
     const char* queueNamesStr[ QUEUES_COUNT ]={
             "QueueSize EXPRESS from Ring",
@@ -98,30 +100,19 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
         }
     }
 
-    fcfsSortOrder[ 0 ] = EXPRESS_RING;
-    fcfsSortOrder[ 1 ] = EXPRESS_INTERNAL;
-    fcfsSortOrder[ 2 ] = HIGH_RING;
-    fcfsSortOrder[ 3 ] = HIGH_INTERNAL;
-    fcfsSortOrder[ 4 ] = LOW_RING;
-    fcfsSortOrder[ 5 ] = LOW_INTERNAL;
-
     ringFirstSortOrder[ 0 ] = EXPRESS_RING;
-    ringFirstSortOrder[ 1 ] = HIGH_RING;
-    ringFirstSortOrder[ 2 ] = LOW_RING;
-    ringFirstSortOrder[ 3 ] = EXPRESS_INTERNAL;
-    ringFirstSortOrder[ 4 ] = HIGH_INTERNAL;
+    ringFirstSortOrder[ 1 ] = EXPRESS_INTERNAL;
+    ringFirstSortOrder[ 2 ] = HIGH_RING;
+    ringFirstSortOrder[ 3 ] = HIGH_INTERNAL;
+    ringFirstSortOrder[ 4 ] = LOW_RING;
     ringFirstSortOrder[ 5 ] = LOW_INTERNAL;
 
-    zipperSortOrder[ 0 ] = EXPRESS_RING;
-    zipperSortOrder[ 1 ] = HIGH_RING;
-    zipperSortOrder[ 2 ] = LOW_RING;
-    zipperSortOrder[ 3 ] = EXPRESS_INTERNAL;
-    zipperSortOrder[ 4 ] = HIGH_INTERNAL;
-    zipperSortOrder[ 5 ] = LOW_INTERNAL;
-
-    queueName ringFirstSortOrder[ QUEUES_COUNT ];
-    queueName zipperSortOrder[ QUEUES_COUNT ];
-    queueName tokenizerSortOrder[ QUEUES_COUNT ];
+    internalFirstSortOrder[ 0 ] = EXPRESS_INTERNAL;
+    internalFirstSortOrder[ 1 ] = EXPRESS_RING;
+    internalFirstSortOrder[ 2 ] = HIGH_INTERNAL;
+    internalFirstSortOrder[ 3 ] = HIGH_RING;
+    internalFirstSortOrder[ 4 ] = LOW_INTERNAL;
+    internalFirstSortOrder[ 5 ] = LOW_RING;
 }
 
 void Scheduler::handleMessage( cMessage *msg )
@@ -154,8 +145,8 @@ void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 
 void Scheduler::processQueues( void )
 {
-    cQueue* currentQueue = NULL;
-    queueName currentQueueName;
+    queueName* currentSortOrder;
+
 
     switch( schedmode )
     {
@@ -172,6 +163,8 @@ void Scheduler::processQueues( void )
          * In case of FCFS-scheduling-mode the ring queues are just always empty,
          * see enqueueMessage-function.
          *
+         * The processing order of the queues is as follows:
+         *
          * EXPRESS_RING,
          * EXPRESS_INTERNAL,
          * HIGH_RING,
@@ -182,40 +175,68 @@ void Scheduler::processQueues( void )
         case FCFS:
         case RING_FIRST:
         {
-            for( unsigned char i = 0; i < queues->size(); i++ )
-            {
-                currentQueueName = static_cast<queueName>( i );
-                currentQueue = check_and_cast<cQueue*>( queues->get( currentQueueName ) );
+            currentSortOrder = ringFirstSortOrder;
+            loopQueues( currentSortOrder );
+            break;
+        }
 
-                if( currentQueue != NULL )
-                {
-                    processOneQueue( currentQueue, currentQueueName );
-                }
-                else
-                {
-                    throw cRuntimeError( " [ PANIC ] : current queue to process is NULL! exiting ... \n" );
-                }
-            }
-
-            /* break belongs to case FCFS */
+        /*
+         * The Internal queues of each level are processed first,
+         * which is part of the INTERNAL_FIRST policy.
+         */
+        case INTERNAL_FIRST:
+        {
+            currentSortOrder = internalFirstSortOrder;
+            loopQueues( currentSortOrder );
             break;
         }
 
         /*
          * ZIPPER-Policy
-         * Alternates the queues at their priority level.
+         * Alternates the queues between ring and internal.
          *
          * Processing order of the queues:
+         *
+         * [2n] even
          * EXPRESS_RING,
-         * HIGH_RING,
-         * LOW_RING,
          * EXPRESS_INTERNAL,
+         * HIGH_RING,
          * HIGH_INTERNAL,
+         * LOW_RING,
          * LOW_INTERNAL
+         *
+         * [2n-1] odd
+         * EXPRESS_INTERNAL,
+         * EXPRESS_RING,
+         * HIGH_INTERNAL,
+         * HIGH_RING,
+         * LOW_INTERNAL,
+         * LOW_RING
          * */
         case ZIPPER:
         {
-            /* break belongs to case ZIPPER */
+            switch( curQueueState )
+            {
+                case RING:
+                {
+                    currentSortOrder = ringFirstSortOrder;
+                    loopQueues( currentSortOrder );
+                    curQueueState = INTERNAL;
+                    break;
+                }
+                case INTERNAL:
+                {
+                    currentSortOrder = internalFirstSortOrder;
+                    loopQueues( currentSortOrder );
+                    curQueueState = RING;
+                    break;
+                }
+                default:
+                {
+                    break;
+                }
+            }
+            /* break to case ZIPPER */
             break;
         }
 
@@ -240,6 +261,27 @@ void Scheduler::sendMessage( cMessage* msg, cGate* outGate )
 {
     parentSwitch->send( msg, outGate );
     return;
+}
+
+void Scheduler::loopQueues( queueName* currentSortOrder )
+{
+    cQueue* currentQueue = NULL;
+    queueName currentQueueName;
+
+    for( unsigned char i = 0; i < QUEUES_COUNT; i++ )
+    {
+        currentQueueName = currentSortOrder[ i ];
+        currentQueue = check_and_cast<cQueue*>( queues->get( currentQueueName ) );
+
+        if( currentQueue != NULL )
+        {
+            processOneQueue( currentQueue, currentQueueName );
+        }
+        else
+        {
+            throw cRuntimeError( " [ PANIC ] : current queue to process is NULL! exiting ... \n" );
+        }
+    }
 }
 
 void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueName )
