@@ -39,7 +39,7 @@ DelayLogger::~DelayLogger()
     delete this->endToEndDelayStatsLow;
 }
 
-void DelayLogger::initialize()
+void DelayLogger::initialize( void )
 {
     int histogramNumCells = par( "histogramNumCells" );
     int numFirstVals = par( "numFirstVals" );

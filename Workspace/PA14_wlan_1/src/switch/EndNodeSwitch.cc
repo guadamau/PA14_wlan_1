@@ -37,7 +37,7 @@ nodeTable* EndNodeSwitch::getNodeTable()
 void EndNodeSwitch::initialize()
 {
     /* Call initialize of the base class. */
-    HsrSwitch::initialize( "FCFS" );
+    HsrSwitch::initialize();
 
     this->endNodeTable = new nodeTable();
 }

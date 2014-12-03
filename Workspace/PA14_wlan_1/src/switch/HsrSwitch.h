@@ -58,7 +58,7 @@ private:
 
 protected:
 
-      virtual void initialize(const char* schedcoice);
+      virtual void initialize( void );
 
       virtual void handleMessage( cMessage *msg ) = 0;
 
@@ -131,9 +131,6 @@ public:
     void setSchedGateBOutExp( Scheduler* schedGateBOutExp );
 
     void setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp );
-
-
-    void scheduleMessage( simtime_t finishTime, unsigned char schedID );
 
 };
 

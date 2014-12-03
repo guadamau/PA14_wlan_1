@@ -160,30 +160,35 @@ void HsrSwitch::setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp ) {
 }
 
 
-void HsrSwitch::initialize( const char* schedchoice )
+void HsrSwitch::initialize( void )
 {
     /* Initialize Scheduler */
-    //schedmode = static_cast<schedulerMode>( par( "schedulerMode" ).stringValue() );
+    const char* schedChoice = par( "schedulerMode" ).stringValue();
 
-    if (strncasecmp("FCFS",schedchoice,4) == 0)
+    if( strncasecmp( "FCFS", schedChoice ,4 ) == 0 )
     {
        schedmode = FCFS;
     }
-    else if (strncasecmp("RING_FIRST",schedchoice,10) == 0)
+    else if( strncasecmp( "RING_FIRST", schedChoice, 10 ) == 0 )
     {
         schedmode = RING_FIRST;
     }
-    else if (strncasecmp("ZIPPER",schedchoice,6) == 0)
+    else if( strncasecmp( "INTERNAL_FIRST", schedChoice, 14 ) == 0 )
+    {
+        schedmode = INTERNAL_FIRST;
+    }
+    else if( strncasecmp( "ZIPPER", schedChoice, 6 ) == 0 )
     {
         schedmode = ZIPPER;
     }
-    else if (strncasecmp("TOKENS",schedchoice,6) == 0)
+    else if( strncasecmp( "TOKENS", schedChoice, 6 ) == 0 )
     {
         schedmode = TOKENS;
     }
     else
     {
         throw cRuntimeError( "Illegal scheduler mode ! \n" );
+        endSimulation();
     }
 
     macAddress = new MACAddress();
@@ -229,16 +234,6 @@ void HsrSwitch::initialize( const char* schedchoice )
     schedGateCpuOut = new Scheduler();
     /* cpu has no external transmission gate, so we pass the internal gates twice here. */
     schedGateCpuOut->initScheduler( 'C', this, schedmode, gateCpuOut, gateCpuOutExp, NULL, NULL );
-}
-
-void HsrSwitch::scheduleMessage( simtime_t finishTime, unsigned char schedID )
-{
-//    if( finishTime >= simTime() )
-//    {
-//        HsrSwitchSelfMessage* newmsg = new HsrSwitchSelfMessage();
-//        newmsg->setSchedulerName(schedID);
-//        scheduleAt(finishTime, newmsg);
-//    }
 }
 
 void HsrSwitch::scheduleProcessQueues( unsigned char schedID )
