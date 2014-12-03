@@ -15,6 +15,7 @@
 
 #include "hsrDefines.h"
 #include "NetworkInterfaceCard.h"
+#include "SendingStatus.h"
 
 class HsrSwitch;
 
@@ -54,9 +55,14 @@ private:
     /* To alternate between Ring and Internal (Zipper mechanism) */
     queueState curQueueState;
 
+    /* Sending Status to determine frame preemtion */
+    SendingStatus* sendingStatus;
+
     void sendMessage( cMessage* msg, cGate* outGate );
     void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
     void loopQueues( queueName* currentSortOrder );
+    unsigned char isSendingFrameFragmentable( NetworkInterfaceCard* selectedNic );
+    framePriority getMessagePriority( cMessage* msg );
 
 public:
     Scheduler();
@@ -73,6 +79,7 @@ public:
     /* Getters */
     cArray* getQueues( void );
     schedulerMode getSchedmode( void );
+    SendingStatus* getSendingStatus( void );
 
     /* Setters */
     void setSchedmode( schedulerMode schedmode );

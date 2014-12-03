@@ -284,13 +284,13 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.005</interval> 					<!-- 200x per second -->           
-            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
+            <interval>0.005</interval> 					    <!-- 200x per second -->           
+            <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-0A</destination>    
-            <paketgroesse>1476</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <paketgroesse>1476</paketgroesse>               <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>LOW</priority>		                <!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
     </source>
     
@@ -300,16 +300,37 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.005</interval> 					<!-- 200x per second -->           
-            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
+            <interval>0.005</interval> 					    <!-- 200x per second -->           
+            <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>00-15-12-14-88-05</destination>    
-            <paketgroesse>40</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <paketgroesse>40</paketgroesse>                 <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>LOW</priority>		                <!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
     </source>
     
+    
+    <!-- ###################################### TCP spam bot with inexisting destination address ###################################### -->
+    
+    <source>00-15-12-14-88-07								<!-- TCP Traffic Simulation MU7 to xx-xx-xx-xx-xx-xx -->
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>konstante last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.011</stopzeit> 
+            <interval>0.00005</interval> 					<!-- 20000x per second -->           
+            <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
+            <last>0.0</last>
+            <maxlast>100</maxlast>               
+            <destination>00-15-12-14-88-F1</destination>    <!-- This destination does intentionally not exist -->
+            <paketgroesse>1476</paketgroesse>               <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>LOW</priority>		                <!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+        </lastmuster> 
+    </source>    
+
+    
+    <!-- ###################################### ############################################### ###################################### -->
     
 </simulation_behaviour>
 

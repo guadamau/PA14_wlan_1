@@ -47,6 +47,11 @@ unsigned char NetworkInterfaceCard::getDeviceTransmitState( void )
 void NetworkInterfaceCard::handleMessage( cMessage *msg )
 {
     EtherMACFullDuplex::handleMessage( msg );
+
+    /*
+     * Transmitting of frame complete.
+     * Notifiy the Scheduler, that the NIC is in Idle-State again
+     * */
     if( msg == endIFGMsg && transmitState == TX_IDLE_STATE )
     {
         transmitLock = 0;

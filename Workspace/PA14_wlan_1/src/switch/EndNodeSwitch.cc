@@ -110,21 +110,25 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
         if( msg->getArrivalGate() == gateAIn )
         {
             schedGateAOut->processQueues();
+            // schedGateAOut->getSendingStatus()->detachFrame();
 
         }
         else if ( msg->getArrivalGate() == gateAInExp )
         {
             schedGateAOut->processQueues();
+            // schedGateAOut->getSendingStatus()->detachFrame();
 
         }
         else if ( msg->getArrivalGate() == gateBIn )
         {
             schedGateBOut->processQueues();
+            // schedGateBOut->getSendingStatus()->detachFrame();
 
         }
         else if ( msg->getArrivalGate() == gateBInExp )
         {
             schedGateBOut->processQueues();
+            // schedGateBOut->getSendingStatus()->detachFrame();
 
         }
         else
@@ -199,7 +203,9 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
 
         /* If it is a circulating multicast frame,
          * we have to send it to the cpu and log it. */
-        if( frameDestination.isMulticast() )
+        if( frameDestination.isMulticast() || /* Multicast frame circulated once in the ring */
+            ( switchMacAddress == frameSource || /* Circulating frame is unicast or unspecified */
+              ( !frameDestination.isBroadcast() && !frameDestination.isMulticast() ) ) )
         {
             frameToDeliver = hsrTagReceiveFromRingRoutine( ethTag, vlanTag, hsrTag, messageData, arrivalGate );
 
@@ -225,6 +231,8 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
         }
         else
         {
+            /* Should never come here ... */
+
             /* Break the circulation and drop the frame at this point. */
             EV << "ATTENTION: Circulating Frame in the HSR-Ring. Frame is going to be dropped." << endl;
             delete msg;

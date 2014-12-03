@@ -8,10 +8,16 @@
 #include <Ethernet.h>
 #include <sstream>
 #include <string>
+#include <math.h>
 #include "Scheduler.h"
 #include "HsrSwitch.h"
 #include "hsrSwitchSelfMessage_m.h"
 #include "schedulerSelfMessage_m.h"
+#include "MessagePacker.h"
+#include "hsrMessage_m.h"
+#include "EtherFrame_m.h"
+#include "dataMessage_m.h"
+#include "vlanMessage_m.h"
 
 
 Scheduler::Scheduler()
@@ -32,6 +38,11 @@ schedulerMode Scheduler::getSchedmode( void ) {
     return schedmode;
 }
 
+SendingStatus* Scheduler::getSendingStatus( void )
+{
+    return sendingStatus;
+}
+
 
 Scheduler::~Scheduler()
 {
@@ -45,6 +56,8 @@ Scheduler::~Scheduler()
 
     delete queues;
     delete queueVectors;
+
+    delete sendingStatus;
 }
 
 
@@ -73,6 +86,8 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     this->schedNicExp = schedNicExp;
 
     this->curQueueState = RING;
+
+    this->sendingStatus = new SendingStatus();
 
     /* Members to record statistics. */
     const char* queueNamesStr[ QUEUES_COUNT ]={
@@ -114,6 +129,7 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     internalFirstSortOrder[ 4 ] = LOW_INTERNAL;
     internalFirstSortOrder[ 5 ] = LOW_RING;
 }
+
 
 void Scheduler::handleMessage( cMessage *msg )
 {
@@ -289,6 +305,7 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
     cGate* selectedOutGate = NULL;
     NetworkInterfaceCard* selectedNic = NULL;
     unsigned char transmitLock = 1;
+    unsigned char transmitLockExp = 1;
 
     if( !currentQueue->isEmpty() )
     {
@@ -310,10 +327,11 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
          * CPU has no NICs */
         if( schedID != 'C' )
         {
-            transmitLock = selectedNic->isLocked();
+            transmitLock = schedNic->isLocked();
+            transmitLockExp = schedNicExp->isLocked();
         }
 
-        if( transmitLock == 0 || schedID == 'C')
+        if( ( transmitLock == 0 && transmitLockExp == 0 ) || schedID == 'C' )
         {
 
             cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
@@ -325,6 +343,7 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
 
 
             /* Tell the switch to send the message now */
+            sendingStatus->attachFrame( msg );
             sendMessage( msg, selectedOutGate );
 
             if(schedID != 'C')
@@ -337,12 +356,72 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
         else
         {
             /* Channel is currently busy. Have to reschedule the frame. */
-            EV << "[ Channel blocked ] Node: " << selectedNic->getParentModule()->getFullName() << "  Network Interface Card: " << selectedNic->getPhysOutGate()->getFullName() <<  endl << endl;
+            EV << endl << "[ Channel blocked ] Node: " << selectedNic->getParentModule()->getFullName() <<  endl << endl;
 
             /*
              * EXPRESS HANDLING
              */
+            //currentQueue->front();
+
+
 
         }
     }
 }
+
+unsigned char Scheduler::isSendingFrameFragmentable( NetworkInterfaceCard* selectedNic )
+{
+    unsigned char retVal = 0x00;
+
+    /* Algorithm from documentation PA14_wlan_1 */
+    int64_t allBytesOfSendingFrame = sendingStatus->getEthTag()->getByteLength();
+
+    simtime_t simTimeNow = simTime();
+
+    double datarate = selectedNic->getTransmissionChannel()->getNominalDatarate();
+
+    simtime_t sendTimeOfFrame = sendingStatus->getSendingTime();
+
+
+    int64_t bytesAlreadySent = ( int64_t )floor( ( ( simTimeNow.dbl() - sendTimeOfFrame.dbl() ) * datarate ) / 8.0 );
+
+
+    int64_t bytesNotYetSent = allBytesOfSendingFrame - bytesAlreadySent + 12;
+
+
+    if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
+        bytesNotYetSent > 72 )
+    {
+        /* can send express frame now. */
+    }
+    else if( bytesAlreadySent < ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
+             bytesNotYetSent >= 72 )
+    {
+        simtime_t reschedTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+        parentSwitch->scheduleAt( reschedTime, new SchedulerSelfMessage() );
+    }
+
+    return retVal;
+}
+
+framePriority Scheduler::getMessagePriority( cMessage* msg )
+{
+    framePriority framePrio;
+    cMessage* message = msg->dup();
+
+    EthernetIIFrame* ethTag = NULL;
+    vlanMessage* vlanTag = NULL;
+    hsrMessage* hsrTag = NULL;
+    dataMessage* messageData = NULL;
+
+    ethTag = check_and_cast<EthernetIIFrame*>( message );
+
+    MessagePacker::decapsulateMessage( &ethTag, &vlanTag, &hsrTag, &messageData );
+
+    framePrio = static_cast<framePriority>( vlanTag->getUser_priority() );
+
+    MessagePacker::deleteMessage( &ethTag, &vlanTag, &hsrTag, &messageData );
+
+    return framePrio;
+}
+

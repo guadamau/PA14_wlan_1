@@ -613,6 +613,13 @@ CPU::handleMessage(cMessage *msg)
         {
             this->delayLogger->addDelay( frameForDelayLogger );
         }
+        /* Log circulating unicast or undefined frames */
+        else if( macAddress == packet->getSrc() &&
+                 !packet->getDest().isMulticast() &&
+                 !packet->getDest().isBroadcast() )
+        {
+            this->delayLogger->addDelay( frameForDelayLogger );
+        }
 
         MessagePacker::deleteMessage( &packet, &vlanTag, &hsrTag , &messageData );
     }
