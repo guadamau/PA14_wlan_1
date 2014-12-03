@@ -990,9 +990,9 @@ Starten der virtuellen Maschine
 
 \begin_layout Standard
 Auf dem mitgelieferten USB-Stick befindet sich eine VDI-Datei.
- Diese Datei beinhaltet eine virtuelle Maschine, auf der das Linux-Betriebssyste
-m Debian inklusive der OMNeT++-Umgebung und einer englischen Anleitung eingerich
-tet ist.
+ Diese Datei beinhaltet eine virtuelle Maschine (VM), auf der das 32Bit
+ Linux-Betriebssystem Debian inklusive der OMNeT++-Umgebung und einer englischen
+ Anleitung eingerichtet ist.
  Eine deutsche Anleitung wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1001,6 +1001,126 @@ reference "chap:Anleitung-zur-Simulationsumgebun"
 \end_inset
 
  aufgeführt.
+\end_layout
+
+\begin_layout Standard
+Damit diese virtuelle Maschine ausgeführt werden kann wird die Software
+ VirtualBox benötigt.
+ Diese kann unter 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+www.virtualbox.org
+\end_layout
+
+\end_inset
+
+ heruntergeladen werden.
+\end_layout
+
+\begin_layout Standard
+Um die VDI-Datei einzubinden erstellt man in VirtualBox eine neue virtuelle
+ Maschine und navigiert durch den Assistenten (Typ: 
+\begin_inset Quotes fld
+\end_inset
+
+Linux
+\begin_inset Quotes frd
+\end_inset
+
+, Version: 
+\begin_inset Quotes fld
+\end_inset
+
+Debian (32 bit)
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Die virtuelle Maschine wurde mit einem zugewiesenen Arbeitsspeicher von
+ 512MB getestet (es wird empfohlen 512MB oder mehr als Arbeitsspeicher auszuwähl
+en).
+ Anstelle einer neuen Festplatte zu erstellen wird nun die bestehende VDI-Datei
+ eingebunden.
+ Wurde die virtuelle Maschine erstellt, kann sie gestartet werden.
+\end_layout
+
+\begin_layout Standard
+Für den Betrieb der virtuellen Maschine sind keine Login-Daten notwendig.
+ Es wird automatisch eine Desktop-Umgebung gestartet, die in etwa folgendermasse
+n aussieht (Desktop-Icons können variieren):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_screenshot_vm.png
+	display false
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot der gerade gestarteten virtuellen Maschine
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auf dem Desktop und dem Startmenü (links oben im Screenshot) werden alle
+ benötigten Verknüpfungen zur Verfügung gestellt.
+ Im geöffneten Startmenü gibt es rechts unten die Möglichkeit, die virtuelle
+ Maschine herunter zu fahren und des Weiteren auch die Möglichkeit, nach
+ Applikationen / Verknüpfungen zu suchen.
+\end_layout
+
+\begin_layout Standard
+Sollte trotzdem ein Login benötigt werden, ist dieser in der VM unter dem
+ Punkt 
+\begin_inset Quotes fld
+\end_inset
+
+Info
+\begin_inset Quotes frd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Section
+Simulation konfigurieren
+\end_layout
+
+\begin_layout Section
+Simulation starten
+\end_layout
+
+\begin_layout Section
+Resultate ansehen
 \end_layout
 
 \begin_layout Chapter

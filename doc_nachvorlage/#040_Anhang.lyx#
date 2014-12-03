@@ -990,9 +990,9 @@ Starten der virtuellen Maschine
 
 \begin_layout Standard
 Auf dem mitgelieferten USB-Stick befindet sich eine VDI-Datei.
- Diese Datei beinhaltet eine virtuelle Maschine, auf der das Linux-Betriebssyste
-m Debian inklusive der OMNeT++-Umgebung und einer englischen Anleitung eingerich
-tet ist.
+ Diese Datei beinhaltet eine virtuelle Maschine, auf der das 32Bit Linux-Betrieb
+ssystem Debian inklusive der OMNeT++-Umgebung und einer englischen Anleitung
+ eingerichtet ist.
  Eine deutsche Anleitung wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1018,6 +1018,30 @@ www.virtualbox.org
 \end_inset
 
  heruntergeladen werden.
+\end_layout
+
+\begin_layout Standard
+Um die VDI-Datei einzubinden erstellt man in VirtualBox eine neue virtuelle
+ Maschine und navigiert durch den (Typ: 
+\begin_inset Quotes fld
+\end_inset
+
+Linux
+\begin_inset Quotes frd
+\end_inset
+
+, Version: 
+\begin_inset Quotes fld
+\end_inset
+
+Debian (32 bit)
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Die virtuelle Maschine wurde mit einem zugewiesenen Arbeitsspeicher von
+ 512MB getestet.
+ Anstelle einer neuen Festplatte zu erstellen
 \end_layout
 
 \begin_layout Chapter
