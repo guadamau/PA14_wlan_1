@@ -202,7 +202,35 @@ name "sub:Mechanismen-zur-Trafficregelung"
 
 \begin_layout Standard
 In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
- und in der Simulation implementiert werden.
+ und in der Simulation implemeJeder Node (DANH oder Redbox, siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Gerätetypen HSR"
+
+\end_inset
+
+) im Netzwerk verfügt über einen internen Switch, der entscheidet wohin
+ die Frames gesendet werden sollen.
+ Zum Beispiel verfügt ein DANH in der Simulation über 3 Ports, zwei für
+ die Frames vom und auf den Ring (Ethernet-Ports) und einen für die Frames
+ von und zur CPU.
+\end_layout
+
+\begin_layout Standard
+Für jeden möglichen Ausgang ist ein Scheduler zuständig (d.h.
+ bei einem DANH-Gerät hat es 3 Scheduler), in welchem die Mechanismen zur
+ Trafficregelung (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Mechanismen-zur-Trafficregelung"
+
+\end_inset
+
+) implementiert sind und die Frames priorisiert abhandelt.
+ Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
+ Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
+ seinen Ausgang zu koordinieren hat.ntiert werden.
  Es besteht dann die Möglichkeit für jeden Knoten zwischen den Mechanismen
  auszuwählen oder diese sogar zu kombinieren.
 \end_layout
@@ -400,6 +428,13 @@ So würde die Priorisierung zwischen der aus Liste 1 und der aus Liste 2
 
 \begin_layout Subsubsection
 Zeitschlitzverfahren
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Zeitschlitzverfahren"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -456,38 +491,137 @@ Beispiel von Frameabfolge mit Zeitschlitzverfahren
 \end_layout
 
 \begin_layout Subsection
+Definition der Knoten
+\end_layout
+
+\begin_layout Standard
+Jede Komponente eines Knotens (Netzwerkinterface, Switch, etc.) ist eine
+ eigene C++-Klasse, welche die jeweiligen Funktionen enthält.
+ Ein Knoten wird dann aus diesen Komponenten zusammengesetzt, indem eine
+ sogenannte NED-Datei (NED steht für Network Description) erstellt wird,
+ in welcher die Komponenten initialisiert und verbunden werden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
+ Der Knoten selbst exisitert nicht als C++-Klasse, sondern lediglich als
+ NED-Datei.
+\end_layout
+
+\begin_layout Standard
+Der Aufbau eines DANH-Knoten in OMNeT++ sieht wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_DANH-Knoten.png
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+DANH-Knoten in OMNeT++
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es gibt in einem DANH-Gerät 3 Ports und für jeden Port gibt es zwei Netzwerkinte
+rfaces, einen für normale und einen für Express-Frames.
+ Der genaue Grund, warum für jeden Port zwei Netzwerkinterfaces existieren
+ ist im Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Fragmentierung-und-Zeitberechnun"
+
+\end_inset
+
+ aufgeführt.
+ Zwei Ports (im Bild 
+\begin_inset Quotes fld
+\end_inset
+
+eth0
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+eth1
+\begin_inset Quotes frd
+\end_inset
+
+) sind für den Anschluss an den Ring.
+ Der dritte Port ist mit der CPU verbunden, die für die Generierung der
+ neuen Frames verantwortlich ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Zwischen jedem Port und Komponente befindet sich eine Duplikatliste, durch
+ die jedes Frame hindurch läuft.
+ Die Duplikatliste überprüft anhand der Sequenznummer und der Quell-MAC-Adresse,
+ ob dasselbe Frame schon mal die Duplikatliste passiert hat.
+ Wenn dasselbe Frame schon mal von der Duplikatliste erkannt wurde wird
+ es gelöscht.
+ Durch diese Duplikatliste wird kein Frame mehrmals über den selben Port
+ versendet.
+\end_layout
+
+\begin_layout Standard
+Alle Frames, die beim DANH-Knoten ankommen oder von dessen CPU generiert
+ werden, gelangen zum internen Switch.
+ Dieser analysiert das Frame und weist es dem entsprechenden Scheduler zu,
+ der die Frames je nach Priorität und aktiven Mechanismen in die entsprechende
+ Warteschlange stellt.
+ Dem Scheduler ist immer ein Port (also auch zwei Netzwerkinterfaces) zugeteilt,
+ was heisst, dass ein Switch über 3 Scheduler verfügt.
+ Der Scheduler ist zudem für das Senden der Frames zuständig.
+ Er entscheidet wann über welches Netzwerkinterface welches Frame versendet
+ wird.
+\end_layout
+
+\begin_layout Subsection
+Netzwerkaufbau
+\end_layout
+
+\begin_layout Standard
+So wie ein Knoten als NED-Datei seinen Aufbau mit den Komponenten beschreibt,
+ wird ein Netzwerk auch als NED-Datei definiert, in welchem die Knoten initialis
+iert und verbunden werden.
+\end_layout
+
+\begin_layout Subsection
 Abhandlung der Frames innerhalb eines Gerätes
-\end_layout
-
-\begin_layout Standard
-Jeder Node (DANH oder Redbox, siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Gerätetypen HSR"
-
-\end_inset
-
-) im Netzwerk verfügt über einen internen Switch, der entscheidet wohin
- die Frames gesendet werden sollen.
- Zum Beispiel verfügt ein DANH in der Simulation über 3 Ports, zwei für
- die Frames vom und auf den Ring (Ethernet-Ports) und einen für die Frames
- von und zur CPU.
-\end_layout
-
-\begin_layout Standard
-Für jeden möglichen Ausgang ist ein Scheduler zuständig (d.h.
- bei einem DANH-Gerät hat es 3 Scheduler), in welchem die Mechanismen zur
- Trafficregelung (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Mechanismen-zur-Trafficregelung"
-
-\end_inset
-
-) implementiert sind und die Frames priorisiert abhandelt.
- Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
- Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
- seinen Ausgang zu koordinieren hat.
 \end_layout
 
 \begin_layout Standard
@@ -584,6 +718,13 @@ Kann das Frame jedoch fragmentiert werden, so wird das derzeitige Fragment
 
 \begin_layout Subsubsection
 Fragmentierung und Zeitberechnung
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Fragmentierung-und-Zeitberechnun"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -897,8 +1038,8 @@ Aufbau der Testumgebung
 \end_layout
 
 \begin_layout Standard
-Für die Tests wird in der Simulation ein HSR-Ring mit 10 DANH-Geräten implementi
-ert.
+Für die Tests wird in der Simulation ein HSR-Ring mit 3 DANH-Geräten implementie
+rt.
 \end_layout
 
 \begin_layout Subsection
@@ -1076,7 +1217,42 @@ Ist
 
 \begin_layout Plain Layout
 Der sich im Knoten befindende Switch hat für jeden seiner Ports einen Scheduler.
- Jeder dieser Scheduler verfügt über
+ Jeder dieser Scheduler verfügt über Queues, für jede Priorität und Herkunft
+ (von Ring oder Aussen) eine, also total 6 Queues.
+ Der Switch fügt ein ankommendes Frame beim jeweiligen Scheduler in die
+ jeweilige Queue ein.
+ Der Scheduler beginnt darauf mit dem Abarbeiten der Queues und startet
+ dabei mit der Queue der höchsten Priorität.
+\end_layout
+
+\begin_layout Plain Layout
+Wenn z.B.
+ zwei Frames, eines mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ und eines mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ zur exakt selben Zeit bei einem Scheduler eingereiht werden, wird garantiert
+ das Frame mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ zuerst versendet.
 \end_layout
 
 \end_inset
@@ -1215,7 +1391,11 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Langes Frame und 2 Express
+\end_layout
 
+\begin_layout Plain Layout
+Nicht fragmentierbar
 \end_layout
 
 \end_inset
@@ -1370,11 +1550,47 @@ Preemption
 \end_layout
 
 \begin_layout Section
-Szenarien
+Simulation
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Simulation"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+In diesem Kapitel werden die Szenarien definiert, die in dieser Arbeit simuliert
+ werden.
+ Die Resultate der jeweiligen Simulation sind im Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Resultate"
+
+\end_inset
+
+ aufgeführt.
+ Wie diese Szenarien selber simuliert werden können, wird in der Anleitung
+ in 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Anleitung-zur-Simulationsumgebun"
+
+\end_inset
+
+ beschrieben.
 \end_layout
 
 \begin_layout Subsection
 Szenario 1: Substation Automation
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Szenario-1:-Substation"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1419,18 +1635,105 @@ Als Background-Traffic wird von 2 Knoten TCP-ähnlicher Traffic generiert,
  an Knoten A.
 \end_layout
 
+\begin_layout Standard
+Sofern es nicht anders erwähnt wird, befinden sich in den Simulationen 14
+ MUs und 2 PUs, die in einem Ring mit einer 100Mbps-Verbindung verbunden
+ sind.
+ Die Prioritäten der Frames werden in jeder Simulation berücksichtigt.
+\end_layout
+
 \begin_layout Subsubsection
-Variante 1.1: First Come First Serve
+Simulation 1.1: First Come First Serve
 \end_layout
 
 \begin_layout Standard
 Szenario 1 wird ohne spezielle Mechanismen in den Knoten simuliert.
- Die Prioritäten werden berücksichtigt, jedoch spielt es in dieser Variante
- keine Rolle, ob ein Frame von Aussen oder vom Ring kommt.
+ Es spielt in dieser Variante keine Rolle, ob ein Frame von Aussen oder
+ vom Ring kommt.
 \end_layout
 
 \begin_layout Subsubsection
-Szenario ##: xxxxxxxxxxxxxxxxxxxxxxx
+Simulation 1.2: Vortritt für Frames vom Ring
+\end_layout
+
+\begin_layout Standard
+Jeder Knoten im Ring gewährt den Frames, die vom Ring kommen, den Vortritt
+ gegenüber den Frames, die von Aussen kommen.
+ Die Frames, die von Aussen kommen, sind dabei die, die vom Knoten selbst
+ generiert werden.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation 1.3: Vortritt für Frames von Aussen
+\end_layout
+
+\begin_layout Standard
+Jeder Knoten im Ring gewährt den Frames, die von Aussen kommen, den Vortritt
+ gegenüber den Frames, die vom Ring kommen.
+ Die Frames, die von Aussen kommen, sind dabei die, die vom Knoten selbst
+ generiert werden.
+ Wenn ein Knoten ständig Frames generiert kann es sein, dass die Frames
+ vom Ring bei diesem Knoten nie zum Zuge kommen und somit nie weitergeleitet
+ werden.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
+\end_layout
+
+\begin_layout Standard
+Die Simulation 1.3 wird mit einer Zuflusslimitierung erweitert.
+ Mit Hilfe dieser Limitierung kann ausgeschlossen werden, dass Frames vom
+ Ring nie weitergeleitet werden wenn ein Knoten ständig Frames generiert.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation 1.5: Reissverschluss
+\end_layout
+
+\begin_layout Standard
+Es wird in jedem Knoten abwechslungsweise der Vortritt für Frames vom Ring
+ und von Aussen gewährt.
+ Wurde zum Beispiel ein Frame vom Ring versendet, wird als nächstes ein
+ Frame von Aussen versendet, sofern eines gesendet werden muss.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation 1.6: Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Standard
+In jedem Knoten wird das Zeitschlitzverfahren (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Zeitschlitzverfahren"
+
+\end_inset
+
+) angewendet.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation 1.7: Maximale Auslastung
+\end_layout
+
+\begin_layout Standard
+Anstelle von 14 werden 17 MUs eingesetzt.
+ Zudem werden in dieser Simulation lediglich Messwerte und Express-Frames
+ versendet, der TCP-ähnliche Traffic wird hier nicht simuliert.
+ Laut unserem Betreuer (siehe Besprechung in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Kalenderwoche-48:-27.11.2014"
+
+\end_inset
+
+) sollte dann neben dem Traffic nichts mehr sonst Platz auf dem Ethernet
+ haben.
+\end_layout
+
+\begin_layout Subsubsection
+Simulation #.#: xxxxxxxxxxxxxxxxxxxxxxx
 \end_layout
 
 \begin_layout Standard
@@ -1440,121 +1743,6 @@ Mechanismen:
 \begin_layout Standard
 Keine (FCFS), Zuflusslimitierung, Vortritt Ring / von Aussen, Reissverschluss,
  Zeitschlitzverfahren
-\end_layout
-
-\begin_layout Section
-Experimente
-\end_layout
-
-\begin_layout Section
-Konzeptpapier
-\end_layout
-
-\begin_layout Subsection
-Einleitung
-\end_layout
-
-\begin_layout Standard
-Dieses Dokument geht konkret auf die funktionalen Anforderungen, welche
- im Pflichtenheft gestellt werden ein und versucht anhand von verschiedenen
- Varianten die geeignete Lösung für deren Umsetzung herauszufiltern.
- Zunächst werden mögliche Projektrisiken aufgezeigt.
-\end_layout
-
-\begin_layout Subsection
-Projekt-Risikoanalyse
-\end_layout
-
-\begin_layout Subsubsection*
-Risikoidentifikation
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="left" valignment="top" width="35col%">
-<column alignment="left" valignment="top" width="56col%">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Risiko
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Mögliche Massnahmen
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-wenn die Polizei vorbei fährt ...
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Itemize
-...
- halt ich erst mal an
-\end_layout
-
-\begin_layout Itemize
-ja
-\end_layout
-
-\begin_layout Itemize
-...
- nimm ne Ziese aus der Schachtel
-\end_layout
-
-\begin_layout Itemize
-ja
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Projekt-Risikoanalyse 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \end_body

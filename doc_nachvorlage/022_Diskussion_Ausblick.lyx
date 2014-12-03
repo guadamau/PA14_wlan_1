@@ -142,6 +142,10 @@ Soll
 \begin_layout Plain Layout
 Der Knoten soll zwei Prioritäten unterstützen, d.h.
  zwei Warteschlangen pro Interface bewirtschaften.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -163,6 +167,10 @@ Ist
 \begin_layout Plain Layout
 Wenn zwei Frames mit unterschiedlichen Prioritäten (Low & High) zur gleichen
  Zeit eintreffen wird das Frame mit der Priorität High als Erstes weitergesendet.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -184,6 +192,10 @@ Nachweis
 \begin_layout Plain Layout
 Die Frames werden in unterschiedliche Queues (Warteschlangen) gesetzt und
  diese werden der Reihe nach abgearbeitet (Absteigend nach Priorität).
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -245,8 +257,12 @@ Soll
 
 \begin_layout Plain Layout
 Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
- Express Frames können die aktuell ablaufende Übertragung eines Frames unterbre-
- chen.
+ Express Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
+hen.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -288,6 +304,10 @@ fragmentierten
 Dies hat für die Auswertung den selben Effekt wie wenn eine Fragmentierung
  stattgefunden hätte (Express-Frame wird während normalem Frame versandt,
  normales Frame kommt später an).
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -369,6 +389,10 @@ Soll
 
 \begin_layout Plain Layout
 Der in den Ring einfliessende Traffic kann limitiert werden.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -402,6 +426,10 @@ reference "sub:Limitierung-des-Zuflusses"
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -483,9 +511,13 @@ Soll
 
 \begin_layout Plain Layout
 Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
- Fra- mes, die in den Ring einfliessen, können variiert werden (z.B.
+ Frames, die in den Ring einfliessen, können variiert werden (z.B.
  „zirkulierende Frames haben immer Vortritt“ oder „minimaler Zufluss wird
  garantiert“).
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -538,6 +570,10 @@ minimaler Zufluss wird garantiert
 Reissverschluss (Der Vortritt für Frames vom Ring und von Aussen wechselt
  sich ab: Wenn ein Frame vom Ring Vortritt hatte, hat als Nächstes das Frame
  von Aussen Vortritt)
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -620,6 +656,10 @@ Soll
 \begin_layout Plain Layout
 Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
  Traffic und dem Bulk Traffic je eine Phase zuordnet.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -660,6 +700,10 @@ In der zweiten Phase können lediglich Frames der Priorität Low versendet
 \begin_layout Plain Layout
 Express-Frames (gehören auch zum zeitkritischen Traffic) können natürlich
  zu jeder Zeit versendet werden.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -746,6 +790,10 @@ Soll
 \begin_layout Plain Layout
 Der Lastgenerator generiert für die Simulation ein Verkehrsaufkommen mit
  konstanter Framerate.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -768,6 +816,10 @@ Ist
 Es lässt sich ein Strom mit konstanter Framerate generieren.
  Mittels Konfigurationsdatei kann man die Rate (in welchen Zeitabständen
  ein neues Frame generiert werden soll) bestimmen.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -850,6 +902,10 @@ Soll
 \begin_layout Plain Layout
 Der Lastgenerator generiert für die Simulation ein Verkehrsaufkommen mit
  einer zufälligen zeitlichen Verteilung der Frames.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -874,6 +930,10 @@ Es kann ein Verkehrsaufkommen generiert werden, bei dem die Zeitabstände
  Zudem kann man bestimmen, innerhalb welchem Bereich der Zeitabstand zufällig
  gewählt werden soll (z.B.
  mindestens 100ns und maximal 500ns).
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -957,6 +1017,10 @@ Soll
 \begin_layout Plain Layout
 Der Lastgenerator generiert für die Simulation ein Verkehrsaufkommen mit
  spontanen Einzelmeldungen.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -978,6 +1042,10 @@ Ist
 \begin_layout Plain Layout
 Spontane Einzelmeldungen in Form von Express-Frames können generiert werden.
  Diese werden per Zufall versandt.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1061,6 +1129,10 @@ Soll
 Das Zeitverhalten der verschiedenen Weiterleitungsvarianten soll durch entsprech
 ende Simulationsläufe ermittelt werden.
  Die Resultate sind zu vergleichen und zu interpretieren.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1083,6 +1155,10 @@ Ist
 Verschiedene Weiterleitungsvarianten können simuliert und analysiert werden.
  Statistiken können zudem generiert werden, was den Vergleich der Varianten
  untereinander vereinfacht.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
