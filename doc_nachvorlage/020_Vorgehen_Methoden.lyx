@@ -1217,41 +1217,8 @@ F
 \end_layout
 
 \begin_layout Enumerate
-Berechne die Anzahl Bytes, die bereits ve
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/020_Ablauf_Frame_Express.png
-	display false
-	scale 90
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Abhandlung von Frames inklusive Express-Frames
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-rsendet wurden (in der folgenden Rechnung 
+Berechne die Anzahl Bytes, die bereits versendet wurden (in der folgenden
+ Rechnung 
 \begin_inset Quotes fld
 \end_inset
 

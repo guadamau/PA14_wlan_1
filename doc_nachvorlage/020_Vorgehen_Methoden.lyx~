@@ -497,7 +497,7 @@ Definition der Knoten
 \begin_layout Standard
 Jede Komponente eines Knotens (Netzwerkinterface, Switch, etc.) ist eine
  eigene C++-Klasse, welche die jeweiligen Funktionen enthält.
- Ein Knoten wird dann aus diesen Komponenten zusammengesetzt, indem eine
+ Ein Knoten wird dann aus diesen Komponenten zusammengesetzt,be indem eine
  sogenannte NED-Datei (NED steht für Network Description) erstellt wird,
  in welcher die Komponenten initialisiert und verbunden werden 
 \begin_inset CommandInset citation
@@ -762,7 +762,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-		Behavior 
+		Behaviober 
 \end_layout
 
 \begin_layout Plain Layout
@@ -849,7 +849,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-		Generate a random value between 0 and epsilon that 
+		Generate bea random value between 0 and epsilon that 
 \end_layout
 
 \begin_layout Plain Layout
@@ -874,6 +874,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
+be
 \end_layout
 
 \begin_layout Plain Layout
