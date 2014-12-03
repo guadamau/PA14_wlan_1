@@ -77,24 +77,59 @@
 
 \begin_body
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-markright{Kapitel 4: Resultate}
-\end_layout
+\begin_layout Chapter
+Resultate und Interpretation 
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Resultate"
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Chapter
-Resultate
+\begin_layout Standard
+Die Resulate der Simulationen aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Simulation"
+
+\end_inset
+
+ werden in diesem Kapitel aufgeführt und interpretiert.
+ Folgende Eigenschaften werden während der Simulation aufgezeichnet, um
+ sie anschliessend analysieren zu können:
+\end_layout
+
+\begin_layout Itemize
+Übertragungsdauer eines Frames von der Erstellung bis zur Löschung
+\begin_inset Newline newline
+\end_inset
+
+Wird ein Frame erstellt, wird es in die jeweilige Queue beim Knoten eingereiht.
+ Das heisst, dass die Zeit zwischen der Erstellung und dem ersten Versand
+ auch zur Übertragungsdauer gehört.
+ Ein Unicast-Frame wird gelöscht, wenn es bei seinem Empfänger oder wieder
+ beim Sender ankommt.
+ Multi-/Broadcast-Frames werden gelöscht, sobald sie wieder beim Sender
+ ankommen.
+\begin_inset Newline newline
+\end_inset
+
+Die Resultate dieser Eigenschaft werden in einem Histogramm gespeichert,
+ auf welchem ersichtlich sein wird, wie viele Frames welche Übertragungsdauer
+ haben.
+\end_layout
+
+\begin_layout Itemize
+Grösse der Queues bei den Schedulern
+\begin_inset Newline newline
+\end_inset
+
+Sobald ein Frame bei einer Queue eingereiht oder von einer Queue entnommen
+ wird, wird die Grösse der Queue jedes mal aufgezeichnet.
+ So lässt sich feststellen, zu exakt welchem Zeitpunkt ein Frame in die
+ Queue kommt und wann ein Frame die Queue verlässt.
 \end_layout
 
 \begin_layout Standard

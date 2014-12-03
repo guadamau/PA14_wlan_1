@@ -86,12 +86,20 @@
 % Sprache XML definieren fuer das Syntaxhighlighting
 \lstdefinelanguage{XML}
 {
-  morestring=[b]",
-  morestring=[s]{>}{<},
-  morecomment=[s]{<?}{?>},
-  stringstyle=\color{black},
-  identifierstyle=\color{blue},
-  keywordstyle=\color{cyan}
+morestring=[b]",
+morecomment=[s]{<?}{?>},
+morecomment=[s][\color{orange}]{<!--}{-->},
+keywordstyle=\color{cyan},
+stringstyle=\color{black},
+identifierstyle=\color{darkblue},
+morekeywords={xmlns,version,type}
+%  morestring=[b]",
+  %morestring=[s]{>}{<},
+%  morecomment=[s]{<?}{?>},
+%  morecomment=[s][\color{orange}]{<!--}{-->},
+%  stringstyle=\color{black},
+%  identifierstyle=\color{blue},
+%  keywordstyle=\color{cyan}
   %morekeywords={xmlns,version,type}% list your attributes here
 }
 

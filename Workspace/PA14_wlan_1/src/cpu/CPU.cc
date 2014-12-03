@@ -11,6 +11,8 @@ unsigned long CPU::messageCount = 0;
 EthernetIIFrame *
 CPU::generateOnePacket(SendData sendData)
 {
+    const char * framePrioArr[] = {"EXPRESS", "HIGH", "LOW"};
+
     /*
     if (sendData.frameprio == EXPRESS)
     {
@@ -20,13 +22,13 @@ CPU::generateOnePacket(SendData sendData)
 
     EthernetIIFrame *result_ethTag = NULL;
 
-    const char* ethFrameName = "Unicast";
+    const char* ethFrameName = "Uni";
 
-    if(sendData.destination.isMulticast()) {
-        ethFrameName = "Multicast";
+    if(sendData.destination.isBroadcast()) {
+        ethFrameName = "Broad";
     }
-    else if(sendData.destination.isBroadcast()) {
-        ethFrameName = "Broadcast";
+    else if(sendData.destination.isMulticast()) {
+        ethFrameName = "Multi";
     }
 
     /*
@@ -34,7 +36,7 @@ CPU::generateOnePacket(SendData sendData)
      */
 
     std::stringstream ss;
-    ss << ethFrameName << " " << getParentModule()->getFullName() << " #" << sequenceNumber;
+    ss << ethFrameName << " From: " << getParentModule()->getFullName() << " (" << framePrioArr[sendData.frameprio] <<") Seq#" << sequenceNumber;
     ethFrameName = ss.str().c_str();
 
     result_ethTag = MessagePacker::createETHTag( ethFrameName, sendData.destination, macAddress );

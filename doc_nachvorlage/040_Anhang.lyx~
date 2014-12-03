@@ -613,6 +613,13 @@ Normal Frame Ankunftszeit um Express + IFG verlängern
 \end_deeper
 \begin_layout Subsection
 Kalenderwoche 46: 13.11.2014
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kalenderwoche-46:-13.11.2014"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -741,6 +748,215 @@ Best-/Worst-Case spielt nur bei Unicast eine Rolle, bei Multi-/Broadcast
 
 \end_deeper
 \end_deeper
+\begin_layout Itemize
+Duplikaterkennung bei allen Ports implementieren
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Kein Port soll dasselbe Frame mehrmals versenden
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 47: 20.11.2014
+\end_layout
+
+\begin_layout Itemize
+Testfälle für Überprüfung der Implementation
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nicht fragmentierbare Frames
+\end_layout
+
+\begin_layout Itemize
+Versenden eines langen, normalen Frames und 2 darauf folgende Express-Frames
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Kalenderwoche 48: 27.11.2014
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kalenderwoche-48:-27.11.2014"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Start der Simulation für Belastung nicht sehr interessant, ab dem Zustand
+ nach der 
+\begin_inset Quotes fld
+\end_inset
+
+Initialisierung
+\begin_inset Quotes frd
+\end_inset
+
+ interessant
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ab 
+\begin_inset Quotes fld
+\end_inset
+
+Ready State
+\begin_inset Quotes frd
+\end_inset
+
+ aufnehmen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Testing
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Mit Multicast-Frames testen, weil diese beim Sender gelöscht werden (Bei
+ einem Defekt würde die Dauer dieses Frames etwa der Dauer eines normalen
+ Frames entsprechen
+\end_layout
+
+\begin_layout Itemize
+Express-Frames mit Multicast versenden
+\end_layout
+
+\begin_layout Itemize
+Mit 17 MUs (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Kalenderwoche-46:-13.11.2014"
+
+\end_inset
+
+), die permanent Messwerte via Multicast versenden sollte so guet wie kein
+ Platz mehr auf dem Ethernet frei sein.
+\end_layout
+
+\begin_layout Itemize
+Interval, in dem die Messwerte versendet werden, variiert von MU zu MU (Phase
+ beginnt nicht überall zur exakt selben Zeit)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Beim Interval eine Zufallszeit dazu- oder abzählen, sodass der Interval
+ nicht konstant ist
+\end_layout
+
+\begin_layout Itemize
+Delayunterschied zu Fall, an dem die MUs gleichzeitig und mit exakt selbem
+ Interval senden untersuchen
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Fall: 14, 15 MUs
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Einfluss TCP (High-Frame wird angestaut, wenn gerade ein Low-Frame gesendet
+ wird)
+\end_layout
+
+\begin_layout Itemize
+Was wenn TCP Löcuken zwischen High-Frames schamlos nutzt?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Zufluss TCP limitieren?
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+100Mbps für die Verbindung verwenden
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Untersuchen wie viele Frames pro Sekunde noch übertragbar sind (bevor sich
+ die Queues nicht mehr leeren).
+ Wie nahe kann man an diese Grenze gehen?
+\end_layout
+
+\begin_layout Itemize
+Frame mit Messwerten beträgt 160 Bytes: ca.
+ 69444 solcher Frames über 100Mbps pro Sekunde 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula $\frac{10{}^{8}}{(160+Präamble+IFG)*8}=\frac{10{}^{8}}{180*8}=69444.\overline{4}$
+\end_inset
+
+
+\end_layout
+
+\end_deeper
+\end_deeper
+\begin_layout Itemize
+Visualisierung der Resultate
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Histogramm (Wie viele haben Transmissiontime x?)
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Klassenbreite (Transmissiontime auf ms/us genau)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Gesamtkapazität < Summe von allem MU- plus TCP-Traffic
+\end_layout
+
+\begin_layout Itemize
+Verifizierung Verhalten mit Frameverlauf in Simulation
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Anleitung
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Ab CD wie starten
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Möglich: Exe-Datei starten und Config editieren (VM auf CD?)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Wie Simulation laufen lassen
+\end_layout
+
+\begin_layout Itemize
+Wie Konfigurieren (in XML- und INI-Datei)
+\end_layout
+
+\begin_layout Itemize
+Wie bestimmter Fall simulieren
+\end_layout
+
+\end_deeper
 \begin_layout Standard
 ------------------------------------
 \end_layout
@@ -755,6 +971,28 @@ Offizielle Aufgabenstellung, Projektauftrag
 
 \begin_layout Itemize
 (Besprechungsprotokolle oder Journals)
+\end_layout
+
+\begin_layout Chapter
+Anleitung zur Simulationsumgebung und -Durchführung
+\begin_inset CommandInset label
+LatexCommand label
+name "chap:Anleitung-zur-Simulationsumgebun"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Starten der virtuellen Maschine
+\end_layout
+
+\begin_layout Standard
+Auf dem mitgelieferten USB-Stick befindet sich eine VDI-Datei.
+ Diese Datei beinhaltet eine virtuelle Maschine, auf der das Linux-Betriebssyste
+m Debian inklusive der OMNeT++-Umgebung und einer englischen Anleitung eingerich
+tet ist.
 \end_layout
 
 \begin_layout Chapter
