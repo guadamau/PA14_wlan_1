@@ -40,6 +40,8 @@ private:
     simtime_t        sendingTime;
     framePriority    framePrio;
 
+    int64_t          messageSize;
+
 public:
 
     SendingStatus();
@@ -48,7 +50,7 @@ public:
     cMessage* getMessage( void );
     simtime_t getSendingTime( void );
     framePriority getFramePrio( void );
-    EthernetIIFrame* getEthTag( void );
+    int64_t getMessageSize( void );
 
     void attachFrame( cMessage* message );
     void detachFrame( void );

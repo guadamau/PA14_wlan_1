@@ -367,23 +367,22 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
                  * EXPRESS HANDLING
                  */
 
-                simtime_t ExpSendTime = getExpressSendTime(); // return SIMTIME_ZERO means current frame is not fragmentable
-                if( ExpSendTime != SIMTIME_ZERO )
+                simtime_t expSendTime = getExpressSendTime();
+
+                /* return SIMTIME_ZERO means current frame is not fragmentable */
+                if( expSendTime != SIMTIME_ZERO )
                 {
                     schedNicExp->lock();
                     cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
-                    parentSwitch->sendDelayed( msgExp, ExpSendTime, schedOutGateExp );
+                    parentSwitch->sendDelayed( msgExp, expSendTime, schedOutGateExp );
 
                     EthernetIIFrame* ifgMsg = new EthernetIIFrame();
                     ifgMsg->setBitLength( INTERFRAME_GAP_BITS );
 
                     cMessage* currMsg = sendingStatus->getMessage();
-                    simtime_t arrivalCurrMsg = currMsg->getCreationTime() + schedNic->getTransmissionChannel()->calculateDuration(currMsg);
-                    currMsg->setArrivalTime(
-                            arrivalCurrMsg +
+                    setPreemptionDelay( currMsg,
                             schedNicExp->getTransmissionChannel()->calculateDuration( msgExp ) +
-                            schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg )
-                            );
+                            schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg ) );
                 }
             }
         }
@@ -393,7 +392,7 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
 simtime_t Scheduler::getExpressSendTime( void )
 {
     /* Algorithm from documentation PA14_wlan_1 */
-    int64_t allBytesOfSendingFrame = sendingStatus->getEthTag()->getByteLength();
+    int64_t allBytesOfSendingFrame = sendingStatus->getMessageSize();
 
     simtime_t simTimeNow = simTime();
 
@@ -433,9 +432,9 @@ simtime_t Scheduler::getExpressSendTime( void )
     }
 }
 
-framePriority Scheduler::getMessagePriority( cMessage* msg )
+void Scheduler::setPreemptionDelay( cMessage* msg, simtime_t delayCorrection )
 {
-    framePriority framePrio;
+
     cMessage* message = msg->dup();
 
     EthernetIIFrame* ethTag = NULL;
@@ -447,10 +446,8 @@ framePriority Scheduler::getMessagePriority( cMessage* msg )
 
     MessagePacker::decapsulateMessage( &ethTag, &vlanTag, &hsrTag, &messageData );
 
-    framePrio = static_cast<framePriority>( vlanTag->getUser_priority() );
+    vlanTag->setPreemptionDelay( delayCorrection );
 
-    MessagePacker::deleteMessage( &ethTag, &vlanTag, &hsrTag, &messageData );
-
-    return framePrio;
+    msg = MessagePacker::generateEthMessage( ethTag, vlanTag, hsrTag, messageData );
 }
 

@@ -109,27 +109,23 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
          */
         if( msg->getArrivalGate() == gateAIn )
         {
+            schedGateAOut->getSendingStatus()->detachFrame();
             schedGateAOut->processQueues();
-            // schedGateAOut->getSendingStatus()->detachFrame();
-
         }
         else if ( msg->getArrivalGate() == gateAInExp )
         {
+            schedGateAOut->getSendingStatus()->detachFrame();
             schedGateAOut->processQueues();
-            // schedGateAOut->getSendingStatus()->detachFrame();
-
         }
         else if ( msg->getArrivalGate() == gateBIn )
         {
+            schedGateBOut->getSendingStatus()->detachFrame();
             schedGateBOut->processQueues();
-            // schedGateBOut->getSendingStatus()->detachFrame();
-
         }
         else if ( msg->getArrivalGate() == gateBInExp )
         {
+            schedGateBOut->getSendingStatus()->detachFrame();
             schedGateBOut->processQueues();
-            // schedGateBOut->getSendingStatus()->detachFrame();
-
         }
         else
         {

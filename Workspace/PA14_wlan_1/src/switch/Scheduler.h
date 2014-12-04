@@ -62,7 +62,7 @@ private:
     void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
     void loopQueues( queueName* currentSortOrder );
     simtime_t getExpressSendTime( void );
-    framePriority getMessagePriority( cMessage* msg );
+    void setPreemptionDelay( cMessage* msg, simtime_t delayCorrection );
 
 public:
     Scheduler();

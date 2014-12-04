@@ -62,6 +62,7 @@ vlanMessage::vlanMessage(const char *name, int kind) : ::cPacket(name,kind)
     this->vlan_identifier_var = 0;
     this->nextEtherType_var = 0;
     this->ownEtherType_var = 0x8100;
+    this->preemptionDelay_var = SIMTIME_ZERO;
 }
 
 vlanMessage::vlanMessage(const vlanMessage& other) : ::cPacket(other)
@@ -88,6 +89,7 @@ void vlanMessage::copy(const vlanMessage& other)
     this->vlan_identifier_var = other.vlan_identifier_var;
     this->nextEtherType_var = other.nextEtherType_var;
     this->ownEtherType_var = other.ownEtherType_var;
+    this->preemptionDelay_var = other.preemptionDelay_var;
 }
 
 void vlanMessage::parsimPack(cCommBuffer *b)
@@ -98,6 +100,7 @@ void vlanMessage::parsimPack(cCommBuffer *b)
     doPacking(b,this->vlan_identifier_var);
     doPacking(b,this->nextEtherType_var);
     doPacking(b,this->ownEtherType_var);
+    doPacking(b,this->preemptionDelay_var);
 }
 
 void vlanMessage::parsimUnpack(cCommBuffer *b)
@@ -108,6 +111,7 @@ void vlanMessage::parsimUnpack(cCommBuffer *b)
     doUnpacking(b,this->vlan_identifier_var);
     doUnpacking(b,this->nextEtherType_var);
     doUnpacking(b,this->ownEtherType_var);
+    doUnpacking(b,this->preemptionDelay_var);
 }
 
 int vlanMessage::getUser_priority() const
@@ -160,6 +164,16 @@ void vlanMessage::setOwnEtherType(int ownEtherType)
     this->ownEtherType_var = ownEtherType;
 }
 
+simtime_t vlanMessage::getPreemptionDelay() const
+{
+    return preemptionDelay_var;
+}
+
+void vlanMessage::setPreemptionDelay(simtime_t preemptionDelay)
+{
+    this->preemptionDelay_var = preemptionDelay;
+}
+
 class vlanMessageDescriptor : public cClassDescriptor
 {
   public:
@@ -207,7 +221,7 @@ const char *vlanMessageDescriptor::getProperty(const char *propertyname) const
 int vlanMessageDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 5+basedesc->getFieldCount(object) : 5;
+    return basedesc ? 6+basedesc->getFieldCount(object) : 6;
 }
 
 unsigned int vlanMessageDescriptor::getFieldTypeFlags(void *object, int field) const
@@ -224,8 +238,9 @@ unsigned int vlanMessageDescriptor::getFieldTypeFlags(void *object, int field) c
         FD_ISEDITABLE,
         FD_ISEDITABLE,
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<5) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<6) ? fieldTypeFlags[field] : 0;
 }
 
 const char *vlanMessageDescriptor::getFieldName(void *object, int field) const
@@ -242,8 +257,9 @@ const char *vlanMessageDescriptor::getFieldName(void *object, int field) const
         "vlan_identifier",
         "nextEtherType",
         "ownEtherType",
+        "preemptionDelay",
     };
-    return (field>=0 && field<5) ? fieldNames[field] : NULL;
+    return (field>=0 && field<6) ? fieldNames[field] : NULL;
 }
 
 int vlanMessageDescriptor::findField(void *object, const char *fieldName) const
@@ -255,6 +271,7 @@ int vlanMessageDescriptor::findField(void *object, const char *fieldName) const
     if (fieldName[0]=='v' && strcmp(fieldName, "vlan_identifier")==0) return base+2;
     if (fieldName[0]=='n' && strcmp(fieldName, "nextEtherType")==0) return base+3;
     if (fieldName[0]=='o' && strcmp(fieldName, "ownEtherType")==0) return base+4;
+    if (fieldName[0]=='p' && strcmp(fieldName, "preemptionDelay")==0) return base+5;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
@@ -272,8 +289,9 @@ const char *vlanMessageDescriptor::getFieldTypeString(void *object, int field) c
         "int",
         "int",
         "int",
+        "simtime_t",
     };
-    return (field>=0 && field<5) ? fieldTypeStrings[field] : NULL;
+    return (field>=0 && field<6) ? fieldTypeStrings[field] : NULL;
 }
 
 const char *vlanMessageDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
@@ -318,6 +336,7 @@ std::string vlanMessageDescriptor::getFieldAsString(void *object, int field, int
         case 2: return long2string(pp->getVlan_identifier());
         case 3: return long2string(pp->getNextEtherType());
         case 4: return long2string(pp->getOwnEtherType());
+        case 5: return double2string(pp->getPreemptionDelay());
         default: return "";
     }
 }
@@ -337,6 +356,7 @@ bool vlanMessageDescriptor::setFieldAsString(void *object, int field, int i, con
         case 2: pp->setVlan_identifier(string2long(value)); return true;
         case 3: pp->setNextEtherType(string2long(value)); return true;
         case 4: pp->setOwnEtherType(string2long(value)); return true;
+        case 5: pp->setPreemptionDelay(string2double(value)); return true;
         default: return false;
     }
 }

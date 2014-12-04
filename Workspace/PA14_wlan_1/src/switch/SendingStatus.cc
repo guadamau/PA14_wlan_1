@@ -29,22 +29,24 @@ SendingStatus::~SendingStatus()
 
 framePriority SendingStatus::getFramePrio( void )
 {
-    return framePrio;
+    return this->framePrio;
 }
 
 cMessage* SendingStatus::getMessage( void )
 {
-    return message;
+    EthernetIIFrame* ethMsg = MessagePacker::generateEthMessage( this->ethTag, this->vlanTag, this->hsrTag, this->dataStream );
+    cMessage* cMsg = check_and_cast<cMessage*>( ethMsg );
+    return cMsg;
 }
 
 simtime_t SendingStatus::getSendingTime( void )
 {
-    return sendingTime;
+    return this->sendingTime;
 }
 
-EthernetIIFrame* SendingStatus::getEthTag( void )
+int64_t SendingStatus::getMessageSize( void )
 {
-    return ethTag;
+    return this->messageSize;
 }
 
 void SendingStatus::attachFrame( cMessage* message )
@@ -52,7 +54,11 @@ void SendingStatus::attachFrame( cMessage* message )
     /* duplicate message first ... */
     this->message = message->dup();
 
+
     this->ethTag = check_and_cast<EthernetIIFrame*>( this->message );
+
+    this->messageSize = this->ethTag->getByteLength();
+
 
     MessagePacker::decapsulateMessage( &this->ethTag, &this->vlanTag, &this->hsrTag, &this->dataStream );
 
@@ -62,21 +68,18 @@ void SendingStatus::attachFrame( cMessage* message )
 
 void SendingStatus::detachFrame( void )
 {
+    this->messageSize = 0;
+
     MessagePacker::deleteMessage( &this->ethTag, &this->vlanTag, &this->hsrTag, &this->dataStream );
 
     this->sendingTime = SIMTIME_ZERO;
-
-    if( this->message != NULL )
-    {
-        delete this->message;
-    }
 }
 
 unsigned char SendingStatus::hasAttachedFrame( void )
 {
     unsigned char retVal = 0x00;
 
-    if( this->sendingTime != SIMTIME_ZERO && this->message != NULL )
+    if( this->sendingTime != SIMTIME_ZERO && this->message != NULL && messageSize > 0 )
     {
         retVal = 0x01;
     }

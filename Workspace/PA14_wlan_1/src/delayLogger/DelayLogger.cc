@@ -79,14 +79,13 @@ void DelayLogger::addDelay( cMessage* msg )
     frame = check_and_cast<EthernetIIFrame*>( msg );
 
     simtime_t frameCreationTime = frame->getCreationTime();
-    EV << "ARRIVAL TIME: (" << simTime() << ") "<< frame->getArrivalTime();
-
-    simtime_t msgDelay = simTime() - frameCreationTime;
+    EV << "[   ARRIVAL TIME:   ] (" << simTime() << ") "<< frame->getArrivalTime();
 
     MessagePacker::decapsulateMessage( &frame, &vlanTag, &hsrTag, &messageData );
 
     frameprio = static_cast<framePriority>( vlanTag->getUser_priority() );
 
+    simtime_t msgDelay = simTime() - frameCreationTime + vlanTag->getPreemptionDelay();
 
     if( frameprio != LOW && frameprio != HIGH && frameprio != EXPRESS )
     {

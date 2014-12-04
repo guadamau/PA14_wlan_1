@@ -26,6 +26,7 @@
  * 	
  * 	int nextEtherType;
  *     int ownEtherType = 0x8100; 
+ *     simtime_t preemptionDelay = SIMTIME_ZERO;
  * }
  * </pre>
  */
@@ -37,6 +38,7 @@ class vlanMessage : public ::cPacket
     int vlan_identifier_var;
     int nextEtherType_var;
     int ownEtherType_var;
+    simtime_t preemptionDelay_var;
 
   private:
     void copy(const vlanMessage& other);
@@ -65,6 +67,8 @@ class vlanMessage : public ::cPacket
     virtual void setNextEtherType(int nextEtherType);
     virtual int getOwnEtherType() const;
     virtual void setOwnEtherType(int ownEtherType);
+    virtual simtime_t getPreemptionDelay() const;
+    virtual void setPreemptionDelay(simtime_t preemptionDelay);
 };
 
 inline void doPacking(cCommBuffer *b, vlanMessage& obj) {obj.parsimPack(b);}

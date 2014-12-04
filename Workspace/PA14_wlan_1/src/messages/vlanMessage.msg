@@ -21,4 +21,5 @@ packet vlanMessage
 	
 	int nextEtherType;
     int ownEtherType = 0x8100; //16bit
+    simtime_t preemptionDelay = SIMTIME_ZERO;
 }
