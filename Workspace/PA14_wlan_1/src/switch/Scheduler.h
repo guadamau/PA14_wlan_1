@@ -61,7 +61,7 @@ private:
     void sendMessage( cMessage* msg, cGate* outGate );
     void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
     void loopQueues( queueName* currentSortOrder );
-    unsigned char isSendingFrameFragmentable( NetworkInterfaceCard* selectedNic );
+    simtime_t getExpressSendTime( void );
     framePriority getMessagePriority( cMessage* msg );
 
 public:

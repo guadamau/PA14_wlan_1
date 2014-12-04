@@ -358,27 +358,46 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
             /* Channel is currently busy. Have to reschedule the frame. */
             EV << endl << "[ Channel blocked ] Node: " << selectedNic->getParentModule()->getFullName() <<  endl << endl;
 
-            /*
-             * EXPRESS HANDLING
-             */
-            //currentQueue->front();
 
+            if( ( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL ) &&
+                    sendingStatus->getFramePrio() != EXPRESS &&
+                    transmitLockExp == 0 )
+            {
+                /*
+                 * EXPRESS HANDLING
+                 */
 
+                simtime_t ExpSendTime = getExpressSendTime(); // return SIMTIME_ZERO means current frame is not fragmentable
+                if( ExpSendTime != SIMTIME_ZERO )
+                {
+                    schedNicExp->lock();
+                    cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
+                    parentSwitch->sendDelayed( msgExp, ExpSendTime, schedOutGateExp );
 
+                    EthernetIIFrame* ifgMsg = new EthernetIIFrame();
+                    ifgMsg->setBitLength( INTERFRAME_GAP_BITS );
+
+                    cMessage* currMsg = sendingStatus->getMessage();
+                    simtime_t arrivalCurrMsg = currMsg->getCreationTime() + schedNic->getTransmissionChannel()->calculateDuration(currMsg);
+                    currMsg->setArrivalTime(
+                            arrivalCurrMsg +
+                            schedNicExp->getTransmissionChannel()->calculateDuration( msgExp ) +
+                            schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg )
+                            );
+                }
+            }
         }
     }
 }
 
-unsigned char Scheduler::isSendingFrameFragmentable( NetworkInterfaceCard* selectedNic )
+simtime_t Scheduler::getExpressSendTime( void )
 {
-    unsigned char retVal = 0x00;
-
     /* Algorithm from documentation PA14_wlan_1 */
     int64_t allBytesOfSendingFrame = sendingStatus->getEthTag()->getByteLength();
 
     simtime_t simTimeNow = simTime();
 
-    double datarate = selectedNic->getTransmissionChannel()->getNominalDatarate();
+    double datarate = schedNic->getTransmissionChannel()->getNominalDatarate();
 
     simtime_t sendTimeOfFrame = sendingStatus->getSendingTime();
 
@@ -390,18 +409,28 @@ unsigned char Scheduler::isSendingFrameFragmentable( NetworkInterfaceCard* selec
 
 
     if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
+        bytesAlreadySent % 4 == 0 &&
         bytesNotYetSent > 72 )
     {
         /* can send express frame now. */
+        return simTimeNow;
     }
-    else if( bytesAlreadySent < ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
+    else if( bytesAlreadySent % 4 != 0 &&
              bytesNotYetSent >= 72 )
     {
-        simtime_t reschedTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
-        parentSwitch->scheduleAt( reschedTime, new SchedulerSelfMessage() );
+        if( bytesAlreadySent >= 72 )
+        {
+            return simTimeNow + ( ( ( 4 - ( bytesAlreadySent % 4 ) + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+        }
+        else
+        {
+            return simTimeNow + ( ( ( 72 - bytesAlreadySent + ( 4 - ( bytesAlreadySent % 4 ) + ( INTERFRAME_GAP_BITS / 8 ) ) ) * 8 ) / datarate );
+        }
     }
-
-    return retVal;
+    else
+    {
+        return SIMTIME_ZERO;
+    }
 }
 
 framePriority Scheduler::getMessagePriority( cMessage* msg )

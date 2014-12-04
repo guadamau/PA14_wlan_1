@@ -52,6 +52,8 @@ void SendingStatus::attachFrame( cMessage* message )
     /* duplicate message first ... */
     this->message = message->dup();
 
+    this->ethTag = check_and_cast<EthernetIIFrame*>( this->message );
+
     MessagePacker::decapsulateMessage( &this->ethTag, &this->vlanTag, &this->hsrTag, &this->dataStream );
 
     this->framePrio = static_cast<framePriority>( this->vlanTag->getUser_priority() );

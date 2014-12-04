@@ -79,6 +79,7 @@ void DelayLogger::addDelay( cMessage* msg )
     frame = check_and_cast<EthernetIIFrame*>( msg );
 
     simtime_t frameCreationTime = frame->getCreationTime();
+    EV << "ARRIVAL TIME: (" << simTime() << ") "<< frame->getArrivalTime();
 
     simtime_t msgDelay = simTime() - frameCreationTime;
 
