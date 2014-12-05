@@ -963,6 +963,13 @@ Wie bestimmter Fall simulieren
 \end_deeper
 \begin_layout Subsection
 Kalenderwoche 49: 04.12.2014
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kalenderwoche-49:-04.12.2014"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -1210,12 +1217,197 @@ USB-Stick
 \end_layout
 
 \begin_layout Standard
-Dieser Arbeit wird ein USB-Stick mitgegeben, auf dem sich folgende Dateien
- befinden:
+Dieser Arbeit wird ein USB-Stick mit folgenden Eigenschaften mitgegeben:
 \end_layout
 
 \begin_layout Standard
-Tree of USB-Stick content
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="20text%">
+<column alignment="left" valignment="top" width="80text%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Marke & Modell
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SanDisk Extreme USB 3.0 Flash Drive
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kapazität
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+16 GB
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Name
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PA14_wlan_1
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dateisystem
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+NTFS
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+USB-Stick Eigenschaften 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auf dem USB-Stick befinden sich folgende Dateien:
+\end_layout
+
+\begin_layout Standard
+(Tree of USB-Stick content)
+\end_layout
+
+\begin_layout Chapter
+Codeausschnitte
+\end_layout
+
+\begin_layout Section
+Switch: Zuteiltung Frame von CPU an beide Ports nach Aussen
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Switch:-Zuteiltung-Frame"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={switch/EndNodeSwitch.cc - Zuteiltung Frame von CPU
+ an beide Ports nach Aussen}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/MultiPrioHan
+dleMsg_EndNodeSwitch.cc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Scheduler: Mechanismen zur Queueverwaltung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Scheduler:-Mechanismen-zur"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={switch/Scheduler.cc - Mechanismen zur Queueverwaltung}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/processQueue
+s_Scheduler.cc}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter

@@ -60,28 +60,7 @@
 \definecolor{darkblue}{rgb}{0.0,0.0,0.6}
 \definecolor{cyan}{rgb}{0.0,0.6,0.6}
 
-% basicstyle=\scriptsize\ttfamily,
- \lstset{
-   basicstyle=\scriptsize\ttfamily,
-   keywordstyle=\bfseries\ttfamily\color{blue},
-   stringstyle=\color{darkgreen}\ttfamily,
-   commentstyle=\color{middlegray}\ttfamily,
-   emph={square}, 
-   emphstyle=\color{orange}\texttt,
-   emph={[2]root,base},
-   emphstyle={[2]\color{yac}\texttt},
-   showstringspaces=false,
-   flexiblecolumns=false,
-   tabsize=2,
-   numbers=left,
-   numberstyle=\tiny,
-   numberblanklines=true,
-   stepnumber=1,
-   breaklines=true,
-   numbersep=10pt,
-   xleftmargin=15pt,
-   %frame=single
- }
+
 
 % Sprache XML definieren fuer das Syntaxhighlighting
 \lstdefinelanguage{XML}
@@ -91,7 +70,7 @@ morecomment=[s]{<?}{?>},
 morecomment=[s][\color{orange}]{<!--}{-->},
 keywordstyle=\color{cyan},
 stringstyle=\color{black},
-tagstyle=\color{darkblue},
+identifierstyle=\color{darkblue},
 morekeywords={xmlns,version,type}
 %  morestring=[b]",
   %morestring=[s]{>}{<},

@@ -610,6 +610,21 @@ Alle Frames, die beim DANH-Knoten ankommen oder von dessen CPU generiert
  wird.
 \end_layout
 
+\begin_layout Standard
+Des Weiteren verursacht ein Knoten eine Verzögerung von 6us pro Frame (Vorgabe
+ von unserem Betreuer, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Kalenderwoche-49:-04.12.2014"
+
+\end_inset
+
+).
+ Dies ist die Zeit, die ein Knoten benötigt, um beim Cut-Through-Switching
+ genug vom Frame eingelesen zu haben, damit der Entscheiden kann was er
+ mit dem Frame machen soll.
+\end_layout
+
 \begin_layout Subsection
 Netzwerkaufbau
 \end_layout
@@ -829,8 +844,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-		<interval>0.00025</interval> <!-- 4000x per second -->                
-        
+		<interval>0.00025</interval> <!-- 4000x per second -->              
 \end_layout
 
 \begin_layout Plain Layout
@@ -1362,8 +1376,15 @@ O
 \end_inset
 
  und rechne die (M)FCS, die pro neuem Fragment dazukommt, hinzu.
- Des Weiteren muss die Präambel aus V nicht mit abgezogen werden, da die
- Präambel nicht zur Framegrösse gehört:
+ Des Weiteren muss die Präambel aus 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ nicht mit abgezogen werden, da die Präambel nicht zur Framegrösse gehört:
 \begin_inset Formula 
 \[
 O=F-V+4+8=F-V+12
@@ -1375,11 +1396,33 @@ O=F-V+4+8=F-V+12
 \end_layout
 
 \begin_layout Enumerate
-Wenn V grösser gleich 72 Bytes (Präambel + SMD + Data + (M)FCS) und IFG
- (von der Simulationsumgebung vorgegeben) zusammen beträgt, V (minus Präambel
- und SMD) durch 8 geteilt 0 ergibt und O grösser als 64 Bytes ist (Data-Felder
- je mindestens 60 Bytes + 4 Bytes (M)FCS), kann das Express-Frame jetzt
- gesendet werden.
+Wenn 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ grösser gleich 72 Bytes (Präambel + SMD + Data + (M)FCS) und IFG (von der
+ Simulationsumgebung vorgegeben) zusammen beträgt, 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ (minus Präambel und SMD) durch 8 geteilt 0 ergibt und 
+\begin_inset Quotes fld
+\end_inset
+
+O
+\begin_inset Quotes frd
+\end_inset
+
+ grösser als 64 Bytes ist (Data-Felder je mindestens 60 Bytes + 4 Bytes
+ (M)FCS), kann das Express-Frame jetzt gesendet werden.
  Die Schritte 6 und 7 müssen nicht mehr erledigt werden, da das Express-Frame
  versandt wurde und der Vorgang somit erfolgreich war.
  In diesem Fall beträgt 
@@ -1470,7 +1513,15 @@ Fverlängert
 \end_layout
 
 \begin_layout Enumerate
-Wenn V nicht grösser gleich 72 Bytes und IFG zusammen beträgt oder 
+Wenn 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ nicht grösser gleich 72 Bytes und IFG zusammen beträgt oder 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1478,8 +1529,16 @@ D
 \begin_inset Quotes frd
 \end_inset
 
- bei der Division durch 8 nicht 0 ergibt, O aber grösser gleich 64 Bytes
- ist, dann muss abgewartet werden bis folgender Zeitpunkt 
+ bei der Division durch 8 nicht 0 ergibt, 
+\begin_inset Quotes fld
+\end_inset
+
+O
+\begin_inset Quotes frd
+\end_inset
+
+ aber grösser gleich 64 Bytes ist, dann muss abgewartet werden bis folgender
+ Zeitpunkt 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1500,7 +1559,15 @@ V<72+I & \: simtime+\frac{(72+I-V+(8-(D\,\%\,8)))*8}{datarate}
 
 Diese Formel berechnet den nächsten Zeitpunkt, ab dem eine Fragmentierung
  möglich wäre.
- Ist V schon über oder gleich der Minimalgrösse (72 Bytes) + IFG, muss lediglich
+ Ist 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ schon über oder gleich der Minimalgrösse (72 Bytes) + IFG, muss lediglich
  abgewartet werden bis 
 \begin_inset Quotes fld
 \end_inset
@@ -1510,9 +1577,24 @@ D
 \end_inset
 
  durch 8 dividiert 0 ergibt.
- Ist V kleiner als die Minimalgrösse + IFG, muss abgewartet werden bis diese
- erfüllt ist und die selben Bedingungen erfüllt sind wie wenn V die Minimalgröss
-e + IFG schon erreicht hat.
+ Ist 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ kleiner als die Minimalgrösse + IFG, muss abgewartet werden bis diese erfüllt
+ ist und die selben Bedingungen erfüllt sind wie wenn 
+\begin_inset Quotes fld
+\end_inset
+
+V
+\begin_inset Quotes frd
+\end_inset
+
+ die Minimalgrösse + IFG schon erreicht hat.
 \end_layout
 
 \begin_layout Enumerate
