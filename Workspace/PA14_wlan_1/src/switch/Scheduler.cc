@@ -376,13 +376,22 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
                     cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
                     parentSwitch->sendDelayed( msgExp, expSendTime, schedOutGateExp );
 
+                    EthernetIIFrame* fcsMsg = new EthernetIIFrame();
+                    fcsMsg->setBitLength( 4 * 8 );
                     EthernetIIFrame* ifgMsg = new EthernetIIFrame();
                     ifgMsg->setBitLength( INTERFRAME_GAP_BITS );
+                    EthernetIIFrame* preambleMsg = new EthernetIIFrame();
+                    preambleMsg->setBitLength( 8 * 8 );
 
                     cMessage* currMsg = sendingStatus->getMessage();
-                    setPreemptionDelay( currMsg,
-                            schedNicExp->getTransmissionChannel()->calculateDuration( msgExp ) +
-                            schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg ) );
+
+                    simtime_t timeMfcsFirstFragment = schedNicExp->getTransmissionChannel()->calculateDuration( fcsMsg );
+                    simtime_t timeIfg = schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg );
+                    simtime_t timePreamble = schedNicExp->getTransmissionChannel()->calculateDuration( preambleMsg );
+                    simtime_t timeMsgExp = schedNicExp->getTransmissionChannel()->calculateDuration( msgExp );
+                    simtime_t timeMsgDelayWhenFragmented = timeMfcsFirstFragment + timeIfg + timePreamble + timeMsgExp + timeIfg + timePreamble;
+
+                    setPreemptionDelay( currMsg, timeMsgDelayWhenFragmented );
                 }
             }
         }
@@ -402,28 +411,29 @@ simtime_t Scheduler::getExpressSendTime( void )
 
 
     int64_t bytesAlreadySent = ( int64_t )floor( ( ( simTimeNow.dbl() - sendTimeOfFrame.dbl() ) * datarate ) / 8.0 );
+    int64_t bytesAlreadySentData = bytesAlreadySent - 12 - (INTERFRAME_GAP_BITS / 8);
 
 
     int64_t bytesNotYetSent = allBytesOfSendingFrame - bytesAlreadySent + 12;
 
 
     if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
-        bytesAlreadySent % 4 == 0 &&
-        bytesNotYetSent > 72 )
+        bytesAlreadySent % 8 == 0 &&
+        bytesNotYetSent > 64 )
     {
         /* can send express frame now. */
         return simTimeNow;
     }
     else if( bytesAlreadySent % 4 != 0 &&
-             bytesNotYetSent >= 72 )
+             bytesNotYetSent >= 64 )
     {
-        if( bytesAlreadySent >= 72 )
+        if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
         {
-            return simTimeNow + ( ( ( 4 - ( bytesAlreadySent % 4 ) + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+            return simTimeNow + ( ( ( 8 - ( bytesAlreadySentData % 8 ) + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
         }
         else
         {
-            return simTimeNow + ( ( ( 72 - bytesAlreadySent + ( 4 - ( bytesAlreadySent % 4 ) + ( INTERFRAME_GAP_BITS / 8 ) ) ) * 8 ) / datarate );
+            return simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) - bytesAlreadySent + ( 8 - ( bytesAlreadySentData % 8 ) ) ) * 8 ) / datarate );
         }
     }
     else
