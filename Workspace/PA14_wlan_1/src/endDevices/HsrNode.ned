@@ -18,7 +18,6 @@ package endDevices;
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
 import cpu.CPU;
-import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import nodeTable.nodeTable;
 import mac.NetworkInterfaceCard;
@@ -32,8 +31,7 @@ module HsrNode
         int ringID; //ring number
         int outputQueueCapacityPerPort;
         int duplicateDetectionListSize;
-        double delay @unit(s); // propagation delay
-        bool storeAndForward;
+        double propagationDelay @unit(s) = default( 6us );
         
     gates:
         

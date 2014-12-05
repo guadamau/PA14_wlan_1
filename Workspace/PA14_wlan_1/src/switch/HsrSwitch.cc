@@ -35,6 +35,11 @@ HsrSwitch::~HsrSwitch()
      * Otherwise a failure will be thrown in omnet++s "network-cleanup".
      * This is wtf.
      */
+
+    if( this->event != NULL )
+    {
+        delete this->event;
+    }
 }
 
 
@@ -129,6 +134,14 @@ Scheduler* HsrSwitch::getSchedGateCpuOutExp() {
     return schedGateCpuOutExp;
 }
 
+cMessage* HsrSwitch::getEvent( void ) {
+    return event;
+}
+
+cMessage* HsrSwitch::getRegularMsg( void ){
+    return regularMsg;
+}
+
 
 /* Setters */
 void HsrSwitch::setSequenceNum( unsigned int sequenceNum ) {
@@ -155,6 +168,14 @@ void HsrSwitch::setSchedGateBOutExp( Scheduler* schedGateBOutExp ) {
     this->schedGateBOutExp = schedGateBOutExp;
 }
 
+void HsrSwitch::setEvent( cMessage* event ) {
+    this->event = event;
+}
+
+void HsrSwitch::setRegularMsg( cMessage* regularMsg ) {
+    this->regularMsg = regularMsg;
+}
+
 void HsrSwitch::setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp ) {
     this->schedGateCpuOutExp = schedGateCpuOutExp;
 }
@@ -164,6 +185,10 @@ void HsrSwitch::initialize( void )
 {
     /* Initialize Scheduler */
     const char* schedChoice = par( "schedulerMode" ).stringValue();
+
+    this->propagationDelay = par( "propagationDelay" );
+
+    this->event = new cMessage();
 
     if( strncasecmp( "FCFS", schedChoice ,4 ) == 0 )
     {
@@ -241,4 +266,13 @@ void HsrSwitch::scheduleProcessQueues( unsigned char schedID )
     HsrSwitchSelfMessage* enqSelfMsg = new HsrSwitchSelfMessage();
     enqSelfMsg->setSchedulerName(schedID);
     scheduleAt(simTime()+DBL_MIN, enqSelfMsg);
+}
+
+void HsrSwitch::simulateSwitchDelay( cMessage* originalMsg )
+{
+    /* store the original incoming message */
+    this->regularMsg = originalMsg;
+
+    /* Schedule at with defined propagation delay. */
+    scheduleAt( simTime() + this->propagationDelay, this->event );
 }

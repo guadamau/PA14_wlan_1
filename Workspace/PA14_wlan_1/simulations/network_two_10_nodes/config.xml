@@ -1,5 +1,10 @@
 ﻿<?xml version="1.0" ?>
 <simulation_behaviour>
+
+
+    
+    <!-- ###################################### Measurement units with multicast destination ###################################### -->
+    
     <source>00-15-12-14-88-01
         <lastmuster>
             <typ>hsr</typ>
@@ -129,7 +134,7 @@
     </source>
     
     
-    
+    <!-- ###################################### TCP Traffic ###################################### -->
     
     <source>00-15-12-14-88-05								<!-- TCP Traffic Simulation MU5 to PU1 -->
         <lastmuster>
@@ -163,6 +168,8 @@
         </lastmuster> 
     </source>
     
+    
+
     
 </simulation_behaviour>
 

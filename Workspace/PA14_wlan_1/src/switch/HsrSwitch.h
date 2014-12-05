@@ -28,6 +28,11 @@ class HsrSwitch : public cSimpleModule
 {
 private:
 
+    cMessage* event;
+    cMessage* regularMsg;
+
+    simtime_t propagationDelay;
+
     MACAddress* macAddress;
 
     unsigned int ringID;
@@ -115,6 +120,10 @@ public:
 
     unsigned int getSequenceNum( void );
 
+    cMessage* getEvent( void );
+
+    cMessage* getRegularMsg( void );
+
 
     /* Setters */
 
@@ -131,6 +140,13 @@ public:
     void setSchedGateBOutExp( Scheduler* schedGateBOutExp );
 
     void setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp );
+
+    void setEvent( cMessage* event );
+
+    void setRegularMsg( cMessage* regularMsg );
+
+    /* Propagation delay */
+    void simulateSwitchDelay( cMessage* originalMsg );
 
 };
 

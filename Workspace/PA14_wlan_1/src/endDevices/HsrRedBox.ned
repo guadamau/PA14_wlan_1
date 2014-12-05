@@ -2,7 +2,6 @@ package endDevices;
 
 import inet.linklayer.ethernet.EtherMACFullDuplex;
 
-import forwardDelay.ForwardDelay;
 import duplicateDetection.ListenErkennung;
 import switch.RedBoxSwitch;
 import mac.NetworkInterfaceCard;
@@ -26,6 +25,7 @@ module HsrRedBox extends HsrNode
             macAddress = macAddress;
             redBoxCfg = redBoxCfg;
             ringID = ringID;
+            propagationDelay = propagationDelay;
             @display("p=167,216");
         }
         

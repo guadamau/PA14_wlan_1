@@ -23,12 +23,11 @@ package channels;
 //        }
         
         channel MyFastChannel extends ned.DatarateChannel {
-            delay = uniform(300ns, 400ns);
+            delay = 100ns; // cable length of ~ 20 m
             datarate = 100Mbps;
             @display("ls=red,3");
         }
         
         channel MyInternalChannel extends ned.DatarateChannel {
-//              delay = 25us;
-//              datarate = 100Mbps;
+                delay = 0us;
         }
