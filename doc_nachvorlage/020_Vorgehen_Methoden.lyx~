@@ -762,7 +762,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-		Behaviober 
+		Behavior 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1167,12 +1167,8 @@ Abhandlung von Frames inklusive Express-Frames
 \end_layout
 
 \begin_layout Standard
-Um herauszufinden, ob ein Frame fragmentierbar ist, muss dessen Grösse des
- effektiven Datenbereichs herausgefunden werden.
- In einem Mframe beträgt der effektive Datenbereich bei einem VLAN-Tag mindesten
-s 42 Bytes und ohne VLAN-Tag 46 Bytes.
- Die Datenbereiche der weiteren Fragmente können mindestens 60 Bytes gross
- sein (siehe Kapitel 
+Die Datenbereiche der weiteren Fragmente müssen mindestens 64 Bytes gross
+ und durch 8 teilbar sein (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:Mframe"
@@ -1183,21 +1179,118 @@ reference "sec:Mframe"
 \end_layout
 
 \begin_layout Standard
-Die minimal mögliche Grösse eines mFrames ist somit 72 Bytes (8 Bytes Präambel
- und SMD + 60 Bytes Data + 4 Bytes MFCS/FCS).
-\end_layout
-
-\begin_layout Standard
-Bei der Fragmentierung werden zudem pro Fragment neue Präambel-, SMD-, FragCount
-- und (M)FCS-Felder generiert.
- Das heisst, dass pro neuem Fragment 12 Bytes plus Interframe Gap dazu kommen.
-\end_layout
-
-\begin_layout Standard
 Natürlich kann bei einem Frame, das gerade übertragen wird nur noch der
  Teil fragmentiert werden, der aussteht.
  Demnach wird wie folgt vorgegangen, um herauszufinden, ob ein Frame fragmentier
 bar ist:
+\end_layout
+
+\begin_layout Standard
+Variablen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+simtime=Derzeitige\, Simulationszeit\,(Jetztiger\, Zeitpunkt)
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+datarate=Übermittlungsrate\, in\, Bits\, pro\, Sekunde
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+sendtime=Zeit,\, an\, der\, die\,Übertragung\, der\, Präambel\, begonnen\, hat
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I=Interframe\, Gap\, in\, Bytes
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+F=Grösse\, des\, zu\, fragmentierenden\, Frames
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+V=Versendete\, Bytes\, inkl.\, Präambel\, und\, SMD
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+O=Noch\, offen\, stehende\, Bytes
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+D=Databereich\, von\, V
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Ablauf_IET.png
+	display false
+	scale 70
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Berechnung der Express-Frame-Versandzeit
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -1217,41 +1310,7 @@ F
 \end_layout
 
 \begin_layout Enumerate
-Berechne die Anzahl Bytes, die bereits ve
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status collapsed
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/020_Ablauf_Frame_Express.png
-	display false
-	scale 90
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Abhandlung von Frames inklusive Express-Frames
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-rsendet wurden (in der folgenden Rechnung 
+Berechne die Anzahl Bytes, die bereits versendet wurden 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1259,31 +1318,15 @@ V
 \begin_inset Quotes frd
 \end_inset
 
-):
-\begin_inset Formula 
-\[
-simtime=Derzeitige\, Simulationszeit\,/\, Jetztiger\, Zeitpunkt
-\]
-
+ und berechne die Grösse dessen Datenbereichs 
+\begin_inset Quotes fld
 \end_inset
 
-
-\begin_inset Formula 
-\[
-datarate=Übermittlungsrate\, in\, Bits\, pro\, Sekunde
-\]
-
+D
+\begin_inset Quotes frd
 \end_inset
 
-
-\begin_inset Formula 
-\[
-sendtime=Zeit,\, an\, der\, die\,Übertragung\, begonnen\, hat
-\]
-
-\end_inset
-
-
+:
 \begin_inset Formula 
 \[
 V=((simtime-sendtime)*datarate)/8
@@ -1292,22 +1335,9 @@ V=((simtime-sendtime)*datarate)/8
 \end_inset
 
 
-\end_layout
-
-\begin_layout Enumerate
-Berechne die Anzahl Bytes, die noch offen stehen (in der folgenden Rechnung
- 
-\begin_inset Quotes fld
-\end_inset
-
-O
-\begin_inset Quotes frd
-\end_inset
-
-) und addiere das, was pro neues Fragment an Feldern dazu kommt:
 \begin_inset Formula 
 \[
-O=F-V+12
+D=V-(Präam.+SMD)-MFCS-I=V-8-4-I=V-12-I
 \]
 
 \end_inset
@@ -1316,19 +1346,125 @@ O=F-V+12
 \end_layout
 
 \begin_layout Enumerate
-Wenn V grösser gleich 72 Bytes und IFG (von der Simulationsumgebung vorgegeben)
- zusammen beträgt, V durch 4 geteilt 0 ergibt und O grösser als 72 Bytes
- ist (Data-Felder je mindestens 60 Bytes), kann das Express-Frame jetzt
- gesendet werden.
- Die weiteren Schritte müssen nicht mehr erledigt werden, da das Express-Frame
- versandt wurde und der Vorgang somit erfolgreich war.
+Berechne die Anzahl Bytes, die noch offen stehen 
+\begin_inset Quotes fld
+\end_inset
+
+O
+\begin_inset Quotes frd
+\end_inset
+
+ und rechne die (M)FCS, die pro neuem Fragment dazukommt, hinzu.
+ Des Weiteren muss die Präambel aus V nicht mit abgezogen werden, da die
+ Präambel nicht zur Framegrösse gehört:
+\begin_inset Formula 
+\[
+O=F-V+4+8=F-V+12
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
-Wenn V nicht grösser gleich 72 Bytes und IFG zusammen beträgt oder bei der
- Division durch 4 nicht 0 ergibt, O aber grösser gleich 72 Bytes ist, dann
- muss abgewartet werden bis folgender Zeitpunkt (in der folgenden Rechnung
+Wenn V grösser gleich 72 Bytes (Präambel + SMD + Data + (M)FCS) und IFG
+ (von der Simulationsumgebung vorgegeben) zusammen beträgt, V (minus Präambel
+ und SMD) durch 8 geteilt 0 ergibt und O grösser als 64 Bytes ist (Data-Felder
+ je mindestens 60 Bytes + 4 Bytes (M)FCS), kann das Express-Frame jetzt
+ gesendet werden.
+ Die Schritte 6 und 7 müssen nicht mehr erledigt werden, da das Express-Frame
+ versandt wurde und der Vorgang somit erfolgreich war.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Da es sich hier um eine Zeitberechnung haltet, wird das normale Frame nicht
+ wirklich fragmentiert, sondern verlängert.
+ Die Ankunftszeit des verlängerten Frames ist die gleiche wie wann alle
+ Fragmente eines Frames ankommen würden.
  
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Folgende Werte müssen dem 
+\begin_inset Quotes fld
+\end_inset
+
+fragmentierten
+\begin_inset Quotes frd
+\end_inset
+
+ Frame dazugerechnet werden: 
+\begin_inset Newline newline
+\end_inset
+
+Grösse normales Frame 
+\begin_inset Quotes fld
+\end_inset
+
+F
+\begin_inset Quotes frd
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
++ MFCS des ersten Fragments
+\begin_inset Newline newline
+\end_inset
+
++ IFG des ersten Fragments (12 Bytes)
+\begin_inset Newline newline
+\end_inset
+
++ Präambel und SFD des Express-Frames (8 Bytes)
+\begin_inset Newline newline
+\end_inset
+
++ Grösse Express-Frame
+\begin_inset Newline newline
+\end_inset
+
++ IFG des Express-Frames (12 Bytes)
+\begin_inset Newline newline
+\end_inset
+
++ Präambel und SMD des nächsten Fragments (8 Bytes)
+\begin_inset Newline newline
+\end_inset
+
+= Totale Grösse des verlängerten Frames 
+\begin_inset Quotes fld
+\end_inset
+
+Fverlängert
+\begin_inset Quotes frd
+\end_inset
+
+ (siehe vorherige Abbildung)
+\end_layout
+
+\begin_layout Enumerate
+Wenn V nicht grösser gleich 72 Bytes und IFG zusammen beträgt oder 
+\begin_inset Quotes fld
+\end_inset
+
+D
+\begin_inset Quotes frd
+\end_inset
+
+ bei der Division durch 8 nicht 0 ergibt, O aber grösser gleich 64 Bytes
+ ist, dann muss abgewartet werden bis folgender Zeitpunkt (in der folgenden
+ Rechnung 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1339,17 +1475,9 @@ t
 ) erreicht ist:
 \begin_inset Formula 
 \[
-I=Interframe\, Gap\, in\, Bytes
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
 t=\begin{cases}
-V\geqq72 & \: simtime+\frac{(4-(V\,\%\,4)+I)*8}{datarate}\\
-V<72 & \: simtime+\frac{(72-V+(4-(V\,\%\,4))+I)*8}{datarate}
+V\geqq72+I & \: simtime+\frac{(8-(D\,\%\,8))*8}{datarate}\\
+V<72+I & \: simtime+\frac{(72+I-V+(8-(D\,\%\,8)))*8}{datarate}
 \end{cases}
 \]
 
@@ -1357,21 +1485,24 @@ V<72 & \: simtime+\frac{(72-V+(4-(V\,\%\,4))+I)*8}{datarate}
 
 Diese Formel berechnet den nächsten Zeitpunkt, ab dem eine Fragmentierung
  möglich wäre.
- Ist V schon über oder gleich der Minimalgrösse (72 Bytes), muss lediglich
- abgewartet werden bis dessen Grösse durch 4 dividiert 0 ergibt und der
- IFG versendet wurde.
- Ist V kleiner als die Minimalgrösse, muss abgewartet werden bis diese erfüllt
- ist und die Selben Bedingungen erfüllt sind wie wenn V die Minimalgrösse
- schon erreicht hat.
+ Ist V schon über oder gleich der Minimalgrösse (72 Bytes) + IFG, muss lediglich
+ abgewartet werden bis 
+\begin_inset Quotes fld
+\end_inset
+
+D
+\begin_inset Quotes frd
+\end_inset
+
+ durch 8 dividiert 0 ergibt.
+ Ist V kleiner als die Minimalgrösse + IFG, muss abgewartet werden bis diese
+ erfüllt ist und die selben Bedingungen erfüllt sind wie wenn V die Minimalgröss
+e + IFG schon erreicht hat.
 \end_layout
 
 \begin_layout Enumerate
-Ist der Zeitpunkt erreicht, muss O und somit auch V neu berechnet werden
- (Siehe Schritt 3 und 4).
- Ist O nicht mehr grösser gleich 72 Bytes, muss man mit dem Senden des Express-F
-rames warten, bis das ganze Frame versendet wurde.
- Ist O aber jetzt noch grösser gleich 72 Bytes, kann das Express-Frame jetzt
- versendet werden.
+Ist der Zeitpunkt erreicht, muss die Überprüfung wieder von Anfang an gemacht
+ werden.
 \end_layout
 
 \begin_layout Subsection

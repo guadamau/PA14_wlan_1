@@ -94,10 +94,6 @@ markright{Teil IV: Anhang}
 \end_layout
 
 \begin_layout Chapter
-Projektmanagement
-\end_layout
-
-\begin_layout Section
 Offizielle Aufgabenstellung
 \begin_inset CommandInset label
 LatexCommand label
@@ -281,6 +277,14 @@ die Laufzeit der einzelnen Frames misst und geeignet visualisiert.
 Das zeitliche Verhalten einiger Konfigurationen ist für verschiedene Lastprofile
  simuliert.
  Die Resultate sind visualisiert, interpretiert und kommentiert.
+\end_layout
+
+\begin_layout Chapter
+Projektmanagement
+\end_layout
+
+\begin_layout Section
+Präzisierung der Aufgabenstellung
 \end_layout
 
 \begin_layout Section
