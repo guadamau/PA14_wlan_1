@@ -829,8 +829,7 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-		<interval>0.00025</interval> <!-- 4000x per second -->                
-        
+		<interval>0.00025</interval> <!-- 4000x per second -->              
 \end_layout
 
 \begin_layout Plain Layout
@@ -874,7 +873,6 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-be
 \end_layout
 
 \begin_layout Plain Layout
@@ -1254,6 +1252,14 @@ D=Databereich\, von\, V
 \end_inset
 
 
+\begin_inset Formula 
+\[
+t=Zeitpunkt,\, zu\, dem\, das\, Express-Frame\, versandt\, wird
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1375,11 +1381,20 @@ Wenn V grösser gleich 72 Bytes (Präambel + SMD + Data + (M)FCS) und IFG
  gesendet werden.
  Die Schritte 6 und 7 müssen nicht mehr erledigt werden, da das Express-Frame
  versandt wurde und der Vorgang somit erfolgreich war.
-\begin_inset Newline newline
+ In diesem Fall beträgt 
+\begin_inset Quotes fld
 \end_inset
 
+t
+\begin_inset Quotes frd
+\end_inset
 
-\begin_inset Newline newline
+:
+\begin_inset Formula 
+\[
+t=simtime
+\]
+
 \end_inset
 
 Da es sich hier um eine Zeitberechnung haltet, wird das normale Frame nicht
@@ -1463,8 +1478,7 @@ D
 \end_inset
 
  bei der Division durch 8 nicht 0 ergibt, O aber grösser gleich 64 Bytes
- ist, dann muss abgewartet werden bis folgender Zeitpunkt (in der folgenden
- Rechnung 
+ ist, dann muss abgewartet werden bis folgender Zeitpunkt 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1472,7 +1486,7 @@ t
 \begin_inset Quotes frd
 \end_inset
 
-) erreicht ist:
+ erreicht ist:
 \begin_inset Formula 
 \[
 t=\begin{cases}

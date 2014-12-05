@@ -961,6 +961,84 @@ Wie bestimmter Fall simulieren
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Kalenderwoche 49: 04.12.2014
+\end_layout
+
+\begin_layout Itemize
+Was bedeuten in der Simulation die verschiedenen Farben der Verbindungen?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In Anleitung festhalten
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Interner Delay (im Knoten) von 6us implementieren
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Zeit bis der Teil des Frames gelesen werde, um entscheiden zu können, was
+ damit gemacht wird (Cut-Through-Switching)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Für die Verbindung zwischen den Endknoten 20m 100Mbps Kabel verwenden
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Delay von 5ns pro 1m Kabel
+\end_layout
+
+\begin_layout Itemize
+Delay 20m Kabel: 100ns
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zuflusslimitierung bei TCP-ähnlichem Traffic auf z.B.
+ 1Mbit/s setzen
+\end_layout
+
+\begin_layout Itemize
+Notieren, wo Aufgabenstellung in welchem Code erfüllt wurde und wie man
+ zu diesem Modul gekommen ist
+\end_layout
+
+\begin_layout Itemize
+Testfälle
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Nur ein Frame auf leeren Ring senden -> schnellster Übertragungswert
+\end_layout
+
+\begin_layout Itemize
+Frame bei t1, Express bei t2 (bisschen später als t1) versenden -> Wie sieht
+ es mit der Preemption aus?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Was wenn das Frame nicht fragmentierbar ist?
+\end_layout
+
+\begin_layout Itemize
+Was wenn es fragmentierbar ist?
+\end_layout
+
+\begin_layout Itemize
+Kann ein langes Frame von mehreren Express-Frames unterbrochen werden?
+\end_layout
+
+\end_deeper
+\end_deeper
 \begin_layout Standard
 ------------------------------------
 \end_layout
@@ -1125,6 +1203,19 @@ Simulation starten
 
 \begin_layout Section
 Resultate ansehen
+\end_layout
+
+\begin_layout Chapter
+USB-Stick
+\end_layout
+
+\begin_layout Standard
+Dieser Arbeit wird ein USB-Stick mitgegeben, auf dem sich folgende Dateien
+ befinden:
+\end_layout
+
+\begin_layout Standard
+Tree of USB-Stick content
 \end_layout
 
 \begin_layout Chapter

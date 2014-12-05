@@ -94,10 +94,6 @@ markright{Teil IV: Anhang}
 \end_layout
 
 \begin_layout Chapter
-Projektmanagement
-\end_layout
-
-\begin_layout Section
 Offizielle Aufgabenstellung
 \begin_inset CommandInset label
 LatexCommand label
@@ -281,6 +277,14 @@ die Laufzeit der einzelnen Frames misst und geeignet visualisiert.
 Das zeitliche Verhalten einiger Konfigurationen ist für verschiedene Lastprofile
  simuliert.
  Die Resultate sind visualisiert, interpretiert und kommentiert.
+\end_layout
+
+\begin_layout Chapter
+Projektmanagement
+\end_layout
+
+\begin_layout Section
+Präzisierung der Aufgabenstellung
 \end_layout
 
 \begin_layout Section
@@ -957,6 +961,59 @@ Wie bestimmter Fall simulieren
 \end_layout
 
 \end_deeper
+\begin_layout Subsection
+Kalenderwoche 49: 04.12.2014
+\end_layout
+
+\begin_layout Itemize
+Was bedeuten in der Simulation die verschiedenen Farben der Verbindungen?
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+In Anleitung festhalten
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Interner Delay (im Knoten) von 6us implementieren
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Zeit bis der Teil des Frames gelesen werde, um entscheiden zu können, was
+ damit gemacht wird (Cut-Through-Switching)
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Für die Verbindung zwischen den Endknoten 20m 100Mbps Kabel verwenden
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Delay von 5ns pro 1m Kabel
+\end_layout
+
+\begin_layout Itemize
+Delay 20m Kabel: 100ns
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Zuflusslimitierung bei TCP-ähnlichem Traffic auf z.B.
+ 1Mbit/s setzen
+\end_layout
+
+\begin_layout Itemize
+Notieren, wo Aufgabenstellung in welchem Code erfüllt wurde und wie man
+ zu diesem Modul gekommen ist
+\end_layout
+
+\begin_layout Itemize
+Te
+\end_layout
+
 \begin_layout Standard
 ------------------------------------
 \end_layout
@@ -990,9 +1047,9 @@ Starten der virtuellen Maschine
 
 \begin_layout Standard
 Auf dem mitgelieferten USB-Stick befindet sich eine VDI-Datei.
- Diese Datei beinhaltet eine virtuelle Maschine, auf der das 32Bit Linux-Betrieb
-ssystem Debian inklusive der OMNeT++-Umgebung und einer englischen Anleitung
- eingerichtet ist.
+ Diese Datei beinhaltet eine virtuelle Maschine (VM), auf der das 32Bit
+ Linux-Betriebssystem Debian inklusive der OMNeT++-Umgebung und einer englischen
+ Anleitung eingerichtet ist.
  Eine deutsche Anleitung wird in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand ref
@@ -1022,7 +1079,7 @@ www.virtualbox.org
 
 \begin_layout Standard
 Um die VDI-Datei einzubinden erstellt man in VirtualBox eine neue virtuelle
- Maschine und navigiert durch den (Typ: 
+ Maschine und navigiert durch den Assistenten (Typ: 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1040,8 +1097,87 @@ Debian (32 bit)
 
 ).
  Die virtuelle Maschine wurde mit einem zugewiesenen Arbeitsspeicher von
- 512MB getestet.
- Anstelle einer neuen Festplatte zu erstellen
+ 512MB getestet (es wird empfohlen 512MB oder mehr als Arbeitsspeicher auszuwähl
+en).
+ Anstelle einer neuen Festplatte zu erstellen wird nun die bestehende VDI-Datei
+ eingebunden.
+ Wurde die virtuelle Maschine erstellt, kann sie gestartet werden.
+\end_layout
+
+\begin_layout Standard
+Für den Betrieb der virtuellen Maschine sind keine Login-Daten notwendig.
+ Es wird automatisch eine Desktop-Umgebung gestartet, die in etwa folgendermasse
+n aussieht (Desktop-Icons können variieren):
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_screenshot_vm.png
+	display false
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Screenshot der gerade gestarteten virtuellen Maschine
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Auf dem Desktop und dem Startmenü (links oben im Screenshot) werden alle
+ benötigten Verknüpfungen zur Verfügung gestellt.
+ Im geöffneten Startmenü gibt es rechts unten die Möglichkeit, die virtuelle
+ Maschine herunter zu fahren und des Weiteren auch die Möglichkeit, nach
+ Applikationen / Verknüpfungen zu suchen.
+\end_layout
+
+\begin_layout Standard
+Sollte trotzdem ein Login benötigt werden, ist dieser in der VM unter dem
+ Punkt 
+\begin_inset Quotes fld
+\end_inset
+
+Info
+\begin_inset Quotes frd
+\end_inset
+
+ zu finden.
+\end_layout
+
+\begin_layout Section
+Simulation konfigurieren
+\end_layout
+
+\begin_layout Section
+Simulation starten
+\end_layout
+
+\begin_layout Section
+Resultate ansehen
 \end_layout
 
 \begin_layout Chapter
