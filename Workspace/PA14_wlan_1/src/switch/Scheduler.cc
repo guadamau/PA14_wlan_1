@@ -418,13 +418,13 @@ simtime_t Scheduler::getExpressSendTime( void )
 
 
     if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
-        bytesAlreadySent % 8 == 0 &&
+        bytesAlreadySentData % 8 == 0 &&
         bytesNotYetSent > 64 )
     {
         /* can send express frame now. */
         return simTimeNow;
     }
-    else if( bytesAlreadySent % 4 != 0 &&
+    else if( bytesAlreadySentData % 8 != 0 &&
              bytesNotYetSent >= 64 )
     {
         if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
