@@ -21,7 +21,6 @@ simple HsrSwitch
         string macAddress;
         string schedulerMode = default("FCFS");
         int ringID; //ring number
-        double propagationDelay @unit(s);
 		@display("i=abstract/switch");
 	gates:
         inout gateA; // declare two way connections

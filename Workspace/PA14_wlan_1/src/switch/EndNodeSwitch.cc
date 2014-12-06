@@ -59,20 +59,6 @@ EndNodeSwitch::~EndNodeSwitch()
 
 void EndNodeSwitch::handleMessage( cMessage* msg )
 {
-    /* first we have to put in a propagation delay */
-    if( msg == HsrSwitch::getEvent() )
-    {
-        /* restore origninal message to process ... */
-        msg = HsrSwitch::getRegularMsg();
-    }
-    else
-    {
-        /* here we do the propagation delay */
-        HsrSwitch::simulateSwitchDelay( msg );
-    }
-
-    /* go ahead after handling a switch propagation delay ... */
-
     /* Schedulers */
     Scheduler* schedGateAOut = HsrSwitch::getSchedGateAOut();
     Scheduler* schedGateBOut = HsrSwitch::getSchedGateBOut();

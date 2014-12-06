@@ -7,7 +7,7 @@ module HsrEndNode extends HsrNode
 {
     parameters:
 
-       
+
 
     gates:
 
@@ -18,9 +18,8 @@ module HsrEndNode extends HsrNode
         endNodeSwitch: EndNodeSwitch {
             macAddress = macAddress;
             ringID = ringID;
-            propagationDelay = propagationDelay;
-            
-            @display("p=167,216");
+
+            @display("p=256,229");
         }
 
     connections:
@@ -31,10 +30,14 @@ module HsrEndNode extends HsrNode
 
         eth0.upperLayerIn <-- MyInternalChannel <-- duplikatlistePortEth0.gate$o;
         duplikatlistePortEth0.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateA$o;
-        eth0Exp.upperLayerIn <-- MyInternalChannel <-- duplikatlistePortEth0Exp.gate$o; 
+        eth0Exp.upperLayerIn <-- MyInternalChannel <-- duplikatlistePortEth0Exp.gate$o;
         duplikatlistePortEth0Exp.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateAExp$o;
-        eth0.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateA$i;
-        eth0Exp.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateAExp$i;
+
+        eth0.upperLayerOut --> MyInternalChannel --> propagationDelayA.in;
+        propagationDelayA.out --> MyInternalChannel --> endNodeSwitch.gateA$i;
+
+        eth0Exp.upperLayerOut --> MyInternalChannel --> propagationDelayAExp.in;
+        propagationDelayAExp.out --> MyInternalChannel --> endNodeSwitch.gateAExp$i;
 
 
         //Gate B
@@ -43,10 +46,14 @@ module HsrEndNode extends HsrNode
 
         eth1.upperLayerIn <-- MyInternalChannel <-- duplikatlistePortEth1.gate$o;
         duplikatlistePortEth1.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateB$o;
-        eth1Exp.upperLayerIn <-- MyInternalChannel <--duplikatlistePortEth1Exp.gate$o;
+        eth1Exp.upperLayerIn <-- MyInternalChannel <-- duplikatlistePortEth1Exp.gate$o;
         duplikatlistePortEth1Exp.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateBExp$o;
-        eth1.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateB$i;
-        eth1Exp.upperLayerOut --> MyInternalChannel --> endNodeSwitch.gateBExp$i;
+
+        eth1.upperLayerOut --> MyInternalChannel --> propagationDelayB.in;
+        propagationDelayB.out --> MyInternalChannel --> endNodeSwitch.gateB$i;
+
+        eth1Exp.upperLayerOut --> MyInternalChannel --> propagationDelayBExp.in;
+        propagationDelayBExp.out --> MyInternalChannel --> endNodeSwitch.gateBExp$i;
 
         //CPU      
         cpu.gate$i <-- duplikatlistePortCPU.gate$o;

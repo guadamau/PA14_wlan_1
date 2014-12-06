@@ -15,7 +15,7 @@
 
 package endDevices;
 
-import inet.linklayer.ethernet.EtherMACFullDuplex;
+import inet.util.Delayer;
 
 import cpu.CPU;
 import duplicateDetection.ListenErkennung;
@@ -31,89 +31,105 @@ module HsrNode
         int ringID; //ring number
         int outputQueueCapacityPerPort;
         int duplicateDetectionListSize;
-        double propagationDelay @unit(s) = default( 6us );
-        
+
+        @display("bgb=807,562");
     gates:
-        
+
         inout gateA;  // declare two way connections
         inout gateAExp;  // declare two way connections
         inout gateB;  // declare two way connections
         inout gateBExp;  // declare two way connections
-        
+
     submodules:
-       
+
+        propagationDelayA: Delayer {
+            delay = 6us;
+            @display("p=130,124");
+        }
+
+        propagationDelayAExp: Delayer {
+            delay = 6us;
+            @display("p=123,203");
+        }
+
+        propagationDelayB: Delayer {
+            delay = 6us;
+            @display("p=282,124");
+        }
+
+        propagationDelayBExp: Delayer {
+            delay = 6us;
+            @display("p=534,111");
+        }
+
         duplikatlistePortCPU: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=333,288");
+            @display("p=374,291");
         }
         duplikatlistePortCPUExp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=473,258");
+            @display("p=534,258");
         }
 
         cpu: CPU {
             @display("p=390,489");
             macAddress = macAddress;
         }
-        
+
         duplikatlistePortEth0: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=143,60");
+            @display("p=170,60");
         }
         duplikatlistePortEth0Exp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=83,280");
+            @display("p=82,319");
         }
-        
-        eth0: NetworkInterfaceCard
-        {
+
+        eth0: NetworkInterfaceCard {
             parameters:
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=43,60");
         }
-        
-        eth0Exp: NetworkInterfaceCard
-        {
+
+        eth0Exp: NetworkInterfaceCard {
             parameters:
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=43,160");
         }
-        
+
         duplikatlistePortEth1: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=400,60");
+            @display("p=429,60");
         }
         duplikatlistePortEth1Exp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=520,163");
+            @display("p=630,160");
         }
-        
-        eth1: NetworkInterfaceCard
-        {
+
+        eth1: NetworkInterfaceCard {
             parameters:
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
                 @display("p=302,60");
         }
-        
-        eth1Exp: NetworkInterfaceCard
-        {
+
+        eth1Exp: NetworkInterfaceCard {
             parameters:
                 promiscuous = true;
                 address = macAddress;
                 txQueueLimit = outputQueueCapacityPerPort;
-                @display("p=520,60");
+                @display("p=637,60");
         }
 
         nodeTable: nodeTable {
-            @display("p=569,358");
+            @display("p=719,477");
         }
-        
+
     connections:
-        
+
 }
