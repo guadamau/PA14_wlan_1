@@ -30,4 +30,5 @@ package channels;
         
         channel MyInternalChannel extends ned.DatarateChannel {
                 delay = 0us;
+                @display("ls=blue,1");
         }

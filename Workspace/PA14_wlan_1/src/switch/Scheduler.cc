@@ -9,6 +9,7 @@
 #include <sstream>
 #include <string>
 #include <math.h>
+#include <float.h>
 #include "Scheduler.h"
 #include "HsrSwitch.h"
 #include "hsrSwitchSelfMessage_m.h"
@@ -72,6 +73,12 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
 
     this->schedmode = schedmode;
 
+    this->preemptedFrames = 0;
+
+    this->preemptedFramesVector = new cOutVector();
+    this->preemptedFramesVector->setName( "Amount of preempted frames" );
+    this->preemptedFramesVector->record( this->preemptedFrames );
+
     queues->addAt( EXPRESS_RING, new cQueue() );
     queues->addAt( EXPRESS_INTERNAL, new cQueue() );
     queues->addAt( HIGH_RING, new cQueue() );
@@ -99,15 +106,16 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
             "QueueSize LOW (from Internal)"
     };
 
-    if(schedID != 'C') {
-        for(int i = 0; i < QUEUES_COUNT; i++)
+    if( schedID != 'C' )
+    {
+        for( int i = 0; i < QUEUES_COUNT; i++ )
         {
-            queueSizes[i] = 0;
+            queueSizes[ i ] = 0;
 
             cOutVector* queueVector = new cOutVector();
 
             std::stringstream ss;
-            ss << schedID << ": " << queueNamesStr[i];
+            ss << schedID << ": " << queueNamesStr[ i ];
             queueVector->setName( ss.str().c_str() );
 
             queueVector->record( queueSizes[ i ] );
@@ -374,7 +382,7 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
                 {
                     schedNicExp->lock();
                     cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
-                    parentSwitch->sendDelayed( msgExp, expSendTime, schedOutGateExp );
+                    parentSwitch->sendDelayed( msgExp, ( expSendTime + DBL_MIN ), schedOutGateExp );
 
                     EthernetIIFrame* fcsMsg = new EthernetIIFrame();
                     fcsMsg->setBitLength( 4 * 8 );
@@ -392,6 +400,9 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
                     simtime_t timeMsgDelayWhenFragmented = timeMfcsFirstFragment + timeIfg + timePreamble + timeMsgExp + timeIfg + timePreamble;
 
                     setPreemptionDelay( currMsg, timeMsgDelayWhenFragmented );
+
+                    /* Statistics ... */
+                    this->preemptedFramesVector->record( this->preemptedFrames++ );
                 }
             }
         }

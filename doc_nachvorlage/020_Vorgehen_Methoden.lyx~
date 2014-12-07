@@ -633,6 +633,8 @@ Netzwerkaufbau
 So wie ein Knoten als NED-Datei seinen Aufbau mit den Komponenten beschreibt,
  wird ein Netzwerk auch als NED-Datei definiert, in welchem die Knoten initialis
 iert und verbunden werden.
+ Verbunden werden die Knoten über eine 20m lange 100Mbps-Verbindung, welche
+ in der Simulation durch eine Verzögerung von 100ns dargestellt wird.
  Das folgende Bild zeigt ein Beispielaufbau mit 10 DANH-Knoten, die als
  Merging und Protection Units definiert wurden (mehr dazu siehe Kapitel
  

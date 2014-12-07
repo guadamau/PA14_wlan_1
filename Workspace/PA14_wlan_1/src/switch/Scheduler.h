@@ -32,8 +32,13 @@ class Scheduler {
 
 private:
     cArray* queues;
+
     unsigned long int queueSizes[ QUEUES_COUNT ];
     cArray* queueVectors;
+
+    unsigned long int preemptedFrames;
+    cOutVector* preemptedFramesVector;
+
     schedulerMode schedmode;
     HsrSwitch* parentSwitch;
 

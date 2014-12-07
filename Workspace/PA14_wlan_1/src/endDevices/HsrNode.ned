@@ -62,17 +62,27 @@ module HsrNode
             @display("p=534,111");
         }
 
+        propagationDelayCpu: Delayer {
+            delay = 6us;
+            @display("p=372,471");
+        }
+
+        propagationDelayCpuExp: Delayer {
+            delay = 6us;
+            @display("p=442,416");
+        }
+
         duplikatlistePortCPU: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=374,291");
+            @display("p=468,335");
         }
         duplikatlistePortCPUExp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=534,258");
+            @display("p=560,269");
         }
 
         cpu: CPU {
-            @display("p=390,489");
+            @display("p=621,498");
             macAddress = macAddress;
         }
 
@@ -82,7 +92,7 @@ module HsrNode
         }
         duplikatlistePortEth0Exp: ListenErkennung {
             ListSize = duplicateDetectionListSize;
-            @display("p=82,319");
+            @display("p=82,281");
         }
 
         eth0: NetworkInterfaceCard {

@@ -19,7 +19,7 @@ module HsrEndNode extends HsrNode
             macAddress = macAddress;
             ringID = ringID;
 
-            @display("p=256,229");
+            @display("p=282,257");
         }
 
     connections:
@@ -56,11 +56,15 @@ module HsrEndNode extends HsrNode
         propagationDelayBExp.out --> MyInternalChannel --> endNodeSwitch.gateBExp$i;
 
         //CPU      
-        cpu.gate$i <-- duplikatlistePortCPU.gate$o;
-        cpu.gateExp$i <-- duplikatlistePortCPUExp.gate$o;
+        cpu.gate$i <-- MyInternalChannel <-- duplikatlistePortCPU.gate$o;
+        cpu.gateExp$i <-- MyInternalChannel <-- duplikatlistePortCPUExp.gate$o;
         duplikatlistePortCPU.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateCPU$o;
         duplikatlistePortCPUExp.gate$i <-- MyInternalChannel <-- endNodeSwitch.gateCPUExp$o;
-        cpu.gate$o --> MyInternalChannel --> endNodeSwitch.gateCPU$i;
-        cpu.gateExp$o --> MyInternalChannel --> endNodeSwitch.gateCPUExp$i;
+
+        cpu.gate$o --> MyInternalChannel --> propagationDelayCpu.in;
+        propagationDelayCpu.out --> MyInternalChannel --> endNodeSwitch.gateCPU$i;
+
+        cpu.gateExp$o --> MyInternalChannel --> propagationDelayCpuExp.in;
+        propagationDelayCpuExp.out --> MyInternalChannel --> endNodeSwitch.gateCPUExp$i;
 
 }

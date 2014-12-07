@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" ?>
+<simulation_behaviour>
+    <!-- ###################################### Express with multicast destination ###################################### -->
+    
+    <source>00-15-12-14-88-01
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>konstante last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit> 
+            <interval>1.0</interval> 					<!-- 1x per second -->          
+            <last>0.0</last>
+            <maxlast>100</maxlast>               
+            <destination>01-15-12-14-88-0A</destination>    
+            <paketgroesse>136</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>HIGH</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+        </lastmuster> 
+    </source>
+      
+</simulation_behaviour>
+
