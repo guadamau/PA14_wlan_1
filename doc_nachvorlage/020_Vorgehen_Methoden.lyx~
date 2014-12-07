@@ -545,6 +545,13 @@ DANH-Knoten in OMNeT++
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:DANH-Knoten"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -633,6 +640,8 @@ Netzwerkaufbau
 So wie ein Knoten als NED-Datei seinen Aufbau mit den Komponenten beschreibt,
  wird ein Netzwerk auch als NED-Datei definiert, in welchem die Knoten initialis
 iert und verbunden werden.
+ Verbunden werden die Knoten über eine 20m lange 100Mbps-Verbindung, welche
+ in der Simulation durch eine Verzögerung von 100ns dargestellt wird.
  Das folgende Bild zeigt ein Beispielaufbau mit 10 DANH-Knoten, die als
  Merging und Protection Units definiert wurden (mehr dazu siehe Kapitel
  
@@ -658,7 +667,7 @@ status open
 \begin_inset Graphics
 	filename _img/020_Netzwerkaufbau.png
 	display false
-	scale 40
+	scale 70
 
 \end_inset
 
@@ -690,6 +699,119 @@ Das Verhalten in diesem Beispiel ist bei jedem Knoten das Selbe, da es sich
  Für die Generierung von Frames wird eine XML-Datei definiert, bei der für
  jeden Knoten bestimmt wird wie viele Frames dieser Knoten an wen sendet.
  Das Generieren von Multi- und Broadcast-Frames ist auch möglich.
+\end_layout
+
+\begin_layout Standard
+Während der Simulation wird die Komponente, die gerade eine Aktion durchführt,
+ rot umrandet.
+ Zudem verändert sich die Farbe der Verbindungen und der Netzwerkinterfaces
+ innerhalb der Knoten (
+\begin_inset Quotes fld
+\end_inset
+
+eth...
+\begin_inset Quotes frd
+\end_inset
+
+, siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:DANH-Knoten-in-OMNeT++"
+
+\end_inset
+
+).
+ Die Farben haben folgende Bedeutungen:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gelb
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Am übertragen
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rot
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Kollision erkannt (wird in den Simulationen dieser Arbeit nicht vorkommen,
+ da Vollduplex-Verbindungen verwendet werden)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bedeutung der Farben bei den Verbindungen und Netzwerkinterfaces in der
+ Simulation 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "INET_FRAMEWORK"
+
+\end_inset
+
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
