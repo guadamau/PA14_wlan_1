@@ -1429,6 +1429,13 @@ Berechnung der Express-Frame-Versandzeit
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Berechnung-Express-Versandzeit"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1632,6 +1639,59 @@ Fverlängert
 \end_inset
 
  (siehe vorherige Abbildung)
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Die 
+\begin_inset Quotes fld
+\end_inset
+
+sendtime
+\begin_inset Quotes frd
+\end_inset
+
+ des fragmentierten Frames wird nun auf die Zeit gesetzt, an der das Express-Fra
+me + IFG fertig versendet wurde (
+\begin_inset Quotes fld
+\end_inset
+
+newsendtime
+\begin_inset Quotes frd
+\end_inset
+
+, siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Berechnung-Express-Versandzeit"
+
+\end_inset
+
+).
+ So wird sichergestellt, dass wenn das Frame erneut fragmentiert werden
+ muss, es ab Beginn des nächsten Fragments betrachtet wird.
+ So können keine zu kleine Fragmente entstehen.
+ Bei der erneuten Fragmentierung kann dann das nächste Fragment so betrachtet
+ werden, als wäre es das Erste des Frames.
+\begin_inset Formula 
+\[
+newsendtime=Zeitpunkt,\, zu\, dem\, Express\, Frame+I\, fertig\, versandt\, wurden
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+sendtime=newsendtime
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Enumerate
@@ -1944,6 +2004,10 @@ Namens
  steht zudem, ob es sich um ein Unicast-, Multicast- oder Broadcast-Frame
  handelt.
 \begin_inset Newline newline
+\end_inset
+
+
+\begin_inset space \hfill{}
 \end_inset
 
 
@@ -2391,6 +2455,10 @@ Langes Frame und 2 Express
 Nicht fragmentierbar
 \end_layout
 
+\begin_layout Plain Layout
+Was wenn fragmentierbar?
+\end_layout
+
 \end_inset
 </cell>
 </row>
@@ -2587,7 +2655,7 @@ name "sub:Szenario-1:-Substation"
 \end_layout
 
 \begin_layout Standard
-Der Aufbau dieses Szenarios ist ein HSR-Ring mit verschiedenen Knoten.
+Der Aufbau dieses Szenarios ist ein HSR-Ring mit DANH-Knoten.
  Die Aufgabe im Anwendungsfall Substation Automation ist der Schutz von
  Schaltern und Leitungen sicher zu stellen.
 \end_layout
@@ -2611,6 +2679,7 @@ High
  Ziel dieser Frames sind Protection Units (PU) und eventuell andere MUs.
  Protection Units sind im Netzwerk doppelt vorhanden und treffen anhand
  der erhaltenen Messwerte Entscheidungen.
+ MUs und PUs sind DANH-Knoten.
 \end_layout
 
 \begin_layout Standard
