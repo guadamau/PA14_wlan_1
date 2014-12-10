@@ -8,8 +8,8 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
-            <interval>0.001</interval> 					<!-- 1000x per second -->          
+            <stopzeit>0.56</stopzeit> 
+            <interval>0.0010</interval> 					<!-- 1000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0A</destination>    
@@ -23,8 +23,8 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
-            <interval>0.001</interval> 					<!-- 1000x per second -->          
+            <stopzeit>0.56</stopzeit> 
+            <interval>0.0010</interval> 					<!-- 1000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-0B</destination>    
@@ -41,7 +41,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -57,7 +57,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -73,7 +73,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -89,7 +89,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -105,7 +105,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -121,7 +121,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -137,7 +137,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -153,7 +153,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -167,37 +167,7 @@
     
     <!-- ###################################### TCP Traffic ###################################### -->
     
-    <source>00-15-12-14-88-05								<!-- TCP Traffic Simulation MU5 to PU1 -->
-        <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
-            <interval>0.005</interval> 					<!-- 200x per second -->           
-            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>00-15-12-14-88-0A</destination>    
-            <paketgroesse>1476</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
-        </lastmuster> 
-    </source>
-    
-    <source>00-15-12-14-88-0A								<!-- TCP Traffic Simulation PU1 to MU5 -->
-        <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
-            <interval>0.005</interval> 					<!-- 200x per second -->           
-            <epsilon>0.0</epsilon>           			<!-- 0.0 µs -->
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>00-15-12-14-88-05</destination>    
-            <paketgroesse>40</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
-        </lastmuster> 
-    </source>
+
     
     
 

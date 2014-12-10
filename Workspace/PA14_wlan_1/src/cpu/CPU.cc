@@ -624,6 +624,7 @@ CPU::handleMessage(cMessage *msg)
         }
 
         MessagePacker::deleteMessage( &packet, &vlanTag, &hsrTag , &messageData );
+
     }
 }
 

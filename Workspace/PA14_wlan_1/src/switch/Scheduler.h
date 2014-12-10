@@ -45,17 +45,30 @@ private:
     unsigned long int availableTokens;
 
     simtime_t finishTime;
+    simtime_t expSendTime;
 
     cGate* schedOutGate;
     cGate* schedOutGateExp;
 
+    cMessage* msgExp;
+
     NetworkInterfaceCard* schedNic;
     NetworkInterfaceCard* schedNicExp;
+    double datarate;
 
     unsigned char schedID; // GateA = A, GateB = B, GateCPU = C, GateInterlink = I
 
+    unsigned char transmitLock;
+    unsigned char transmitLockExp;
+    unsigned char notifiedToken;
+    unsigned char notifiedTimeslot;
+
     queueName ringFirstSortOrder[ QUEUES_COUNT ];
     queueName internalFirstSortOrder[ QUEUES_COUNT ];
+
+    int timeslotPhaseSize;
+    int64_t framebytelimitPerSecond;
+    int64_t framebytecontainer;
 
     /* To alternate between Ring and Internal (Zipper mechanism) */
     queueState curQueueState;
@@ -66,8 +79,12 @@ private:
     void sendMessage( cMessage* msg, cGate* outGate );
     void processOneQueue( cQueue* currentQueue, queueName currentQueueName );
     void loopQueues( queueName* currentSortOrder );
+    unsigned char timeslotIsValid( queueName currentQueueName );
+    unsigned char containerHasEnoughBytes( cMessage* msg );
+    void subtractFromByteContainer( cMessage* msg );
+    void sendExpressFrame( cQueue* currentQueue, queueName currentQueueName, simtime_t expSendTime );
     simtime_t getExpressSendTime( void );
-    void setPreemptionDelay( cMessage* msg, simtime_t delayCorrection );
+    void addPreemptionDelay( cMessage* msg, simtime_t delayCorrection );
 
 public:
     Scheduler();
@@ -88,6 +105,14 @@ public:
 
     /* Setters */
     void setSchedmode( schedulerMode schedmode );
+
+    void resetNotifiedToken( void );
+    void resetNotifiedTimeslot( void );
+
+    void unlock( void );
+    void unlockExp( void );
+
+    void refreshContainer( void );
 
 protected:
     virtual void handleMessage( cMessage *msg );

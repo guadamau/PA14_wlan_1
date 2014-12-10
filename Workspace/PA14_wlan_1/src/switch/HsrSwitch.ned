@@ -20,7 +20,9 @@ simple HsrSwitch
     parameters:
         string macAddress;
         string schedulerMode = default("FCFS");
+        int timeslotPhaseSize = default(0);
         int ringID; //ring number
+        int framebytelimitPerSecond = default(-1);
 		@display("i=abstract/switch");
 	gates:
         inout gateA; // declare two way connections

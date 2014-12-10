@@ -13,17 +13,19 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package delayLogger;
+#ifndef PROPAGATIONDELAY_H_
+#define PROPAGATIONDELAY_H_
 
+#include <Delayer.h>
 
-simple DelayLogger
-{    
-    // Number of histogram cells
-    int histogramNumCells = default( 200 );
-    
-    // Number of observations used for range estimation
-    int numFirstVals = default( 10000 );
-    
-    // Range extension factor (usually 1.0 .. 2)
-    double rangeExtFactor = default( 1.3 );
-}
+class PropagationDelay: public Delayer
+{
+public:
+    PropagationDelay();
+    virtual ~PropagationDelay();
+
+protected:
+    virtual void handleMessage( cMessage* msg );
+};
+
+#endif /* PROPAGATIONDELAY_H_ */

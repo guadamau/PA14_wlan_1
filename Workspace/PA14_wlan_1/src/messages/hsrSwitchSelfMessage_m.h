@@ -20,6 +20,7 @@
  * <pre>
  * message HsrSwitchSelfMessage {
  *     unsigned char schedulerName; 
+ *     unsigned char type; 
  * }
  * </pre>
  */
@@ -27,6 +28,7 @@ class HsrSwitchSelfMessage : public ::cMessage
 {
   protected:
     unsigned char schedulerName_var;
+    unsigned char type_var;
 
   private:
     void copy(const HsrSwitchSelfMessage& other);
@@ -47,6 +49,8 @@ class HsrSwitchSelfMessage : public ::cMessage
     // field getter/setter methods
     virtual unsigned char getSchedulerName() const;
     virtual void setSchedulerName(unsigned char schedulerName);
+    virtual unsigned char getType() const;
+    virtual void setType(unsigned char type);
 };
 
 inline void doPacking(cCommBuffer *b, HsrSwitchSelfMessage& obj) {obj.parsimPack(b);}

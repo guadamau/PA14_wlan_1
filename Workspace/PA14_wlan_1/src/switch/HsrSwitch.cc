@@ -232,13 +232,25 @@ void HsrSwitch::initialize( void )
     schedGateBOut = new Scheduler();
     schedGateBOut->initScheduler( 'B', this, schedmode, gateBOut, gateBOutExp, eth1, eth1Exp );
     schedGateCpuOut = new Scheduler();
-    /* cpu has no external transmission gate, so we pass the internal gates twice here. */
-    schedGateCpuOut->initScheduler( 'C', this, schedmode, gateCpuOut, gateCpuOutExp, NULL, NULL );
+    /* cpu has no external transmission gate, so we pass the NICs of another scheduler for the preemption-calculation */
+    schedGateCpuOut->initScheduler( 'C', this, schedmode, gateCpuOut, gateCpuOutExp, eth0, eth0Exp );
+
+    this->framebytelimitSetForSecond = 0.0;
 }
 
 void HsrSwitch::scheduleProcessQueues( unsigned char schedID )
 {
     HsrSwitchSelfMessage* enqSelfMsg = new HsrSwitchSelfMessage();
     enqSelfMsg->setSchedulerName(schedID);
+    enqSelfMsg->setType(0);
     scheduleAt(simTime()+DBL_MIN, enqSelfMsg);
+}
+
+void HsrSwitch::frameByteContainerCheck( void ) {
+    if(floor(simTime().dbl()) > framebytelimitSetForSecond) {
+        schedGateAOut->refreshContainer();
+        schedGateBOut->refreshContainer();
+        schedGateCpuOut->refreshContainer();
+        framebytelimitSetForSecond++;
+    }
 }

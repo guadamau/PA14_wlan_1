@@ -15,12 +15,12 @@
 
 package endDevices;
 
-import inet.util.Delayer;
 
 import cpu.CPU;
 import duplicateDetection.ListenErkennung;
 import nodeTable.nodeTable;
 import mac.NetworkInterfaceCard;
+import util.PropagationDelay;
 
 
 
@@ -42,32 +42,32 @@ module HsrNode
 
     submodules:
 
-        propagationDelayA: Delayer {
+        propagationDelayA: PropagationDelay {
             delay = 6us;
             @display("p=130,124");
         }
 
-        propagationDelayAExp: Delayer {
+        propagationDelayAExp: PropagationDelay {
             delay = 6us;
             @display("p=123,203");
         }
 
-        propagationDelayB: Delayer {
+        propagationDelayB: PropagationDelay {
             delay = 6us;
             @display("p=282,124");
         }
 
-        propagationDelayBExp: Delayer {
+        propagationDelayBExp: PropagationDelay {
             delay = 6us;
             @display("p=534,111");
         }
 
-        propagationDelayCpu: Delayer {
+        propagationDelayCpu: PropagationDelay {
             delay = 6us;
             @display("p=372,471");
         }
 
-        propagationDelayCpuExp: Delayer {
+        propagationDelayCpuExp: PropagationDelay {
             delay = 6us;
             @display("p=442,416");
         }

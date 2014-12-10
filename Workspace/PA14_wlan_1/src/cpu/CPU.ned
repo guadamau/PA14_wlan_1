@@ -9,6 +9,7 @@ simple CPU
         string macAddress;
         xml xmlparam;
         int multicastListener = default(0);
+        int framebytelimitPerSecond = default(0);
         @display("i=device/cpu");
     gates:
         inout gate;  // declare two way connections

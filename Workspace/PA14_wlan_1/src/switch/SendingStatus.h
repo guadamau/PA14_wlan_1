@@ -52,10 +52,15 @@ public:
     framePriority getFramePrio( void );
     int64_t getMessageSize( void );
 
+    void setMessageSize ( int64_t messageSize );
+
     void attachFrame( cMessage* message );
     void detachFrame( void );
 
     unsigned char hasAttachedFrame( void );
+
+    void updateSendtime( simtime_t sendtime );
+    simtime_t getPreemptionDelay( void );
 
 };
 

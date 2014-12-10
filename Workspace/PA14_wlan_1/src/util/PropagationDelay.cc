@@ -13,17 +13,27 @@
 // along with this program.  If not, see http://www.gnu.org/licenses/.
 // 
 
-package delayLogger;
+#include <util/PropagationDelay.h>
+#include <schedulerSelfMessage_m.h>
 
+Define_Module( PropagationDelay );
 
-simple DelayLogger
-{    
-    // Number of histogram cells
-    int histogramNumCells = default( 200 );
-    
-    // Number of observations used for range estimation
-    int numFirstVals = default( 10000 );
-    
-    // Range extension factor (usually 1.0 .. 2)
-    double rangeExtFactor = default( 1.3 );
+PropagationDelay::PropagationDelay() {
+    // TODO Auto-generated constructor stub
+}
+
+PropagationDelay::~PropagationDelay() {
+    // TODO Auto-generated destructor stub
+}
+
+void PropagationDelay::handleMessage( cMessage* msg )
+{
+    if( typeid( *msg ) == typeid( SchedulerSelfMessage ) )
+    {
+        send( msg, "out" );
+    }
+    else
+    {
+        Delayer::handleMessage( msg );
+    }
 }

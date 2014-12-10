@@ -55,14 +55,14 @@ private:
 
     schedulerMode schedmode;
 
+    double framebytelimitSetForSecond;
+
 
 protected:
 
       virtual void initialize( void );
 
       virtual void handleMessage( cMessage *msg ) = 0;
-
-      virtual void scheduleProcessQueues( unsigned char schedID );
 
 public:
 
@@ -131,6 +131,10 @@ public:
     void setSchedGateBOutExp( Scheduler* schedGateBOutExp );
 
     void setSchedGateCpuOutExp( Scheduler* schedGateCpuOutExp );
+
+    virtual void scheduleProcessQueues( unsigned char schedID );
+
+    void frameByteContainerCheck( void );
 };
 
 #endif /* HSRSWITCH_H_ */

@@ -14,7 +14,7 @@
 //
 
 #include "EndNodeSwitch.h"
-#include <schedulerSelfMessage_m.h>
+#include "schedulerSelfMessage_m.h"
 
 Define_Module( EndNodeSwitch );
 
@@ -66,24 +66,53 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
 
     if( msg->isSelfMessage() )
     {
-        HsrSwitchSelfMessage* selfmsg = check_and_cast<HsrSwitchSelfMessage*>(msg);
-        unsigned char schedname = selfmsg->getSchedulerName();
-        if( schedname == 'A' ) {
-            schedGateAOut->processQueues();
-        }
-        else if( schedname == 'B' ) {
-            schedGateBOut->processQueues();
-        }
-        else if( schedname == 'C' ) {
-            schedGateCpuOut->processQueues();
-        }
-        else {
-            delete selfmsg;
-            throw cRuntimeError( "Scheduler not found for reprocessing! \n" );
-        }
+        if( typeid( *msg ) == typeid( HsrSwitchSelfMessage ) )
+        {
+            HsrSwitchSelfMessage* selfmsg = check_and_cast<HsrSwitchSelfMessage*>(msg);
+            unsigned char schedname = selfmsg->getSchedulerName();
+            unsigned char type = selfmsg->getType();
 
-        delete selfmsg;
-        return;
+            if( schedname == 'A' ) {
+                if( type == 'o' )
+                {
+                    schedGateAOut->resetNotifiedToken();
+                }
+                else if ( type == 'i' )
+                {
+                    schedGateAOut->resetNotifiedTimeslot();
+                }
+                schedGateAOut->processQueues();
+            }
+            else if( schedname == 'B' ) {
+                if( type == 'o' )
+                {
+                    schedGateBOut->resetNotifiedToken();
+                }
+                else if ( type == 'i' )
+                {
+                    schedGateBOut->resetNotifiedTimeslot();
+                }
+                schedGateBOut->processQueues();
+            }
+            else if( schedname == 'C' ) {
+                if( type == 'o' )
+                {
+                    schedGateCpuOut->resetNotifiedToken();
+                }
+                else if ( type == 'i' )
+                {
+                    schedGateCpuOut->resetNotifiedTimeslot();
+                }
+                schedGateCpuOut->processQueues();
+            }
+            else {
+                delete selfmsg;
+                throw cRuntimeError( "Scheduler not found for reprocessing! \n" );
+            }
+
+            delete selfmsg;
+            return;
+        }
     }
 
     /* Gates */
@@ -109,22 +138,26 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
          */
         if( msg->getArrivalGate() == gateAIn )
         {
-            schedGateAOut->getSendingStatus()->detachFrame();
+            schedGateAOut->unlock();
+//            schedGateAOut->getSendingStatus()->detachFrame();
             schedGateAOut->processQueues();
         }
         else if ( msg->getArrivalGate() == gateAInExp )
         {
-            schedGateAOut->getSendingStatus()->detachFrame();
+            schedGateAOut->unlockExp();
+            schedGateAOut->getSendingStatus()->updateSendtime( simTime() );
             schedGateAOut->processQueues();
         }
         else if ( msg->getArrivalGate() == gateBIn )
         {
-            schedGateBOut->getSendingStatus()->detachFrame();
+            schedGateBOut->unlock();
+//            schedGateBOut->getSendingStatus()->detachFrame();
             schedGateBOut->processQueues();
         }
         else if ( msg->getArrivalGate() == gateBInExp )
         {
-            schedGateBOut->getSendingStatus()->detachFrame();
+            schedGateBOut->unlockExp();
+            schedGateBOut->getSendingStatus()->updateSendtime( simTime() );
             schedGateBOut->processQueues();
         }
         else

@@ -18,4 +18,5 @@
 //
 message HsrSwitchSelfMessage {
     unsigned char schedulerName; //A = A, B = B, C = CPU
+    unsigned char type; //o = Tokenizer, i = Timeslot
 }

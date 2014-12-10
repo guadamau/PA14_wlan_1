@@ -6,12 +6,12 @@
         <lastmuster>
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
+            <startzeit>0.0010000001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.00025</interval> 					<!-- 4000x per second -->          
+            <interval>1.00025</interval> 					<!-- 4000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
-            <destination>01-15-12-14-88-0A</destination>    
+            <destination>01-15-12-14-88-02</destination>    
             <paketgroesse>76</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
             <priority>EXPRESS</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
@@ -25,12 +25,12 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>0.00025</interval> 					<!-- 4000x per second -->
-            <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->           
+            <interval>1.00025</interval> 					<!-- 4000x per second -->
+            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
             <last>0.0</last>
             <maxlast>100</maxlast>               
-            <destination>01-15-12-14-88-0A</destination>    
-            <paketgroesse>136</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <destination>01-15-12-14-88-02</destination>    
+            <paketgroesse>1476</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
             <priority>HIGH</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
     </source>    

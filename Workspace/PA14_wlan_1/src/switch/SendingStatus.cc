@@ -49,6 +49,11 @@ int64_t SendingStatus::getMessageSize( void )
     return this->messageSize;
 }
 
+void SendingStatus::setMessageSize ( int64_t messageSize )
+{
+    this->messageSize = messageSize;
+}
+
 void SendingStatus::attachFrame( cMessage* message )
 {
     /* duplicate message first ... */
@@ -85,6 +90,16 @@ unsigned char SendingStatus::hasAttachedFrame( void )
     }
 
     return retVal;
+}
+
+void SendingStatus::updateSendtime( simtime_t sendtime )
+{
+    this->sendingTime = sendtime;
+}
+
+simtime_t SendingStatus::getPreemptionDelay( void )
+{
+    return this->vlanTag->getPreemptionDelay();
 }
 
 

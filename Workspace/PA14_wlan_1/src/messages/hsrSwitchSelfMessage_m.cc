@@ -58,6 +58,7 @@ Register_Class(HsrSwitchSelfMessage);
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const char *name, int kind) : ::cMessage(name,kind)
 {
     this->schedulerName_var = 0;
+    this->type_var = 0;
 }
 
 HsrSwitchSelfMessage::HsrSwitchSelfMessage(const HsrSwitchSelfMessage& other) : ::cMessage(other)
@@ -80,18 +81,21 @@ HsrSwitchSelfMessage& HsrSwitchSelfMessage::operator=(const HsrSwitchSelfMessage
 void HsrSwitchSelfMessage::copy(const HsrSwitchSelfMessage& other)
 {
     this->schedulerName_var = other.schedulerName_var;
+    this->type_var = other.type_var;
 }
 
 void HsrSwitchSelfMessage::parsimPack(cCommBuffer *b)
 {
     ::cMessage::parsimPack(b);
     doPacking(b,this->schedulerName_var);
+    doPacking(b,this->type_var);
 }
 
 void HsrSwitchSelfMessage::parsimUnpack(cCommBuffer *b)
 {
     ::cMessage::parsimUnpack(b);
     doUnpacking(b,this->schedulerName_var);
+    doUnpacking(b,this->type_var);
 }
 
 unsigned char HsrSwitchSelfMessage::getSchedulerName() const
@@ -102,6 +106,16 @@ unsigned char HsrSwitchSelfMessage::getSchedulerName() const
 void HsrSwitchSelfMessage::setSchedulerName(unsigned char schedulerName)
 {
     this->schedulerName_var = schedulerName;
+}
+
+unsigned char HsrSwitchSelfMessage::getType() const
+{
+    return type_var;
+}
+
+void HsrSwitchSelfMessage::setType(unsigned char type)
+{
+    this->type_var = type;
 }
 
 class HsrSwitchSelfMessageDescriptor : public cClassDescriptor
@@ -151,7 +165,7 @@ const char *HsrSwitchSelfMessageDescriptor::getProperty(const char *propertyname
 int HsrSwitchSelfMessageDescriptor::getFieldCount(void *object) const
 {
     cClassDescriptor *basedesc = getBaseClassDescriptor();
-    return basedesc ? 1+basedesc->getFieldCount(object) : 1;
+    return basedesc ? 2+basedesc->getFieldCount(object) : 2;
 }
 
 unsigned int HsrSwitchSelfMessageDescriptor::getFieldTypeFlags(void *object, int field) const
@@ -164,8 +178,9 @@ unsigned int HsrSwitchSelfMessageDescriptor::getFieldTypeFlags(void *object, int
     }
     static unsigned int fieldTypeFlags[] = {
         FD_ISEDITABLE,
+        FD_ISEDITABLE,
     };
-    return (field>=0 && field<1) ? fieldTypeFlags[field] : 0;
+    return (field>=0 && field<2) ? fieldTypeFlags[field] : 0;
 }
 
 const char *HsrSwitchSelfMessageDescriptor::getFieldName(void *object, int field) const
@@ -178,8 +193,9 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldName(void *object, int field
     }
     static const char *fieldNames[] = {
         "schedulerName",
+        "type",
     };
-    return (field>=0 && field<1) ? fieldNames[field] : NULL;
+    return (field>=0 && field<2) ? fieldNames[field] : NULL;
 }
 
 int HsrSwitchSelfMessageDescriptor::findField(void *object, const char *fieldName) const
@@ -187,6 +203,7 @@ int HsrSwitchSelfMessageDescriptor::findField(void *object, const char *fieldNam
     cClassDescriptor *basedesc = getBaseClassDescriptor();
     int base = basedesc ? basedesc->getFieldCount(object) : 0;
     if (fieldName[0]=='s' && strcmp(fieldName, "schedulerName")==0) return base+0;
+    if (fieldName[0]=='t' && strcmp(fieldName, "type")==0) return base+1;
     return basedesc ? basedesc->findField(object, fieldName) : -1;
 }
 
@@ -200,8 +217,9 @@ const char *HsrSwitchSelfMessageDescriptor::getFieldTypeString(void *object, int
     }
     static const char *fieldTypeStrings[] = {
         "unsigned char",
+        "unsigned char",
     };
-    return (field>=0 && field<1) ? fieldTypeStrings[field] : NULL;
+    return (field>=0 && field<2) ? fieldTypeStrings[field] : NULL;
 }
 
 const char *HsrSwitchSelfMessageDescriptor::getFieldProperty(void *object, int field, const char *propertyname) const
@@ -242,6 +260,7 @@ std::string HsrSwitchSelfMessageDescriptor::getFieldAsString(void *object, int f
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
         case 0: return ulong2string(pp->getSchedulerName());
+        case 1: return ulong2string(pp->getType());
         default: return "";
     }
 }
@@ -257,6 +276,7 @@ bool HsrSwitchSelfMessageDescriptor::setFieldAsString(void *object, int field, i
     HsrSwitchSelfMessage *pp = (HsrSwitchSelfMessage *)object; (void)pp;
     switch (field) {
         case 0: pp->setSchedulerName(string2ulong(value)); return true;
+        case 1: pp->setType(string2ulong(value)); return true;
         default: return false;
     }
 }

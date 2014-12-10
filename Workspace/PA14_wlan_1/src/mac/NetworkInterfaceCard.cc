@@ -26,7 +26,7 @@ void NetworkInterfaceCard::initialize(int stage)
 {
     EtherMACFullDuplex::initialize( stage );
     upperLayerOut = gate("upperLayerOut");
-    this->transmitLock = 0;
+//    this->transmitLock = 0;
 }
 
 cGate* NetworkInterfaceCard::getPhysOutGate( void )
@@ -54,7 +54,7 @@ void NetworkInterfaceCard::handleMessage( cMessage *msg )
      * */
     if( msg == endIFGMsg && transmitState == TX_IDLE_STATE )
     {
-        transmitLock = 0;
+//        transmitLock = 0;
         EV << "[ NIC " << simTime() << " ] ENDIFG reached! Unlock NIC!" << endl << endl;
         send( new SchedulerSelfMessage(), upperLayerOut );
     }
