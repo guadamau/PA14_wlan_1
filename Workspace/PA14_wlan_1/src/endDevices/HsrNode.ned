@@ -29,8 +29,8 @@ module HsrNode
     parameters:
         string macAddress;
         int ringID; //ring number
-        int outputQueueCapacityPerPort;
-        int duplicateDetectionListSize;
+        int outputQueueCapacityPerPort = default( 100 );
+        int duplicateDetectionListSize = default( 1000 );
 
         @display("bgb=807,562");
     gates:

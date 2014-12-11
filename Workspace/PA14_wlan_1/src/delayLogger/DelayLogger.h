@@ -31,6 +31,12 @@ private:
     cDoubleHistogram* endToEndDelayStatsHigh;
     cDoubleHistogram* endToEndDelayStatsLow;
 
+    cOutVector* preemptionTimeAdditionVecHigh;
+    cOutVector* preemptionTimeAdditionVecLow;
+
+    cDoubleHistogram* preemptionTimeAdditionStatsHigh;
+    cDoubleHistogram* preemptionTimeAdditionStatsLow;
+
 protected:
     virtual void initialize( void );
 

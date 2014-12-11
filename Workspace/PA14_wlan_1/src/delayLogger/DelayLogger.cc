@@ -37,6 +37,12 @@ DelayLogger::~DelayLogger()
     delete this->endToEndDelayStatsExpress;
     delete this->endToEndDelayStatsHigh;
     delete this->endToEndDelayStatsLow;
+
+    delete this->preemptionTimeAdditionVecHigh;
+    delete this->preemptionTimeAdditionVecLow;
+
+    delete this->preemptionTimeAdditionStatsHigh;
+    delete this->preemptionTimeAdditionStatsLow;
 }
 
 void DelayLogger::initialize( void )
@@ -45,6 +51,7 @@ void DelayLogger::initialize( void )
     int numFirstVals = par( "numFirstVals" );
     double rangeExtFactor = par( "rangeExtFactor" );
 
+    /* create the instances */
     this->endToEndDelayVecExpress = new cOutVector();
     this->endToEndDelayVecHigh = new cOutVector();
     this->endToEndDelayVecLow = new cOutVector();
@@ -53,15 +60,28 @@ void DelayLogger::initialize( void )
     this->endToEndDelayStatsHigh = new cDoubleHistogram( "High Prio Delay", histogramNumCells );
     this->endToEndDelayStatsLow = new cDoubleHistogram( "Low Prio Delay", histogramNumCells );
 
+    this->preemptionTimeAdditionVecHigh = new cOutVector();
+    this->preemptionTimeAdditionVecLow = new cOutVector();
 
+    this->preemptionTimeAdditionStatsHigh = new cDoubleHistogram( "High Priority Preemption Time Addition", histogramNumCells );
+    this->preemptionTimeAdditionStatsLow = new cDoubleHistogram( "Low Priority Preemption Time Addition", histogramNumCells );
+
+
+    /* Set initial stuff to the statistics tools in use ... */
     this->endToEndDelayVecExpress->setName( "End-to-End Delay EXP" );
     this->endToEndDelayVecHigh->setName( "End-to-End Delay HIGH" );
     this->endToEndDelayVecLow->setName( "End-to-End Delay LOW" );
+
+    this->preemptionTimeAdditionVecHigh->setName( "Time Preemption of HIGH Frames" );
+    this->preemptionTimeAdditionVecLow->setName( "Time Preemption of LOW Frames" );
 
     // 0.0 is lower limit
     this->endToEndDelayStatsExpress->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
     this->endToEndDelayStatsHigh->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
     this->endToEndDelayStatsLow->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
+
+    this->preemptionTimeAdditionStatsHigh->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
+    this->preemptionTimeAdditionStatsLow->setRangeAutoUpper( 0.0, numFirstVals, rangeExtFactor );
 }
 
 void DelayLogger::addDelay( cMessage* msg )
@@ -106,6 +126,9 @@ void DelayLogger::addDelay( cMessage* msg )
         {
             endToEndDelayVecHigh->record( msgDelay );
             endToEndDelayStatsHigh->collect( msgDelay );
+
+            preemptionTimeAdditionVecHigh->record( vlanTag->getPreemptionDelay() );
+            preemptionTimeAdditionStatsHigh->collect( vlanTag->getPreemptionDelay() );
             break;
         }
 
@@ -114,6 +137,9 @@ void DelayLogger::addDelay( cMessage* msg )
         {
             endToEndDelayVecLow->record( msgDelay );
             endToEndDelayStatsLow->collect( msgDelay );
+
+            preemptionTimeAdditionVecLow->record( vlanTag->getPreemptionDelay() );
+            preemptionTimeAdditionStatsLow->collect( vlanTag->getPreemptionDelay() );
             break;
         }
     }
@@ -126,4 +152,7 @@ void DelayLogger::finish( void )
     this->endToEndDelayStatsExpress->recordAs( "Express Prio Delay" );
     this->endToEndDelayStatsHigh->recordAs( "High Prio Delay" );
     this->endToEndDelayStatsLow->recordAs( "Low Prio Delay" );
+
+    this->preemptionTimeAdditionStatsHigh->recordAs( "High Prio Frame Preemption Time" );
+    this->preemptionTimeAdditionStatsLow->recordAs( "Low Prio Frame Preemption Time" );
 }

@@ -8,7 +8,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.001</interval> 					<!-- 1000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
@@ -23,7 +23,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.001</interval> 					<!-- 1000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
@@ -40,7 +40,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->           
             <last>0.0</last>
@@ -56,7 +56,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -72,7 +72,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -88,7 +88,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -104,7 +104,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -120,7 +120,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -136,7 +136,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -152,7 +152,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -168,7 +168,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -184,7 +184,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -200,7 +200,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -216,7 +216,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -232,7 +232,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -248,7 +248,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -264,7 +264,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -280,7 +280,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -296,7 +296,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.00025</interval> 					<!-- 4000x per second -->           
             <epsilon>0.0000125</epsilon>           			<!-- 12.5 µs -->
             <last>0.0</last>
@@ -315,7 +315,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.005</interval> 					    <!-- 200x per second -->           
             <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
             <last>0.0</last>
@@ -331,7 +331,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.06</stopzeit> 
+            <stopzeit>0.56</stopzeit> 
             <interval>0.005</interval> 					    <!-- 200x per second -->           
             <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
             <last>0.0</last>
@@ -350,7 +350,7 @@
             <typ>hsr</typ>
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
-            <stopzeit>0.011</stopzeit> 
+            <stopzeit>0.021</stopzeit> 
             <interval>0.00005</interval> 					<!-- 20000x per second -->           
             <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
             <last>0.0</last>
