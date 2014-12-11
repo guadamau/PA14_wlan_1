@@ -652,6 +652,13 @@ reference "sub:Szenario-1:-Substation"
 \end_inset
 
 ):
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Netzwerkaufbau"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1302,8 +1309,11 @@ Abhandlung von Frames inklusive Express-Frames
 \end_layout
 
 \begin_layout Standard
-Die Datenbereiche der weiteren Fragmente müssen mindestens 64 Bytes gross
- und durch 8 teilbar sein (siehe Kapitel 
+Der Datenbereich eines Mframes umfasst vom ersten Oktett nach dem SFD/SMD-Feld
+ bis und mit dem letzten Oktett vor dem CRC und hat mindestens eine Grösse
+ von 60 Bytes.
+ Dabei muss dessen Grösse durch 8 (Alignment der Fragmentierung) teilbar
+ sein (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:Mframe"
@@ -1327,7 +1337,7 @@ Variablen:
 \begin_layout Standard
 \begin_inset Formula 
 \[
-simtime=Derzeitige\, Simulationszeit\,(Jetztiger\, Zeitpunkt)
+simtime=Derzeitige\, Simulationszeit\,(Jetztiger\, Zeitpunkt)\,[s]
 \]
 
 \end_inset
@@ -1335,7 +1345,7 @@ simtime=Derzeitige\, Simulationszeit\,(Jetztiger\, Zeitpunkt)
 
 \begin_inset Formula 
 \[
-datarate=Übermittlungsrate\, in\, Bits\, pro\, Sekunde
+sendtime=Zeit,\, an\, der\, die\,Übertragung\, der\, Präambel\, begonnen\, hat\,[s]
 \]
 
 \end_inset
@@ -1343,7 +1353,7 @@ datarate=Übermittlungsrate\, in\, Bits\, pro\, Sekunde
 
 \begin_inset Formula 
 \[
-sendtime=Zeit,\, an\, der\, die\,Übertragung\, der\, Präambel\, begonnen\, hat
+F=Grösse\, des\, zu\, fragmentierenden\, Frames\, ohne\, Präambel\, und\, SMD\,[Byte]
 \]
 
 \end_inset
@@ -1351,7 +1361,7 @@ sendtime=Zeit,\, an\, der\, die\,Übertragung\, der\, Präambel\, begonnen\, hat
 
 \begin_inset Formula 
 \[
-I=Interframe\, Gap\, in\, Bytes
+V=Bereits\, versendete\, Bytes\, inkl.\, Präambel\, und\, SMD\,[Byte]
 \]
 
 \end_inset
@@ -1359,7 +1369,7 @@ I=Interframe\, Gap\, in\, Bytes
 
 \begin_inset Formula 
 \[
-F=Grösse\, des\, zu\, fragmentierenden\, Frames\, ohne\, Präambel\, und\, SMD
+O=Noch\, offen\, stehender\, Teil\, des\, zu\, fragmentierenden\, Mframes\,[Byte]
 \]
 
 \end_inset
@@ -1367,7 +1377,7 @@ F=Grösse\, des\, zu\, fragmentierenden\, Frames\, ohne\, Präambel\, und\, SMD
 
 \begin_inset Formula 
 \[
-V=Versendete\, Bytes\, inkl.\, Präambel\, und\, SMD
+D=Grösse\, des\, Datenbereichs\, eines\, Mframes,\, wenn\, man\, jetzt\, fragmentieren\, würde\,[Byte]
 \]
 
 \end_inset
@@ -1375,7 +1385,22 @@ V=Versendete\, Bytes\, inkl.\, Präambel\, und\, SMD
 
 \begin_inset Formula 
 \[
-O=Noch\, offen\, stehende\, Bytes
+t=Zeitpunkt,\, zu\, dem\, das\, Express\, Frame\, versandt\, wird\,[s]
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Konstanten:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+datarate=Übermittlungsrate\,[Byte/s]
 \]
 
 \end_inset
@@ -1383,7 +1408,7 @@ O=Noch\, offen\, stehende\, Bytes
 
 \begin_inset Formula 
 \[
-D=Databereich\, von\, V
+P=Präambel\,+Start\, of\, Frame\, bzw.\, Mframe\, Delimiter=8\, Bytes
 \]
 
 \end_inset
@@ -1391,7 +1416,23 @@ D=Databereich\, von\, V
 
 \begin_inset Formula 
 \[
-t=Zeitpunkt,\, zu\, dem\, das\, Express-Frame\, versandt\, wird
+C=FCS\, bzw.\, MFCS=4\, Bytes
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+I=Interframe\, Gap\,(IFG)=12\, Bytes
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+A=Alignment\, der\, Fragmentierung=8\, Bytes
 \]
 
 \end_inset
@@ -1412,7 +1453,7 @@ status open
 \begin_inset Graphics
 	filename _img/020_Ablauf_IET.png
 	display false
-	scale 70
+	scale 60
 
 \end_inset
 
@@ -1448,7 +1489,7 @@ Express-Frame muss versendet werden.
 \end_layout
 
 \begin_layout Enumerate
-Hole Grösse des gesamten Frames in Bytes 
+Hole Grösse des gesamten Frames 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1457,10 +1498,42 @@ F
 \end_inset
 
 , das gerade gesendet wird.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Beträgt 
+\begin_inset Quotes fld
+\end_inset
+
+F
+\begin_inset Quotes frd
+\end_inset
+
+ weniger als 136 Bytes (
+\begin_inset Quotes fld
+\end_inset
+
+P
+\begin_inset Quotes frd
+\end_inset
+
+, 64 Bytes + 60 Bytes und 
+\begin_inset Quotes fld
+\end_inset
+
+C
+\begin_inset Quotes frd
+\end_inset
+
+ zusammen), kann das Frame nicht fragmentiert und der weitere Vorgang abgebroche
+n werden.
+ Das heisst, dass man mit dem Senden des Express-Frames warten muss, bis
+ das nicht fragmentierbare Frame und dessen IFG fertig versandt wurden.
 \end_layout
 
 \begin_layout Enumerate
-Berechne die Anzahl Bytes, die bereits versendet wurden 
+Berechne 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1468,7 +1541,7 @@ V
 \begin_inset Quotes frd
 \end_inset
 
- und berechne die Grösse dessen Datenbereichs 
+ und 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1479,7 +1552,7 @@ D
 :
 \begin_inset Formula 
 \[
-V=((simtime-sendtime)*datarate)/8
+V=(simtime-sendtime)*datarate
 \]
 
 \end_inset
@@ -1487,7 +1560,7 @@ V=((simtime-sendtime)*datarate)/8
 
 \begin_inset Formula 
 \[
-D=V-(Präam.+SMD)-MFCS-I=V-8-4-I=V-12-I
+D=V-P-C-I=V-24
 \]
 
 \end_inset
@@ -1496,7 +1569,7 @@ D=V-(Präam.+SMD)-MFCS-I=V-8-4-I=V-12-I
 \end_layout
 
 \begin_layout Enumerate
-Berechne die Anzahl Bytes, die noch offen stehen 
+Berechne 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1504,7 +1577,15 @@ O
 \begin_inset Quotes frd
 \end_inset
 
- und rechne die (M)FCS, die pro neuem Fragment dazukommt, hinzu.
+ und rechne die 
+\begin_inset Quotes fld
+\end_inset
+
+C
+\begin_inset Quotes frd
+\end_inset
+
+, das pro neuem Fragment dazukommt, hinzu.
  Des Weiteren muss die Präambel aus 
 \begin_inset Quotes fld
 \end_inset
@@ -1516,7 +1597,7 @@ V
  nicht mit abgezogen werden, da die Präambel nicht zur Framegrösse gehört:
 \begin_inset Formula 
 \[
-O=F-V+4+8=F-V+12
+O=F-V+C+P=F-V+12
 \]
 
 \end_inset
@@ -1538,11 +1619,11 @@ V
 \begin_inset Quotes fld
 \end_inset
 
-V
+D
 \begin_inset Quotes frd
 \end_inset
 
- (minus Präambel und SMD) durch 8 geteilt 0 ergibt und 
+ durch 8 geteilt 0 ergibt und 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1606,15 +1687,39 @@ F
 \begin_inset Newline newline
 \end_inset
 
-+ MFCS des ersten Fragments
++ MFCS des ersten Fragments (
+\begin_inset Quotes fld
+\end_inset
+
+C
+\begin_inset Quotes frd
+\end_inset
+
+)
 \begin_inset Newline newline
 \end_inset
 
-+ IFG des ersten Fragments (12 Bytes)
++ IFG des ersten Fragments (
+\begin_inset Quotes fld
+\end_inset
+
+I
+\begin_inset Quotes frd
+\end_inset
+
+)
 \begin_inset Newline newline
 \end_inset
 
-+ Präambel und SFD des Express-Frames (8 Bytes)
++ Präambel und SFD des Express-Frames (
+\begin_inset Quotes fld
+\end_inset
+
+P
+\begin_inset Quotes frd
+\end_inset
+
+)
 \begin_inset Newline newline
 \end_inset
 
@@ -1622,11 +1727,27 @@ F
 \begin_inset Newline newline
 \end_inset
 
-+ IFG des Express-Frames (12 Bytes)
++ IFG des Express-Frames (
+\begin_inset Quotes fld
+\end_inset
+
+I
+\begin_inset Quotes frd
+\end_inset
+
+)
 \begin_inset Newline newline
 \end_inset
 
-+ Präambel und SMD des nächsten Fragments (8 Bytes)
++ Präambel und SMD des nächsten Fragments (
+\begin_inset Quotes fld
+\end_inset
+
+P
+\begin_inset Quotes frd
+\end_inset
+
+)
 \begin_inset Newline newline
 \end_inset
 
@@ -1639,11 +1760,19 @@ Fverlängert
 \end_inset
 
  (siehe vorherige Abbildung)
-\begin_inset Newline newline
+\begin_inset Formula 
+\[
+Fverlängert=F+C+I+P+(Grösse\, Express\, Frame)+I+P
+\]
+
 \end_inset
 
 
-\begin_inset Newline newline
+\begin_inset Formula 
+\[
+=F+C+2*I+2*P+(Grösse\, Express\, Frame)=F+44+(Grösse\, Express\, Frame)
+\]
+
 \end_inset
 
 Die 
@@ -1674,11 +1803,10 @@ reference "fig:Berechnung-Express-Versandzeit"
  So wird sichergestellt, dass wenn das Frame erneut fragmentiert werden
  muss, es ab Beginn des nächsten Fragments betrachtet wird.
  So können keine zu kleine Fragmente entstehen.
- Bei der erneuten Fragmentierung kann dann das nächste Fragment so betrachtet
- werden, als wäre es das Erste des Frames.
+ 
 \begin_inset Formula 
 \[
-newsendtime=Zeitpunkt,\, zu\, dem\, Express-Frame+I\, fertig\, versandt\, wurden
+newsendtime=Zeitpunkt,\, zu\, dem\, Express\, Frame+I\, fertig\, versandt\, wurden
 \]
 
 \end_inset
@@ -1691,7 +1819,25 @@ sendtime=newsendtime
 
 \end_inset
 
+Somit kann dann bei der erneuten Fragmentierung das nächste Fragment so
+ betrachtet werden, als wäre es das Erste des Frames (die Framegrösse muss
+ jedoch dem entsprechend angepasst werden, nur noch das Fragment mit dem
+ 
+\begin_inset Quotes fld
+\end_inset
 
+Data 2
+\begin_inset Quotes frd
+\end_inset
+
+ Feld in Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Berechnung-Express-Versandzeit"
+
+\end_inset
+
+ betrachten).
 \end_layout
 
 \begin_layout Enumerate
@@ -1732,8 +1878,10 @@ t
 \begin_inset Formula 
 \[
 t=\begin{cases}
-V\geqq72+I & \: simtime+\frac{(8-(D\,\%\,8))*8}{datarate}\\
-V<72+I & \: simtime+\frac{(72+I-V+(8-(D\,\%\,8)))*8}{datarate}
+(V\geqq72+I)\:\&\:(D\%8=0) & simtime\\
+(V<72+I)\:\&\:(D\%8=0) & simtime+\frac{72+I-V}{datarate}\\
+(V\geqq72+I)\:\&\:(D\%8\:!=0) & simtime+\frac{8-(D\,\%\,8)}{datarate}\\
+(V<72+I)\:\&\:(D\%8\:!=0) & simtime+\frac{72+I-V+(8-(D\,\%\,8))}{datarate}
 \end{cases}
 \]
 
@@ -1838,6 +1986,18 @@ Low
 Bezüglich der Auftretenswahrscheinlichkeit der Frames lässt sich demnach
  folgendes sagen: Je höher die Priorität, desto seltener kommt das Frame
  vor.
+\end_layout
+
+\begin_layout Standard
+Ein Beispiel eines Lastprofils findet man in der XML-Konfiguration in Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Netzwerkaufbau"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Section
