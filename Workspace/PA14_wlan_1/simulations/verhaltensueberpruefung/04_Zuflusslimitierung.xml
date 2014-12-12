@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" ?>
+<simulation_behaviour>
+    
+    <!-- ###################################### Frames with unicast destination and different priorities ###################################### -->
+    
+    <source>00-15-12-14-88-01
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>konstante last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.051</stopzeit> 
+            <interval>0.001</interval> 					<!-- 5000x per second -->
+            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
+            <last>0.0</last>
+            <maxlast>100</maxlast>               
+            <destination>00-15-12-14-88-02</destination>    <!-- UNICAST -->    
+            <paketgroesse>976</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+        </lastmuster> 
+    </source>
+ 
+    <!-- ###################################### ############################################### ###################################### -->
+    
+</simulation_behaviour>
+

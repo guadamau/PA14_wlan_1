@@ -202,8 +202,8 @@ name "sub:Mechanismen-zur-Trafficregelung"
 
 \begin_layout Standard
 In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
- und in der Simulation implemeJeder Node (DANH oder Redbox, siehe Kapitel
- 
+ und in der Simulation angewendet werden können.
+ Jeder Node (DANH oder Redbox, siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Gerätetypen HSR"
@@ -230,13 +230,26 @@ reference "sub:Mechanismen-zur-Trafficregelung"
 ) implementiert sind und die Frames priorisiert abhandelt.
  Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
  Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
- seinen Ausgang zu koordinieren hat.ntiert werden.
+ seinen Ausgang zu koordinieren hat.
  Es besteht dann die Möglichkeit für jeden Knoten zwischen den Mechanismen
  auszuwählen oder diese sogar zu kombinieren.
 \end_layout
 
 \begin_layout Subsubsection
-Limitierung des Zuflusses von neuem Traffic
+First Come First Serve
+\end_layout
+
+\begin_layout Standard
+Die Frames werden, unabhängig von ihrer Herkunft, nur nach ihrer Priorität
+ behandelt.
+ Das erste Frame, das von der jeweiligen Priorität eintrifft, wird dem anderen
+ der selben Priorität vorgezogen.
+ Somit spielt hier die Herkunft des Frames (von Aussen oder vom Ring) keine
+ Rolle.
+\end_layout
+
+\begin_layout Subsubsection
+Zuflusslimitierung
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Limitierung-des-Zuflusses"
@@ -247,8 +260,8 @@ name "sub:Limitierung-des-Zuflusses"
 \end_layout
 
 \begin_layout Standard
-Jedes Gerät generiert intern mit einer fixen Rate eine Anzahl an Tokens
- bis zu einem bestimmten Maximum.
+Jedes Gerät generiert intern eine Anzahl an Tokens bis zu einem bestimmten
+ Maximum.
  Möchte das Gerät ein neues, intern generiertes Frame versenden, kann es
  das Frame erst versenden wenn genügend Tokens vorhanden sind.
  Dabei verbraucht ein Frame mit n Bytes genau n Tokens.
@@ -258,8 +271,49 @@ Jedes Gerät generiert intern mit einer fixen Rate eine Anzahl an Tokens
 \end_layout
 
 \begin_layout Standard
-So kann der Zufluss von neuem Traffic limitiert werden, womit kein Gerät
- das Netzwerk mit neuen Frames überschütten kann.
+Diese Limitierung findet jedoch lediglich für Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ statt, damit nichts vom Überlebenswichtigen limitiert wird.
+ So kann der Zufluss von neuem 
+\begin_inset Quotes fld
+\end_inset
+
+unwichtigen
+\begin_inset Quotes frd
+\end_inset
+
+ Traffic limitiert werden, womit die Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+EXPRESS
+\begin_inset Quotes frd
+\end_inset
+
+ weniger von Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ gestört werden.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -300,6 +354,13 @@ Die andere Möglichkeit ist, den Frames, die auf den Ring sollen, den Vortritt
 
 \begin_layout Subsubsection
 Reissverschluss
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Reissverschluss"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -492,6 +553,13 @@ Beispiel von Frameabfolge mit Zeitschlitzverfahren
 
 \begin_layout Subsection
 Definition der Knoten
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Definition-der-Knoten"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1484,6 +1552,24 @@ name "fig:Berechnung-Express-Versandzeit"
 
 \end_layout
 
+\begin_layout Standard
+Mehr Informationen zu den Feldern dieser Abbildung sind in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Mframe"
+
+\end_inset
+
+ und Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "mframe-format-image"
+
+\end_inset
+
+ zu finden.
+\end_layout
+
 \begin_layout Enumerate
 Express-Frame muss versendet werden.
 \end_layout
@@ -2007,6 +2093,19 @@ reference "sub:Netzwerkaufbau"
 \begin_layout Standard
 Damit man sich sicher sein kann, dass die Simulation wie geplant verläuft,
  wird die Implementation vor der Simulation der Szenarien überprüft.
+ Diese Überprüfungen können in der mit dieser Arbeit mitgelieferten Umgebung
+ auch selber durchgeführt werden.
+ Beim Starten der Simulationsumgebung wird nach einer Konfiguration gefragt.
+ Dieser Konfigurationsname wird beim entsprechenden Testfall in der Zeile
+ 
+\begin_inset Quotes fld
+\end_inset
+
+Konfig.
+\begin_inset Quotes frd
+\end_inset
+
+ aufgelistet.
 \end_layout
 
 \begin_layout Subsection
@@ -2041,8 +2140,157 @@ Node3
 ) implementiert.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Verhaltensueberpruefung_Umgebung.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+HSR-Ring, in dem die Verhaltensüberprüfung statt findet
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Verhaltensüberprüfung
+\end_layout
+
+\begin_layout Standard
+Für den Nachweis der Tests wird der Nachrichtenverlauf der jeweiligen Simulation
+ verwendet oder eine Grafik, die den Queueverlauf (wann sind wieviele Frames
+ mit welcher Eigenschaft bei einem Ausgang vorhanden) aufweist, angezeigt.
+ Im 
+\begin_inset Quotes fld
+\end_inset
+
+Namen
+\begin_inset Quotes frd
+\end_inset
+
+ des Frames steht der Name des Knotens, der das Frame generiert hat, die
+ Priorität und die Sequenznummer des Frames.
+ Am Anfang des 
+\begin_inset Quotes fld
+\end_inset
+
+Namens
+\begin_inset Quotes frd
+\end_inset
+
+ steht zudem, ob es sich um ein Unicast-, Multicast- oder Broadcast-Frame
+ handelt.
+\end_layout
+
+\begin_layout Standard
+Wenn 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ am Anfang der Simulation 2 Multicast-Frames hintereinander mit der Priorität
+ 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ generiert, würden dessen Namen wie folgt lauten:
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes fld
+\end_inset
+
+Multi From: Node1 (HIGH) Seq#0
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Quotes fld
+\end_inset
+
+Multi From: Node1 (HIGH) Seq#1
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Der Namen des Frames bleibt immer gleich, auch wenn z.B.
+ 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ dieses weiterleitet.
+ Die Zeit in der Grafik, in der die Framenamen angezeigt werden, listet
+ den Zeitpunkt, zu dem das Frame den Knoten verlassen hat (Generierungszeitpunkt
+ + Interner Delay + Verzögerung durch andere Frames) auf.
+\end_layout
+
+\begin_layout Standard
+Des Weiteren ist bei der Zeit folgendes zu beachten: Der Zeitpunkt, zu dem
+ ein Frame generiert wird ist nicht der Sendezeitpunkt, da jeder Knoten
+ intern einen Delay von 6us hat (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Definition-der-Knoten"
+
+\end_inset
+
+).
+ Wenn ein Knoten zum Zeitpunkt t1=0.001 generiert wird, wird er zum Zeitpunkt
+ t2=0.001006 versendet, wenn nichts anderes gerade versendet wird.
+\end_layout
+
+\begin_layout Standard
+Sofern es nicht anders erwähnt wird, ist der verwendete Mechanismus 
+\begin_inset Quotes fld
+\end_inset
+
+First Come First Serve
+\begin_inset Quotes frd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2058,10 +2306,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_01_Weiterleiten_und_Empf
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2141,40 +2413,11 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Für den Nachweis dieses Tests werden 3 verschiedene Fälle betrachtet und
- den Nachrichtenverlauf der jeweiligen Simulation angezeigt.
- Im 
-\begin_inset Quotes fld
-\end_inset
-
-Namen
-\begin_inset Quotes frd
-\end_inset
-
- des Frames (siehe nächstes Bild) steht der Knoten, der das Frame generiert
- hat, die Priorität und die Sequenznummer des Frames.
- Am Anfang des 
-\begin_inset Quotes fld
-\end_inset
-
-Namens
-\begin_inset Quotes frd
-\end_inset
-
- steht zudem, ob es sich um ein Unicast-, Multicast- oder Broadcast-Frame
- handelt.
-\begin_inset Newline newline
-\end_inset
-
-
-\begin_inset space \hfill{}
-\end_inset
-
-
+Folgende Frames werden mit der selben Priorität generiert:
 \end_layout
 
-\begin_layout Plain Layout
-Unicast-Frame von 
+\begin_layout Itemize
+1x Unicast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2186,30 +2429,15 @@ Node1
 \begin_inset Quotes fld
 \end_inset
 
-Node3
+Node2
 \begin_inset Quotes frd
 \end_inset
 
-
+ (Generiert an t=0.001)
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename _img/selftest/001_unicast_01_to_03.png
-	display false
-	scale 60
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Multicast-Frame von 
+\begin_layout Itemize
+1x Multicast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2217,26 +2445,11 @@ Node1
 \begin_inset Quotes frd
 \end_inset
 
-
+ (Generiert an t=0.002)
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Graphics
-	filename _img/selftest/001_multicast_01.png
-	display false
-	scale 60
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-Broadcast-Frame von 
+\begin_layout Itemize
+1x Broadcast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2244,18 +2457,38 @@ Node1
 \begin_inset Quotes frd
 \end_inset
 
+ (Generiert an t=0.003)
+\end_layout
 
+\begin_layout Plain Layout
+Die Merkmale der Frames sind bis auf die oben erwähnten Eigenschaften gleich
+ (Herkunft, Grösse, Priorität).
+ Der verwendete Mechanismus ist 
+\begin_inset Quotes fld
+\end_inset
+
+First Come First Serve
+\begin_inset Quotes frd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename _img/selftest/001_broadcast_01.png
+	filename _img/selftest/01_weiterleit_empf.png
 	display false
-	scale 60
+	scale 55
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+Wie man der Grafik entnehmen kann, werden Unicast-Frames beim Empfänger
+ und Multi-/Broadcast-Frames beim Sender gelöscht.
+ Des Weiteren werden die Frames korrekt weitergeleitet.
 \end_layout
 
 \end_inset
@@ -2272,7 +2505,7 @@ Node1
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: Frameablauf in der Testumgebung
+Verhaltensüberprüfung: Frameablauf
 \end_layout
 
 \end_inset
@@ -2298,10 +2531,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_02_Priorisierung
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2316,7 +2573,7 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wenn zwei Frames mit unterschiedlichen Prioritäten ankommen soll das mit
+Wenn drei Frames mit unterschiedlichen Prioritäten ankommen, soll das mit
  der höheren Priorität vor dem anderen verarbeitet werden.
 \begin_inset Newline newline
 \end_inset
@@ -2342,42 +2599,12 @@ Ist
 
 \begin_layout Plain Layout
 Der sich im Knoten befindende Switch hat für jeden seiner Ports einen Scheduler.
- Jeder dieser Scheduler verfügt über Queues, für jede Priorität und Herkunft
- (von Ring oder Aussen) eine, also total 6 Queues.
  Der Switch fügt ein ankommendes Frame beim jeweiligen Scheduler in die
  jeweilige Queue ein.
  Der Scheduler beginnt darauf mit dem Abarbeiten der Queues und startet
- dabei mit der Queue der höchsten Priorität.
-\end_layout
-
-\begin_layout Plain Layout
-Wenn z.B.
- zwei Frames, eines mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und eines mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- zur exakt selben Zeit bei einem Scheduler eingereiht werden, wird garantiert
- das Frame mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- zuerst versendet.
+ mit der Queue der höchsten Priorität.
+ Wenn mehrere Frames mit unterschiedlichen Prioritäten zur selben Zeit ankommen
+ wird garantiert das Frame mit der höheren Priorität zuerst versendet.
 \begin_inset Newline newline
 \end_inset
 
@@ -2401,11 +2628,11 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Folgende Frames werden zur exakt selben Zeit generiert:
+Folgende Frames werden zur exakt selben Zeit generiert (t=0.001):
 \end_layout
 
 \begin_layout Itemize
-Unicast-Frame von 
+1x Unicast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2417,7 +2644,7 @@ Node1
 \begin_inset Quotes fld
 \end_inset
 
-Node3
+Node2
 \begin_inset Quotes frd
 \end_inset
 
@@ -2433,7 +2660,7 @@ EXPRESS
 \end_layout
 
 \begin_layout Itemize
-Unicast-Frame von 
+1x Unicast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2445,7 +2672,7 @@ Node1
 \begin_inset Quotes fld
 \end_inset
 
-Node3
+Node2
 \begin_inset Quotes frd
 \end_inset
 
@@ -2461,7 +2688,7 @@ HIGH
 \end_layout
 
 \begin_layout Itemize
-Unicast-Frame von 
+1x Unicast-Frame von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2473,7 +2700,7 @@ Node1
 \begin_inset Quotes fld
 \end_inset
 
-Node3
+Node2
 \begin_inset Quotes frd
 \end_inset
 
@@ -2486,6 +2713,52 @@ LOW
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+Die Merkmale der Frames sind bis auf die oben erwähnten Eigenschaften gleich.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/02_Priorisierung.png
+	display false
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Die nächste Grafik zeigt den Ablauf bei einem Ausgang von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/02_Priorisierung_Queue_Analysis.png
+	display false
+	scale 40
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Hier ist ersichtlich, dass alle 3 Frames zur gleichen Zeit eingereiht wurden,
+ die Zeitpunkte, an denen die Frames die Queues verlassen haben, unterschiedlich
+ sind.
+ Des Weiteren kann man feststellen, dass die Frames ihrer Priorität entsprechend
+ behandelt werden.
 \end_layout
 
 \end_inset
@@ -2502,7 +2775,7 @@ LOW
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Beachten der Priorisierung 
 \end_layout
 
 \end_inset
@@ -2528,10 +2801,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Siehe jeweiliges Szenario in den nächsten 3 Tabellen
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2546,25 +2843,22 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-Soll ein Express-Frame versendet werden, so wird dies sofort versandt wenn
+Soll ein Express-Frame versendet werden, so wird dies sofort versandt, wenn
  derzeit keine anderen Frames auf demselben Ausgang versendet werden.
- 
-\end_layout
+ Wird jedoch bereits ein «HIGH»- oder «LOW»-Frame darauf gesendet, so wird
+ das Express-Frame zu dem Zeitpunkt versandt, an dem ein Fragment des anderen
+ Frames (inklusive Interframe Gap) fertig versendet worden wäre.
+ Kann das normale Frame jedoch nicht fragmentiert werden, kann das Express-Frame
+ erst nach dem normalen Frame versendet werden.
+ Die Berechnung zur Fragmentierung und dem Zeitpunkt des Express-Frame-Versands
+ ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Fragmentierung-und-Zeitberechnun"
 
-\begin_layout Plain Layout
-Wird jedoch etwas darauf gesendet, so wird das Express-Frame zu dem Zeitpunkt
- versandt, an dem ein Fragment des anderen Frames (inklusive Interframe
- Gap) fertig versendet worden wäre.
- Die Dauer, die das Express-Frame inkl.
- IFG beanspruchte, wird der Ankunftszeit des 
-\begin_inset Quotes fld
 \end_inset
 
-fragmentierten
-\begin_inset Quotes frd
-\end_inset
-
- Frames angerechnet.
+ aufgeführt.
 \begin_inset Newline newline
 \end_inset
 
@@ -2588,6 +2882,27 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
+Die Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ werden, wenn möglich, fragmentiert und das Express-Frame wird zum korrekten
+ Zeitpunkt versendet.
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2608,15 +2923,95 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Langes Frame und 2 Express
+3 Szenarios werden für den Nachweis erstellt:
+\end_layout
+
+\begin_layout Itemize
+Szenario 01 (Fragmentierbares Frame)
+\end_layout
+
+\begin_layout Itemize
+Szenario 02 (Nicht fragmentierbares Frame)
+\end_layout
+
+\begin_layout Itemize
+Szenario 03 (Ein langes Frame wird mehrmals fragmentiert)
 \end_layout
 
 \begin_layout Plain Layout
-Nicht fragmentierbar
+Wenn ein Express-Frame unmittelbar nach einem normalen, fragmentierbaren
+ Frame generiert wird (d.h.
+ das normale Frame wird bereits versendet, jedoch wurde davon noch kein
+ Byte versendet), müsste das Express-Frame laut Berechnung aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Fragmentierung-und-Zeitberechnun"
+
+\end_inset
+
+ zu folgendem Zeitpunkt 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp
+\begin_inset Quotes frd
+\end_inset
+
+ versendet werden (Für die Bedeutung der Variablen siehe vorhin erwähnte
+ Berechnung):
+\begin_inset Formula 
+\[
+tsend=Zeit,\, an\, dem\, das\, normale\, Frame\, versandt\, wurde\,[s]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+tsendexp=Zeit,\, an\, dem\, das\, ExpressFrame\, versendet\, wird\,[s]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+datarate=100\, Mbit/s
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+t=\frac{72+I}{datarate}=\frac{84}{(100000000/8)}=0,00000672s
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+tsendexp=tsend+t
+\]
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
-Was wenn fragmentierbar?
+Da in OMNeT++ für die Zeitberechnung Double-Werte verwendet werden, kann
+ eine gewisse Präzision verloren gehen, weshalb sich die effektiven Zeiten
+ zur hier berechneten Zeit marginal unterscheiden kann 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -2633,7 +3028,762 @@ Was wenn fragmentierbar?
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Express-Frames und Fragmentierung (Allgemein)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_03_Exp_und_Frag_01_Frag
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Szenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+01: Fragmentierbares Frame
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Folgende Frames werden generiert:
+\end_layout
+
+\begin_layout Itemize
+1x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 136 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert an t=0.001)
+\end_layout
+
+\begin_layout Itemize
+1x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 100 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+EXPRESS
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert an t=0.001001)
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/03_Exp_und_Frag_01_Frag.png
+	display false
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wie man sehen kann beträgt 
+\begin_inset Quotes fld
+\end_inset
+
+tsend
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001006s und 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001012759999s, was eine Differenz 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ von 0.00000676s beträgt.
+ Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
+ geht, kann man sagen, dass 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ dem oben berechneten Wert (0.00000672s) entspricht und die Fragmentierung
+ somit bewiesen wurde.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verhaltensüberprüfung: Express-Frames und Fragmentierung (Szenario 01)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_03_Exp_und_Frag_02_NoFrag
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Szenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+02: Nicht fragmentierbares Frame
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Folgende Frames werden generiert:
+\end_layout
+
+\begin_layout Itemize
+1x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 135 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert an t=0.001)
+\end_layout
+
+\begin_layout Itemize
+1x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 100 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+EXPRESS
+\begin_inset Quotes frd
+\end_inset
+
+(Generiert an t=0.001001)
+\end_layout
+
+\begin_layout Plain Layout
+Wenn das normale Frame nicht fragmentiert werden kann, müsste 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ bei einem normalen Frame mit 135 Bytes wie folgt berechnet werden:
+\begin_inset Formula 
+\[
+t=\frac{135+I}{datarate}=\frac{147}{(100000000/8)}=0,00001176s
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+tsendexp=tsend+t
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/03_Exp_und_Frag_02_NoFrag.png
+	display false
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wie man sehen kann beträgt 
+\begin_inset Quotes fld
+\end_inset
+
+tsend
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001006s und 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001018399999s, was eine Differenz 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ von 0.0000124s beträgt.
+ Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
+ geht, kann man sagen, dass 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ dem oben berechneten Wert (0.00001176s) entspricht und das Szenario somit
+ bewiesen wurde.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verhaltensüberprüfung: Express-Frames und Fragmentierung (Szenario 02)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_03_Exp_und_Frag_03_Long_Mult
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Szenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+03: Ein langes Frame wird mehrmals fragmentiert
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Folgende Frames werden generiert:
+\end_layout
+
+\begin_layout Itemize
+1x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1500 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert an t=0.001)
+\end_layout
+
+\begin_layout Itemize
+2x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 100 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+EXPRESS
+\begin_inset Quotes frd
+\end_inset
+
+(Generiert an t1=0.001001 und t2=0.001002)
+\end_layout
+
+\begin_layout Plain Layout
+Das zweite Express-Frame wird unmittelbar nach dem ersten Express-Frame
+ generiert, weshalb das Zweite direkt nach dem ersten Express-Frame versendet
+ wird.
+ Die beiden Express-Frames müssten zu folgenden Zeiten 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp1
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp2
+\begin_inset Quotes frd
+\end_inset
+
+ versendet werden:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+t=\frac{72+I}{datarate}=\frac{84}{(100000000/8)}=0,00000672s
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+texp=\frac{100+I}{datarate}=\frac{112}{(100000000/8)}=0,00000896s
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+tsendexp1=tsend+t
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+tsendexp2=tsend+t+texp=tsend+0,00001568s
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/03_Exp_und_Frag_03_Long_Mult.png
+	display false
+	scale 55
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wie man sehen kann beträgt 
+\begin_inset Quotes fld
+\end_inset
+
+tsend
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001006s und 
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp1
+\begin_inset Quotes frd
+\end_inset
+
+ 0.001012759999s, was eine Differenz 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ von 0.00000676s beträgt.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Quotes fld
+\end_inset
+
+tsendexp2
+\begin_inset Quotes frd
+\end_inset
+
+ beträgt 0.001022359998s, was wenn man 
+\begin_inset Quotes fld
+\end_inset
+
+t
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+texp
+\begin_inset Quotes frd
+\end_inset
+
+ abzieht 0.00100668s (ungefähr 
+\begin_inset Quotes fld
+\end_inset
+
+tsend
+\begin_inset Quotes frd
+\end_inset
+
+) beträgt.
+\end_layout
+
+\begin_layout Plain Layout
+Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
+ geht, kann man sagen, dass die simulierten Ergebnisse den Berechneten entsprech
+en und das Szenario somit bewiesen wurde.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verhaltensüberprüfung: Express-Frames und Fragmentierung (Szenario 03)
 \end_layout
 
 \end_inset
@@ -2659,10 +3809,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_04_Zuflusslimitierung
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2677,6 +3851,36 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
+Der Zufluss von neuen Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ soll limitiert werden können.
+ Als Limite kann eine Anzahl an Bytes, die pro Sekunde von 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames verbraucht werden können, festgelegt werden.
+ Es werden lediglich die 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames limitiert, die intern generiert werden.
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2697,6 +3901,20 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
+Sofern eine Zuflusslimitierung auf x Byte/s gesetzt wurde, kann ein Knoten
+ nur so viele 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames pro Sekunde generieren und versenden bis dessen Summe die x Bytes
+ aufgebraucht hat.
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2717,7 +3935,120 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Damit in den Simulationsergebnissen zwischen den Frames vom Ring und den
+ intern Generierten unterschieden werden kann, wird folgender Mechanismus
+ verwendet: Die intern Generierten Frames haben gegenüber den Frames vom
+ Ring Vortritt (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Vortrittsregeln-bezüglich-Frames"
 
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Plain Layout
+Es wird eine Zuflusslimitierung von 100Kbit/s (12500 Byte/s) gesetzt.
+ Dies bedeutet, dass intern maximal 12500 Tokens generiert werden können.
+\end_layout
+
+\begin_layout Plain Layout
+Folgende Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ werden generiert:
+\end_layout
+
+\begin_layout Itemize
+50x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Plain Layout
+Es folgt ein Graph, der die Anzahl vorhandener, intern generierter 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames an einem Ausgang zu jedem Zeitpunkt darstellt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/04_Zuflusslimitierung.png
+	display false
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Bis zum Zeitpunkt 
+\begin_inset Quotes fld
+\end_inset
+
+t1
+\begin_inset Quotes frd
+\end_inset
+
+ von ca.
+ 0.013s konnte jedes generierte Frame sofort versendet werden.
+ Danach waren zu wenige Tokens verfügbar und die Frames wurden somit nicht
+ direkt nach dessen Generierung verschickt.
+ Die Frames stauten sich somit bis zum Zeitpunkt 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ an, nach dem keine neuen Frames mehr generiert wurden.
+ Nach 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ wurden die Frames gleich schnell (siehe rote Linie in Grafik) wie nach
+ 
+\begin_inset Quotes fld
+\end_inset
+
+t1
+\begin_inset Quotes frd
+\end_inset
+
+ versendet.
 \end_layout
 
 \end_inset
@@ -2734,7 +4065,7 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Zuflusslimitierung
 \end_layout
 
 \end_inset
@@ -2760,10 +4091,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Siehe jeweiliges Szenario in den nächsten 2 Tabellen
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2778,7 +4133,9 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Wenn zwei Frames der selben Priorität beim Knoten ankommen (ein Frame vom
+ Ring und ein Frame intern generiert), gewährt der Knoten je nach Mechanismus
+ dem entsprechenden Frame gegenüber dem anderen den Vortritt.
 \end_layout
 
 \end_inset
@@ -2798,6 +4155,194 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
+Wenn ständig Frames vom Ring kommen und ständig welche mit der selben Priorität
+ intern generiert werden, werden je nach Mechanismus bestimmte Frames nie
+ weitergeleitet solange neue von der anderen Sorte kommen.
+\end_layout
+
+\begin_layout Plain Layout
+Haben die Frames vom Ring den Vortritt werden die intern generierten Frames
+ kaum versendet.
+\end_layout
+
+\begin_layout Plain Layout
+Haben die Frames von Aussen den Vortritt werden die Frames vom Ring kaum
+ weitergeleitet.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2 Szenarios werden für den Nachweis erstellt:
+\end_layout
+
+\begin_layout Itemize
+Szenario 01 (Frames vom Ring haben Vortritt)
+\end_layout
+
+\begin_layout Itemize
+Szenario 02 (Frames von Aussen (Intern generiert) haben Vortritt)
+\end_layout
+
+\begin_layout Plain Layout
+Bei beiden Szenarios werden folgende Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ generiert:
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node3
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Plain Layout
+Bei jedem der 3 Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden,
+ da alle 3 das selbe Lastprofil zur Framegenerierung haben.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verhaltensüberprüfung: Vortrittsregeln im und zum Ring (Allgemein)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Verh_ueberpruef_05_Vortritt"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_05_Vortritt_01_Ring
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Szenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+01: Frames vom Ring haben Vortritt
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2818,7 +4363,43 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Es folgt ein Graph, der die Anzahl 
+\begin_inset Quotes fld
+\end_inset
 
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/05_Vortritt_01_Ring.png
+	display false
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wie man sehen kann, stauen sich bis zum Zeitpunkt 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ (0.051s) die intern generierten Frames (rot) an.
+ Es werden zwar intern generierte Frames versendet (ansonsten hätte kein
+ Knoten etwas zum weiterleiten), jedoch sehr wenige.
+ Nach diesem Zeitpunkt sind die Knoten zwar noch andere Frames vom Ring
+ am weiterleiten, jedoch generiert kein Knoten mehr neue Frames, weshalb
+ mehr Platz entsteht, um mehr intern generierte Frames versenden zu können.
 \end_layout
 
 \end_inset
@@ -2835,8 +4416,179 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Vortrittsregeln im und zum Ring (Szenario 01)
 \end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Verh_ueberpruef_05_Vortritt_01_Ring"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="10text%">
+<column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_05_Vortritt_02_Intern
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Szenario
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+02: Frames von Aussen (Intern generiert) haben Vortritt
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Nachweis
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Es folgt ein Graph, der die Anzahl 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/05_Vortritt_02_Intern.png
+	display false
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Hier sieht man das Gegenstück zum vorherigen Szenario.
+ Die intern generierten Frames (rot) können alle sofort versendet werden
+ (weshalb es nach 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ keine mehr gibt) und die weiterzuleitenden Frames (blau) stauen sich an.
+ Nach 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ werden die angestauten Frames weitergeleitet und ab ca.
+ 0.09s hat sich das Netzwerk ein wenig 
+\begin_inset Quotes fld
+\end_inset
+
+erholt
+\begin_inset Quotes frd
+\end_inset
+
+ und mehr Platz geschaffen, weshalb die restlichen Frames schneller weitergeleit
+et werden können.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Verhaltensüberprüfung: Vortrittsregeln im und zum Ring (Szenario 02)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "Verh_ueberpruef_05_Vortritt_02_Intern"
 
 \end_inset
 
@@ -2861,10 +4613,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_06_Reissverschluss
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2879,6 +4655,18 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
+Abwechslungsweise soll ein Knoten mal dem gleichpriorisierten Frame vom
+ Ring und mal von Aussen den Vortritt gewähren (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Reissverschluss"
+
+\end_inset
+
+).
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2899,6 +4687,22 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
+Es wird in einem Knoten, wenn gerade einem Frame vom Ring Vortritt gewährt
+ wurde, einem Frame von Aussen den Vortritt gewährt und umgekehrt.
+ Anders als beim vorherigen Test (siehe Tabelle 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "Verh_ueberpruef_05_Vortritt"
+
+\end_inset
+
+) stauen sich keine Frames an, weil ständig Frames vom anderen Typ gesendet
+ werden.
+ Ein Anstauen ist dennoch möglich, wenn zu viele Frames versendet werden
+ müssen, jedoch würde es sich dann bei beiden Typen anstauen.
+\begin_inset Newline newline
+\end_inset
+
 
 \end_layout
 
@@ -2919,7 +4723,106 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Es werden folgende Frames mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
 
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ generiert (selbes Lastprofil wie beim vorherigen Test, siehe Tabelle 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "Verh_ueberpruef_05_Vortritt"
+
+\end_inset
+
+):
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Multicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node3
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
+ tstop=0.051)
+\end_layout
+
+\begin_layout Plain Layout
+Es folgt ein Graph, der die Anzahl 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/06_Reissverschluss.png
+	display false
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Man kann anhand der Grafik feststellen, dass die beiden Typen einander beeinflus
+sen.
+ Es ist ersichtlich, dass nach 
+\begin_inset Quotes fld
+\end_inset
+
+tstop
+\begin_inset Quotes frd
+\end_inset
+
+ die Anzahl interner Frames (rot) schneller abgebaut wird und somit mehr
+ Frames vom Ring (blau) entstehen.
+ Nachdem alle internen Frames versendet wurden (bei ca.
+ 0.065s) können alle die restlichen Frames vom Ring abgearbeitet werden.
+\end_layout
+
+\begin_layout Plain Layout
+Bei jedem der 3 Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden,
+ da alle 3 das selbe Lastprofil zur Framegenerierung haben.
 \end_layout
 
 \end_inset
@@ -2936,7 +4839,7 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Reissverschluss
 \end_layout
 
 \end_inset
@@ -2962,10 +4865,34 @@ status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
+<lyxtabular version="3" rows="4" columns="2">
 <features rotate="0" tabularvalignment="middle">
 <column alignment="left" valignment="top" width="10text%">
 <column alignment="left" valignment="top" width="90text%">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Konfig.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Verh_ueberpruef_07_Zeitschlitz
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
 <row>
 <cell alignment="left" valignment="top" usebox="none">
 \begin_inset Text
@@ -2980,7 +4907,42 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
+Es sollten mit dem Zeitschlitzverfahren (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Zeitschlitzverfahren"
 
+\end_inset
+
+) trotz einer ständigen generierung von 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames auch Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ versendet werden, da die 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames nur innerhalb der definierten Grün-Phase versendet werden können.
+ Die Grösse dieser Phase kann in Bytes selber gesetzt werden und jede zweite
+ Phase ist die vorhin erwähnte Grün-Phase.
+ Anhand der gesetzten Grösse in Bytes und der vorhandenen Übertragungsrate
+ wird eine Zeitdauer berechnet, die dann die effektive Phasengrösse beträgt.
 \end_layout
 
 \end_inset
@@ -3000,7 +4962,57 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
+Obwohl ständig 
+\begin_inset Quotes fld
+\end_inset
 
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames generiert werden, findet auch der Versand von 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames statt, da es in jeder zweiten Phase (
+\begin_inset Quotes fld
+\end_inset
+
+Nicht-Grün-Phase
+\begin_inset Quotes frd
+\end_inset
+
+) untersagt ist, 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames zu versenden.
+ Gibt es keine 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames zum Versenden, so können 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames auch in der Grün-Phase versendet werden.
+ Express-Frames können natürlich immer versendet werden.
 \end_layout
 
 \end_inset
@@ -3020,7 +5032,160 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Es werden folgende Frames mit der Priorität generiert:
+\end_layout
 
+\begin_layout Itemize
+50x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 100 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+EXPRESS
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert ab t=0.001 mit einem Interval von 0.001 bis zu tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051)
+\end_layout
+
+\begin_layout Itemize
+500x Unicast-Frame von 
+\begin_inset Quotes fld
+\end_inset
+
+Node1
+\begin_inset Quotes frd
+\end_inset
+
+ zu 
+\begin_inset Quotes fld
+\end_inset
+
+Node2
+\begin_inset Quotes frd
+\end_inset
+
+ mit 1000 Bytes und Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051)
+\end_layout
+
+\begin_layout Plain Layout
+Die Phasengrösse wird auf 10000 Bytes gesetzt, was bei einer gegebenen Übertragu
+ngsrate von 100Mbit/s 0.0008 beträgt.
+ Das heisst, das alle 0.0016s für 0.0008s lang 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet werden können.
+\end_layout
+
+\begin_layout Plain Layout
+Es folgt ein Graph, der die Anzahl aller Frames an einem Ausgang zu jedem
+ Zeitpunkt darstellt:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename _img/selftest/07_Zeitschlitz.png
+	display false
+	scale 45
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wie man feststellen kann, werden 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+- (rot) und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames (grün) gleichmässig abgebaut, obwohl von beiden Prioritäten ständig
+ neue Frames generiert werden.
+ Die Express-Frames können immer versendet werden, haben aber in diesem
+ Fall keinen grossen Einfluss auf die 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+- und 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames.
 \end_layout
 
 \end_inset
@@ -3037,7 +5202,7 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Test: 
+Verhaltensüberprüfung: Zeitschlitz
 \end_layout
 
 \end_inset

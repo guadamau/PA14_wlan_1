@@ -64,6 +64,7 @@ private:
     unsigned char transmitLockExp;
     unsigned char notifiedToken;
     unsigned char notifiedTimeslot;
+    unsigned char nextUpAnotherExp;
 
     queueName ringFirstSortOrder[ QUEUES_COUNT ];
     queueName internalFirstSortOrder[ QUEUES_COUNT ];

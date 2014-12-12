@@ -156,6 +156,8 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     this->framebyteLimit = parentSwitch->par("framebyteLimit");
     this->framebytecontainer = framebyteLimit;
     this->notifiedToken = 0;
+
+    this->nextUpAnotherExp = 0;
 }
 
 
@@ -388,21 +390,20 @@ unsigned char Scheduler::containerHasEnoughBytes( cMessage* msg )
 
         /* Time elapsed since last sent low priority frame. */
         simtime_t timeElapsed = simTime() - lowSendTime;
-
-        int64_t creditBytes = ( int64_t )floor( timeElapsed.dbl() * ( datarate / 8.0 ) );
+        double creditBytes = timeElapsed.dbl() * ( framebyteLimit / 8.0 );
+        int64_t creditBytesFloored = ( int64_t )floor( creditBytes );
 
         /* in case of an overflow the result of ( framebytecontainer + creditBytes ) is negative */
-        if( ( framebytecontainer + creditBytes ) > framebyteLimit || ( framebytecontainer + creditBytes ) < -1 )
+        if( ( framebytecontainer + creditBytesFloored ) > framebyteLimit || ( framebytecontainer + creditBytesFloored ) < -1 )
         {
             framebytecontainer = framebyteLimit;
         }
         else
         {
-            framebytecontainer = framebytecontainer + creditBytes;
+            framebytecontainer = framebytecontainer + creditBytesFloored;
         }
 
 
-        EV << endl << "FRAMEBYTE CONTAINER: " << framebytecontainer << endl;
         cGate* arrivalGate = msg->getArrivalGate();
         if( arrivalGate == parentSwitch->getGateCpuIn() || arrivalGate == parentSwitch->getGateCpuInExp() )
         {
@@ -418,7 +419,7 @@ unsigned char Scheduler::containerHasEnoughBytes( cMessage* msg )
             {
                 retVal = 0x01;
                 /* in this case the low priority frame can be sent at this time. */
-                lowSendTime = simTime();
+                lowSendTime = simTime() - (creditBytes-creditBytesFloored)/framebyteLimit;
             }
         }
         else
@@ -477,6 +478,11 @@ void Scheduler::subtractFromByteContainer( cMessage* msg )
             {
                 framebytecontainer = framebytecontainer - lengthFrame;
             }
+            else if ( framebyteLimit != -1 )
+            {
+                throw cRuntimeError( "[ Scheduler ]: Error in traffic limitation" );
+                parentSwitch->endSimulation();
+            }
         }
     }
 }
@@ -489,12 +495,28 @@ void Scheduler::refreshContainer( void )
 void Scheduler::unlock( void )
 {
     transmitLock = 0;
+    nextUpAnotherExp = 0;
 }
 
 void Scheduler::unlockExp( void )
 {
     transmitLockExp = 0;
     msgExp = NULL;
+
+    /*
+     * If an express-frame has been sent and another one is coming up we have to set,
+     * that it can send it right away without creating another fragment, so that there
+     * will be two express frames between two fragments.
+     * It still will create a delay for the preempted frame.
+     */
+    cQueue* exp_ring = check_and_cast<cQueue*>( queues->get( EXPRESS_RING ) );
+    cQueue* exp_int = check_and_cast<cQueue*>( queues->get( EXPRESS_INTERNAL ) );
+    if( (!exp_ring->isEmpty()) || (!exp_int->isEmpty()) ) {
+        nextUpAnotherExp = 1;
+    }
+    else {
+        nextUpAnotherExp = 0;
+    }
 }
 
 void Scheduler::resetNotifiedToken( void )
@@ -649,57 +671,64 @@ simtime_t Scheduler::getExpressSendTime( void )
 {
     /* Algorithm from documentation PA14_wlan_1 */
     int64_t allBytesOfSendingFrame = sendingStatus->getMessageSize();
-
-    simtime_t simTimeNow = simTime();
-    simtime_t currentPreemptionDelay = sendingStatus->getPreemptionDelay();
-
-    simtime_t sendTimeOfFrame = sendingStatus->getSendingTime();
     simtime_t calcExpSendTime;
 
-
-    int64_t bytesAlreadySent = ( int64_t )floor(
-                ( ( simTimeNow.dbl() - sendTimeOfFrame.dbl() ) * datarate ) / 8.0
-                + ( (currentPreemptionDelay.dbl() * datarate) / 8.0 )
-            );
-    int64_t bytesAlreadySentData = bytesAlreadySent - 12 - (INTERFRAME_GAP_BITS / 8);
-    if( bytesAlreadySentData < 0 )
+    if( allBytesOfSendingFrame >= 136 )
     {
-        bytesAlreadySentData = 0;
-    }
 
+        simtime_t simTimeNow = simTime();
+        simtime_t currentPreemptionDelay = sendingStatus->getPreemptionDelay();
 
-    int64_t bytesNotYetSent = allBytesOfSendingFrame - bytesAlreadySent + 12;
+        simtime_t sendTimeOfFrame = sendingStatus->getSendingTime();
 
-
-    if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
-        bytesAlreadySentData % 8 == 0 &&
-        bytesNotYetSent >= 64 )
-    {
-        /* can send express frame now. */
-        calcExpSendTime = simTimeNow;
-    }
-    else if( bytesAlreadySentData % 8 != 0 &&
-             bytesNotYetSent >= 64 )
-    {
-        if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
+        int64_t bytesAlreadySent = ( int64_t )floor(
+                    ( ( simTimeNow.dbl() - sendTimeOfFrame.dbl() ) * datarate ) / 8.0
+                    + ( (currentPreemptionDelay.dbl() * datarate) / 8.0 )
+                );
+        int64_t bytesAlreadySentData = bytesAlreadySent - 12 - (INTERFRAME_GAP_BITS / 8);
+        if( bytesAlreadySentData < 0 )
         {
-            calcExpSendTime = simTimeNow + ( ( ( 8 - ( bytesAlreadySentData % 8 ) + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+            bytesAlreadySentData = 0;
+        }
+
+
+        int64_t bytesNotYetSent = allBytesOfSendingFrame - bytesAlreadySent + 12;
+
+
+        if( ( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) &&
+            bytesAlreadySentData % 8 == 0 &&
+            bytesNotYetSent >= 64 ) || nextUpAnotherExp == 1 )
+        {
+            /* can send express frame now. */
+            calcExpSendTime = simTimeNow;
+        }
+        else if( bytesAlreadySentData % 8 != 0 &&
+                 bytesNotYetSent >= 64 )
+        {
+            if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
+            {
+                calcExpSendTime = simTimeNow + ( ( ( 8 - ( bytesAlreadySentData % 8 ) + ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+            }
+            else
+            {
+                calcExpSendTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) - bytesAlreadySent + ( 8 - ( bytesAlreadySentData % 8 ) ) ) * 8 ) / datarate );
+            }
+        }
+        else if( bytesAlreadySentData % 8 == 0 &&
+                 bytesNotYetSent >= 64 )
+        {
+            if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
+            {
+                calcExpSendTime = simTimeNow + ( ( ( ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
+            }
+            else
+            {
+                calcExpSendTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) - bytesAlreadySent ) * 8 ) / datarate );
+            }
         }
         else
         {
-            calcExpSendTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) - bytesAlreadySent + ( 8 - ( bytesAlreadySentData % 8 ) ) ) * 8 ) / datarate );
-        }
-    }
-    else if( bytesAlreadySentData % 8 == 0 &&
-             bytesNotYetSent >= 64 )
-    {
-        if( bytesAlreadySent >= ( 72 + ( INTERFRAME_GAP_BITS / 8 ) ) )
-        {
-            calcExpSendTime = simTimeNow + ( ( ( ( INTERFRAME_GAP_BITS / 8 ) ) * 8 ) / datarate );
-        }
-        else
-        {
-            calcExpSendTime = simTimeNow + ( ( ( 72 + ( INTERFRAME_GAP_BITS / 8 ) - bytesAlreadySent ) * 8 ) / datarate );
+            calcExpSendTime = SIMTIME_ZERO;
         }
     }
     else
