@@ -505,13 +505,21 @@ Im Zeitschlitzverfahren werden Zeitschlitze definiert, in denen man High-
 \end_layout
 
 \begin_layout Standard
-Jeder Zeitschlitz hat eine sogenannte Grün-Phase, in welcher High-Frames
- gesendet werden können.
+Jeder Zeitschlitz hat 2 gleich grosse Phasen, davon eine sogenannte Grün-Phase,
+ in welcher High-Frames gesendet werden können.
  Den Rest des Zeitschlitzes wird für den Sendevorgang oder Low-Frames verwendet.
  Sollten keine High-Frames da sein so können auch Low-Frames gesendet werden.
  Dies wiederholt sich in jedem Zeitschlitz.
  Mit diesem Mechanismus wird verhindert, dass Low-Frames nicht gesendet
  werden, wenn ständig High-Frames zum Senden bereitstehen.
+\end_layout
+
+\begin_layout Standard
+Die Grösse einer Phase kann in Bytes selber gesetzt werden und jede zweite
+ Phase ist die vorhin erwähnte Grün-Phase.
+ Anhand der gesetzten Grösse in Bytes und der vorhandenen Übertragungsrate
+ wird eine Zeitdauer berechnet, die dann die effektive Phasengrösse als
+ Zeitfenster beträgt.
 \end_layout
 
 \begin_layout Standard
@@ -4000,7 +4008,7 @@ LOW
 
 \begin_layout Plain Layout
 \begin_inset Graphics
-	filename _img/selftest/04_Zuflusslimitierung.png
+	filename _img/selftest/04_Zuflusslimitierung_edit.png
 	display false
 	scale 45
 
@@ -4039,7 +4047,7 @@ tstop
 \begin_inset Quotes frd
 \end_inset
 
- wurden die Frames gleich schnell (siehe rote Linie in Grafik) wie nach
+ wurden die Frames gleich schnell (siehe rote Linien in Grafik) wie nach
  
 \begin_inset Quotes fld
 \end_inset
@@ -4207,7 +4215,7 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
- generiert:
+ ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051 generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -4219,8 +4227,7 @@ Node1
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Itemize
@@ -4232,8 +4239,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Itemize
@@ -4245,8 +4251,7 @@ Node3
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Plain Layout
@@ -4731,7 +4736,8 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
- generiert (selbes Lastprofil wie beim vorherigen Test, siehe Tabelle 
+ ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051 generiert (selbes
+ Lastprofil wie beim vorherigen Test, siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "Verh_ueberpruef_05_Vortritt"
@@ -4750,8 +4756,7 @@ Node1
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Itemize
@@ -4763,8 +4768,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Itemize
@@ -4776,8 +4780,7 @@ Node3
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu
- tstop=0.051)
+ mit 1000 Bytes
 \end_layout
 
 \begin_layout Plain Layout
@@ -4939,10 +4942,11 @@ HIGH
 \end_inset
 
 -Frames nur innerhalb der definierten Grün-Phase versendet werden können.
- Die Grösse dieser Phase kann in Bytes selber gesetzt werden und jede zweite
- Phase ist die vorhin erwähnte Grün-Phase.
- Anhand der gesetzten Grösse in Bytes und der vorhandenen Übertragungsrate
- wird eine Zeitdauer berechnet, die dann die effektive Phasengrösse beträgt.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4978,23 +4982,7 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
--Frames statt, da es in jeder zweiten Phase (
-\begin_inset Quotes fld
-\end_inset
-
-Nicht-Grün-Phase
-\begin_inset Quotes frd
-\end_inset
-
-) untersagt ist, 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames zu versenden.
+-Frames statt.
  Gibt es keine 
 \begin_inset Quotes fld
 \end_inset
@@ -5013,6 +5001,10 @@ LOW
 
 -Frames auch in der Grün-Phase versendet werden.
  Express-Frames können natürlich immer versendet werden.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5032,7 +5024,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es werden folgende Frames mit der Priorität generiert:
+Es werden folgende Frames generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -5088,7 +5080,7 @@ HIGH
 \begin_inset Quotes frd
 \end_inset
 
- (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051)
+ (Generiert ab t=0.001, Interval von 0.0001 bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Itemize
@@ -5116,7 +5108,7 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
- (Generiert ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051)
+ (Generiert ab t=0.001, Interval von 0.0001 bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Plain Layout
@@ -5142,7 +5134,7 @@ Es folgt ein Graph, der die Anzahl aller Frames an einem Ausgang zu jedem
 \begin_inset Graphics
 	filename _img/selftest/07_Zeitschlitz.png
 	display false
-	scale 45
+	scale 40
 
 \end_inset
 
