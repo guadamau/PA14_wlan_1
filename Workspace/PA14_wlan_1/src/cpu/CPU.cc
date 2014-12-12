@@ -442,9 +442,17 @@ CPU::initialize()
     /* There must be a delay logger on top of the current simulation.
      * Otherwise the following lines will result in an error. */
 
-    if( getModuleByPath( "delayLogger" ) != NULL )
+    if( getModuleByPath( "HsrNetworkSimple.delayLogger" ) != NULL )
     {
-        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "delayLogger" ) );
+        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "HsrNetworkSimple.delayLogger" ) );
+    }
+    else if( getModuleByPath( "SubstationHSR8mu2pu.delayLogger" ) != NULL )
+    {
+        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "SubstationHSR8mu2pu.delayLogger" ) );
+    }
+    else if( getModuleByPath( "SubstationHSR17mu2pu.delayLogger" ) != NULL )
+    {
+        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "SubstationHSR17mu2pu.delayLogger" ) );
     }
     else
     {
