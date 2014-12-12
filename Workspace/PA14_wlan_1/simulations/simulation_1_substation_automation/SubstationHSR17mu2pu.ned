@@ -1,10 +1,10 @@
-package selftest_single_frame_express;
+package simulation_1_substation_automation;
 import channels.MyFastChannel;
 import endDevices.HsrEndNode;
 import delayLogger.DelayLogger;
 
 
-network HsrNetworkSimple
+network SubstationHSR17mu2pu
 {
     @display("bgb=1184,462");
     submodules:
