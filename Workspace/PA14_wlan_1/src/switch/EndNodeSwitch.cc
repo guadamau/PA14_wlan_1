@@ -139,7 +139,6 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
         if( msg->getArrivalGate() == gateAIn )
         {
             schedGateAOut->unlock();
-//            schedGateAOut->getSendingStatus()->detachFrame();
             schedGateAOut->processQueues();
         }
         else if ( msg->getArrivalGate() == gateAInExp )
@@ -151,7 +150,6 @@ void EndNodeSwitch::handleMessage( cMessage* msg )
         else if ( msg->getArrivalGate() == gateBIn )
         {
             schedGateBOut->unlock();
-//            schedGateBOut->getSendingStatus()->detachFrame();
             schedGateBOut->processQueues();
         }
         else if ( msg->getArrivalGate() == gateBInExp )

@@ -8,7 +8,7 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.0010000001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>1.00025</interval> 					<!-- 4000x per second -->          
+            <interval>0.001</interval> 					<!-- 1000x per second -->          
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-02</destination>    
@@ -25,14 +25,38 @@
             <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.06</stopzeit> 
-            <interval>1.00025</interval> 					<!-- 4000x per second -->
+            <interval>0.00025</interval> 					<!-- 4000x per second -->
             <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
             <last>0.0</last>
             <maxlast>100</maxlast>               
             <destination>01-15-12-14-88-02</destination>    
-            <paketgroesse>1476</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <paketgroesse>136</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
             <priority>HIGH</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
         </lastmuster> 
     </source>    
+    
+    
+    <!-- ###################################### TCP spam bot with inexisting destination address ###################################### -->
+    
+    
+    <source>00-15-12-14-88-02								<!-- TCP Traffic Simulation MU7 to xx-xx-xx-xx-xx-xx -->
+        <lastmuster>
+            <typ>hsr</typ>
+            <verhalten>konstante last</verhalten>         
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.06</stopzeit> 
+            <interval>0.000005</interval> 					<!-- 20000x per second -->           
+            <epsilon>0.0</epsilon>           			    <!-- 0.0 µs -->
+            <last>0.0</last>
+            <maxlast>100</maxlast>               
+            <destination>00-15-12-14-88-F1</destination>    <!-- This destination does intentionally not exist -->
+            <paketgroesse>1476</paketgroesse>               <!-- size DATA FRAME (+24 = Total Framesize) -->
+            <priority>LOW</priority>		                <!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+        </lastmuster> 
+    </source>    
+
+    
+    <!-- ###################################### ############################################### ###################################### -->
+    
 </simulation_behaviour>
 

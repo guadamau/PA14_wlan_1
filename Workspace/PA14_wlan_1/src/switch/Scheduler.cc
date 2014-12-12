@@ -76,6 +76,8 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     this->finishTime = SIMTIME_ZERO;
     this->expSendTime = SIMTIME_ZERO;
 
+    this->lowSendTime = SIMTIME_ZERO;
+
     this->parentSwitch = parentSwitch;
 
     this->schedmode = schedmode;
@@ -151,19 +153,11 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
 
     this->timeslotPhaseSize = parentSwitch->par( "timeslotPhaseSize" );
     this->notifiedTimeslot = 0;
-    this->framebytelimitPerSecond = parentSwitch->par("framebytelimitPerSecond");
-    this->framebytecontainer = framebytelimitPerSecond;
+    this->framebyteLimit = parentSwitch->par("framebyteLimit");
+    this->framebytecontainer = framebyteLimit;
     this->notifiedToken = 0;
 }
 
-void Scheduler::handleMessage( cMessage *msg )
-{
-    if( msg->isSelfMessage() )
-    {
-        delete msg;
-        processQueues();
-    }
-}
 
 void Scheduler::enqueueMessage( cMessage *msg, queueName queue )
 {
@@ -366,57 +360,130 @@ unsigned char Scheduler::timeslotIsValid( queueName currentQueueName )
 
 unsigned char Scheduler::containerHasEnoughBytes( cMessage* msg )
 {
+    unsigned char retVal = 0x00;
     /*
-     * Only check for newly generated frames
-     */
-    parentSwitch->frameByteContainerCheck();
-    EV << endl << "FRAMEBYTE CONTAINER: " << framebytecontainer << endl;
-    cGate* arrivalGate = msg->getArrivalGate();
-    if( arrivalGate == parentSwitch->getGateCpuIn() || arrivalGate == parentSwitch->getGateCpuInExp() )
+     * The tokenizer has only impact on low priority frames.
+     * This method always returns true when the priority is not low.
+     * */
+    EthernetIIFrame* ethTag = NULL;
+    vlanMessage* vlanTag = NULL;
+    hsrMessage* hsrTag = NULL;
+    dataMessage* ethPayload = NULL;
+
+    ethTag = check_and_cast<EthernetIIFrame*>( msg->dup() );
+
+    MessagePacker::decapsulateMessage( &ethTag, &vlanTag, &hsrTag, &ethPayload );
+
+    framePriority framePrio = static_cast<framePriority>( vlanTag->getUser_priority() );
+
+    if( framePrio != LOW && framePrio != HIGH && framePrio != EXPRESS )
     {
-        cMessage* msgdup = msg->dup();
-        EthernetIIFrame* checkmsg = check_and_cast<EthernetIIFrame*>( msgdup );
-        int64_t lengthFrame = checkmsg->getByteLength();
-        if( framebytelimitPerSecond == -1 )
+        throw cRuntimeError( "[ Scheduler ]: Can't handle this priority number. Exiting ..." );
+        parentSwitch->endSimulation();
+    }
+
+    if( framePrio == LOW )
+    {
+        // parentSwitch->frameByteContainerCheck();
+
+        /* Time elapsed since last sent low priority frame. */
+        simtime_t timeElapsed = simTime() - lowSendTime;
+
+        int64_t creditBytes = ( int64_t )floor( timeElapsed.dbl() * ( datarate / 8.0 ) );
+
+        /* in case of an overflow the result of ( framebytecontainer + creditBytes ) is negative */
+        if( ( framebytecontainer + creditBytes ) > framebyteLimit || ( framebytecontainer + creditBytes ) < -1 )
         {
-            return 0x01;
-        }
-        else if( framebytecontainer - lengthFrame >= 0)
-        {
-            return 0x01;
+            framebytecontainer = framebyteLimit;
         }
         else
         {
-            return 0x00;
+            framebytecontainer = framebytecontainer + creditBytes;
+        }
+
+
+        EV << endl << "FRAMEBYTE CONTAINER: " << framebytecontainer << endl;
+        cGate* arrivalGate = msg->getArrivalGate();
+        if( arrivalGate == parentSwitch->getGateCpuIn() || arrivalGate == parentSwitch->getGateCpuInExp() )
+        {
+            EthernetIIFrame* checkmsg = check_and_cast<EthernetIIFrame*>( msg->dup() );
+            int64_t lengthFrame = checkmsg->getByteLength();
+            delete checkmsg;
+
+            if( framebyteLimit == -1 )
+            {
+                retVal = 0x01;
+            }
+            else if( framebytecontainer - lengthFrame >= 0 )
+            {
+                retVal = 0x01;
+                /* in this case the low priority frame can be sent at this time. */
+                lowSendTime = simTime();
+            }
+        }
+        else
+        {
+            retVal = 0x01;
         }
     }
     else
     {
-        return 0x01;
+        retVal = 0x01;
     }
+
+    MessagePacker::deleteMessage( &ethTag, &vlanTag, &hsrTag, &ethPayload );
+
+    return retVal;
 }
 
 void Scheduler::subtractFromByteContainer( cMessage* msg )
 {
     /*
-     * Only subtract newly generated frames
-     */
-    cGate* arrivalGate = msg->getArrivalGate();
-    if( arrivalGate == parentSwitch->getGateCpuIn() || arrivalGate == parentSwitch->getGateCpuInExp() )
+     * The tokenizer has only impact on low priority frames.
+     * This method does nothing when the priority is not low.
+     * */
+    EthernetIIFrame* ethTag = NULL;
+    vlanMessage* vlanTag = NULL;
+    hsrMessage* hsrTag = NULL;
+    dataMessage* ethPayload = NULL;
+
+    ethTag = check_and_cast<EthernetIIFrame*>( msg->dup() );
+
+    MessagePacker::decapsulateMessage( &ethTag, &vlanTag, &hsrTag, &ethPayload );
+
+    framePriority framePrio = static_cast<framePriority>( vlanTag->getUser_priority() );
+
+    if( framePrio != LOW && framePrio != HIGH && framePrio != EXPRESS )
     {
-        cMessage* msgdup = msg->dup();
-        EthernetIIFrame* checkmsg = check_and_cast<EthernetIIFrame*>( msgdup );
-        int64_t lengthFrame = checkmsg->getByteLength();
-        if( framebytecontainer - lengthFrame >= 0)
+        throw cRuntimeError( "[ Scheduler ]: Can't handle this priority number. Exiting ..." );
+        parentSwitch->endSimulation();
+    }
+
+    MessagePacker::deleteMessage( &ethTag, &vlanTag, &hsrTag, &ethPayload );
+
+    if( framePrio == LOW )
+    {
+        /*
+         * Only subtract newly generated frames (from the cpu)
+         */
+        cGate* arrivalGate = msg->getArrivalGate();
+        if( arrivalGate == parentSwitch->getGateCpuIn() || arrivalGate == parentSwitch->getGateCpuInExp() )
         {
-            framebytecontainer = framebytecontainer - lengthFrame;
+            EthernetIIFrame* checkmsg = check_and_cast<EthernetIIFrame*>( msg->dup() );
+            int64_t lengthFrame = checkmsg->getByteLength();
+            delete checkmsg;
+
+            if( framebytecontainer - lengthFrame >= 0 )
+            {
+                framebytecontainer = framebytecontainer - lengthFrame;
+            }
         }
     }
 }
 
 void Scheduler::refreshContainer( void )
 {
-    framebytecontainer = framebytelimitPerSecond;
+    framebytecontainer = framebyteLimit;
 }
 
 void Scheduler::unlock( void )
@@ -448,10 +515,12 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
         cOutVector* currentQueueSizeVector = check_and_cast<cOutVector*>( queueVectors->get( currentQueueName ) );
 
         EthernetIIFrame* msgeth = check_and_cast<EthernetIIFrame*>( currentQueue->front()->dup() );
+        unsigned char enoughBytesAvailableToSend = containerHasEnoughBytes( msgeth );
+
         /* check if the transmit state of the nic is idle. */
-        if(
-           (transmitLock == 0 && transmitLockExp == 0 && timeslotIsValid( currentQueueName ) && containerHasEnoughBytes( msgeth ) ) || schedID == 'C'
-          )
+        if( ( transmitLock == 0 && transmitLockExp == 0 &&
+              timeslotIsValid( currentQueueName ) && enoughBytesAvailableToSend )
+            || schedID == 'C' )
         {
             cMessage* msg = check_and_cast<cMessage*>( currentQueue->pop() );
 
@@ -484,7 +553,7 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
             if( ( currentQueueName == EXPRESS_RING || currentQueueName == EXPRESS_INTERNAL ) &&
                     transmitLock == 1 &&
                     transmitLockExp == 0 &&
-                    containerHasEnoughBytes( msgeth ) )
+                    enoughBytesAvailableToSend )
             {
                 /*
                  * EXPRESS HANDLING (PREEMPTION)
@@ -506,11 +575,14 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
                 looklatermsg->setSchedulerName( schedID );
                 simtime_t now = simTime();
                 simtime_t nextlookup = SIMTIME_ZERO;
+                int64_t curFrameLength = msgeth->getByteLength();
 
-                if ( !containerHasEnoughBytes( msgeth ) && notifiedToken == 0 )
+                if ( !enoughBytesAvailableToSend && notifiedToken == 0 )
                 {
-                    parentSwitch->frameByteContainerCheck();
-                    nextlookup = floor(simTime().dbl()) + 1.0;
+                    // parentSwitch->frameByteContainerCheck();
+                    // nextlookup = floor(simTime().dbl()) + 1.0;
+                    nextlookup =  simTime() + ( ( curFrameLength - framebytecontainer ) / ( datarate / 8.0 ) );
+
                     looklatermsg->setType('o');
                     notifiedToken = 1;
                     parentSwitch->scheduleAt( nextlookup, looklatermsg );

@@ -47,6 +47,8 @@ private:
     simtime_t finishTime;
     simtime_t expSendTime;
 
+    simtime_t lowSendTime;
+
     cGate* schedOutGate;
     cGate* schedOutGateExp;
 
@@ -67,7 +69,7 @@ private:
     queueName internalFirstSortOrder[ QUEUES_COUNT ];
 
     int timeslotPhaseSize;
-    int64_t framebytelimitPerSecond;
+    int64_t framebyteLimit;
     int64_t framebytecontainer;
 
     /* To alternate between Ring and Internal (Zipper mechanism) */
@@ -113,9 +115,6 @@ public:
     void unlockExp( void );
 
     void refreshContainer( void );
-
-protected:
-    virtual void handleMessage( cMessage *msg );
 
 };
 
