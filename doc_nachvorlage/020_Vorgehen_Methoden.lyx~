@@ -933,162 +933,138 @@ label{lst:configxml},captionpos=b]
 
 \begin_layout Plain Layout
 
-<!-- 	
+	<!--
 \end_layout
 
 \begin_layout Plain Layout
 
-Define framegenerator for node with MAC 00-15-12-14-88-04
+		######################################################################
 \end_layout
 
 \begin_layout Plain Layout
 
-(has to be defined in NED-file from the network)
+		 Tag-description (see current configurations for syntax)
 \end_layout
 
 \begin_layout Plain Layout
 
--->
+		######################################################################
 \end_layout
 
 \begin_layout Plain Layout
 
-<source>00-15-12-14-88-04
+        source:	MAC-Address of source {
 \end_layout
 
 \begin_layout Plain Layout
 
+            lastmuster {
 \end_layout
 
 \begin_layout Plain Layout
 
-	<lastmuster>             
+                startzeit:       Time when the first frame will be generated
 \end_layout
 
 \begin_layout Plain Layout
 
-		<typ>hsr</typ>    
+                stopzeit:        Generate frame until this time is reached
 \end_layout
 
 \begin_layout Plain Layout
 
-       
+                interval:        Generate a frame every x seconds
 \end_layout
 
 \begin_layout Plain Layout
 
-<!-- 	
+                epsilon:         Generate a random value between 0 and epsilon
 \end_layout
 
 \begin_layout Plain Layout
 
-		Behavior 
+                                 that will be added to the value of the
+ 
 \end_layout
 
 \begin_layout Plain Layout
 
-			Constant load -> "konstante last", 
+                                 previous tag every time a new frame 
 \end_layout
 
 \begin_layout Plain Layout
 
-			Evenly distributed load -> "gleichverteilte last", 
+                                 will be generated
 \end_layout
 
 \begin_layout Plain Layout
 
-			Normally distributed load -> "normalverteilte last" 
+                destination:     Set destination of frame
 \end_layout
 
 \begin_layout Plain Layout
 
--->
+                                 (can be Uni-, Multi- or Broadcast)
 \end_layout
 
 \begin_layout Plain Layout
 
-		<verhalten>konstante last</verhalten>
+                                 The broadcast-address is FF-FF-FF-FF-FF-FF
 \end_layout
 
 \begin_layout Plain Layout
 
+                paketgroesse:    Set datasize of frame in Bytes 
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	Time when the first frame will be generated -->
+                                 (Size + 24 = Total Framesize)
 \end_layout
 
 \begin_layout Plain Layout
 
-		<startzeit>0.001</startzeit>
+                                 Example: the total framesize is 
 \end_layout
 
 \begin_layout Plain Layout
 
+                                 160 Bytes when 136 is set
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	Generate frame until this time is reached -->
+                priority:        Set priority of frame
 \end_layout
 
 \begin_layout Plain Layout
 
-		<stopzeit>0.06</stopzeit>
+                                 ("EXPRESS", "HIGH", "LOW")
 \end_layout
 
 \begin_layout Plain Layout
 
+            }
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	Generate a frame every x seconds -->
+        }
 \end_layout
 
 \begin_layout Plain Layout
 
-		<interval>0.00025</interval> <!-- 4000x per second -->              
+	-->
 \end_layout
 
 \begin_layout Plain Layout
 
+    
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	
-\end_layout
-
-\begin_layout Plain Layout
-
-		(Only for constant load behavior)
-\end_layout
-
-\begin_layout Plain Layout
-
-		Generate bea random value between 0 and epsilon that 
-\end_layout
-
-\begin_layout Plain Layout
-
-		will be added to the value of the previous tag
-\end_layout
-
-\begin_layout Plain Layout
-
-		every time a new frame will be generated
-\end_layout
-
-\begin_layout Plain Layout
-
--->
-\end_layout
-
-\begin_layout Plain Layout
-
-		<epsilon>0.0000125</epsilon> <!-- 12.5 us -->            
+    <!-- # Frames with unicast destination and different priorities # -->
 \end_layout
 
 \begin_layout Plain Layout
@@ -1097,59 +1073,72 @@ Define framegenerator for node with MAC 00-15-12-14-88-04
 
 \begin_layout Plain Layout
 
-<!--	Set destination of frame (can be Uni-, Multi- or Broadcast) -->
+    <source>00-15-12-14-88-01
 \end_layout
 
 \begin_layout Plain Layout
 
-		<destination>01-15-12-14-88-0A</destination>
+        <lastmuster>
 \end_layout
 
 \begin_layout Plain Layout
 
+            <startzeit>0.001</startzeit>
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	Set datasize of frame (Size + 24 = Total Framesize) -->
+            <stopzeit>0.0011</stopzeit>
 \end_layout
 
 \begin_layout Plain Layout
 
-		<paketgroesse>136</paketgroesse>
+            <interval>0.00025</interval>
 \end_layout
 
 \begin_layout Plain Layout
 
+            <epsilon>0</epsilon>
 \end_layout
 
 \begin_layout Plain Layout
 
-<!--	Set priority of frame ("EXPRESS", "HIGH", "LOW") -->
+            <destination>00-15-12-14-88-02</destination>
 \end_layout
 
 \begin_layout Plain Layout
 
-		<priority>HIGH</priority>
+            <paketgroesse>136</paketgroesse>
 \end_layout
 
 \begin_layout Plain Layout
 
+            <priority>EXPRESS</priority>
 \end_layout
 
 \begin_layout Plain Layout
 
-	</lastmuster>   
+        </lastmuster>
+\end_layout
+
+\begin_layout Plain Layout
+
+    </source> 
+\end_layout
+
+\begin_layout Plain Layout
+
+          
+\end_layout
+
+\begin_layout Plain Layout
+
+    <!-- # # # -->
 \end_layout
 
 \begin_layout Plain Layout
 
   
-\end_layout
-
-\begin_layout Plain Layout
-
-</source>  
 \end_layout
 
 \begin_layout Plain Layout
@@ -1604,15 +1593,8 @@ F
 \begin_inset Quotes frd
 \end_inset
 
- weniger als 136 Bytes (
-\begin_inset Quotes fld
-\end_inset
-
-P
-\begin_inset Quotes frd
-\end_inset
-
-, 64 Bytes + 60 Bytes und 
+ weniger als 128 Bytes (64 Bytes Data für das erste Fragment + 60 Bytes
+ Data für das zweite Fragment + 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1620,8 +1602,8 @@ C
 \begin_inset Quotes frd
 \end_inset
 
- zusammen), kann das Frame nicht fragmentiert und der weitere Vorgang abgebroche
-n werden.
+ des gesamten Frames zusammen), kann das Frame nicht fragmentiert und der
+ weitere Vorgang abgebrochen werden.
  Das heisst, dass man mit dem Senden des Express-Frames warten muss, bis
  das nicht fragmentierbare Frame und dessen IFG fertig versandt wurden.
 \end_layout
@@ -2193,6 +2175,14 @@ Verhaltensüberprüfung
 Für den Nachweis der Tests wird der Nachrichtenverlauf der jeweiligen Simulation
  verwendet oder eine Grafik, die den Queueverlauf (wann sind wieviele Frames
  mit welcher Eigenschaft bei einem Ausgang vorhanden) aufweist, angezeigt.
+ Wie diese Grafiken zu lesen sind wird in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Resultate"
+
+\end_inset
+
+ erklärt.
  Im 
 \begin_inset Quotes fld
 \end_inset
@@ -2285,8 +2275,9 @@ reference "sub:Definition-der-Knoten"
 \end_inset
 
 ).
- Wenn ein Knoten zum Zeitpunkt t1=0.001 generiert wird, wird er zum Zeitpunkt
- t2=0.001006 versendet, wenn nichts anderes gerade versendet wird.
+ Wenn ein Frame eines Knotens zum Zeitpunkt t1=0.001 generiert wird, wird
+ es zum Zeitpunkt t2=0.001006 versendet, wenn gerade nichts anderes versendet
+ wird.
 \end_layout
 
 \begin_layout Standard
@@ -3144,7 +3135,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 136 Bytes und Priorität 
+ mit 128 Bytes und Priorität 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3355,7 +3346,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 135 Bytes und Priorität 
+ mit 127 Bytes und Priorität 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3403,10 +3394,10 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- bei einem normalen Frame mit 135 Bytes wie folgt berechnet werden:
+ bei einem normalen Frame mit 127 Bytes wie folgt berechnet werden:
 \begin_inset Formula 
 \[
-t=\frac{135+I}{datarate}=\frac{147}{(100000000/8)}=0,00001176s
+t=\frac{127+I}{datarate}=\frac{139}{(100000000/8)}=0.00001112s
 \]
 
 \end_inset
@@ -3450,7 +3441,7 @@ tsendexp
 \begin_inset Quotes frd
 \end_inset
 
- 0.001018399999s, was eine Differenz 
+ 0.001017759999s, was eine Differenz 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3458,7 +3449,7 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- von 0.0000124s beträgt.
+ von 0.00001176s beträgt.
  Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
  geht, kann man sagen, dass 
 \begin_inset Quotes fld
@@ -3468,7 +3459,7 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- dem oben berechneten Wert (0.00001176s) entspricht und das Szenario somit
+ dem oben berechneten Wert (0.00001112s) entspricht und das Szenario somit
  bewiesen wurde.
 \end_layout
 
@@ -4864,7 +4855,7 @@ Zeitschlitzverfahren
 placement H
 wide false
 sideways false
-status open
+status collapsed
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -5080,7 +5071,7 @@ HIGH
 \begin_inset Quotes frd
 \end_inset
 
- (Generiert ab t=0.001, Interval 0.0001 bis zu tstop=0.051)
+ (Generiert ab t=0.001, Interval von 0.0001 bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Itemize
@@ -5207,231 +5198,6 @@ Verhaltensüberprüfung: Zeitschlitz
 
 \end_layout
 
-\begin_layout Subsubsection
-xxxxxxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="left" valignment="top" width="10text%">
-<column alignment="left" valignment="top" width="90text%">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Soll
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Ist
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Nachweis
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Test: 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-xxxxxxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\begin_inset Tabular
-<lyxtabular version="3" rows="3" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="left" valignment="top" width="10text%">
-<column alignment="left" valignment="top" width="90text%">
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Soll
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Ist
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Nachweis
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Test: 
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-Verhält sich Frame wie geplant?
-\end_layout
-
-\begin_layout Standard
-Was wenn....?
-\end_layout
-
-\begin_layout Standard
-Prioritäten?
-\end_layout
-
-\begin_layout Standard
-\begin_inset Quotes fld
-\end_inset
-
-Preemption
-\begin_inset Quotes frd
-\end_inset
-
-?
-\end_layout
-
 \begin_layout Section
 Simulation
 \begin_inset CommandInset label
@@ -5454,6 +5220,8 @@ reference "chap:Resultate"
 \end_inset
 
  aufgeführt.
+ Diese Simulationen können in der mit dieser Arbeit mitgelieferten Umgebung
+ auch selber durchgeführt werden.
  Wie diese Szenarien selber simuliert werden können, wird in der Anleitung
  in 
 \begin_inset CommandInset ref
@@ -5463,6 +5231,8 @@ reference "chap:Anleitung-zur-Simulationsumgebun"
 \end_inset
 
  beschrieben.
+ Beim Starten der Simulationsumgebung wird nach einer Konfiguration gefragt.
+ Dieser Konfigurationsname wird bei der entsprechenden Simulation aufgelistet.
 \end_layout
 
 \begin_layout Subsection
@@ -5483,7 +5253,7 @@ Der Aufbau dieses Szenarios ist ein HSR-Ring mit DANH-Knoten.
 \end_layout
 
 \begin_layout Standard
-Im HSR-Ring befinden sich sogenannte Merging Units (MU), welche die Messwerte
+Im HSR-Ring befinden sich 14 sogenannte Merging Units (MU), welche die Messwerte
  mit Sensoren erfassen und diesemit Zeitstempel und sonstigen Steuerinformatione
 n in ein Frame packen.
  Ein solches Frame hat eine Gesamtgrösse von 160 Bytes (inklusive Header)
@@ -5491,24 +5261,23 @@ n in ein Frame packen.
 \begin_inset Quotes fld
 \end_inset
 
-High
+HIGH
 \begin_inset Quotes frd
 \end_inset
 
 .
  Eine MU verschickt konstant 4000 mal pro Sekunde ein solches Frame via
  Multicast (Publisher / Subscriber Modell).
- Ziel dieser Frames sind Protection Units (PU) und eventuell andere MUs.
- Protection Units sind im Netzwerk doppelt vorhanden und treffen anhand
- der erhaltenen Messwerte Entscheidungen.
+ Ziel dieser Frames sind 2 Protection Units (PU) und eventuell andere MUs.
+ Protection Units treffen anhand der erhaltenen Messwerte Entscheidungen.
  MUs und PUs sind DANH-Knoten.
 \end_layout
 
 \begin_layout Standard
 Neben den erwähnten Frames gibt es spontane Einzelmeldungen (Express-Frames,
  auch Multicast), welche selten und zufällig vorkommen.
- Die grösse dieser Express-Frames beträgt ca.
- 100 Bytes.
+ Die grösse dieser Express-Frames beträgt 100 Bytes.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -5517,6 +5286,880 @@ Als Background-Traffic wird von 2 Knoten TCP-ähnlicher Traffic generiert,
  von 1500 Bytes an den anderen Knoten (Knoten B) sendet (Unicast).
  Knoten B sendet zur selben Zeit auch alle 200 Sekunden Frames à 64 Bytes
  an Knoten A.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/020_Simulation_1_Network.png
+	display false
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Netzwerkaufbau Szenario 1: Substation Automation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Konkret wird für dieses Szenario folgendes Lastprofil angewandt:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="13" columns="6">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="middle" width="12text%">
+<column alignment="left" valignment="middle" width="8text%">
+<column alignment="left" valignment="middle" width="10text%">
+<column alignment="left" valignment="middle" width="30text%">
+<column alignment="left" valignment="middle" width="10text%">
+<column alignment="left" valignment="middle" width="18text%">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Priorität
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Quelle
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Ziel
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Interval (Alle x Sekunden)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grösse in Bytes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zweck
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EXPRESS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU1
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multicast
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01s + 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{1}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Alarm
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU8
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HIGH
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU1
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Multicast
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00025s + 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{2}$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+160
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Messwerte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU2
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU3
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU4
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU5
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU6
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU7
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU8
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LOW
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PU1
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.005s
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1500
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="3" alignment="left" valignment="middle" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+TCP-ähnlicher Traffic
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell multirow="4" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PU1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+MU5
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell multirow="4" alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Lastprofil Szenario 1: Substation Automation
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{1}$
+\end_layout
+
+\end_inset
+
+ = Zufallswert zwischen (0s und 0.01s)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{2}$
+\end_layout
+
+\end_inset
+
+= Zufallswert zwischen (0s und 0.0000125s)
+\end_layout
+
+\begin_layout Standard
+Diese Frames werden ab dem Zeitpunkt t=0.001s bis zu tstop=0.56s generiert.
 \end_layout
 
 \begin_layout Standard
@@ -5531,6 +6174,10 @@ Simulation 1.1: First Come First Serve
 \end_layout
 
 \begin_layout Standard
+Konfigurationsname: Simulation_1_1_FCFS
+\end_layout
+
+\begin_layout Standard
 Szenario 1 wird ohne spezielle Mechanismen in den Knoten simuliert.
  Es spielt in dieser Variante keine Rolle, ob ein Frame von Aussen oder
  vom Ring kommt.
@@ -5538,6 +6185,10 @@ Szenario 1 wird ohne spezielle Mechanismen in den Knoten simuliert.
 
 \begin_layout Subsubsection
 Simulation 1.2: Vortritt für Frames vom Ring
+\end_layout
+
+\begin_layout Standard
+Konfigurationsname: Simulation_1_2_Vortritt_Ring
 \end_layout
 
 \begin_layout Standard
@@ -5549,6 +6200,10 @@ Jeder Knoten im Ring gewährt den Frames, die vom Ring kommen, den Vortritt
 
 \begin_layout Subsubsection
 Simulation 1.3: Vortritt für Frames von Aussen
+\end_layout
+
+\begin_layout Standard
+Konfigurationsname: Simulation_1_3_Vortritt_Internal
 \end_layout
 
 \begin_layout Standard
@@ -5566,6 +6221,10 @@ Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
 \end_layout
 
 \begin_layout Standard
+Konfigurationsname: Simulation_1_4_Vortritt_Int_Zuflusslim
+\end_layout
+
+\begin_layout Standard
 Die Simulation 1.3 wird mit einer Zuflusslimitierung erweitert.
  Mit Hilfe dieser Limitierung kann ausgeschlossen werden, dass Frames vom
  Ring nie weitergeleitet werden wenn ein Knoten ständig Frames generiert.
@@ -5573,6 +6232,10 @@ Die Simulation 1.3 wird mit einer Zuflusslimitierung erweitert.
 
 \begin_layout Subsubsection
 Simulation 1.5: Reissverschluss
+\end_layout
+
+\begin_layout Standard
+Konfigurationsname: Simulation_1_5_Reissverschluss
 \end_layout
 
 \begin_layout Standard
@@ -5584,6 +6247,10 @@ Es wird in jedem Knoten abwechslungsweise der Vortritt für Frames vom Ring
 
 \begin_layout Subsubsection
 Simulation 1.6: Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Standard
+Konfigurationsname: Simulation_1_6_Zeitschlitz
 \end_layout
 
 \begin_layout Standard
@@ -5599,6 +6266,10 @@ reference "sub:Zeitschlitzverfahren"
 
 \begin_layout Subsubsection
 Simulation 1.7: Maximale Auslastung
+\end_layout
+
+\begin_layout Standard
+Konfigurationsname: Simulation_1_7_Max_Auslastung
 \end_layout
 
 \begin_layout Standard

@@ -1,37 +1,50 @@
 ﻿<?xml version="1.0" ?>
 <simulation_behaviour>
+
+	<!--
+		######################################################################
+		 Tag-description (see current configurations for syntax)
+		######################################################################
+		source:	MAC-Address of source {
+			lastmuster {
+				startzeit:  	Time when the first frame will be generated           
+				stopzeit:		Generate frame until this time is reached
+				interval:		Generate a frame every x seconds
+				epsilon:		Generate a random value between 0 and epsilon that
+								will be added to the value of the previous tag
+								every time a new frame will be generated
+				destination:	Set destination of frame (can be Uni-, Multi- or Broadcast)
+								The broadcast-address is FF-FF-FF-FF-FF-FF
+				paketgroesse:	Set datasize of frame in Bytes (Size + 24 = Total Framesize)
+								Example: the total framesize is 160 Bytes when 136 is set
+				priority:		Set priority of frame ("EXPRESS", "HIGH", "LOW")
+			}
+		}
+	-->
     
     <!-- ###################################### Frames with unicast destination and different priorities ###################################### -->
     
     <source>00-15-12-14-88-01
         <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
-            <startzeit>0.001</startzeit>            
+        	<startzeit>0.001</startzeit>            
             <stopzeit>0.0011</stopzeit> 
-            <interval>0.00025</interval> 					<!-- 4000x per second -->
-            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>00-15-12-14-88-02</destination>    <!-- UNICAST -->    
-            <paketgroesse>111</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>HIGH</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <interval>0.00025</interval>
+            <epsilon>0</epsilon>
+            <destination>00-15-12-14-88-02</destination>  
+            <paketgroesse>103</paketgroesse>
+            <priority>HIGH</priority>
         </lastmuster> 
     </source>
     
     <source>00-15-12-14-88-01
         <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
             <startzeit>0.001001</startzeit>            
             <stopzeit>0.0011</stopzeit> 
-            <interval>0.00025</interval> 					<!-- 4000x per second -->
-            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>00-15-12-14-88-02</destination>    <!-- UNICAST -->       
-            <paketgroesse>76</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>EXPRESS</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <interval>0.00025</interval>
+            <epsilon>0</epsilon>
+            <destination>00-15-12-14-88-02</destination>     
+            <paketgroesse>76</paketgroesse>
+            <priority>EXPRESS</priority>
         </lastmuster> 
     </source>
  

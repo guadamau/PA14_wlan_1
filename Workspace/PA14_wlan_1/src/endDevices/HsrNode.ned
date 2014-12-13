@@ -28,7 +28,7 @@ module HsrNode
 {
     parameters:
         string macAddress;
-        int ringID; //ring number
+        int ringID = default( 1 ); //ring number
         int outputQueueCapacityPerPort = default( 100 );
         int duplicateDetectionListSize = default( 1000 );
 

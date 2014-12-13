@@ -1,130 +1,96 @@
-package network_three_19_nodes;
+package simulation_1_substation_automation;
 import channels.MyFastChannel;
 import endDevices.HsrEndNode;
 import delayLogger.DelayLogger;
 
 
-network HsrNetworkSimple
+network SubstationHSR
 {
-    @display("bgb=1184,462");
+    @display("bgb=971,535");
     submodules:
 
         delayLogger: DelayLogger {
-            @display("i=block/wheelbarrow;p=1114,395");
+            @display("i=block/wheelbarrow;p=895,481");
         }
 
         MU1: HsrEndNode {
             macAddress = "00-15-12-14-88-01";
-            ringID = 1;
-            @display("i=devices/mu;p=319,96");
+            @display("i=devices/mu;p=759,53");
         }
 
         MU2: HsrEndNode {
             macAddress = "00-15-12-14-88-02";
-            ringID = 1;
-            @display("i=devices/mu;p=192,96");
+            @display("i=devices/mu;p=759,152");
         }
 
         MU3: HsrEndNode {
             macAddress = "00-15-12-14-88-03";
-            ringID = 1;
-            @display("i=devices/mu;p=57,96");
+            @display("i=devices/mu;p=759,259");
         }
 
         MU4: HsrEndNode {
             macAddress = "00-15-12-14-88-04";
-            ringID = 1;
-            @display("i=devices/mu;p=57,257");
+            @display("i=devices/mu;p=759,367");
         }
 
         MU5: HsrEndNode {
             macAddress = "00-15-12-14-88-05";
-            ringID = 1;
-            @display("i=devices/mu;p=161,257");
+            @display("i=devices/mu;p=759,481");
         }
 
         MU6: HsrEndNode {
             macAddress = "00-15-12-14-88-06";
-            ringID = 1;
-            @display("i=devices/mu;p=255,257");
+            @display("i=devices/mu;p=614,481");
         }
 
         MU7: HsrEndNode {
             macAddress = "00-15-12-14-88-07";
-            ringID = 1;
-            @display("i=devices/mu;p=358,257");
+            @display("i=devices/mu;p=479,481");
         }
 
         MU8: HsrEndNode {
             macAddress = "00-15-12-14-88-08";
-            ringID = 1;
-            @display("i=devices/mu;p=455,257");
+            @display("i=devices/mu;p=338,481");
         }
 
         MU9: HsrEndNode {
             macAddress = "00-15-12-14-88-09";
-            ringID = 1;
-            @display("i=devices/mu;p=565,257");
+            @display("i=devices/mu;p=195,481");
         }
 
         MU10: HsrEndNode {
             macAddress = "00-15-12-14-88-0C";
-            ringID = 1;
-            @display("i=devices/mu;p=663,257");
+            @display("i=devices/mu;p=54,481");
         }
 
         MU11: HsrEndNode {
             macAddress = "00-15-12-14-88-0D";
-            ringID = 1;
-            @display("i=devices/mu;p=764,257");
+            @display("i=devices/mu;p=54,367");
         }
 
         MU12: HsrEndNode {
             macAddress = "00-15-12-14-88-0E";
-            ringID = 1;
-            @display("i=devices/mu;p=865,257");
+            @display("i=devices/mu;p=54,259");
         }
 
         MU13: HsrEndNode {
             macAddress = "00-15-12-14-88-0F";
-            ringID = 1;
-            @display("i=devices/mu;p=974,257");
+            @display("i=devices/mu;p=54,152");
         }
 
         MU14: HsrEndNode {
             macAddress = "00-15-12-14-88-10";
-            ringID = 1;
-            @display("i=devices/mu;p=1056,257");
-        }
-
-        MU15: HsrEndNode {
-            macAddress = "00-15-12-14-88-11";
-            ringID = 1;
-            @display("i=devices/mu;p=1056,96");
-        }
-
-        MU16: HsrEndNode {
-            macAddress = "00-15-12-14-88-12";
-            ringID = 1;
-            @display("i=devices/mu;p=935,96");
-        }
-
-        MU17: HsrEndNode {
-            macAddress = "00-15-12-14-88-13";
-            ringID = 1;
-            @display("i=devices/mu;p=803,96");
+            @display("i=devices/mu;p=54,53");
         }
 
         PU1: HsrEndNode {
             macAddress = "00-15-12-14-88-0A";
-            ringID = 1;
-            @display("i=devices/pu;p=624,57");
+            @display("i=devices/pu;p=326,52");
         }
 
         PU2: HsrEndNode {
             macAddress = "00-15-12-14-88-0B";
-            ringID = 1;
-            @display("i=devices/pu;p=494,57");
+            @display("i=devices/pu;p=518,52");
         }
 
     connections:
@@ -143,11 +109,7 @@ network HsrNetworkSimple
         MU11.gateA <--> MyFastChannel <--> MU12.gateB;
         MU12.gateA <--> MyFastChannel <--> MU13.gateB;
         MU13.gateA <--> MyFastChannel <--> MU14.gateB;
-        MU14.gateA <--> MyFastChannel <--> MU15.gateB;
-        MU15.gateA <--> MyFastChannel <--> MU16.gateB;
-        MU16.gateA <--> MyFastChannel <--> MU17.gateB;
-
-        MU17.gateA <--> MyFastChannel <--> PU1.gateB;
+        MU14.gateA <--> MyFastChannel <--> PU1.gateB;
         PU1.gateA <--> MyFastChannel <--> PU2.gateB;
         PU2.gateA <--> MyFastChannel <--> MU1.gateB;
 
@@ -166,11 +128,8 @@ network HsrNetworkSimple
         MU11.gateAExp <--> MyFastChannel <--> MU12.gateBExp;
         MU12.gateAExp <--> MyFastChannel <--> MU13.gateBExp;
         MU13.gateAExp <--> MyFastChannel <--> MU14.gateBExp;
-        MU14.gateAExp <--> MyFastChannel <--> MU15.gateBExp;
-        MU15.gateAExp <--> MyFastChannel <--> MU16.gateBExp;
-        MU16.gateAExp <--> MyFastChannel <--> MU17.gateBExp;
-
-        MU17.gateAExp <--> MyFastChannel <--> PU1.gateBExp;
+        MU14.gateAExp <--> MyFastChannel <--> PU1.gateBExp;
         PU1.gateAExp <--> MyFastChannel <--> PU2.gateBExp;
         PU2.gateAExp <--> MyFastChannel <--> MU1.gateBExp;
+
 }

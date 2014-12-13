@@ -1046,20 +1046,72 @@ Kann ein langes Frame von mehreren Express-Frames unterbrochen werden?
 
 \end_deeper
 \end_deeper
-\begin_layout Standard
-------------------------------------
+\begin_layout Subsection
+Kalenderwoche 50: 11.12.2014
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Kalenderwoche-50:-11.12.2014"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Offizielle Aufgabenstellung, Projektauftrag
+Zuflusslimitierung nur für Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Express-Frames gibt es 
+\begin_inset Quotes fld
+\end_inset
+
+by design
+\begin_inset Quotes frd
+\end_inset
+
+ wenige
 \end_layout
 
 \begin_layout Itemize
-(Zeitplan)
+Zweck der Limitierung: Nicht Überlebenswichtiges limitieren
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Steady State
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Werte in leerem Ring uninteressant
 \end_layout
 
 \begin_layout Itemize
-(Besprechungsprotokolle oder Journals)
+Start und Stop uninteressant
+\end_layout
+
+\begin_layout Itemize
+Fenstergrösse, in der die Werte aufgezeichnet werden, definieren, paar 10tel
+ Sekunden
+\end_layout
+
+\begin_layout Itemize
+Kann in omnetpp.ini definiert werden
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Dies war die letzte Besprechung
 \end_layout
 
 \begin_layout Chapter
@@ -1382,6 +1434,13 @@ dleMsg_EndNodeSwitch.cc}
 
 \begin_layout Section
 Scheduler: Mechanismen zur Queueverwaltung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Scheduler:-Mechanismen-zur"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1396,6 +1455,29 @@ lstinputlisting[caption={switch/Scheduler.cc - Mechanismen zur Queueverwaltung}
 \backslash
 label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/processQueue
 s_Scheduler.cc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Scheduler: Zuflusslimitierung 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={switch/Scheduler.cc - Zuflusslimitierung}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/tokenizer_Sc
+heduler.cc}
 \end_layout
 
 \end_inset

@@ -234,8 +234,8 @@ CPU::loadXMLFile()
             while(paketElement != NULL)
             {
                 sendData.destination = nullAddr;
-                sendData.sendType = TYPE_ERROR;
-                sendData.sendBehavior = BEHAVIOR_STD;
+                sendData.sendType = TYPE_HSR;
+                sendData.sendBehavior = BEHAVIOR_CONSTANT_LOADGEN;
                 sendData.startTime = 0;
                 sendData.stopTime = 0;
                 sendData.last = 0;
@@ -446,9 +446,9 @@ CPU::initialize()
     {
         this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "HsrNetworkSimple.delayLogger" ) );
     }
-    else if( getModuleByPath( "SubstationHSR8mu2pu.delayLogger" ) != NULL )
+    else if( getModuleByPath( "SubstationHSR.delayLogger" ) != NULL )
     {
-        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "SubstationHSR8mu2pu.delayLogger" ) );
+        this->delayLogger = check_and_cast<DelayLogger*>( getModuleByPath( "SubstationHSR.delayLogger" ) );
     }
     else if( getModuleByPath( "SubstationHSR17mu2pu.delayLogger" ) != NULL )
     {

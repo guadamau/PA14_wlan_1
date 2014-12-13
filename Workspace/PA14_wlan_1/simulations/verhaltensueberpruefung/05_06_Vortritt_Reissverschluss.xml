@@ -1,53 +1,62 @@
 ﻿<?xml version="1.0" ?>
 <simulation_behaviour>
+
+	<!--
+		######################################################################
+		 Tag-description (see current configurations for syntax)
+		######################################################################
+		source:	MAC-Address of source {
+			lastmuster {
+				startzeit:  	Time when the first frame will be generated           
+				stopzeit:		Generate frame until this time is reached
+				interval:		Generate a frame every x seconds
+				epsilon:		Generate a random value between 0 and epsilon that
+								will be added to the value of the previous tag
+								every time a new frame will be generated
+				destination:	Set destination of frame (can be Uni-, Multi- or Broadcast)
+								The broadcast-address is FF-FF-FF-FF-FF-FF
+				paketgroesse:	Set datasize of frame in Bytes (Size + 24 = Total Framesize)
+								Example: the total framesize is 160 Bytes when 136 is set
+				priority:		Set priority of frame ("EXPRESS", "HIGH", "LOW")
+			}
+		}
+	-->
     
     <!-- ############################ Frames with multicast destination and different priorities ###################################### -->
     
     <source>00-15-12-14-88-01
         <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.051</stopzeit> 
-            <interval>0.0001</interval> 					<!-- 5000x per second -->
-            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>01-15-12-14-88-02</destination>    <!-- UNICAST -->    
-            <paketgroesse>976</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <interval>0.0001</interval>
+            <epsilon>0</epsilon>
+            <destination>01-15-12-14-88-02</destination>
+            <paketgroesse>976</paketgroesse>
+            <priority>LOW</priority>
         </lastmuster> 
     </source>
     
     <source>00-15-12-14-88-02
         <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.051</stopzeit> 
-            <interval>0.0001</interval> 					<!-- 5000x per second -->
-            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>01-15-12-14-88-02</destination>    <!-- UNICAST -->    
-            <paketgroesse>976</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <interval>0.0001</interval>
+            <epsilon>0</epsilon>
+            <destination>01-15-12-14-88-02</destination>   
+            <paketgroesse>976</paketgroesse>
+            <priority>LOW</priority>
         </lastmuster> 
     </source>
     
     <source>00-15-12-14-88-03
         <lastmuster>
-            <typ>hsr</typ>
-            <verhalten>konstante last</verhalten>         
             <startzeit>0.001</startzeit>            
             <stopzeit>0.051</stopzeit> 
-            <interval>0.0001</interval> 					<!-- 5000x per second -->
-            <epsilon>0</epsilon>           			<!-- 12.5 µs -->           
-            <last>0.0</last>
-            <maxlast>100</maxlast>               
-            <destination>01-15-12-14-88-02</destination>    <!-- UNICAST -->    
-            <paketgroesse>976</paketgroesse>      <!-- size DATA FRAME (+24 = Total Framesize) -->
-            <priority>LOW</priority>		<!-- EXPRESS = 0 / HIGH = 1 / LOW = 2 -->
+            <interval>0.0001</interval>
+            <epsilon>0</epsilon>
+            <destination>01-15-12-14-88-02</destination>    
+            <paketgroesse>976</paketgroesse>
+            <priority>LOW</priority>
         </lastmuster> 
     </source>
  

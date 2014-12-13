@@ -120,9 +120,52 @@ Wird ein Frame erstellt, wird es in die jeweilige Queue beim Knoten eingereiht.
 \begin_inset Newline newline
 \end_inset
 
-Die Resultate dieser Eigenschaft werden in einem Histogramm gespeichert,
- auf welchem ersichtlich sein wird, wie viele Frames welche Übertragungsdauer
- haben.
+
+\begin_inset Newline newline
+\end_inset
+
+Die Resultate dieser Eigenschaft werden in einem Histogramm gespeichert.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/021_Histogramm_Example.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel eines Histograms für Frames einer bestimmten Priorität
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Bei diesem Histogramm ist ersichtlich, wie viele Frames (Y-Achse) welche
+ Übertragungsdauer in Sekunden (X-Achse) haben.
+ Dieser Grafik kann man entnehmen, dass kein Frame äusserst lange verzögert
+ wurde und alle Frames in etwa die gleiche Übertragungsdauer hatten.
 \end_layout
 
 \begin_layout Itemize
@@ -138,10 +181,131 @@ Sobald ein Frame bei einer Queue eingereiht oder von einer Queue entnommen
  wird, wird die Grösse der Queue jedes mal aufgezeichnet.
  So lässt sich feststellen, zu exakt welchem Zeitpunkt ein Frame in die
  Queue kommt und wann ein Frame die Queue verlässt.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Dabei besitzt jeder DANH-Knoten 3 Ausgänge (2 Verbindungen zum Ring, 1 Verbindun
+g zur CPU) und für jeden Ausgang einen Scheduler.
+ Ein Scheduler verwendet 6 Queues für das Verarbeiten der Frames.
+ Beim 
+\begin_inset Quotes fld
+\end_inset
+
+First Come First Serve
+\begin_inset Quotes frd
+\end_inset
+
+-Mechanismus werden lediglich 3 Queues verwendet, da dort nicht unterschieden
+ wird, ob das Frame vom Ring oder von der CPU kommt.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/021_Queueverlauf_Example.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Beispiel eines Queueverlaufs für Frames von 2 Queues
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+In dieser Grafik sieht man zu welchem Zeitpunkt in Sekunden (X-Achse) wie
+ viele Frames (Y-Achse) in welcher Queue eingereiht sind.
+ So lässt sich auch feststellen, wann ein Frame zur Queue hinzugefügt oder
+ entfernt wurde.
+ In diesem Beispiel ist ersichtlich, dass ständig Express-Frames versendet
+ werden, während sich 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames anstauen und nicht immer umgehend versendet werden können.
 \end_layout
 
 \begin_layout Standard
-(Zusammenfassung der Resultate)
+Bei diesen Grafiken kann man, wie es in der vorherigen Grafik gezeigt wurde,
+ auch die Eigenschaften mehrerer Prioritäten / Queues kombiniert ausgeben.
+ Dies macht jedoch nicht immer Sinn, da die Skalierung von den Quellen sehr
+ unterschiedlich ausfallen kann.
+\end_layout
+
+\begin_layout Standard
+Die Werte werden lediglich innerhalb des sogenannten Steady-States aufgezeichnet
+, da die Werte beim Start und Stop der Simulation nicht von Interesse sind.
+ Somit wird nur das Verhalten innerhalb des stetigen Zustands analysiert
+ und der Aufbau und Abschluss ausser Acht gelassen.
+\end_layout
+
+\begin_layout Section
+Szenario 1: Substation Automation
+\end_layout
+
+\begin_layout Standard
+Für dieses Szenario werden die Werte ab dem Zeitpunkt t=0.02s bis zu tstop=0.5
+ aufgezeichnet.
+ Dieser Bereich beeinhaltet für dieses Szenario garantiert nur das Verhalten
+ innerhalb des Steady-States.
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.1: First Come First Serve
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.2: Vortritt für Frames vom Ring
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.3: Vortritt für Frames von Aussen
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.5: Reissverschluss
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.6: Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.7: Maximale Auslastung
 \end_layout
 
 \end_body

@@ -543,7 +543,138 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+In der Datei 
+\begin_inset Quotes fld
+\end_inset
 
+omnetpp.ini
+\begin_inset Quotes frd
+\end_inset
+
+ kann das maxmimum an Tokens gesetzt werden.
+ Wird kein Maximum gesetzt, wird der Traffic nicht limitiert.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=bash,tabsize=2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}[caption={omnetpp.ini - Definition Zuflusslimitierung}
+\backslash
+label{lst:enumqueuenum},captionpos=b]
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+# Set a maximum of x Byte/s of generated low-traffic
+\end_layout
+
+\begin_layout Plain Layout
+
+**.endNodeSwitch.framebyteLimit = 12500
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+Der Codeausschnitt, in welchem die Zuflusslimitierung umgesetzt ist, ist
+ in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Scheduler:-Zuflusslimitierung"
+
+\end_inset
+
+ aufzufinden.
+ In diesem Codeausschnitt befinden sich 2 Methoden, 
+\begin_inset Quotes fld
+\end_inset
+
+containerHasEnoughBytes()
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+subtractFromByteContainer()
+\begin_inset Quotes frd
+\end_inset
+
+ .
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Quotes fld
+\end_inset
+
+containerHasEnoughBytes()
+\begin_inset Quotes frd
+\end_inset
+
+ wird vor jedem Versand aufgerufen und gibt false zurück, wenn ein 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frame als Parameter mitgegeben wird und dessen Grösse die vorhandene Anzahl
+ Tokens überschreitet.
+ Zudem ist diese Funktion für die Token generierung zuständig.
+\end_layout
+
+\begin_layout Plain Layout
+In 
+\begin_inset Quotes fld
+\end_inset
+
+subtractFromByteContainer()
+\begin_inset Quotes frd
+\end_inset
+
+ wird bei der vorhandenen Anzahl Tokens die Anzahl abgezogen, die der Grösse
+ des mitgegebenen Frames in Bytes entspricht.
+ Abgezogen wird jedoch nur, wenn es sich um ein 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frame handelt.
+ 
 \end_layout
 
 \end_inset
@@ -714,7 +845,8 @@ lstset{language=bash,tabsize=2}
 
 
 \backslash
-begin{lstlisting}[caption={omnetpp.ini - Definition Mechanismus im Switch}
+begin{lstlisting}[caption={omnetpp.ini - Definition Vortritt-Mechanismus
+ im Switch}
 \backslash
 label{lst:enumqueuenum},captionpos=b]
 \end_layout
@@ -726,8 +858,7 @@ label{lst:enumqueuenum},captionpos=b]
 
 \begin_layout Plain Layout
 
-# Define Schedulermode ("FCFS", "RING_FIRST", "INTERNAL_FIRST", "ZIPPER",
- "TOKENS")
+# Define Schedulermode ("FCFS", "RING_FIRST", "INTERNAL_FIRST", "ZIPPER")
 \end_layout
 
 \begin_layout Plain Layout
@@ -764,6 +895,18 @@ end{lstlisting}
 \end_inset
 
 
+\end_layout
+
+\begin_layout Plain Layout
+Ein Ausschnitt, bei dem aufgezeigt wird wie die Vortritts-Mechanismen ablaufen,
+ ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Scheduler:-Mechanismen-zur"
+
+\end_inset
+
+ einsehbar.
 \end_layout
 
 \end_inset

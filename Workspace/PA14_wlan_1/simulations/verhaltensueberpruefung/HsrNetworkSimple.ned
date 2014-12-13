@@ -12,20 +12,17 @@ network HsrNetworkSimple
         
         Node1: HsrEndNode {
             @display("p=50,200");
-            macAddress = "00-15-12-14-88-01";
-            ringID = 1;        
+            macAddress = "00-15-12-14-88-01";       
         }
 
         Node2: HsrEndNode {
             @display("p=150,100");
             macAddress = "00-15-12-14-88-02";
-            ringID = 1;
         }
 
         Node3: HsrEndNode {
             @display("p=250,200");
             macAddress = "00-15-12-14-88-03";
-            ringID = 1;
         }
 
     connections:

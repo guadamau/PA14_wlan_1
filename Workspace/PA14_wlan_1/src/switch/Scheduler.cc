@@ -411,14 +411,15 @@ unsigned char Scheduler::containerHasEnoughBytes( cMessage* msg )
             int64_t lengthFrame = checkmsg->getByteLength();
             delete checkmsg;
 
+            /* value of framebytelimit is -1 if the tokenizer is disabled -> return true */
             if( framebyteLimit == -1 )
             {
                 retVal = 0x01;
             }
             else if( framebytecontainer - lengthFrame >= 0 )
             {
-                retVal = 0x01;
                 /* in this case the low priority frame can be sent at this time. */
+                retVal = 0x01;
                 lowSendTime = simTime() - (creditBytes-creditBytesFloored)/framebyteLimit;
             }
         }
@@ -673,7 +674,7 @@ simtime_t Scheduler::getExpressSendTime( void )
     int64_t allBytesOfSendingFrame = sendingStatus->getMessageSize();
     simtime_t calcExpSendTime;
 
-    if( allBytesOfSendingFrame >= 136 )
+    if( allBytesOfSendingFrame >= 128 )
     {
 
         simtime_t simTimeNow = simTime();
