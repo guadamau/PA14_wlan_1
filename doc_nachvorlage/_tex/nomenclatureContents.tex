@@ -9,6 +9,14 @@
 
 \newcommand{\prpdesc}{Parallel Redundancy Protocol. Hat ein ähnliches Funktionsprinzip wie HSR, aber auch Unterschiede wie z.B. das Frameformat. PRP- und HSR-Netze können jedoch über RedBoxen kommunizieren.}
 
+\newcommand{\ethernetIIdesc}{Definiert eine Struktur, um Nutzdaten über ein Ethernet-Netzwerk zu versenden. Es ist die kleinste adressierbare Einheit auf dem Link Layer. Die Struktur eines EthernetII-Frames gliedert sich wie folgt: Start of frame delimiter, Zieladresse, Quelladresse, Tag (optional), Ethertype (Ethernet II), Nutzdatenanteil, Frame check sequence (CRC).}
+
+\newcommand{\mframedesc}{MAC Merge Frame ist ein Format eines Ethernet Frames. Im Gegensatz zu herkömmlichen EthernetII Frames, stellt das mFrame Format Parameter und Strukturen zur Verfügung, die es ermöglichen, das Ethernet Frame zu fragmentieren.}
+
+\newcommand{\linklayerdesc}{Stellt sicher, dass Daten über eine physikalische Schnittstelle von und zu einem Netzwerk transferiert werden können.}
+
+\newcommand{\steadystatedesc}{Eingeschwungener, stabieler Zustand der Simulation. Damit keine verfälschten Simulationsresultate auftreten, werden die Messwerte in einem Zeitintervall aufgenommen, welches einige Zeit nach dem Simulationsstart beginnt und einige Zeit vor der Generierung der letzten Frames endet.}
+
 
 % *****************************************************************************
 % Nomenclature entries
@@ -17,3 +25,7 @@
 \nomenclature{IET}{\ietdesc}
 \nomenclature{IFG}{\ifgdesc}
 \nomenclature{PRP}{\prpdesc}
+\nomenclature{EthernetII Frame}{\ethernetIIdesc}
+\nomenclature{mFrame}{\mframedesc}
+\nomenclature{Link Layer}{\linklayerdesc}
+\nomenclature{Steady-State}{\steadystatedesc}

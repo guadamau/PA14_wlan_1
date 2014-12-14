@@ -5,8 +5,8 @@
 \textclass scrbook
 \begin_preamble
 % Sprachpaket
-\usepackage[ngerman]{babel}
-%\usepackage{ngerman}
+%\usepackage[ngerman]{babel}
+\usepackage{ngerman}
 
 % Variabeln
 \newcommand{\myTitle}{Performance-Evaluation Ethernet für Echtzeit-Datenerfassung}
@@ -137,7 +137,7 @@ keepaspectratio]{_img/InES.pdf}%
 \use_default_options true
 \maintain_unincluded_children false
 \language ngerman
-\language_package none
+\language_package default
 \inputencoding utf8
 \fontencoding global
 \font_roman cmr

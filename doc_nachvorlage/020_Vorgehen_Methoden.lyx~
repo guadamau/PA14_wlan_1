@@ -6287,18 +6287,5 @@ reference "sub:Kalenderwoche-48:-27.11.2014"
  haben.
 \end_layout
 
-\begin_layout Subsubsection
-Simulation #.#: xxxxxxxxxxxxxxxxxxxxxxx
-\end_layout
-
-\begin_layout Standard
-Mechanismen:
-\end_layout
-
-\begin_layout Standard
-Keine (FCFS), Zuflusslimitierung, Vortritt Ring / von Aussen, Reissverschluss,
- Zeitschlitzverfahren
-\end_layout
-
 \end_body
 \end_document
