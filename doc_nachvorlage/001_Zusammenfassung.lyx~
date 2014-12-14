@@ -85,7 +85,7 @@ status open
 
 
 \backslash
-markright{Abstract}
+markright{Zusammenfassung}
 \end_layout
 
 \end_inset
@@ -98,7 +98,7 @@ status open
 
 
 \backslash
-addcontentsline{toc}{chapter}{Abstract}
+addcontentsline{toc}{chapter}{Zusammenfassung}
 \end_layout
 
 \end_inset
@@ -107,7 +107,41 @@ addcontentsline{toc}{chapter}{Abstract}
 \end_layout
 
 \begin_layout Standard
-In Deutsch
+Für Echtzeit-Systeme, die aus mehreren Komponenten bestehen, welche miteinander
+ über ein Netzwerk verbunden sind, sind Faktoren wie ausfallsichere Datenübertra
+gung sowie garantierte Datenübertragungszeiten von signifikanter Bedeutung.
+ Ein Ansatz, um diesen Kriterien gerecht zu werden, bietet das High Availability
+ Seamless Redundancy (folgend auch bezeichnet als HSR) Protokoll.
+ Redundante Datenübertragung und die Struktur der Verbindungen umgesetzt
+ als Ring-Topologie zählen zu den Haupt-Charakteristiken des HSR-Protokolls.
+ Im Zentrum dieser Arbeit liegt die Modellierung verschiedener Szenarien,
+ basierend auf einem HSR-Ring-Netzwerk mit verschiedenen Instanzen von HSR-Endge
+räten.
+ Zu diesem Zweck wird ein virtueller HSR-Knoten programmiert, der einige
+ Regelwerke implementiert.
+ Diese Regelwerke beziehen sich auf die Behandlung von Ethernet Frames und
+ den Datenfluss in einem HSR-Ring.
+ Für das Erreichen garantierter Höchstübertragungszeiten werden die Ethernet
+ Frames mit einer Priorität versehen, was die Unterbrechung von niedrig
+ priorisierten Ethernet Frames ermöglicht.
+ Hierzu wird der IEEE Draft P802.3br/D1.0 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+ als Grundlage verwendet, um die Verhaltensweise von Interspersing Express
+ Traffic (IET) in Form von MAC Merge Frames (mFrames) zeitlich zu simulieren.
+ Als Simulationsumgebung wird OMNeT++ eingesetzt, eine diskrete Ereignissimulati
+onsumgebung für Kommunikationsnetzwerke.
+ Die Ergebnisse der vorliegenden Arbeit zeigen auf, wie sich die Verzögerungszei
+ten von Ethernet Frames unter Berücksichtigung verschiedener Regelwerke
+ und mannigfaltigem Datenaufkommen im HSR-Ring verhalten.
+ Ferner werden Aspekte beleuchtet, wie sich der Datenrückstau bezüglich
+ verschiedener Datenflussregeln in einzelnen HSR-Knoten verhält und wie
+ viele Ethernet Frames jeweils während eines Simulationslaufs unterbrochen
+ werden.
 \end_layout
 
 \end_body

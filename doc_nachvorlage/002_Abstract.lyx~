@@ -1,5 +1,5 @@
-#LyX 2.0 created this file. For more info see http://www.lyx.org/
-\lyxformat 413
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
 \begin_document
 \begin_header
 \textclass scrbook
@@ -13,13 +13,13 @@
 \font_roman cmr
 \font_sans lmss
 \font_typewriter cmtt
+\font_math auto
 \font_default_family sfdefault
 \use_non_tex_fonts false
 \font_sc false
 \font_osf true
 \font_sf_scale 100
 \font_tt_scale 100
-
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -30,15 +30,24 @@
 \use_hyperref false
 \papersize a4paper
 \use_geometry false
-\use_amsmath 1
-\use_esint 1
-\use_mhchem 1
-\use_mathdots 1
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
 \cite_engine basic
+\cite_engine_type default
+\biblio_style plain
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
 \suppress_date false
+\justification true
 \use_refstyle 0
 \index Stichwortverzeichnis
 \shortcut idx
@@ -98,7 +107,63 @@ addcontentsline{toc}{chapter}{Abstract}
 \end_layout
 
 \begin_layout Standard
-Blubb blubb blaa brrrrr, ...
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{otherlanguage}{british}
+\end_layout
+
+\end_inset
+
+Regarding to real-time systems consisting of several components, which are
+ connected by a network, aspects like failsafe data transmission as soon
+ as guaranteed data transmission times are of significant importance.
+ An approach to fulfil these requirements is provided by the High Availability
+ Seamless Redundancy (hereinafter also referred to as HSR) protocol.
+ Redundant data transmission and also the structure of the compounds implemented
+ as a ring topology rank as main characteristics of the HSR protocol.
+ The main focus of this thesis consists of the modelling of various scenarios
+ based on a HSR ring network composed of distinct instances of HSR end devices.
+ For this purpose a virtual HSR node is programmed, which implements certain
+ rule sets.
+ These rule sets apply to the handling of Ethernet frames and the dataflow
+ in a HSR ring.
+ To achieve guaranteed maximum transmission times, Ethernet frames are prioritiz
+ed, which allows the preemption of low prioritized Ethernet frames.
+ Concerning this, the IEEE Draft P802.3br / D1.0 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+ is used as a basis to simulate the behaviour of Interspersing Express Traffic
+ (IET) in the form of MAC Merge Frames (mFrames) in function of time.
+ As simulation environment OMNeT++ is used, a discrete event simulation
+ environment for communication networks.
+ The results of the present work reveal the impacts on delay times of Ethernet
+ frames in due consideration of different rule sets and varied data traffic
+ in a HSR ring.
+ Moreover there is put a spotlight on the factors such as data backlog in
+ view of various dataflow rules of particular HSR nodes and how many Ethernet
+ frames that are being preempted at a time during one simulation run.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{otherlanguage}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

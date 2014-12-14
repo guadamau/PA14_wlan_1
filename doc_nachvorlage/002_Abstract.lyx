@@ -107,7 +107,63 @@ addcontentsline{toc}{chapter}{Abstract}
 \end_layout
 
 \begin_layout Standard
-In Englisch
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{otherlanguage*}{british}
+\end_layout
+
+\end_inset
+
+Regarding to real-time systems consisting of several components, which are
+ connected by a network, aspects like failsafe data transmission as soon
+ as guaranteed data transmission times are of significant importance.
+ An approach to fulfil these requirements is provided by the High Availability
+ Seamless Redundancy (hereinafter also referred to as HSR) protocol.
+ Redundant data transmission and also the structure of the compounds implemented
+ as a ring topology rank as main characteristics of the HSR protocol.
+ The main focus of this thesis consists of the modelling of various scenarios
+ based on a HSR ring network composed of distinct instances of HSR end devices.
+ For this purpose a virtual HSR node is programmed, which implements certain
+ rule sets.
+ These rule sets apply to the handling of Ethernet frames and the dataflow
+ in a HSR ring.
+ To achieve guaranteed maximum transmission times, Ethernet frames are prioritiz
+ed, which allows the preemption of low prioritized Ethernet frames.
+ Concerning this, the IEEE Draft P802.3br / D1.0 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "Draft_Standart"
+
+\end_inset
+
+ is used as a basis to simulate the behaviour of Interspersing Express Traffic
+ (IET) in the form of MAC Merge Frames (mFrames) in function of time.
+ As simulation environment OMNeT++ is used, a discrete event simulation
+ environment for communication networks.
+ The results of the present work reveal the impacts on delay times of Ethernet
+ frames in due consideration of different rule sets and varied data traffic
+ in a HSR ring.
+ Moreover there is put a spotlight on the factors such as data backlog in
+ view of various dataflow rules of particular HSR nodes and how many Ethernet
+ frames that are being preempted at a time during one simulation run.
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{otherlanguage*}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

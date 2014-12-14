@@ -5,7 +5,8 @@
 \textclass scrbook
 \begin_preamble
 % Sprachpaket
-\usepackage{ngerman}
+\usepackage[ngerman,british]{babel}
+%\usepackage{ngerman}
 
 % Variabeln
 \newcommand{\myTitle}{Performance-Evaluation Ethernet für Echtzeit-Datenerfassung}
@@ -131,14 +132,12 @@ morekeywords={xmlns,version,type}
 keepaspectratio]{_img/InES.pdf}%
 \vfill
 }}}
-
-\setcounter{tocdepth}{2}
 \end_preamble
 \options bibliography=totocnumbered,listof=totocnumbered
 \use_default_options true
 \maintain_unincluded_children false
 \language ngerman
-\language_package default
+\language_package none
 \inputencoding utf8
 \fontencoding global
 \font_roman cmr
@@ -192,7 +191,7 @@ keepaspectratio]{_img/InES.pdf}%
 \headsep 12mm
 \footskip 20mm
 \secnumdepth 3
-\tocdepth 2
+\tocdepth 3
 \paragraph_separation skip
 \defskip bigskip
 \quotes_language french
