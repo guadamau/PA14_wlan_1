@@ -70,7 +70,7 @@ private:
     queueName internalFirstSortOrder[ QUEUES_COUNT ];
 
     int timeslotPhaseSize;
-    int64_t framebyteLimit;
+    int framebyteLimit;
     int64_t framebytecontainer;
 
     /* To alternate between Ring and Internal (Zipper mechanism) */

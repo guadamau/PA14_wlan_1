@@ -1264,6 +1264,13 @@ name "sec:Simulation-konfigurieren"
 \end_layout
 
 \begin_layout Standard
+Für die Konfiguration einer Simulation kann man OMNeT++ oder einen normalen
+ Texteditor verwenden.
+ In dieser Anleitung werden die Dateien mit OMNeT++ editiert.
+ OMNeT++ kann man über die Desktopverknüpfung starten.
+\end_layout
+
+\begin_layout Standard
 Jede Simulation ist in der Datei 
 \begin_inset Quotes fld
 \end_inset
@@ -1272,7 +1279,15 @@ omnetpp.ini
 \begin_inset Quotes frd
 \end_inset
 
- (im Ordner 
+ (in OMNeT++ in Projekt 
+\begin_inset Quotes fld
+\end_inset
+
+PA14_wlan_1
+\begin_inset Quotes frd
+\end_inset
+
+ im Ordner 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1281,6 +1296,68 @@ simulations
 \end_inset
 
 ) aufgeführt.
+ Wer die Dateien mittels Texteditor editieren möchte, findet die Dateien
+ über die Desktopverknüpfung 
+\begin_inset Quotes fld
+\end_inset
+
+Simulation Configuration
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_omnetpp_ini.png
+	display false
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Standort der Datei 
+\begin_inset Quotes fld
+\end_inset
+
+omnetpp.ini
+\begin_inset Quotes frd
+\end_inset
+
+ in OMNeT++
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:omnetpp_ini_in_omnet++"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1315,7 +1392,37 @@ network = beispielsimulation.SubstationHSR
 
 \begin_layout Plain Layout
 
-**.cpu.xmlparam = xmldoc("beispielsimulation/config.xml") 
+**.cpu.xmlparam = xmldoc("beispielsimulation/config.xml")
+\end_layout
+
+\begin_layout Plain Layout
+
+**.endNodeSwitch.schedulerMode = "FCFS"
+\end_layout
+
+\begin_layout Plain Layout
+
+**.PU1.cpu.multicastListener = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+**.PU2.cpu.multicastListener = 1
+\end_layout
+
+\begin_layout Plain Layout
+
+**.vector-recording-intervals = 0.02..0.5
+\end_layout
+
+\begin_layout Plain Layout
+
+# **.endNodeSwitch.framebyteLimit = 12500
+\end_layout
+
+\begin_layout Plain Layout
+
+# **.endNodeSwitch.timeslotPhaseSize = 10000
 \end_layout
 
 \begin_layout Plain Layout
@@ -1332,6 +1439,19 @@ end{lstlisting}
 
 \begin_layout Standard
 Dieser Eintrag zeigt, welche Dateien zur Konfiguration editiert werden können.
+ Hier können zudem weitere Eigenschaften der Simulation definiert werden
+ (wie z.B.
+ der anzuwendende Mechanismus), die am Anfang der Datei 
+\begin_inset Quotes fld
+\end_inset
+
+omnetpp.ini
+\begin_inset Quotes frd
+\end_inset
+
+ vermerkt sind.
+ Bei den Zeilen mit einem #-Symbol am Anfang wird die dort gesetze Konfiguration
+ nicht angewandt (derzeit als Kommentar gesetzt).
 \end_layout
 
 \begin_layout Subsection
@@ -1481,7 +1601,7 @@ beispielsimulation/config.xml
 Wie die XML-Datei in etwa aussieht ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
-reference "sub:Netzwerkaufbau-1"
+reference "sub:Netzwerkaufbau"
 
 \end_inset
 
@@ -1517,6 +1637,223 @@ In der XML-Datei ist des Weiteren aufgeführt, für was welcher Inhalt editiert
 
 \begin_layout Section
 Simulation starten
+\end_layout
+
+\begin_layout Standard
+Sofern OMNeT++ noch nicht geöffnet wurde, muss es jetzt über die Desktopverknüpf
+ung gestartet werden.
+ Ist die Applikation geöffnet, klickt man oben auf 
+\begin_inset Quotes fld
+\end_inset
+
+Run
+\begin_inset Quotes frd
+\end_inset
+
+ -> 
+\begin_inset Quotes fld
+\end_inset
+
+Run History
+\begin_inset Quotes frd
+\end_inset
+
+ -> 
+\begin_inset Quotes fld
+\end_inset
+
+PA14_wlan_1
+\begin_inset Quotes frd
+\end_inset
+
+ oder klickt auf den im folgenden Bild rot umrandeten Pfeil und dann auf
+ 
+\begin_inset Quotes fld
+\end_inset
+
+PA14_wlan_1
+\begin_inset Quotes frd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status collapsed
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_run_sim.png
+	display false
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Starten der Simulation in OMNeT++
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ist die Simulationsumgebung gestartet, kann man eine Konfiguration/Simulation
+ auswählen und klickt auf 
+\begin_inset Quotes fld
+\end_inset
+
+OK
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Zur Auswahl stehen alle in dieser Arbeit durchgeführten Simulationen (Der
+ Konfigurationsname ist bei der jeweiligen Simulation in der ersten Zeile
+ aufgeführt) oder die vorhin konfigurierte Beispielsimulation.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_config_selection.png
+	display false
+	scale 80
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Konfigurations-/Simulationsauswahl in OMNeT++
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Wenn man 
+\begin_inset Quotes fld
+\end_inset
+
+Beispielkonfiguration
+\begin_inset Quotes frd
+\end_inset
+
+ auswählt, sieht nach dem Klick auf 
+\begin_inset Quotes fld
+\end_inset
+
+OK
+\begin_inset Quotes frd
+\end_inset
+
+ die Umgebung in etwa wie folgt aus:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_sim_env.png
+	display false
+	scale 30
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Simulationsumgebung in OMNeT++
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Die Fensterbereiche kann man sich nach Belieben zu recht ziehen.
+ Im unteren Bereich ist der Nachrichtenverlauf aufgeführt.
+\end_layout
+
+\begin_layout Standard
+Folgende Buttons sind links oben in der Simulationsumgebung zu verwenden:
+\end_layout
+
+\begin_layout Itemize
+Step: Tätigt ein einzelnes Event, muss kein Frameversand sein.
+\end_layout
+
+\begin_layout Itemize
+Run: Lässt die Simulation in einer verfolgbaren Geschwindigkeit laufen.
+ Es werden alle Animationen dargestellt.
+ Die Geschwindigkeit lässt sich mittels Schiebefeld oben rechts neben dem
+ Schraubenschlüssel-Button genauer definieren.
+\end_layout
+
+\begin_layout Itemize
+Fast: Die Simulation läuft viel schneller, der Frameversand wird nicht mehr
+ animiert, jedoch ist anhand der Verbindungsfarben noch ersichtlich auf
+ welcher Leitung gerade gesendet wird.
+\end_layout
+
+\begin_layout Itemize
+Express: Die Simulation läuft auf der höchsten Geschwindigkeit und zeigt
+ keine Animationen mehr.
 \end_layout
 
 \begin_layout Section
