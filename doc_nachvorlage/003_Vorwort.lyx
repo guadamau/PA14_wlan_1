@@ -260,13 +260,62 @@ end{comment}
 \end_layout
 
 \begin_layout Standard
-Da wir eine Begeisterung für Netzwerktechnik haben und offen für Neues sind,
- fiel uns dieses Thema ins Auge.
- 
+Ab dem 4.
+ Semester des Informatik-Studiums werden erstmals Module unterrichtet, die
+ spezifisch für die jeweilig gewählte Fachrichtung der Studierenden ausgelegt
+ sind.
+ Wir haben zum einen die Fachrichtung Service Management (Mauro Guadagnini)
+ und zum anderen Embedded Systems (Prosper Leibundgut) selektiert.
+ In der Fachrichtung Service Management geht es primär darum, die Fachkenntnisse
+ über das Errichten und Unterhalten umfangreicher Netzwerk-Infrastrukturen
+ weiter zu vertiefen, sowie Firmen-Software wie beispielsweise ERP-Systeme
+ zu parametrisieren und zu dimensionieren.
+ Die Fachrichtung Embedded Systems befasst sich hauptsächlich damit, Firmware
+ für eingebettete Systeme zu entwickeln, die ohne oder nur mit minimalistischen
+ Betriebssytemen betrieben werden.
+ Solche Geräte haben oft die Anforderung, Datenverarbeitungen in Echtzeit
+ auszuführen und müssen nicht selten auch über eine Netzwerkschnittstelle
+ verfügen, um Daten an entfernte Netzwerkteilnehmer zu übermitteln, beziehungswe
+ise damit diesen ein Zugriff auf besagte Geräte ermöglicht wird.
 \end_layout
 
 \begin_layout Standard
-Stellt den persönlichen Bezug zur Arbeit dar und spricht Dank aus.
+Unser gemeinsames Interesse liegt im Bereich von netzwerkbasierten Anwendungen
+ und performanter Datenübertragung.
+ Bei der Wahl der ausgeschriebenen Projektarbeiten fiel uns die Arbeit 
+\begin_inset Quotes fld
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+myTitle
+\end_layout
+
+\end_inset
+
+
+\begin_inset Quotes frd
+\end_inset
+
+ auf.
+ Die Entscheidung, uns für diese Arbeit einzuschreiben, war nach kurzer
+ Zeit getroffen.
+ Wir zeigen beide grosses Interesse an gehaltvollen Technologien und so
+ sahen wir es zusätzlich als Gelegenheit, ein tieferes Verständnis für Netzwerks
+imulationen, das HSR-Protokoll und Interspersing Express Traffic zu gewinnen,
+ was uns im Verlaufe der Umsetzung dieser Arbeit auch gelungen ist.
+\end_layout
+
+\begin_layout Standard
+Unser herzlicher Dank an Herrn Prof.
+ Hans Weibel für die geduldige und fachkundige Arbeitsbetreuung in Form
+ von Impulsen und Diskussionen, die zu geeigneten Lösungsansätzen verhalfen.
 \end_layout
 
 \end_body
