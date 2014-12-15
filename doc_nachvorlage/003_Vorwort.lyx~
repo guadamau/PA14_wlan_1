@@ -273,10 +273,11 @@ Ab dem 4.
  Die Fachrichtung Embedded Systems befasst sich hauptsächlich damit, Firmware
  für eingebettete Systeme zu entwickeln, die ohne oder nur mit minimalistischen
  Betriebssytemen betrieben werden.
- Solche Geräte haben oft die Anforderung, Datenverarbeitungen in Echtzeit
- auszuführen und müssen nicht selten auch über eine Netzwerkschnittstelle
- verfügen, um Daten an entfernte Netzwerkteilnehmer zu übermitteln, beziehungswe
-ise damit diesen ein Zugriff auf besagte Geräte ermöglicht wird.
+ Solche Geräte haben oft die Anforderung zu erfüllen, Datenverarbeitungen
+ in Echtzeit auszuführen.
+ Nicht selten müssen diese Geräte auch über eine Netzwerkschnittstelle verfügen,
+ um Daten an entfernte Netzwerkteilnehmer zu übermitteln, beziehungsweise
+ diesen einen Zugriff auf besagte Geräte zu ermöglichen.
 \end_layout
 
 \begin_layout Standard
@@ -307,13 +308,13 @@ myTitle
  Die Entscheidung, uns für diese Arbeit einzuschreiben, war nach kurzer
  Zeit getroffen.
  Wir zeigen beide grosses Interesse an gehaltvollen Technologien und so
- sahen wir es zusätzlich als Chance, ein tieferes Verständnis für Netzwerksimula
-tionen, das HSR-Protokoll und Interspersing Express Traffic zu gewinnen,
+ sahen wir als zusätzliche Gelegenheit, ein tieferes Verständnis für Netzwerksim
+ulationen, das HSR-Protokoll und Interspersing Express Traffic zu gewinnen,
  was uns im Verlaufe der Umsetzung dieser Arbeit auch gelungen ist.
 \end_layout
 
 \begin_layout Standard
-Unser herzlicher Dank an Herrn Prof.
+Unser herzlicher Dank gilt Herrn Prof.
  Hans Weibel für die geduldige und fachkundige Arbeitsbetreuung in Form
  von Impulsen und Diskussionen, die zu geeigneten Lösungsansätzen verhalfen.
 \end_layout
