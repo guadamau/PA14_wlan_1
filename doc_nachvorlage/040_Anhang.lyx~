@@ -1254,6 +1254,265 @@ Info
 
 \begin_layout Section
 Simulation konfigurieren
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Simulation-konfigurieren"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Jede Simulation ist in der Datei 
+\begin_inset Quotes fld
+\end_inset
+
+omnetpp.ini
+\begin_inset Quotes frd
+\end_inset
+
+ (im Ordner 
+\begin_inset Quotes fld
+\end_inset
+
+simulations
+\begin_inset Quotes frd
+\end_inset
+
+) aufgeführt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=bash,tabsize=2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}[caption={omnetpp.ini - Beispiel eines Simulationseintrags}
+\backslash
+label{lst:enumqueuenum},captionpos=b]
+\end_layout
+
+\begin_layout Plain Layout
+
+[Config Beispielsimulation]
+\end_layout
+
+\begin_layout Plain Layout
+
+network = beispielsimulation.SubstationHSR
+\end_layout
+
+\begin_layout Plain Layout
+
+**.cpu.xmlparam = xmldoc("beispielsimulation/config.xml") 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dieser Eintrag zeigt, welche Dateien zur Konfiguration editiert werden können.
+\end_layout
+
+\begin_layout Subsection
+Netzwerkaufbau
+\end_layout
+
+\begin_layout Standard
+Für den Netzwerkaufbau (Zeile mit 
+\begin_inset Quotes fld
+\end_inset
+
+network
+\begin_inset Quotes frd
+\end_inset
+
+) wird die Datei 
+\begin_inset Quotes fld
+\end_inset
+
+beispielsimulation/SubstationHSR.ned
+\begin_inset Quotes frd
+\end_inset
+
+ verwendet.
+ In dieser Datei sind die einzelnen Knoten definiert und miteinander Verbunden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=bash,tabsize=2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}[caption={SubstationHSR.ned - Beispiel eines Knoteneintrags}
+\backslash
+label{lst:enumqueuenum},captionpos=b]
+\end_layout
+
+\begin_layout Plain Layout
+
+MU1: HsrEndNode {
+\end_layout
+
+\begin_layout Plain Layout
+
+	macAddress = "00-15-12-14-88-01";
+\end_layout
+
+\begin_layout Plain Layout
+
+	@display("i=devices/mu;p=759,53");
+\end_layout
+
+\begin_layout Plain Layout
+
+}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Beim Editieren eines solchen Knoten reicht es, wenn man den Namen (hier
+ 
+\begin_inset Quotes fld
+\end_inset
+
+MU1
+\begin_inset Quotes frd
+\end_inset
+
+), die MAC-Adresse und die Koordinaten des Knotens in der Netzwerkdarstellung
+ (
+\begin_inset Quotes fld
+\end_inset
+
+p=x,y
+\begin_inset Quotes frd
+\end_inset
+
+) editiert.
+ Erstellt man einen neuen Knoten, sind das auch die einzigen Angaben, die
+ zu denen anderer Knoten abweichen müssen.
+\end_layout
+
+\begin_layout Standard
+Die MAC-Adresse, die hier definiert wird, wird später in der Konfiguration
+ des Lastgenerators verwendet.
+\end_layout
+
+\begin_layout Standard
+Mehr über NED-Dateien ist im OMNeT++ User Manual aufzufinden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
+Lastgenerator
+\end_layout
+
+\begin_layout Standard
+Die XML-Datei, die zum Konfigurieren des Lastgenerators verwendet wird,
+ ist im Beispiel des Simulationseintrags (erstes Listing am Anfang des Kapitels
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Simulation-konfigurieren"
+
+\end_inset
+
+) aufgeführt.
+ Hier wird die Datei 
+\begin_inset Quotes fld
+\end_inset
+
+beispielsimulation/config.xml
+\begin_inset Quotes frd
+\end_inset
+
+ verwendet.
+\end_layout
+
+\begin_layout Standard
+Wie die XML-Datei in etwa aussieht ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Netzwerkaufbau-1"
+
+\end_inset
+
+ aufzufinden.
+ Ein Eintrag (source-Tag) beschreibt die Lastgenerierung eines bestimmten
+ Frametyps für einen bestimmten Knoten (mittels MAC-Adresse).
+ Für einen Knoten können mehrere solcher Einträge existieren, sodass er
+ z.B.
+ ständig 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+- und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames generieren könnte.
+ Es können auch Knoten existieren, die keinen Eintrag in der XML-Datei haben.
+\end_layout
+
+\begin_layout Standard
+In der XML-Datei ist des Weiteren aufgeführt, für was welcher Inhalt editiert
+ werden muss.
 \end_layout
 
 \begin_layout Section
@@ -1464,6 +1723,13 @@ s_Scheduler.cc}
 
 \begin_layout Section
 Scheduler: Zuflusslimitierung 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Scheduler:-Zuflusslimitierung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

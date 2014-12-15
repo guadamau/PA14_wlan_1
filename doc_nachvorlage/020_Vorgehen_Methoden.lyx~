@@ -710,6 +710,13 @@ reference "sub:Kalenderwoche-49:-04.12.2014"
 
 \begin_layout Subsection
 Netzwerkaufbau
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Netzwerkaufbau-1"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5253,9 +5260,9 @@ Der Aufbau dieses Szenarios ist ein HSR-Ring mit DANH-Knoten.
 \end_layout
 
 \begin_layout Standard
-Im HSR-Ring befinden sich 14 sogenannte Merging Units (MU), welche die Messwerte
- mit Sensoren erfassen und diesemit Zeitstempel und sonstigen Steuerinformatione
-n in ein Frame packen.
+Im HSR-Ring befinden sich 14 sogenannte Measurement Units (MU), welche die
+ Messwerte mit Sensoren erfassen und diesemit Zeitstempel und sonstigen
+ Steuerinformationen in ein Frame packen.
  Ein solches Frame hat eine Gesamtgrösse von 160 Bytes (inklusive Header)
  und die Priorität 
 \begin_inset Quotes fld
