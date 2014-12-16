@@ -1909,7 +1909,7 @@ Until:
 Stop:
 \series default
  Haltet die Simulation zum derzeitigen Zeitpunkt an.
- Man kann ab diesem Punkt die Simulation auch weiterführen.
+ Man kann ab diesem Punkt die Simulation auch weiterführen lassen.
 \end_layout
 
 \begin_layout Itemize
@@ -2188,7 +2188,7 @@ Beschreibt, zu welchem Zeitpunkt wie viele Express-Frames bei einem Ausgang
 \begin_layout Standard
 
 \series bold
-Histograms: Express, High & Low Prio Delay
+Histograms: Express, High & Low Prio Transmission Time
 \series default
 
 \begin_inset Newline newline

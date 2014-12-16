@@ -38,11 +38,11 @@ DelayLogger::~DelayLogger()
     delete this->endToEndDelayStatsHigh;
     delete this->endToEndDelayStatsLow;
 
-    delete this->preemptionTimeAdditionVecHigh;
-    delete this->preemptionTimeAdditionVecLow;
-
-    delete this->preemptionTimeAdditionStatsHigh;
-    delete this->preemptionTimeAdditionStatsLow;
+//    delete this->preemptionTimeAdditionVecHigh;
+//    delete this->preemptionTimeAdditionVecLow;
+//
+//    delete this->preemptionTimeAdditionStatsHigh;
+//    delete this->preemptionTimeAdditionStatsLow;
 }
 
 void DelayLogger::initialize( void )
