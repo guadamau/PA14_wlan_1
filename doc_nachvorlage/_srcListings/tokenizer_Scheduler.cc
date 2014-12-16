@@ -1,3 +1,4 @@
+...
 unsigned char Scheduler::containerHasEnoughBytes( cMessage* msg )
 {
     unsigned char retVal = 0x00;
@@ -117,3 +118,4 @@ void Scheduler::subtractFromByteContainer( cMessage* msg )
         }
     }
 }
+...

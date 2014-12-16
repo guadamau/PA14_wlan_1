@@ -345,6 +345,10 @@ unsigned char Scheduler::timeslotIsValid( queueName currentQueueName )
     }
     else if( currentQueueName == HIGH_RING || currentQueueName == HIGH_INTERNAL )
     {
+        /*
+         * if ( time modulo (2 * phasesize) ) < phasesize
+         * the high-frame can be sent
+         */
         if( fmod( now.dbl(), interval.dbl() ) < phase.dbl() )
         {
             return 0x01;
@@ -633,41 +637,6 @@ void Scheduler::processOneQueue( cQueue* currentQueue, queueName currentQueueNam
     }
 }
 
-void Scheduler::sendExpressFrame( cQueue* currentQueue, queueName currentQueueName, simtime_t expSendTime )
-{
-    cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
-    EthernetIIFrame* msgethExp = check_and_cast<EthernetIIFrame*>( msgExp->dup() );
-    parentSwitch->sendDelayed(msgExp, (expSendTime-simTime()), schedOutGateExp);
-
-    /* LOGGING */
-    cOutVector* currentQueueSizeVector = check_and_cast<cOutVector*>( queueVectors->get( currentQueueName ) );
-    currentQueueSizeVector->record( --queueSizes[ currentQueueName ] );
-
-    EthernetIIFrame* fcsMsg = new EthernetIIFrame();
-    fcsMsg->setBitLength( 4 * 8 );
-    EthernetIIFrame* ifgMsg = new EthernetIIFrame();
-    ifgMsg->setBitLength( INTERFRAME_GAP_BITS );
-    EthernetIIFrame* preambleMsg = new EthernetIIFrame();
-    preambleMsg->setBitLength( 8 * 8 );
-
-    cMessage* currMsg = sendingStatus->getMessage();
-
-    simtime_t timeMfcsFirstFragment = schedNicExp->getTransmissionChannel()->calculateDuration( fcsMsg );
-    simtime_t timeIfg = schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg );
-    simtime_t timePreamble = schedNicExp->getTransmissionChannel()->calculateDuration( preambleMsg );
-    simtime_t timeMsgExp = schedNicExp->getTransmissionChannel()->calculateDuration( msgExp );
-    simtime_t timeMsgDelayWhenFragmented = timeMfcsFirstFragment + timeIfg + timePreamble + timeMsgExp + timeIfg + timePreamble;
-
-    addPreemptionDelay( currMsg, timeMsgDelayWhenFragmented );
-
-    /* Statistics ... */
-    subtractFromByteContainer( msgethExp );
-    delete msgethExp;
-    this->preemptedFramesVector->record( ++this->preemptedFrames );
-
-    msgExp = NULL;
-}
-
 simtime_t Scheduler::getExpressSendTime( void )
 {
     /* Algorithm from documentation PA14_wlan_1 */
@@ -738,6 +707,41 @@ simtime_t Scheduler::getExpressSendTime( void )
     }
 
     return calcExpSendTime;
+}
+
+void Scheduler::sendExpressFrame( cQueue* currentQueue, queueName currentQueueName, simtime_t expSendTime )
+{
+    cMessage* msgExp = check_and_cast<cMessage*>( currentQueue->pop() );
+    EthernetIIFrame* msgethExp = check_and_cast<EthernetIIFrame*>( msgExp->dup() );
+    parentSwitch->sendDelayed(msgExp, (expSendTime-simTime()), schedOutGateExp);
+
+    /* LOGGING */
+    cOutVector* currentQueueSizeVector = check_and_cast<cOutVector*>( queueVectors->get( currentQueueName ) );
+    currentQueueSizeVector->record( --queueSizes[ currentQueueName ] );
+
+    EthernetIIFrame* fcsMsg = new EthernetIIFrame();
+    fcsMsg->setBitLength( 4 * 8 );
+    EthernetIIFrame* ifgMsg = new EthernetIIFrame();
+    ifgMsg->setBitLength( INTERFRAME_GAP_BITS );
+    EthernetIIFrame* preambleMsg = new EthernetIIFrame();
+    preambleMsg->setBitLength( 8 * 8 );
+
+    cMessage* currMsg = sendingStatus->getMessage();
+
+    simtime_t timeMfcsFirstFragment = schedNicExp->getTransmissionChannel()->calculateDuration( fcsMsg );
+    simtime_t timeIfg = schedNicExp->getTransmissionChannel()->calculateDuration( ifgMsg );
+    simtime_t timePreamble = schedNicExp->getTransmissionChannel()->calculateDuration( preambleMsg );
+    simtime_t timeMsgExp = schedNicExp->getTransmissionChannel()->calculateDuration( msgExp );
+    simtime_t timeMsgDelayWhenFragmented = timeMfcsFirstFragment + timeIfg + timePreamble + timeMsgExp + timeIfg + timePreamble;
+
+    addPreemptionDelay( currMsg, timeMsgDelayWhenFragmented );
+
+    /* Statistics ... */
+    subtractFromByteContainer( msgethExp );
+    delete msgethExp;
+    this->preemptedFramesVector->record( ++this->preemptedFrames );
+
+    msgExp = NULL;
 }
 
 void Scheduler::addPreemptionDelay( cMessage* msg, simtime_t delayCorrection )

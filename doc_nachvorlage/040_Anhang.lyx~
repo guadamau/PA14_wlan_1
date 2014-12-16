@@ -1125,6 +1125,21 @@ name "chap:Anleitung-zur-Simulationsumgebun"
 
 \end_layout
 
+\begin_layout Standard
+Hierbei handelt es sich um eine grobe Anleitung, wie man die Simulationsumgebung
+ mit den beigelieferten Daten ausführen, konfigurieren und dessen Resultate
+ analysieren kann.
+ Der genaue Umgang mit OMNeT++ ist in dessen offiziellen User Manual beschrieben
+ 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Section
 Starten der virtuellen Maschine
 \end_layout
@@ -1573,6 +1588,13 @@ key "OMNET_USERGUIDE"
 
 \begin_layout Subsection
 Lastgenerator
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Lastgenerator"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1831,33 +1853,388 @@ Die Fensterbereiche kann man sich nach Belieben zu recht ziehen.
 \end_layout
 
 \begin_layout Standard
-Folgende Buttons sind links oben in der Simulationsumgebung zu verwenden:
+Folgende Buttons links oben in der Simulationsumgebung können unter Anderem
+ für die Simulation verwendet werden:
 \end_layout
 
 \begin_layout Itemize
-Step: Tätigt ein einzelnes Event, muss kein Frameversand sein.
+
+\series bold
+Step: 
+\series default
+Tätigt ein einzelnes Event, muss kein Frameversand sein.
 \end_layout
 
 \begin_layout Itemize
-Run: Lässt die Simulation in einer verfolgbaren Geschwindigkeit laufen.
+
+\series bold
+Run:
+\series default
+ Lässt die Simulation in einer verfolgbaren Geschwindigkeit laufen.
  Es werden alle Animationen dargestellt.
  Die Geschwindigkeit lässt sich mittels Schiebefeld oben rechts neben dem
  Schraubenschlüssel-Button genauer definieren.
 \end_layout
 
 \begin_layout Itemize
-Fast: Die Simulation läuft viel schneller, der Frameversand wird nicht mehr
- animiert, jedoch ist anhand der Verbindungsfarben noch ersichtlich auf
- welcher Leitung gerade gesendet wird.
+
+\series bold
+Fast:
+\series default
+ Die Simulation läuft viel schneller, der Frameversand wird nicht mehr animiert,
+ jedoch ist anhand der Verbindungsfarben noch ersichtlich auf welcher Leitung
+ gerade gesendet wird.
 \end_layout
 
 \begin_layout Itemize
-Express: Die Simulation läuft auf der höchsten Geschwindigkeit und zeigt
- keine Animationen mehr.
+
+\series bold
+Express:
+\series default
+ Die Simulation läuft auf der höchsten Geschwindigkeit und zeigt keine Animation
+en mehr.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Until:
+\series default
+ Führt die Simulation im Express-Modus bis zum angegebenen Zeitpunkt aus.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Stop:
+\series default
+ Haltet die Simulation zum derzeitigen Zeitpunkt an.
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Finish:
+\series default
+ Schliesst die Simulation ab.
+ Klickt man danach nochmals auf 
+\begin_inset Quotes fld
+\end_inset
+
+Step
+\begin_inset Quotes frd
+\end_inset
+
+, 
+\begin_inset Quotes fld
+\end_inset
+
+Run
+\begin_inset Quotes frd
+\end_inset
+
+, 
+\begin_inset Quotes fld
+\end_inset
+
+Fast
+\begin_inset Quotes frd
+\end_inset
+
+, 
+\begin_inset Quotes fld
+\end_inset
+
+Express
+\begin_inset Quotes frd
+\end_inset
+
+ oder 
+\begin_inset Quotes fld
+\end_inset
+
+Until
+\begin_inset Quotes frd
+\end_inset
+
+ kann man die Simulation nochmals von Vorne ausführen.
+\end_layout
+
+\begin_layout Standard
+Mehr zur Simulationsumgebung ist im OMNeT++ User Manual im Kapitel 
+\begin_inset Quotes fld
+\end_inset
+
+The Tkenv Graphical Runtime Environment
+\begin_inset Quotes frd
+\end_inset
+
+ aufgeführt 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Ist die Simulation beendet (ein Fenster mit dem Inhalt 
+\begin_inset Quotes fld
+\end_inset
+
+no more events
+\begin_inset Quotes frd
+\end_inset
+
+ erscheint), wird automatisch der sogenannte 
+\begin_inset Quotes fld
+\end_inset
+
+Finish
+\begin_inset Quotes frd
+\end_inset
+
+-Befehl ausgeführt, welcher die aufgezeichneten Resultate abspeichert.
+ Interessieren nur die Werte bis zum jetzigen Zeitpunkt, kann man die Simulation
+ mit einem Klick auf 
+\begin_inset Quotes fld
+\end_inset
+
+Finish
+\begin_inset Quotes frd
+\end_inset
+
+ abschliessen.
+ Nun kann man die Resultate der Simulation ansehen.
 \end_layout
 
 \begin_layout Section
 Resultate ansehen
+\end_layout
+
+\begin_layout Standard
+Die Resultate können in der OMNeT++ Applikation (nicht die Simulationsumgebung)
+ angesehen werden.
+ Die Resultate der jeweiligen Simulation werden als ANF-Datei mit dem Konfigurat
+ionsnamen als Dateinamen im selben Ordner wie dessen XML-Datei (siehe Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Lastgenerator"
+
+\end_inset
+
+) aufgelistet.
+ Die Rohdaten der Simulation befinden sich in OMNeT++ in Projekt 
+\begin_inset Quotes fld
+\end_inset
+
+PA14_wlan_1
+\begin_inset Quotes frd
+\end_inset
+
+ im Ordner 
+\begin_inset Quotes fld
+\end_inset
+
+results
+\begin_inset Quotes frd
+\end_inset
+
+, haben den Namen der Konfiguration und unterschiedliche Dateiendungen.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_resultate_anf.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/040_resultate_rohdaten.png
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Standorte der Resultate (ANF-Datei und Rohdaten) der Simulation 
+\begin_inset Quotes fld
+\end_inset
+
+Beispielsimulation
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nun kann man mit einem Doppelklick auf die entsprechende ANF-Datei klicken,
+ um die Resultate zu öffnen.
+ Unterhalb des mittleren Fensters kann man auf 
+\begin_inset Quotes fld
+\end_inset
+
+Browse Data
+\begin_inset Quotes frd
+\end_inset
+
+ klicken, um die Resultate genau analysieren zu können.
+ In dieser Arbeit wurden spezifisch folgende Daten aufgezeichnet:
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Vectors: Ausgang: QueueSize nach Priorität und Herkunft (From Ring / (Internal))
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beschreibt, zu welchem Zeitpunkt wie viele Frames bei einem Ausgang eines
+ Knotens in einer Queue eingereiht sind.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Vectors: Ausgang: endNodeSwitch Preempted Frames
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Beschreibt, zu welchem Zeitpunkt wie viele Express-Frames bei einem Ausgang
+ eines Knotens andere Frames unterbrochen haben.
+\end_layout
+
+\begin_layout Standard
+
+\series bold
+Histograms: Express, High & Low Prio Delay
+\series default
+
+\begin_inset Newline newline
+\end_inset
+
+Zeigt, wie viele Frames welche Übertragungsdauer hatten.
+\end_layout
+
+\begin_layout Standard
+Die genauere Bedeutung der Resultate ist in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Resultate"
+
+\end_inset
+
+ aufgeführt.
+ Diese Resultate können einzeln oder kombiniert (mehrere mit Ctrl-/Strg-Taste
+ markieren) per Rechtsklick -> 
+\begin_inset Quotes fld
+\end_inset
+
+Plot
+\begin_inset Quotes frd
+\end_inset
+
+ ausgegeben werden.
+\end_layout
+
+\begin_layout Standard
+Der genauere Umgang bei der Auswertung der Resultate kann im OMNeT++ User
+ Manual im Kapitel 
+\begin_inset Quotes fld
+\end_inset
+
+Analyzing the Results
+\begin_inset Quotes frd
+\end_inset
+
+ betrachtet werden 
+\begin_inset CommandInset citation
+LatexCommand cite
+key "OMNET_USERGUIDE"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Chapter
@@ -2029,10 +2406,10 @@ dleMsg_EndNodeSwitch.cc}
 \end_layout
 
 \begin_layout Section
-Scheduler: Mechanismen zur Queueverwaltung
+Scheduler: Zeitberechnung und Versand IET
 \begin_inset CommandInset label
 LatexCommand label
-name "sec:Scheduler:-Mechanismen-zur"
+name "sec:Scheduler:-Zeitberechnung-und"
 
 \end_inset
 
@@ -2047,10 +2424,11 @@ status open
 
 
 \backslash
-lstinputlisting[caption={switch/Scheduler.cc - Mechanismen zur Queueverwaltung}
+lstinputlisting[caption={switch/Scheduler.cc - Zeitberechnung und Versand
+ IET}
 \backslash
-label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/processQueue
-s_Scheduler.cc}
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/preemption_S
+cheduler.cc}
 \end_layout
 
 \end_inset
@@ -2081,6 +2459,59 @@ lstinputlisting[caption={switch/Scheduler.cc - Zuflusslimitierung}
 \backslash
 label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/tokenizer_Sc
 heduler.cc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Scheduler: Mechanismen zur Queueverwaltung
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Scheduler:-Mechanismen-zur"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={switch/Scheduler.cc - Mechanismen zur Queueverwaltung}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/processQueue
+s_Scheduler.cc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Scheduler: Zeitschlitzverfahren
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={switch/Scheduler.cc - Zeitschlitzverfahren}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/timeslot_Sch
+eduler.cc}
 \end_layout
 
 \end_inset

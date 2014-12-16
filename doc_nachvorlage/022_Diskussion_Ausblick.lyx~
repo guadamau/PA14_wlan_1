@@ -288,6 +288,13 @@ reference "sec:Switch:-Zuteiltung-Frame"
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 Nach der Zuteilung werden die Queues je nach Mechanismus im Scheduler abgearbeit
 et.
 \end_layout
@@ -395,6 +402,13 @@ fragmentierten
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 Dies hat für die Auswertung den selben Effekt wie wenn eine Fragmentierung
  stattgefunden hätte (Express-Frame wird während normalem Frame versandt,
  normales Frame kommt später an).
@@ -421,7 +435,129 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Der folgende Text bezieht sich auf den Codeausschnitt aus Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Scheduler:-Zeitberechnung-und"
 
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Der Scheduler prüft beim Abarbeiten seiner Queues (
+\begin_inset Quotes fld
+\end_inset
+
+processOneQueue()
+\begin_inset Quotes frd
+\end_inset
+
+), ob derzeit normale Frames oder Express-Frames versendet werden (anhand
+ der 
+\begin_inset Quotes fld
+\end_inset
+
+transmitLock
+\begin_inset Quotes frd
+\end_inset
+
+-Variablen, werden mit den 
+\begin_inset Quotes fld
+\end_inset
+
+unlock()
+\begin_inset Quotes frd
+\end_inset
+
+-Funktionen nach dem Senden eines Frames wieder aufgehoben).
+ Wird derzeit nichts versendet, kann das Frame normal versendet werden.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wird derzeit ein normales Frame versendet und es steht der Versand eines
+ Express-Frames an, wird anhand dem normalen Frame berechnet, wann das Express-F
+rame versendet werden kann (
+\begin_inset Quotes fld
+\end_inset
+
+getExpressSendTime()
+\begin_inset Quotes frd
+\end_inset
+
+).
+ Kann das normale Frame nicht fragmentiert werden, gibt 
+\begin_inset Quotes fld
+\end_inset
+
+getExpressSendTime()
+\begin_inset Quotes frd
+\end_inset
+
+ einen ungültigen Wert zurück, der von 
+\begin_inset Quotes fld
+\end_inset
+
+processOneQueue()
+\begin_inset Quotes frd
+\end_inset
+
+ abgefangen wird (dann wird das Express-Frame nachdem das normale Frame
+ fertig versendet wurde bzw.
+ beim nächsten Abarbeiten versendet).
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Gibt 
+\begin_inset Quotes fld
+\end_inset
+
+getExpressSendTime()
+\begin_inset Quotes frd
+\end_inset
+
+ einen gültigen Wert zurück, der besagt, wann das Express-Frame versendet
+ werden kann, so wird ein Event gesendet, der zum berechneten Zeitpunkt
+ das Express-Frame versendet und das normale Frame wird verlängert (siehe
+ 
+\begin_inset Quotes fld
+\end_inset
+
+Fverlängert
+\begin_inset Quotes frd
+\end_inset
+
+ in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Fragmentierung-und-Zeitberechnun"
+
+\end_inset
+
+).
+ 
 \end_layout
 
 \end_inset
@@ -634,6 +770,13 @@ subtractFromByteContainer()
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Quotes fld
 \end_inset
 
@@ -652,6 +795,13 @@ LOW
 -Frame als Parameter mitgegeben wird und dessen Grösse die vorhandene Anzahl
  Tokens überschreitet.
  Zudem ist diese Funktion für die Token generierung zuständig.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -674,7 +824,8 @@ LOW
 \end_inset
 
 -Frame handelt.
- 
+ Diese Funktion wird beim Versenden aufgeführt und wird nur dann ausgeführt,
+ wenn genügend Tokens vorhanden sind.
 \end_layout
 
 \end_inset
@@ -998,6 +1149,13 @@ Es ist ein Mechanismus implementiert, welcher einen Intervall in zwei Phasen
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 In der ersten Phase werden so viele Frames mit der Priorität High (Zeitkritische
 r Traffic) verschickt wie möglich.
  Wenn in dieser Phase noch Platz frei ist, es jedoch keine Frames mit der
@@ -1006,8 +1164,22 @@ r Traffic) verschickt wie möglich.
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 In der zweiten Phase können lediglich Frames der Priorität Low versendet
  werden.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -1036,6 +1208,133 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Der Scheduler überprüft beim Abarbeiten seiner Queues, ob er sich in einer
+ Phase befindet, in der er senden kann.
+ Dazu ruft er die Funktion 
+\begin_inset Quotes fld
+\end_inset
+
+timeslotIsValid()
+\begin_inset Quotes frd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Scheduler:-Zeitschlitzverfahren"
+
+\end_inset
+
+) mit der derzeitigen Queue als Parameter auf und sendet nur, wenn diese
+ 
+\begin_inset Quotes fld
+\end_inset
+
+true
+\begin_inset Quotes frd
+\end_inset
+
+ zurück gibt.
+ 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Diese Funktion gibt bei Express- und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames immer 
+\begin_inset Quotes fld
+\end_inset
+
+true
+\begin_inset Quotes frd
+\end_inset
+
+ zurück, da Express-Frames immer und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames auch in jeder Phase gesendet werden können, da diese nur gesendet
+ werden, wenn kein 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frame in den Queues existiert oder gesendet werden kann.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wird der Funktion eine Queue mit 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames übergeben, überprüft sie anhand der derzeitigen Zeit, ob das Frame
+ gesendet werden kann oder nicht.
+ Dazu wird folgende Rechnung angewandt:
+\begin_inset Formula 
+\[
+simtime=Derzeitige\, Simulationszeit\,(Jetztiger\, Zeitpunkt)\,[s]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+phase=Konfigurierte\, Phasengrösse\,[s]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+ret=Rückgabewert\,[Boolean]
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+ret=\begin{cases}
+simtime\%(2*phase)<phase & \, true\\
+simtime\%(2*phase)\geq phase & \, false
+\end{cases}
+\]
+
+\end_inset
+
 
 \end_layout
 
