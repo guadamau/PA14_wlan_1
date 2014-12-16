@@ -1142,6 +1142,13 @@ key "OMNET_USERGUIDE"
 
 \begin_layout Section
 Starten der virtuellen Maschine
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Starten-der-virtuellen"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1189,8 +1196,8 @@ Debian (32 bit)
 
 ).
  Die virtuelle Maschine wurde mit einem zugewiesenen Arbeitsspeicher von
- 512MB getestet (es wird empfohlen 512MB oder mehr als Arbeitsspeicher auszuwähl
-en).
+ 512MB getestet (es wird empfohlen 1GB oder mehr als Arbeitsspeicher auszuwählen
+).
  Anstelle einer neuen Festplatte zu erstellen wird nun die bestehende VDI-Datei
  eingebunden.
  Wurde die virtuelle Maschine erstellt, kann sie gestartet werden.
@@ -2364,11 +2371,111 @@ USB-Stick Eigenschaften
 \end_layout
 
 \begin_layout Standard
-Auf dem USB-Stick befinden sich folgende Dateien:
+Auf dem USB-Stick befinden sich folgende Dateien und Verzeichnisse:
 \end_layout
 
 \begin_layout Standard
-(Tree of USB-Stick content)
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="2">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top" width="30text%">
+<column alignment="left" valignment="top" width="70text%">
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Documentation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beinhaltet diese Dokumentation als PDF-Datei und als Quellcode im LyX-Format
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+PA14_wlan_1.vdi
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Virtuelle Maschine (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Starten-der-virtuellen"
+
+\end_inset
+
+)
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+SourceCode_Simulation
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Beinhaltet den Source-Code dieses Projekts als C++-Code und OMNeT++-Files
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+USB-Stick Inhalt 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Chapter
