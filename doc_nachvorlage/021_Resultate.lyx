@@ -269,6 +269,29 @@ Die Werte werden lediglich innerhalb des sogenannten Steady-States aufgezeichnet
  und der Aufbau und Abschluss ausser Acht gelassen.
 \end_layout
 
+\begin_layout Standard
+In diesem Kapitel werden nicht die Resulate aller Knoten im Netzwerk angegeben
+ und ausgewertet, da viele Knoten das selbe Verhalten haben.
+ Hat ein Knoten ein anderes Verhalten (z.B.
+ wenn er neben 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames auch 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet), wird dieser auch aufgezeigt.
+\end_layout
+
 \begin_layout Section
 Szenario 1: Substation Automation
 \end_layout
@@ -312,7 +335,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.1 / Verzögerungszeiten von Express Frames
+Szenario 1 / Simulation 1.1 / Übertragungszeiten von Express Frames
 \end_layout
 
 \end_inset
@@ -336,12 +359,52 @@ status open
 \noindent
 \align center
 \begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
+<lyxtabular version="3" rows="3" columns="4">
 <features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <column alignment="left" valignment="top">
 <row>
 <cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+EXPRESS
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+HIGH
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+LOW
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -350,7 +413,7 @@ Anzahl Frames:
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -369,9 +432,47 @@ $75$
 
 \end_inset
 </cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$17454$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$224$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
 </row>
 <row>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -380,7 +481,7 @@ Mittelwert:
 
 \end_inset
 </cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
 \begin_inset Text
 
 \begin_layout Plain Layout
@@ -390,6 +491,48 @@ status open
 \begin_layout Plain Layout
 
 $272.92 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$368.83 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$445.25 
 \backslash
 mu s$
 \end_layout
@@ -413,7 +556,7 @@ mu s$
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.1 / Datenangabe
+Szenario 1 / Simulation 1.1 / Datenangabe 
 \end_layout
 
 \end_inset
@@ -446,6 +589,18 @@ Simulation 1.3: Vortritt für Frames von Aussen
 Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
 \end_layout
 
+\begin_layout Standard
+76Kbit/s
+\end_layout
+
+\begin_layout Standard
+88Kbit/s 
+\end_layout
+
+\begin_layout Standard
+100Kbit/s
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.5: Reissverschluss
 \end_layout
@@ -456,6 +611,10 @@ Simulation 1.6: Zeitschlitzverfahren
 
 \begin_layout Subsection
 Simulation 1.7: Maximale Auslastung
+\end_layout
+
+\begin_layout Subsection
+Simulation 1.8: Maximale Auslastung mit TCP-ähnlichem Verkehr
 \end_layout
 
 \end_body
