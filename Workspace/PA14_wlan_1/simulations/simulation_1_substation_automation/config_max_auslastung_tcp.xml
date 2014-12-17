@@ -256,5 +256,34 @@
     
     <!-- ###################################### ############################################### ###################################### -->
     
+    
+    <!-- ######################################            Simulation of TCP-Traffic            ###################################### -->
+    
+    <source>00-15-12-14-88-05								<!-- TCP Traffic Simulation MU5 to PU1 -->
+        <lastmuster>      
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.56</stopzeit> 
+            <interval>0.001</interval>        
+            <epsilon>0.0</epsilon>           
+            <destination>00-15-12-14-88-0A</destination>    
+            <paketgroesse>1476</paketgroesse>         
+            <priority>LOW</priority>
+        </lastmuster> 
+    </source>
+    
+    <source>00-15-12-14-88-0A								<!-- TCP Traffic Simulation PU1 to MU5 -->
+        <lastmuster>       
+            <startzeit>0.001</startzeit>            
+            <stopzeit>0.56</stopzeit> 
+            <interval>0.001</interval>         
+            <epsilon>0.0</epsilon>         
+            <destination>00-15-12-14-88-05</destination>    
+            <paketgroesse>40</paketgroesse>           
+            <priority>LOW</priority>
+        </lastmuster> 
+    </source>
+    
+    <!-- ###################################### ############################################### ###################################### -->
+    
 </simulation_behaviour>
 
