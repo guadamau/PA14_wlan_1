@@ -2634,6 +2634,36 @@ eduler.cc}
 
 \end_layout
 
+\begin_layout Section
+CPU: Lastgenerator
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:CPU-Lastgenerator"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstinputlisting[caption={cpu/CPU.cc - Lastgenerator}
+\backslash
+label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/generateOneP
+acket_CPU.cc}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Weiteres
 \end_layout

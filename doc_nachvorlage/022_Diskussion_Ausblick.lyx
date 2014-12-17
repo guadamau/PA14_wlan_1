@@ -1417,15 +1417,12 @@ Lastgenerator
 Wie sich die Lastengenerierung eines einzelnen HSR-Nodes verhält, wird in
  der Konfigurations-XML-Datei festgelgt.
  Die Struktur dieser XML-Datei wird in Kapitel 
-
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Netzwerkaufbau"
 
 \end_inset
 
-
-\lang ngerman
  genau erläutert.
  Diese XML-Konfiguration wird zu Beginn eines Simulationslaufs geladen und
  in einem CPU-Objekt gespeichert.
@@ -1460,8 +1457,15 @@ generateOnePacket()
 \begin_inset Quotes frd
 \end_inset
 
- aufgerufen.
- Diese Methode Kann im Kapitel.
+ des CPU-Moduls aufgerufen.
+ Diese Methode kann im Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:CPU-Lastgenerator"
+
+\end_inset
+
+ eingesehen werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1523,6 +1527,22 @@ Ist
 Es lässt sich ein Strom mit konstanter Framerate generieren.
  Mittels Konfigurationsdatei kann man die Rate (in welchen Zeitabständen
  ein neues Frame generiert werden soll) bestimmen.
+ Zudem kann über den Parameter 
+\begin_inset Quotes fld
+\end_inset
+
+epsiolon
+\begin_inset Quotes frd
+\end_inset
+
+ (siehe Konfigurations-XML 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Netzwerkaufbau"
+
+\end_inset
+
+) eine maximale Abweichung des herkömmlichen Intervalls definieren.
 \begin_inset Newline newline
 \end_inset
 

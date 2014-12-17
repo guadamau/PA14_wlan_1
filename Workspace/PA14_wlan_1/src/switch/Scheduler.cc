@@ -154,7 +154,7 @@ void Scheduler::initScheduler( unsigned char schedID, HsrSwitch* parentSwitch, s
     this->timeslotPhaseSize = parentSwitch->par( "timeslotPhaseSize" );
     this->notifiedTimeslot = 0;
     this->framebyteLimit = parentSwitch->par("framebyteLimit");
-    this->framebytecontainer = framebyteLimit;
+    this->framebytecontainer = 0;
     this->notifiedToken = 0;
 
     this->nextUpAnotherExp = 0;
