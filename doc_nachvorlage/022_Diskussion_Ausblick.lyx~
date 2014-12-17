@@ -1338,6 +1338,50 @@ simtime\%(2*phase)\geq phase & \, false
 
 \end_layout
 
+\begin_layout Plain Layout
+\begin_inset Quotes fld
+\end_inset
+
+ret
+\begin_inset Quotes frd
+\end_inset
+
+ beträgt dabei den Rückgabewert der Funktion 
+\begin_inset Quotes fld
+\end_inset
+
+timeslotIsValid()
+\begin_inset Quotes frd
+\end_inset
+
+.
+ Wenn 
+\begin_inset Quotes fld
+\end_inset
+
+ret
+\begin_inset Quotes frd
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+true
+\begin_inset Quotes frd
+\end_inset
+
+ ist, dann befindet sich die Simulation in der Grün-Phase und kann 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versenden.
+\end_layout
+
 \end_inset
 </cell>
 </row>
@@ -1367,6 +1411,60 @@ Nachweis: Knoten kann nach Zeitschlitzverfahren arbeiten
 
 \begin_layout Subsection
 Lastgenerator
+\end_layout
+
+\begin_layout Standard
+Wie sich die Lastengenerierung eines einzelnen HSR-Nodes verhält, wird in
+ der Konfigurations-XML-Datei festgelgt.
+ Die Struktur dieser XML-Datei wird in Kapitel 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vref{lst:configxml}
+\end_layout
+
+\end_inset
+
+ genau erläutert.
+ Diese XML-Konfiguration wird zu Beginn eines Simulationslaufs geladen und
+ in einem CPU-Objekt gespeichert.
+\end_layout
+
+\begin_layout Standard
+Das CPU-Modul eines HSR-Knotens, siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:DANH-Knoten"
+
+\end_inset
+
+, löst die Generierung einzelner Frames je nach Konfigurationsparameter
+ mittels 
+\begin_inset Quotes fld
+\end_inset
+
+Selfmessages
+\begin_inset Quotes frd
+\end_inset
+
+ aus.
+\end_layout
+
+\begin_layout Standard
+Wenn ein neues Frame erstellt werden muss, wird die Methode 
+\begin_inset Quotes fld
+\end_inset
+
+generateOnePacket()
+\begin_inset Quotes frd
+\end_inset
+
+ aufgerufen.
+ Diese Methode Kann im Kapitel.
 \end_layout
 
 \begin_layout Subsubsection
