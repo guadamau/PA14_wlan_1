@@ -88,8 +88,8 @@ Aufbau der Simulation
 \begin_layout Standard
 In OMNeT++ wird ein HSR-Ring-Netzwerk aufgebaut, in welchem der Traffic
  simuliert wird.
- Mittels Konfigurationsdatei kann man die zu verwendenden Prioritäten (siehe
- Kapitel 
+ Mittels Konfigurationsdateien kann man die zu verwendenden Prioritäten
+ (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Prioritäten-der-Ethernet-Frames"
@@ -103,7 +103,7 @@ reference "sub:Mechanismen-zur-Trafficregelung"
 
 \end_inset
 
-) definieren, welche in den weiteren Kapiteln genauer behandelt werden.
+) definieren, die in den weiteren Kapiteln genauer behandelt werden.
 \end_layout
 
 \begin_layout Subsection
@@ -119,7 +119,7 @@ name "sub:Prioritäten-der-Ethernet-Frames"
 
 \begin_layout Standard
 Für die Frames sind 3 verschiedene Prioritäten vorgesehen, nämlich sogenannte
- Express-, High- und Low-Frames.
+ Express-, High- und Low-Prioritäten.
  Dabei handelt es sich um das in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -137,26 +137,24 @@ In dieser Arbeit werden wir diese Frames wie folgt auf technischer Ebene
 \end_layout
 
 \begin_layout Itemize
-Ein Express-Frame wird durch einen eigenen EtherType-Wert im Ethernet-Header
- definiert.
- So werden diese Frames auch nur von den Geräten erkannt, die diesen EtherType-W
-ert kennen.
- Bis jetzt gibt es noch keine konkreten Vorschläge wie ein Express-Frame
- gekennzeichnet ist.
+Ein Express-Frame wird in der Simulation im VLAN-Tag mit der Priorität 2
+ versehen.
  Die hier erwähnte Kennzeichnung ist eine der Autoren ausgedachten Lösungen.
+ Im Standard wird anhand des SFD-/SMD-Feldes zwischen normalen Frames und
+ Express-Frames unterschieden.
 \end_layout
 
 \begin_layout Itemize
-Bei einem High-Frame handelt es sich um ein normales Ethernet-Frame das
- über ein VLAN-Tag mit der Priorität 1 versehen ist.
+Bei einem High-Frame handelt es sich um ein normales Ethernet-Frame, das
+ über ein VLAN-Tag mit der Priorität 1 gekennzeichnet ist.
  Da das VLAN-Priority-Feld 3 Bits gross ist wären 8 verschiedene Prioritäten
  möglich, jedoch wird in dieser Arbeit keine Prioritätsnummer, die höher
- als 1 ist, verwendet.
+ als 2 ist, verwendet.
 \end_layout
 
 \begin_layout Itemize
-Als ein Low-Frame werden alle Frames definiert, welche ein VLAN-Tag mit
- der Priorität 0 oder keine besondere Kennzeichnung haben.
+Als ein Low-Frame gelten alle Frames, welche einen VLAN-Tag mit der Priorität
+ 0 oder keine besondere Kennzeichnung haben.
 \end_layout
 
 \begin_layout Subsection
@@ -171,8 +169,8 @@ name "sub:Mechanismen-zur-Trafficregelung"
 \end_layout
 
 \begin_layout Standard
-In diesem Kapitel werden Mechanismen erläutert, welche den Traffic regeln
- und in der Simulation angewendet werden können.
+In diesem Kapitel werden Mechanismen erläutert, die den Traffic regeln und
+ in der Simulation angewendet werden können.
  Jeder Node (DANH oder Redbox, siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -180,28 +178,22 @@ reference "sub:Gerätetypen HSR"
 
 \end_inset
 
-) im Netzwerk verfügt über einen internen Switch, der entscheidet wohin
+) im Netzwerk verfügt über einen internen Switch, der entscheidet, wohin
  die Frames gesendet werden sollen.
- Zum Beispiel verfügt ein DANH in der Simulation über 3 Ports, zwei für
- die Frames vom und auf den Ring (Ethernet-Ports) und einen für die Frames
- von und zur CPU.
+ In der Simulation verfügt ein DANH über drei Ports, zwei für die Frames
+ vom und auf den Ring (Ethernet-Ports) und einen für die Frames von und
+ zur CPU.
 \end_layout
 
 \begin_layout Standard
 Für jeden möglichen Ausgang ist ein Scheduler zuständig (d.h.
- bei einem DANH-Gerät hat es 3 Scheduler), in welchem die Mechanismen zur
- Trafficregelung (siehe Kapitel 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sub:Mechanismen-zur-Trafficregelung"
-
-\end_inset
-
-) implementiert sind und die Frames priorisiert abgehandelt werden.
+ bei einem DANH-Gerät hat es drei Scheduler), in welchem die Mechanismen
+ zur Trafficregelung implementiert sind und die Frames priorisiert abgehandelt
+ werden.
  Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
  Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
  seinen Ausgang zu koordinieren hat.
- Es besteht dann die Möglichkeit für jeden Knoten zwischen den Mechanismen
+ Es besteht dann die Möglichkeit, für jeden Knoten zwischen den Mechanismen
  auszuwählen oder diese sogar zu kombinieren.
 \end_layout
 
@@ -210,12 +202,10 @@ First Come First Serve
 \end_layout
 
 \begin_layout Standard
-Die Frames werden, unabhängig von ihrer Herkunft, nur nach ihrer Priorität
- behandelt.
+Die Frames werden, unabhängig von ihrer Herkunft (von Aussen oder vom Ring),
+ nur nach ihrer Priorität behandelt.
  Das erste Frame, das von der jeweiligen Priorität eintrifft, wird dem anderen
  der selben Priorität vorgezogen.
- Somit spielt hier die Herkunft des Frames (von Aussen oder vom Ring) keine
- Rolle.
 \end_layout
 
 \begin_layout Subsubsection
@@ -232,57 +222,27 @@ name "sub:Limitierung-des-Zuflusses"
 \begin_layout Standard
 Jedes Gerät generiert intern eine Anzahl an Tokens bis zu einem bestimmten
  Maximum.
- Möchte das Gerät ein neues, intern generiertes Frame versenden, kann es
- das Frame erst versenden wenn genügend Tokens vorhanden sind.
- Dabei verbraucht ein Frame mit n Bytes genau n Tokens.
- Wenn zum Beispiel ein Frame mit 800 Bytes versendet werden muss und nur
- 600 Tokens vorhanden sind, muss das Gerät mit dem Versand warten bis genügend
- Tokens vorhanden sind.
+ Möchte das Gerät ein neues, intern generiertes Low-Frame versenden, kann
+ es das Frame erst versenden wenn genügend Tokens vorhanden sind.
+ Dabei verbraucht ein Low-Frame mit n Bytes genau n Tokens.
+ Wenn zum Beispiel ein Low-Frame mit 800 Bytes versendet werden muss und
+ nur 600 Tokens vorhanden sind, muss das Gerät mit dem Versand warten, bis
+ genügend Tokens vorhanden sind.
 \end_layout
 
 \begin_layout Standard
-Diese Limitierung findet jedoch lediglich für Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- statt, damit nichts vom Überlebenswichtigen limitiert wird.
+Es werden lediglich Low-Frames limitiert, damit nichts vom hoch priorisierten
+ Traffic limitiert wird.
  So kann der Zufluss von neuem 
 \begin_inset Quotes fld
 \end_inset
 
-unwichtigen
+unwichtigem
 \begin_inset Quotes frd
 \end_inset
 
- Traffic limitiert werden, womit die Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
- weniger von Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- gestört werden.
+ Traffic limitiert werden, womit die Frames mit der Priorität High und Express
+ weniger von Frames mit der Priorität Low gestört werden.
  
 \end_layout
 
@@ -314,8 +274,8 @@ Je nach auftretenden Prioritäten kann es auch sein, dass von Aussen ein
 \end_layout
 
 \begin_layout Standard
-Die andere Möglichkeit ist, den Frames, die auf den Ring sollen, den Vortritt
- zu gewähren.
+Die andere Möglichkeit ist, den Frames, die von Aussen auf den Ring sollen,
+ den Vortritt zu gewähren.
  So kann ein minimaler Zufluss auf den Ring garantiert werden.
  Hier kann es den umgekehrten Fall wie wenn die Frames vom Ring Vortritt
  haben geben: Wenn ständig neue Frames von Aussen kommen, werden die Frames
@@ -457,6 +417,13 @@ So würde die Priorisierung zwischen der aus Liste 1 und der aus Liste 2
  nach jedem Frame-Versand abwechseln.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Zeitschlitzverfahren
 \begin_inset CommandInset label
@@ -470,15 +437,17 @@ name "sub:Zeitschlitzverfahren"
 
 \begin_layout Standard
 Im Zeitschlitzverfahren werden Zeitschlitze definiert, in denen man High-
- und Low-Frames senden kann, ein Express-Frame kann immer versendet werden.
+ und Low-Frames senden kann.
+ Ein Express-Frame kann immer versendet werden.
  
 \end_layout
 
 \begin_layout Standard
-Jeder Zeitschlitz hat 2 gleich grosse Phasen, davon eine sogenannte Grün-Phase,
- in welcher High-Frames gesendet werden können.
- Den Rest des Zeitschlitzes wird für den Sendevorgang oder Low-Frames verwendet.
- Sollten keine High-Frames da sein so können auch Low-Frames gesendet werden.
+Jeder Zeitschlitz hat zwei gleich grosse Phasen, davon eine sogenannte Grün-Phas
+e, in welcher High-Frames gesendet werden können.
+ Die Rot-Phase wird für den restlichen Sendevorgang oder für Low-Frames
+ verwendet.
+ Sollten keine High-Frames da sein, so können auch Low-Frames gesendet werden.
  Dies wiederholt sich in jedem Zeitschlitz.
  Mit diesem Mechanismus wird verhindert, dass Low-Frames nicht gesendet
  werden, wenn ständig High-Frames zum Senden bereitstehen.
@@ -516,7 +485,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel von Frameabfolge mit Zeitschlitzverfahren
+Beispiel von Frame-Abfolge mit Zeitschlitzverfahren
 \end_layout
 
 \end_inset
@@ -524,6 +493,13 @@ Beispiel von Frameabfolge mit Zeitschlitzverfahren
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -643,10 +619,10 @@ eth1
 Zwischen jedem Port und Komponente befindet sich eine Duplikatliste, durch
  die jedes Frame hindurch läuft.
  Die Duplikatliste überprüft anhand der Sequenznummer und der Quell-MAC-Adresse,
- ob dasselbe Frame schon mal die Duplikatliste passiert hat.
- Wenn dasselbe Frame schon mal von der Duplikatliste erkannt wurde wird
- es gelöscht.
- Durch diese Duplikatliste wird kein Frame mehrmals über den selben Port
+ ob dasselbe Frame schon einmal die Duplikatliste passiert hat.
+ Wenn dasselbe Frame bereits einmal von der Duplikatliste erkannt wurde
+ wird es gelöscht.
+ Dank dieser Duplikatliste wird kein Frame mehrmals über den selben Port
  versendet.
 \end_layout
 
@@ -656,7 +632,7 @@ Alle Frames, die beim DANH-Knoten ankommen oder von dessen CPU generiert
  Dieser analysiert das Frame und weist es dem entsprechenden Scheduler zu,
  der die Frames je nach Priorität und aktiven Mechanismen in die entsprechende
  Warteschlange stellt.
- Dem Scheduler ist immer ein Port (also auch zwei Netzwerkinterfaces) zugeteilt,
+ Dem Scheduler ist immer ein Port (also zwei Netzwerkinterfaces) zugeteilt,
  was heisst, dass ein Switch über 3 Scheduler verfügt.
  Der Scheduler ist zudem für das Senden der Frames zuständig.
  Er entscheidet wann über welches Netzwerkinterface welches Frame versendet
@@ -686,7 +662,7 @@ reference "sub:Kalenderwoche-49:-04.12.2014"
 
 ).
  Dies ist die Zeit, die ein Knoten benötigt, um beim Cut-Through-Switching
- genug vom Frame eingelesen zu haben, damit der Entscheiden kann was er
+ genug vom Frame eingelesen zu haben, damit er Entscheiden kann, was er
  mit dem Frame machen soll.
 \end_layout
 
@@ -759,11 +735,20 @@ Beispielaufbau eines Netzwerks in OMNeT++
 \begin_layout Standard
 Das Verhalten in diesem Beispiel ist bei jedem Knoten das Selbe, da es sich
  lediglich um DANH-Knoten handelt.
- Was variiert sind die MAC-Adresse (in der NED-Datei des Netzwerks definiert)
+ Was variiert, sind die MAC-Adressen (in der NED-Datei des Netzwerks definiert)
  und die Anzahl und Häufigkeit der Frames, die generiert werden.
  Für die Generierung von Frames wird eine XML-Datei definiert, bei der für
- jeden Knoten bestimmt wird wie viele Frames dieser Knoten an wen sendet.
- Das Generieren von Multi- und Broadcast-Frames ist auch möglich.
+ jeden Knoten bestimmt wird, wie viele Frames dieser Knoten an welchen Host
+ sendet.
+ Das Generieren von Multi- und Broadcast-Frames ist neben Unicast-Frames
+ auch möglich.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1046,7 +1031,7 @@ label{lst:configxml},captionpos=b]
 
 \begin_layout Plain Layout
 
-    <!-- # Frames with unicast destination and different priorities # -->
+    <!-- # Express-Frames with unicast destination # -->
 \end_layout
 
 \begin_layout Plain Layout
@@ -1138,23 +1123,7 @@ end{lstlisting}
 \begin_layout Standard
 Für einen Knoten können mehrere solcher Konfigurationen gleichzeitig gesetzt
  werden, wenn ein Knoten z.B.
- Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- versenden soll.
+ Frames der Priorität High und Low versenden soll.
  Des Weiteren können auch Knoten im Netz ohne einen Eintrag im XML existieren.
  Diese Knoten generieren dann zwar selber keine Frames, leiten jedoch Frames
  normal weiter wie jeder andere Knoten auch.
@@ -1231,7 +1200,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispielablauf und Schedulerzuordnung eines Frames in einem Switch
+Schedulerzuordnung eines Frames in einem Switch
 \end_layout
 
 \end_inset
@@ -1251,6 +1220,8 @@ Der Scheduler arbeitet nach jedem neuen Frame seine Queues ab.
  und Mechanismus an der Reihe ist.
  Wird gerade etwas auf dem Ausgang übertragen, versucht es der Scheduler
  erst nochmals sobald die Übertragung zu Ende ist.
+ Die Ausnahme bildet das Express-Frame, das den Sendevorgang normaler Frames
+ unterbrechen kann.
 \end_layout
 
 \begin_layout Subsubsection
@@ -1259,9 +1230,9 @@ Express-Frame
 
 \begin_layout Standard
 Bei einem Express-Frame muss der Scheduler sofort handeln.
- Anders als bei einem normalen Frame muss das Express-Frame auch bei einem
- besetzten Ausgang versendet werden, weshalb das Frame, das gerade übertragen
- wird, wenn möglich fragmentiert werden muss.
+ Anders als bei einem normalen Frame, muss das Express-Frame auch bei einem
+ besetzten Ausgang versendet werden, was impliziert, dass das Frame, das
+ gerade übertragen wird, wenn möglich fragmentiert werden muss.
  
 \end_layout
 
@@ -1269,12 +1240,12 @@ Bei einem Express-Frame muss der Scheduler sofort handeln.
 Wichtig ist, dass kein Fragment unter der kleinstmöglichen Ethernet-Frame-Grösse
  von 64 Bytes liegt.
  Aus diesem Grund kann es sein, dass Frames manchmal nicht fragmentiert
- werden können und der Scheduler warten muss bis dieses versendet wurde.
+ werden können und der Scheduler warten muss, bis dieses versendet wurde.
 \end_layout
 
 \begin_layout Standard
 Kann das Frame jedoch fragmentiert werden, so wird das derzeitige Fragment
- zu Ende gesendet und dann das Express-Frame versendet.
+ zu Ende gesendet und anschliessend das Express-Frame versendet.
  Danach werden die restlichen Fragmente versendet.
 \end_layout
 
@@ -1290,8 +1261,8 @@ name "sub:Fragmentierung-und-Zeitberechnun"
 \end_layout
 
 \begin_layout Standard
-In der Simulation findet jedoch keine richtige Fragmentierung statt, jedoch
- wird diese über Zeitberechnung miteinbezogen.
+In der Simulation findet keine richtige Fragmentierung statt, jedoch wird
+ diese mittels Zeitberechnung durchgeführt.
  Das heisst, dass ein Express-Frame bei einem belegten Ausgang gesendet
  wird, wenn das Fragment inklusive IFG versendet worden wäre.
  Die Ankunftszeit des 
@@ -1307,15 +1278,15 @@ fragmentierten
 \end_layout
 
 \begin_layout Standard
-Da keine wirkliche Fragmentierung statt findet, ist der Ausgang bei dem
- das zu unterbrechende Frame gesendet wird immer noch belegt.
+Da keine wirkliche Fragmentierung stattfindet, ist der Ausgang, bei dem
+ das zu unterbrechende Frame gesendet wird, immer noch belegt.
  Aus diesem Grund gibt es für jeden Ausgang einen weiteren Ausgang ausschliessli
 ch für Express-Frames.
 \end_layout
 
 \begin_layout Standard
-Somit sind die Ankunfts- und Sendezeiten der Frames dieselben wie wenn eine
- tatsächliche Fragmentierung stattgefunden hätte.
+Somit sind die Ankunfts- und Sendezeiten der Frames dieselben, wie wenn
+ eine tatsächliche Fragmentierung stattgefunden hätte.
 \end_layout
 
 \begin_layout Standard
@@ -1356,7 +1327,7 @@ Abhandlung von Frames inklusive Express-Frames
 \end_layout
 
 \begin_layout Standard
-Der Datenbereich eines Mframes umfasst vom ersten Oktett nach dem SFD/SMD-Feld
+Der Datenbereich eines mFrames umfasst vom ersten Oktett nach dem SFD/SMD-Feld
  bis und mit dem letzten Oktett vor dem CRC und hat mindestens eine Grösse
  von 60 Bytes.
  Dabei muss dessen Grösse durch 8 (Alignment der Fragmentierung) teilbar
@@ -1373,8 +1344,18 @@ reference "sec:Mframe"
 \begin_layout Standard
 Natürlich kann bei einem Frame, das gerade übertragen wird nur noch der
  Teil fragmentiert werden, der aussteht.
- Demnach wird wie folgt vorgegangen, um herauszufinden, ob ein Frame fragmentier
-bar ist:
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Demnach wird bei der Fragmentierung wie folgt vorgegangen:
 \end_layout
 
 \begin_layout Standard
@@ -1416,7 +1397,7 @@ V=Bereits\, versendete\, Bytes\, inkl.\, Präambel\, und\, SMD\,[Byte]
 
 \begin_inset Formula 
 \[
-O=Noch\, offen\, stehender\, Teil\, des\, zu\, fragmentierenden\, Mframes\,[Byte]
+O=Noch\, offen\, stehender\, Teil\, des\, zu\, fragmentierenden\, mFrames\,[Byte]
 \]
 
 \end_inset
@@ -1424,7 +1405,7 @@ O=Noch\, offen\, stehender\, Teil\, des\, zu\, fragmentierenden\, Mframes\,[Byte
 
 \begin_inset Formula 
 \[
-D=Grösse\, des\, Datenbereichs\, eines\, Mframes,\, wenn\, man\, jetzt\, fragmentieren\, würde\,[Byte]
+D=Grösse\, des\, Datenbereichs\, eines\, mFrames,\, wenn\, man\, jetzt\, fragmentieren\, würde\,[Byte]
 \]
 
 \end_inset
@@ -1432,7 +1413,7 @@ D=Grösse\, des\, Datenbereichs\, eines\, Mframes,\, wenn\, man\, jetzt\, fragme
 
 \begin_inset Formula 
 \[
-t=Zeitpunkt,\, zu\, dem\, das\, Express\, Frame\, versandt\, wird\,[s]
+t=Zeitpunkt,\, zu\, dem\, das\, Express\, Frame\, versendet\, wird\,[s]
 \]
 
 \end_inset
@@ -1455,7 +1436,7 @@ datarate=Übermittlungsrate\,[Byte/s]
 
 \begin_inset Formula 
 \[
-P=Präambel\,+Start\, of\, Frame\, bzw.\, Mframe\, Delimiter=8\, Bytes
+P=Präambel\,+Start\, of\, Frame\, bzw.\, mFrame\, Delimiter=8\, Bytes
 \]
 
 \end_inset
@@ -1587,7 +1568,7 @@ C
  des gesamten Frames zusammen), kann das Frame nicht fragmentiert und der
  weitere Vorgang abgebrochen werden.
  Das heisst, dass man mit dem Senden des Express-Frames warten muss, bis
- das nicht fragmentierbare Frame und dessen IFG fertig versandt wurden.
+ das nicht fragmentierbare Frame und dessen IFG fertig versendet wurden.
 \end_layout
 
 \begin_layout Enumerate
@@ -1643,8 +1624,16 @@ C
 \begin_inset Quotes frd
 \end_inset
 
-, das pro neuem Fragment dazukommt, hinzu.
- Des Weiteren muss die Präambel aus 
+, die pro neuem Fragment dazukommt, hinzu.
+ Des Weiteren muss 
+\begin_inset Quotes fld
+\end_inset
+
+P
+\begin_inset Quotes frd
+\end_inset
+
+ aus 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1652,7 +1641,8 @@ V
 \begin_inset Quotes frd
 \end_inset
 
- nicht mit abgezogen werden, da die Präambel nicht zur Framegrösse gehört:
+ nicht mit abgezogen werden, da die Präambel und SFD/SMD nicht zur Framegrösse
+ gehören:
 \begin_inset Formula 
 \[
 O=F-V+C+P=F-V+12
@@ -1692,7 +1682,7 @@ O
  grösser als 64 Bytes ist (Data-Felder je mindestens 60 Bytes + 4 Bytes
  (M)FCS), kann das Express-Frame jetzt gesendet werden.
  Die Schritte 6 und 7 müssen nicht mehr erledigt werden, da das Express-Frame
- versandt wurde und der Vorgang somit erfolgreich war.
+ versendet wurde und der Vorgang somit erfolgreich war.
  In diesem Fall beträgt 
 \begin_inset Quotes fld
 \end_inset
@@ -1711,8 +1701,8 @@ t=simtime
 
 Da es sich hier um eine Zeitberechnung haltet, wird das normale Frame nicht
  wirklich fragmentiert, sondern verlängert.
- Die Ankunftszeit des verlängerten Frames ist die gleiche wie wann alle
- Fragmente eines Frames ankommen würden.
+ Die Ankunftszeit des verlängerten Frames ist die gleiche wie wenn alle
+ Fragmente des Frames ankommen würden.
  
 \begin_inset Newline newline
 \end_inset
@@ -1721,15 +1711,15 @@ Da es sich hier um eine Zeitberechnung haltet, wird das normale Frame nicht
 \begin_inset Newline newline
 \end_inset
 
-Folgende Werte müssen dem 
+Das 
 \begin_inset Quotes fld
 \end_inset
 
-fragmentierten
+fragmentierte
 \begin_inset Quotes frd
 \end_inset
 
- Frame dazugerechnet werden: 
+ Frame wird wie folgt verlängert: 
 \begin_inset Newline newline
 \end_inset
 
@@ -1860,7 +1850,7 @@ reference "fig:Berechnung-Express-Versandzeit"
 ).
  So wird sichergestellt, dass wenn das Frame erneut fragmentiert werden
  muss, es ab Beginn des nächsten Fragments betrachtet wird.
- So können keine zu kleine Fragmente entstehen.
+ So können keine zu kleinen Fragmente entstehen.
  
 \begin_inset Formula 
 \[
@@ -1878,9 +1868,9 @@ sendtime=newsendtime
 \end_inset
 
 Somit kann dann bei der erneuten Fragmentierung das nächste Fragment so
- betrachtet werden, als wäre es das Erste des Frames (die Framegrösse muss
- jedoch dem entsprechend angepasst werden, nur noch das Fragment mit dem
- 
+ betrachtet werden, als wäre es das erste Fragment des Frames (die Framegrösse
+ muss jedoch dementsprechend angepasst werden, nur noch das Fragment mit
+ dem 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1923,7 +1913,7 @@ O
 \begin_inset Quotes frd
 \end_inset
 
- aber grösser gleich 64 Bytes ist, dann muss abgewartet werden bis folgender
+ aber grösser gleich 64 Bytes ist, dann muss abgewartet werden, bis folgender
  Zeitpunkt 
 \begin_inset Quotes fld
 \end_inset
@@ -1973,8 +1963,8 @@ V
 \begin_inset Quotes frd
 \end_inset
 
- kleiner als die Minimalgrösse + IFG, muss abgewartet werden bis diese erfüllt
- ist und die selben Bedingungen erfüllt sind wie wenn 
+ kleiner als die Minimalgrösse + IFG, muss abgewartet werden, bis diese
+ erfüllt ist und die selben Bedingungen erfüllt sind wie wenn 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1988,6 +1978,13 @@ V
 \begin_layout Enumerate
 Ist der Zeitpunkt erreicht, muss die Überprüfung wieder von Anfang an gemacht
  werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -2021,10 +2018,7 @@ High
 \begin_inset Quotes frd
 \end_inset
 
- stellen den normalen Verkehr dar.
- Dies kann unter anderem Down- und Upload von Dateien, Monitoring, etc.
- sein.
- Die Grösse der Frames kann klein und gross sein.
+ stellen die zu übertragenden Messwerte mit bestimmter Grösse dar.
 \end_layout
 
 \begin_layout Itemize
@@ -2038,6 +2032,8 @@ Low
 
  bilden den Background-Traffic, der oft vorkommt und wie der normale Verkehr
  verschieden gross sein kann.
+ Dies kann unter anderem Down- und Upload von Dateien, Monitoring, etc.
+ sein.
 \end_layout
 
 \begin_layout Standard
@@ -2047,15 +2043,14 @@ Bezüglich der Auftretenswahrscheinlichkeit der Frames lässt sich demnach
 \end_layout
 
 \begin_layout Standard
-Ein Beispiel eines Lastprofils findet man in der XML-Konfiguration in Kapitel
- 
+Ein Beispiel eines Lastprofils ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
-reference "sub:Netzwerkaufbau"
+reference "sub:Szenario-1:-Substation"
 
 \end_inset
 
-.
+ aufgeführt.
 \end_layout
 
 \begin_layout Section
@@ -2074,7 +2069,8 @@ Damit man sich sicher sein kann, dass die Simulation wie geplant verläuft,
  wird die Implementation vor der Simulation der Szenarien überprüft.
  Diese Überprüfungen können in der mit dieser Arbeit mitgelieferten Umgebung
  auch selber durchgeführt werden.
- Beim Starten der Simulationsumgebung wird nach einer Konfiguration gefragt.
+ Beim Starten der Simulationsumgebung wird jeweils nach einer Konfiguration
+ gefragt.
  Dieser Konfigurationsname wird beim entsprechenden Testfall in der Zeile
  
 \begin_inset Quotes fld
@@ -2176,21 +2172,21 @@ reference "chap:Resultate"
 \begin_inset Quotes fld
 \end_inset
 
-Namen
+Name
 \begin_inset Quotes frd
 \end_inset
 
- des Frames steht der Name des Knotens, der das Frame generiert hat, die
- Priorität und die Sequenznummer des Frames.
+-Feld des Frames im Nachrichtenverlauf steht der Name des Knotens, der das
+ Frame generiert hat, die Priorität und die Sequenznummer des Frames.
  Am Anfang des 
 \begin_inset Quotes fld
 \end_inset
 
-Namens
+Name
 \begin_inset Quotes frd
 \end_inset
 
- steht zudem, ob es sich um ein Unicast-, Multicast- oder Broadcast-Frame
+-Feldes steht zudem, ob es sich um ein Unicast-, Multicast- oder Broadcast-Frame
  handelt.
 \end_layout
 
@@ -2204,22 +2200,14 @@ Node1
 \end_inset
 
  am Anfang der Simulation 2 Multicast-Frames hintereinander mit der Priorität
- 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- generiert, würden dessen Namen wie folgt lauten:
+ High generiert, würden dessen Namen wie folgt lauten:
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Quotes fld
 \end_inset
 
-Multi From: Node1 (HIGH) Seq#0
+Multi From: Node1 (High) Seq#0
 \begin_inset Quotes frd
 \end_inset
 
@@ -2230,7 +2218,7 @@ Multi From: Node1 (HIGH) Seq#0
 \begin_inset Quotes fld
 \end_inset
 
-Multi From: Node1 (HIGH) Seq#1
+Multi From: Node1 (High) Seq#1
 \begin_inset Quotes frd
 \end_inset
 
@@ -2248,9 +2236,9 @@ Node2
 \end_inset
 
  dieses weiterleitet.
- Die Zeit in der Grafik, in der die Framenamen angezeigt werden, listet
- den Zeitpunkt, zu dem das Frame den Knoten verlassen hat (Generierungszeitpunkt
- + Interner Delay + Verzögerung durch andere Frames) auf.
+ Die Zeiten im Nachrichtenverlauf zeigen die Zeitpunkte, zu dem die Frames
+ den Knoten verlassen haben (Generierungszeitpunkt + Interner Delay + Verzögerun
+g durch andere Frames) auf.
 \end_layout
 
 \begin_layout Standard
@@ -2283,7 +2271,7 @@ reference "sub:Definition-der-Knoten"
 \end_layout
 
 \begin_layout Standard
-Sofern es nicht anders erwähnt wird, ist der verwendete Mechanismus 
+Sofern nicht anders erwähnt, ist der verwendete Mechanismus 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2383,13 +2371,13 @@ Der sich im Knoten befindende Switch analysiert die Quell- und Ziel-Adresse
 \end_layout
 
 \begin_layout Plain Layout
-Frames, welche vom eigenen Switch stammen und nicht von der CPU kommen werden
- entfernt, um zirkulierende Frames (können Uni-, Multi- oder Broadcast sein)
- zu verhindern.
+Frames, welche vom eigenen Switch stammen und nicht von der CPU her kommen
+ werden entfernt, um zirkulierende Frames (können Uni-, Multi- oder Broadcast
+ sein) zu verhindern.
 \end_layout
 
 \begin_layout Plain Layout
-Multi- und Broadcast-Frames (die nicht vom Knoten selbst stammen) werden
+Multi- und Broadcast-Frames, die nicht vom Knoten selbst stammen, werden
  an alle Ports ausser dem Herkunftsport weitergeleitet.
 \begin_inset Newline newline
 \end_inset
@@ -2414,7 +2402,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Folgende Frames werden mit der selben Priorität generiert:
+Folgende Frames werden mit der selben Priorität High generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -2476,6 +2464,13 @@ First Come First Serve
 \end_layout
 
 \begin_layout Plain Layout
+\begin_inset space \hfill{}
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 \begin_inset Graphics
 	filename _img/selftest/01_weiterleit_empf.png
 	display false
@@ -2506,7 +2501,7 @@ Wie man der Grafik entnehmen kann, werden Unicast-Frames beim Empfänger
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Verhaltensüberprüfung: Frameablauf
+Verhaltensüberprüfung: Frame-Ablauf
 \end_layout
 
 \end_inset
@@ -2604,7 +2599,7 @@ Der sich im Knoten befindende Switch hat für jeden seiner Ports einen Scheduler
  jeweilige Queue ein.
  Der Scheduler beginnt darauf mit dem Abarbeiten der Queues und startet
  mit der Queue der höchsten Priorität.
- Wenn mehrere Frames mit unterschiedlichen Prioritäten zur selben Zeit ankommen
+ Wenn mehrere Frames mit unterschiedlichen Prioritäten zur selben Zeit ankommen,
  wird garantiert das Frame mit der höheren Priorität zuerst versendet.
 \begin_inset Newline newline
 \end_inset
@@ -2649,15 +2644,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
-
+ mit Priorität Express
 \end_layout
 
 \begin_layout Itemize
@@ -2677,15 +2664,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+ mit Priorität High
 \end_layout
 
 \begin_layout Itemize
@@ -2705,15 +2684,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+ mit Priorität Low
 \end_layout
 
 \begin_layout Plain Layout
@@ -2756,8 +2727,8 @@ Node1
 
 \begin_layout Plain Layout
 Hier ist ersichtlich, dass alle 3 Frames zur gleichen Zeit eingereiht wurden,
- die Zeitpunkte, an denen die Frames die Queues verlassen haben, unterschiedlich
- sind.
+ jedoch die Zeitpunkte, an denen die Frames die Queues verlassen haben,
+ unterschiedlich sind.
  Des Weiteren kann man feststellen, dass die Frames ihrer Priorität entsprechend
  behandelt werden.
 \end_layout
@@ -2846,12 +2817,12 @@ Soll
 \begin_layout Plain Layout
 Soll ein Express-Frame versendet werden, so wird dies sofort versandt, wenn
  derzeit keine anderen Frames auf demselben Ausgang versendet werden.
- Wird jedoch bereits ein «HIGH»- oder «LOW»-Frame darauf gesendet, so wird
- das Express-Frame zu dem Zeitpunkt versandt, an dem ein Fragment des anderen
- Frames (inklusive Interframe Gap) fertig versendet worden wäre.
+ Wird jedoch bereits ein High- oder Low-Frame darauf gesendet, so wird das
+ Express-Frame zu dem Zeitpunkt versandt, an dem ein Fragment des anderen
+ Frames (inklusive IFG) fertig versendet worden wäre.
  Kann das normale Frame jedoch nicht fragmentiert werden, kann das Express-Frame
  erst nach dem normalen Frame versendet werden.
- Die Berechnung zur Fragmentierung und dem Zeitpunkt des Express-Frame-Versands
+ Die Berechnung zur Fragmentierung und dem Zeitpunkt des Express-Frame-Versandes
  ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -2883,24 +2854,8 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Die Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- werden, wenn möglich, fragmentiert und das Express-Frame wird zum korrekten
- Zeitpunkt versendet.
+Die Frames der Priorität High und Low werden, wenn möglich, fragmentiert
+ und das Express-Frame wird zum korrekten Zeitpunkt versendet.
 \begin_inset Newline newline
 \end_inset
 
@@ -2958,11 +2913,10 @@ tsendexp
 \begin_inset Quotes frd
 \end_inset
 
- versendet werden (Für die Bedeutung der Variablen siehe vorhin erwähnte
- Berechnung):
+ versendet werden:
 \begin_inset Formula 
 \[
-tsend=Zeit,\, an\, dem\, das\, normale\, Frame\, versandt\, wurde\,[s]
+tsend=Zeit,\, an\, dem\, das\, normale\, Frame\, versendet\, wurde\,[s]
 \]
 
 \end_inset
@@ -3003,9 +2957,13 @@ tsendexp=tsend+t
 \end_layout
 
 \begin_layout Plain Layout
+Für die Bedeutung der Variablen siehe vorhin erwähnte Berechnung.
+\end_layout
+
+\begin_layout Plain Layout
 Da in OMNeT++ für die Zeitberechnung Double-Werte verwendet werden, kann
  eine gewisse Präzision verloren gehen, weshalb sich die effektiven Zeiten
- zur hier berechneten Zeit marginal unterscheiden kann 
+ zur hier berechneten Zeit marginal unterscheiden können 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "OMNET_USERGUIDE"
@@ -3137,15 +3095,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 128 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert an t=0.001)
+ mit 128 Bytes und Priorität High (Generiert an t=0.001)
 \end_layout
 
 \begin_layout Itemize
@@ -3165,15 +3115,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 100 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert an t=0.001001)
+ mit 100 Bytes und Priorität Express (Generiert an t=0.001001)
 \end_layout
 
 \begin_layout Plain Layout
@@ -3204,7 +3146,7 @@ tsendexp
 \begin_inset Quotes frd
 \end_inset
 
- 0.001012759999s, was eine Differenz 
+ 0.001012759999s, was einer Differenz 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3212,7 +3154,7 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- von 0.00000676s beträgt.
+ von 0.00000676s entspricht.
  Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
  geht, kann man sagen, dass 
 \begin_inset Quotes fld
@@ -3222,8 +3164,8 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- dem oben berechneten Wert (0.00000672s) entspricht und die Fragmentierung
- somit bewiesen wurde.
+ dem vorhin berechneten Wert (0.00000672s) entspricht und die Fragmentierung
+ per Zeitberechnung somit bewiesen wurde.
 \end_layout
 
 \end_inset
@@ -3348,15 +3290,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 127 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert an t=0.001)
+ mit 127 Bytes und Priorität High (Generiert an t=0.001)
 \end_layout
 
 \begin_layout Itemize
@@ -3376,15 +3310,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 100 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
-(Generiert an t=0.001001)
+ mit 100 Bytes und Priorität Express(Generiert an t=0.001001)
 \end_layout
 
 \begin_layout Plain Layout
@@ -3427,7 +3353,7 @@ tsendexp=tsend+t
 \end_layout
 
 \begin_layout Plain Layout
-Wie man sehen kann beträgt 
+Wie man sehen kann, beträgt 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3587,15 +3513,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1500 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert an t=0.001)
+ mit 1500 Bytes und Priorität High (Generiert an t=0.001)
 \end_layout
 
 \begin_layout Itemize
@@ -3615,21 +3533,13 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 100 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
-(Generiert an t1=0.001001 und t2=0.001002)
+ mit 100 Bytes und Priorität Express(Generiert an t1=0.001001 und t2=0.001002)
 \end_layout
 
 \begin_layout Plain Layout
 Das zweite Express-Frame wird unmittelbar nach dem ersten Express-Frame
- generiert, weshalb das Zweite direkt nach dem ersten Express-Frame versendet
- wird.
+ generiert, weshalb das zweite Express-Frame direkt nach dem ersten Express-Fram
+e versendet wird.
  Die beiden Express-Frames müssten zu folgenden Zeiten 
 \begin_inset Quotes fld
 \end_inset
@@ -3702,7 +3612,7 @@ tsendexp2=tsend+t+texp=tsend+0,00001568s
 \end_layout
 
 \begin_layout Plain Layout
-Wie man sehen kann beträgt 
+Wie man sehen kann, beträgt 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3718,7 +3628,7 @@ tsendexp1
 \begin_inset Quotes frd
 \end_inset
 
- 0.001012759999s, was eine Differenz 
+ 0.001012759999s, was einer Differenz 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3726,7 +3636,7 @@ t
 \begin_inset Quotes frd
 \end_inset
 
- von 0.00000676s beträgt.
+ von 0.00000676s entspricht.
 \end_layout
 
 \begin_layout Plain Layout
@@ -3766,8 +3676,8 @@ tsend
 
 \begin_layout Plain Layout
 Dadurch, dass bei der Berechnung in OMNeT++ eine gewisse Präzision verloren
- geht, kann man sagen, dass die simulierten Ergebnisse den Berechneten entsprech
-en und das Szenario somit bewiesen wurde.
+ geht, kann man sagen, dass die simulierten Ergebnisse den berechneten Werten
+ entsprechen und das Szenario somit bewiesen wurde.
 \end_layout
 
 \end_inset
@@ -3852,33 +3762,11 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-Der Zufluss von neuen Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- soll limitiert werden können.
- Als Limit kann eine Anzahl an Bytes, die pro Sekunde von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames verbraucht werden können, festgelegt werden.
- Es werden lediglich die 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames limitiert, die intern generiert werden.
+Der Zufluss von neuen Frames mit der Priorität Low soll limitiert werden
+ können.
+ Als Limit kann eine Anzahl an Bytes, die maximal pro Sekunde von Low-Frames
+ verbraucht werden können, festgelegt werden.
+ Es werden lediglich die Low-Frames limitiert, die intern generiert werden.
 \begin_inset Newline newline
 \end_inset
 
@@ -3903,16 +3791,8 @@ Ist
 
 \begin_layout Plain Layout
 Sofern eine Zuflusslimitierung auf x Byte/s gesetzt wurde, kann ein Knoten
- nur so viele 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames pro Sekunde generieren und versenden bis dessen Summe die x Bytes
- aufgebraucht hat.
+ nur so viele Low-Frames pro Sekunde generieren und versenden wie Tokens
+ generiert werden können.
 \begin_inset Newline newline
 \end_inset
 
@@ -3937,7 +3817,7 @@ Nachweis
 
 \begin_layout Plain Layout
 Damit in den Simulationsergebnissen zwischen den Frames vom Ring und den
- intern Generierten unterschieden werden kann, wird folgender Mechanismus
+ intern generierten unterschieden werden kann, wird folgender Mechanismus
  verwendet: Die intern Generierten Frames haben gegenüber den Frames vom
  Ring Vortritt (siehe Kapitel 
 \begin_inset CommandInset ref
@@ -3955,15 +3835,7 @@ Es wird eine Zuflusslimitierung von 100Kbit/s (12500 Byte/s) gesetzt.
 \end_layout
 
 \begin_layout Plain Layout
-Folgende Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- werden generiert:
+Folgende Frames mit der Priorität Low werden generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -3988,15 +3860,8 @@ Node2
 \end_layout
 
 \begin_layout Plain Layout
-Es folgt ein Graph, der die Anzahl vorhandener, intern generierter 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames an einem Ausgang zu jedem Zeitpunkt darstellt:
+Es folgt ein Graph, der die Anzahl vorhandener, intern generierter Low-Frames
+ an einem Ausgang zu jedem Zeitpunkt darstellt:
 \end_layout
 
 \begin_layout Plain Layout
@@ -4012,8 +3877,8 @@ LOW
 
 \begin_layout Plain Layout
 Zu Beginn müssen die Tokens generiert werden, deshalb waren dann zu wenige
- Tokens verfügbar und die Frames wurden nicht direkt nach dessen Generierung
- verschickt.
+ Tokens verfügbar und die Frames wurden nicht direkt nach ihrer Generierung
+ versendet.
  Die Frames stauten sich somit bis zum Zeitpunkt 
 \begin_inset Quotes fld
 \end_inset
@@ -4092,7 +3957,7 @@ Konfig.
 \begin_inset Text
 
 \begin_layout Plain Layout
-Siehe jeweiliges Szenario in den nächsten 2 Tabellen
+Siehe jeweiliges Szenario in den nächsten zwei Tabellen
 \begin_inset Newline newline
 \end_inset
 
@@ -4116,9 +3981,13 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wenn zwei Frames der selben Priorität beim Knoten ankommen (ein Frame vom
+Wenn zwei Frames derselben Priorität beim Knoten ankommen (ein Frame vom
  Ring und ein Frame intern generiert), gewährt der Knoten je nach Mechanismus
  dem entsprechenden Frame gegenüber dem anderen den Vortritt.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4138,9 +4007,13 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Wenn ständig Frames vom Ring kommen und ständig welche mit der selben Priorität
- intern generiert werden, werden je nach Mechanismus bestimmte Frames nie
- weitergeleitet solange neue von der anderen Sorte kommen.
+Wenn ständig Frames vom Ring her kommen und ständig welche mit der selben
+ Priorität intern generiert werden, werden je nach Mechanismus bestimmte
+ Frames nie weitergeleitet solange neue von der anderen Sorte kommen.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -4151,6 +4024,10 @@ Haben die Frames vom Ring den Vortritt werden die intern generierten Frames
 \begin_layout Plain Layout
 Haben die Frames von Aussen den Vortritt werden die Frames vom Ring kaum
  weitergeleitet.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -4170,7 +4047,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-2 Szenarios werden für den Nachweis erstellt:
+Zwei Szenarios werden für den Nachweis erstellt:
 \end_layout
 
 \begin_layout Itemize
@@ -4178,19 +4055,12 @@ Szenario 01 (Frames vom Ring haben Vortritt)
 \end_layout
 
 \begin_layout Itemize
-Szenario 02 (Frames von Aussen (Intern generiert) haben Vortritt)
+Szenario 02 (Frames von Aussen intern generiert) haben Vortritt)
 \end_layout
 
 \begin_layout Plain Layout
-Bei beiden Szenarios werden folgende Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- ab t=0.001 mit einem Intervall von 0.0001 bis zu tstop=0.051 generiert:
+Bei beiden Szenarios werden folgende Frames mit der Priorität Low ab t=0.001
+ mit einem Intervall von 0.0001 bis zu tstop=0.051 generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -4230,8 +4100,8 @@ Node3
 \end_layout
 
 \begin_layout Plain Layout
-Bei jedem der 3 Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden,
- da alle 3 das selbe Lastprofil zur Framegenerierung haben.
+Bei jedem der drei Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden
+, da alle drei das selbe Lastprofil zur Framegenerierung haben.
 \end_layout
 
 \end_inset
@@ -4343,15 +4213,8 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es folgt ein Graph, der die Anzahl 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+Es folgt ein Graph, der die Anzahl Low-Frames von Aussen und vom Ring an
+ einem Ausgang zu jedem Zeitpunkt darstellt:
 \end_layout
 
 \begin_layout Plain Layout
@@ -4467,7 +4330,7 @@ Szenario
 \begin_inset Text
 
 \begin_layout Plain Layout
-02: Frames von Aussen (Intern generiert) haben Vortritt
+02: Frames von Aussen (intern generiert) haben Vortritt
 \begin_inset Newline newline
 \end_inset
 
@@ -4491,15 +4354,8 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es folgt ein Graph, der die Anzahl 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+Es folgt ein Graph, der die Anzahl Low-Frames von Aussen und vom Ring an
+ einem Ausgang zu jedem Zeitpunkt darstellt:
 \end_layout
 
 \begin_layout Plain Layout
@@ -4703,16 +4559,9 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es werden folgende Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- ab t=0.001 mit einem Intervall von 0.0001 bis zu tstop=0.051 generiert (selbes
- Lastprofil wie beim vorherigen Test, siehe Tabelle 
+Es werden folgende Frames mit der Priorität Low ab t=0.001 mit einem Intervall
+ von 0.0001 bis zu tstop=0.051 generiert (selbes Lastprofil wie beim vorherigen
+ Test, siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "Verh_ueberpruef_05_Vortritt"
@@ -4759,15 +4608,8 @@ Node3
 \end_layout
 
 \begin_layout Plain Layout
-Es folgt ein Graph, der die Anzahl 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames von Aussen und vom Ring an einem Ausgang zu jedem Zeitpunkt darstellt:
+Es folgt ein Graph, der die Anzahl Low-Frames von Aussen und vom Ring an
+ einem Ausgang zu jedem Zeitpunkt darstellt:
 \end_layout
 
 \begin_layout Plain Layout
@@ -4792,15 +4634,15 @@ tstop
 \begin_inset Quotes frd
 \end_inset
 
- die Anzahl interner Frames (rot) schneller abgebaut wird und somit mehr
+ die Anzahl interner Frames (rot) schneller abgebaut werden und somit mehr
  Frames vom Ring (blau) entstehen.
  Nachdem alle internen Frames versendet wurden (bei ca.
- 0.065s) können alle die restlichen Frames vom Ring abgearbeitet werden.
+ 0.065s), können alle restlichen Frames vom Ring abgearbeitet werden.
 \end_layout
 
 \begin_layout Plain Layout
-Bei jedem der 3 Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden,
- da alle 3 das selbe Lastprofil zur Framegenerierung haben.
+Bei jedem der drei Knoten in der Testumgebung ist der gleiche Ablauf vorzufinden
+, da alle drei das selbe Lastprofil zur Framegenerierung haben.
 \end_layout
 
 \end_inset
@@ -4839,7 +4681,7 @@ Zeitschlitzverfahren
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \begin_inset Tabular
@@ -4892,31 +4734,9 @@ reference "sub:Zeitschlitzverfahren"
 
 \end_inset
 
-) trotz einer ständigen generierung von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames auch Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- versendet werden, da die 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames nur innerhalb der definierten Grün-Phase versendet werden können.
+) trotz einer ständigen Generierung von High-Frames auch Frames der Priorität
+ Low versendet werden, da die High-Frames nur innerhalb der definierten
+ Grün-Phase versendet werden können.
  
 \begin_inset Newline newline
 \end_inset
@@ -4941,41 +4761,11 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Obwohl ständig 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames generiert werden, findet auch der Versand von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames statt.
- Gibt es keine 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames zum Versenden, so können 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames auch in der Grün-Phase versendet werden.
- Express-Frames können natürlich immer versendet werden.
+Obwohl ständig High-Frames generiert werden, findet auch der Versand von
+ Low-Frames statt.
+ Gibt es keine High-Frames zum Versenden, so können Low-Frames auch in der
+ Grün-Phase versendet werden.
+ Express-Frames können immer versendet werden.
 \begin_inset Newline newline
 \end_inset
 
@@ -5019,15 +4809,8 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 100 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-EXPRESS
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert ab t=0.001 mit einem Interval von 0.001 bis zu tstop=0.051)
+ mit 100 Bytes und Priorität Express (Generiert ab t=0.001 mit einem Interval
+ von 0.001 bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Itemize
@@ -5047,15 +4830,8 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert ab t=0.001, Interval von 0.0001 bis zu tstop=0.051)
+ mit 1000 Bytes und Priorität High (Generiert ab t=0.001, Interval von 0.0001
+ bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Itemize
@@ -5075,29 +4851,15 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes und Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- (Generiert ab t=0.001, Interval von 0.0001 bis zu tstop=0.051)
+ mit 1000 Bytes und Priorität Low (Generiert ab t=0.001, Interval von 0.0001
+ bis zu tstop=0.051)
 \end_layout
 
 \begin_layout Plain Layout
 Die Phasengrösse wird auf 10000 Bytes gesetzt, was bei einer gegebenen Übertragu
 ngsrate von 100Mbit/s 0.0008s beträgt.
- Das heisst, das alle 0.0016s für 0.0008s lang 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet werden können.
+ Das heisst, das alle 0.0016s für 0.0008s lang High-Frames versendet werden
+ können.
 \end_layout
 
 \begin_layout Plain Layout
@@ -5117,42 +4879,10 @@ Es folgt ein Graph, der die Anzahl aller Frames an einem Ausgang zu jedem
 \end_layout
 
 \begin_layout Plain Layout
-Wie man feststellen kann, werden 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-- (rot) und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames (grün) gleichmässig abgebaut, obwohl von beiden Prioritäten ständig
- neue Frames generiert werden.
+Wie man feststellen kann, werden High- (rot) und Low-Frames (grün) gleichmässig
+ abgebaut, obwohl von beiden Prioritäten ständig neue Frames generiert werden.
  Die Express-Frames können immer versendet werden, haben aber in diesem
- Fall keinen grossen Einfluss auf die 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-- und 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames.
+ Fall keinen erwähnenswerten Einfluss auf die Low- und High-Frames.
 \end_layout
 
 \end_inset
@@ -5194,8 +4924,8 @@ name "sec:Simulation"
 \end_layout
 
 \begin_layout Standard
-In diesem Kapitel werden die Szenarien definiert, die in dieser Arbeit simuliert
- werden.
+In diesem Kapitel werden die Szenarien und Simulationen definiert, die in
+ dieser Arbeit simuliert werden.
  Die Resultate der jeweiligen Simulation sind im Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -5215,7 +4945,8 @@ reference "chap:Anleitung-zur-Simulationsumgebun"
 \end_inset
 
  beschrieben.
- Beim Starten der Simulationsumgebung wird nach einer Konfiguration gefragt.
+ Beim Starten der Simulationsumgebung wird jeweils nach einer Konfiguration
+ gefragt.
  Dieser Konfigurationsname wird bei der entsprechenden Simulation aufgelistet.
 \end_layout
 
@@ -5232,27 +4963,21 @@ name "sub:Szenario-1:-Substation"
 
 \begin_layout Standard
 Der Aufbau dieses Szenarios ist ein HSR-Ring mit DANH-Knoten.
- Die Aufgabe im Anwendungsfall Substation Automation ist der Schutz von
+ Die Aufgabe im Anwendungsfall Substation Automation ist den Schutz von
  Schaltern und Leitungen sicher zu stellen.
 \end_layout
 
 \begin_layout Standard
-Im HSR-Ring befinden sich 14 sogenannte Measurement Units (MU), welche die
- Messwerte mit Sensoren erfassen und diese mit Zeitstempel und sonstigen
- Steuerinformationen in ein Frame packen.
+Im HSR-Ring befinden sich 14 sogenannte Merging Units (MU), welche die Messwerte
+ mit Sensoren erfassen und diese mit Zeitstempel und sonstigen Steuerinformation
+en in ein Frame verpacken.
  Ein solches Frame hat eine Gesamtgrösse von 160 Bytes (inklusive Header)
- und die Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-.
- Eine MU verschickt konstant 4000 mal pro Sekunde ein solches Frame via
- Multicast (Publisher / Subscriber Modell).
- Ziel dieser Frames sind 2 Protection Units (PU) und eventuell andere MUs.
+ und die Priorität High.
+ Eine MU verschickt ca.
+ 4000 mal pro Sekunde ein solches Frame via Multicast (Publisher / Subscriber
+ Modell).
+ Ziel dieser Frames sind zwei Protection Units (PU) und eventuell andere
+ MUs.
  Protection Units treffen anhand der erhaltenen Messwerte Entscheidungen.
  MUs und PUs sind DANH-Knoten.
 \end_layout
@@ -5260,13 +4985,13 @@ HIGH
 \begin_layout Standard
 Neben den erwähnten Frames gibt es spontane Einzelmeldungen (Express-Frames,
  auch Multicast), welche selten und zufällig vorkommen.
- Die Grösse dieser Express-Frames beträgt 100 Bytes.
+ Die Grösse dieser Express-Frames beträgt total 100 Bytes.
  
 \end_layout
 
 \begin_layout Standard
 Als Background-Traffic wird von 2 Knoten TCP-ähnlicher Traffic generiert,
- bei dem ein Knoten (Knoten A) alle 200 Sekunden Frames mit einer Grösse
+ bei dem ein Knoten (Knoten A) alle 200 Sekunden Frames mit einer Gesamtgrösse
  von 1500 Bytes an den anderen Knoten (Knoten B) sendet (Unicast).
  Knoten B sendet zur selben Zeit auch alle 200 Sekunden Frames à 64 Bytes
  an Knoten A.
@@ -5285,7 +5010,7 @@ status open
 \begin_inset Graphics
 	filename _img/020_Simulation_1_Network.png
 	display false
-	scale 50
+	scale 45
 
 \end_inset
 
@@ -5310,7 +5035,7 @@ Netzwerkaufbau Szenario 1: Substation Automation
 \end_layout
 
 \begin_layout Standard
-Konkret wird für dieses Szenario folgendes Lastprofil angewandt:
+Konkret wird für dieses Szenario folgendes Lastprofil angewendet:
 \end_layout
 
 \begin_layout Standard
@@ -5393,7 +5118,7 @@ Zweck
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -5518,7 +5243,7 @@ MU8
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -6315,7 +6040,7 @@ MU14
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -6538,7 +6263,7 @@ Jeder Knoten im Ring gewährt den Frames, die von Aussen kommen, den Vortritt
  gegenüber den Frames, die vom Ring kommen.
  Die Frames, die von Aussen kommen, sind dabei die, die vom Knoten selbst
  generiert werden.
- Wenn ein Knoten ständig Frames generiert kann es sein, dass die Frames
+ Wenn ein Knoten ständig Frames generiert, kann es sein, dass die Frames
  vom Ring bei diesem Knoten nie zum Zuge kommen und somit nie weitergeleitet
  werden.
 \end_layout
@@ -6554,7 +6279,7 @@ Konfigurationsname: Scen1_Simulation_1_4_Vortritt_Int_Zuflusslim
 \begin_layout Standard
 Die Simulation 1.3 wird mit einer Zuflusslimitierung erweitert.
  Mit Hilfe dieser Limitierung kann ausgeschlossen werden, dass Frames vom
- Ring nie weitergeleitet werden wenn ein Knoten ständig Frames generiert.
+ Ring nie weitergeleitet werden, wenn ein Knoten ständig Frames generiert.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6604,6 +6329,18 @@ name "sub:Simulation-1.7:-Maximale"
 
 \begin_layout Standard
 Konfigurationsname: Scen1_Simulation_1_7_Max_Auslastung
+\end_layout
+
+\begin_layout Standard
+Die Knoten verwenden den 
+\begin_inset Quotes fld
+\end_inset
+
+First Come First Serve
+\begin_inset Quotes frd
+\end_inset
+
+-Mechanismus.
 \end_layout
 
 \begin_layout Standard
@@ -6705,7 +6442,7 @@ Zweck
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -6830,7 +6567,7 @@ MU8
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -7814,6 +7551,42 @@ Lastprofil Simulation 1.7: Maximale Auslastung
 
 \end_layout
 
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{1}$
+\end_layout
+
+\end_inset
+
+ = Zufallswert zwischen (0s und 0.01s)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$
+\backslash
+epsilon_{2}$
+\end_layout
+
+\end_inset
+
+= Zufallswert zwischen (0s und 0.0000125s)
+\end_layout
+
+\begin_layout Standard
+Diese Frames werden ab dem Zeitpunkt t=0.001s bis zu tstop=0.56s generiert.
+\end_layout
+
 \begin_layout Subsubsection
 Simulation 1.8: Maximale Auslastung mit TCP-ähnlichem Verkehr
 \end_layout
@@ -7933,7 +7706,7 @@ Zweck
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset

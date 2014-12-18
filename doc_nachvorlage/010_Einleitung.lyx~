@@ -91,7 +91,7 @@ Stand der Technik
 
 \begin_layout Standard
 Das Unterbrechen der Übertragung von Frames durch Express-Frames (IET) sowie
- das dadurch zu verwendende Mframe-Format sind noch nicht in Hardware implementi
+ das dadurch zu verwendende mFrame-Format sind noch nicht in Hardware implementi
 ert.
  Es ist ein Entwurf in Entwicklung 
 \begin_inset CommandInset citation
@@ -114,14 +114,14 @@ key "IET_DRAFT_SCHEDULE"
 
 \begin_layout Standard
 Aufgrund dieser Tatsache findet man im Internet kaum etwas zu IET sowie
- dem Mframe-Format, ausser einigen Unterlagen vom IEEE-Verband, der den
+ dem mFrame-Format, ausser einigen Unterlagen vom IEEE-Verband, der den
  Standard entwickelt.
 \end_layout
 
 \begin_layout Standard
 Bezüglich HSR (High Availability Seamless Redundancy) gibt es einiges mehr
  zu finden.
- Das HSR-Protokoll ist seit Februar 2010 unter dem Titlel «IEC 62439-3 Cl.
+ Das HSR-Protokoll ist seit Februar 2010 unter dem Titel «IEC 62439-3 Cl.
  5
 \begin_inset Quotes frd
 \end_inset
@@ -151,8 +151,8 @@ key "VA_HSR_Simulation"
 \end_inset
 
  behandelt das Simulieren von Frames in einem HSR-Netzwerk, jedoch ohne
- IET-Implementation, die dazugehörige Frame-Priorisierung und dem Mframe-Format.
- Aufgrund dem derzeitigen Stand der Technik wurden keine Arbeiten gefunden,
+ IET-Implementation, die dazugehörige Frame-Priorisierung und dem mFrame-Format.
+ Aufgrund des derzeitigen Standes der Technik wurden keine Arbeiten gefunden,
  die sich mit unserer Thematik (HSR-Netzwerk mit IET-Implementation) beschäftige
 n.
 \end_layout
@@ -163,7 +163,7 @@ Zielsetzung / Aufgabenstellung / Anforderungen
 
 \begin_layout Standard
 Durch das Institute of Embedded Systems der ZHAW wurde den Autoren am 24.
- September 2014 eine Aufgabenstellung
+ September 2014 eine Aufgabenstellung 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Aufgabenstellung"
@@ -195,167 +195,9 @@ key "VA_HSR_Simulation"
 
  soll so erweitert bzw.
  angepasst werden, dass folgende Funktionen/Mechanismen simuliert werden
- können:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="6" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top" width="30text%">
-<column alignment="left" valignment="top" width="60text%">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
+ können 
 \series bold
-Anforderungs-Nr.
-\end_layout
 
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Beschreibung
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der Knoten soll zwei Prioritäten unterstützen, d.h.
- zwei Warteschlangen pro Interface bewirtschaften.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
- Express Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
-hen.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der in den Ring einfliessende Traffic kann limitiert werden.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.4
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
- Frames, die in den Ring einfliessen, können variiert werden (z.B.
- «zirkulierende Frames haben immer Vortritt» oder «minimaler Zufluss wird
- garantiert»).
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-1.5
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
- Traffic und dem Bulk Traffic je eine Phase zuordnet.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Anforderungen an HSR-Knoten 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Aufgabenstellung"
@@ -363,20 +205,35 @@ key "Aufgabenstellung"
 \end_inset
 
 
+\series default
+:
 \end_layout
 
-\end_inset
-
-
+\begin_layout Itemize
+Der Knoten soll zwei Prioritäten unterstützen, d.h.
+ zwei Warteschlangen pro Interface bewirtschaften.
 \end_layout
 
-\begin_layout Plain Layout
-
+\begin_layout Itemize
+Der Knoten soll Interspersing Express Traffic (IET) unterstützen, d.h.
+ Express-Frames können die aktuell ablaufende Übertragung eines Frames unterbrec
+hen.
 \end_layout
 
-\end_inset
+\begin_layout Itemize
+Der in den Ring einfliessende Traffic kann limitiert werden.
+\end_layout
 
+\begin_layout Itemize
+Die Vortrittsregeln bezüglich der im Ring zirkulierenden Frames und den
+ Frames, die in den Ring einfliessen, können variiert werden (z.B.
+ «zirkulierende Frames haben immer Vortritt» oder «minimaler Zufluss wird
+ garantiert»).
+\end_layout
 
+\begin_layout Itemize
+Der Knoten implementiert ein Zeitschlitzverfahren, welches dem zeitkritischen
+ Traffic und dem Bulk Traffic je eine Phase zuordnet.
 \end_layout
 
 \begin_layout Subsection
@@ -388,137 +245,26 @@ Das durch die Anwendung generierte Verkehrsaufkommen ist zu studieren und
  zu beschreiben.
  Lastgeneratoren sollen implementiert werden, die das Verkehrsaufkommen
  für die Simulation generieren durch die Überlagerung von Strömen mit folgender
- Charakteristik:
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="4" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top" width="30text%">
-<column alignment="left" valignment="top" width="60text%">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Anforderungs-Nr.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Beschreibung
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lastgenerator mit konstanter Framerate.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.2
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lastgenerator mit zufälliger zeitlicher Verteilung der Frames.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-2.3
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Lastgenerator, der spontane Einzelmeldungen erzeugt.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Anforderungen an Lastmodell 
+ Charakteristik 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Aufgabenstellung"
 
 \end_inset
 
-
+:
 \end_layout
 
-\end_inset
-
-
+\begin_layout Itemize
+Lastgenerator mit konstanter Framerate.
 \end_layout
 
-\end_inset
+\begin_layout Itemize
+Lastgenerator mit zufälliger zeitlicher Verteilung der Frames.
+\end_layout
 
-
+\begin_layout Itemize
+Lastgenerator, der spontane Einzelmeldungen erzeugt.
 \end_layout
 
 \begin_layout Subsection
@@ -526,99 +272,16 @@ Simulationen durchführen und Resultate interpretieren
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="2" columns="2">
-<features rotate="0" tabularvalignment="middle">
-<column alignment="center" valignment="top" width="30text%">
-<column alignment="left" valignment="top" width="60text%">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Anforderungs-Nr.
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-
-\series bold
-Beschreibung
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-3.1
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 Das Zeitverhalten der verschiedenen Weiterleitungsvarianten soll durch entsprech
 ende Simulationsläufe ermittelt werden.
- Die Resultate sind zu vergleichen und zu interpretieren.
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Allgemeine Anforderungen 
+ Die Resultate sind zu vergleichen und zu interpretieren 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Aufgabenstellung"
 
 \end_inset
 
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
+.
 \end_layout
 
 \begin_layout Subsection

@@ -95,8 +95,9 @@ reference "sec:Überprüfung-der-Implementation"
 \end_inset
 
 ) aussagekräftig.
- Des Weiteren traten auch erwartete Ergebnisse ein, wie z.B., dass mit 17
- MUs das Netzwerk an seine Grenzen stösst (siehe Simulation in Kapitel 
+ Des Weiteren traten auch erwartete Ergebnisse ein, wie zum Beispiel, dass
+ mit 17 MUs das Netzwerk an seine Grenzen stösst (siehe Simulation in Kapitel
+ 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Simulation-1.7:-Maximale"
@@ -202,7 +203,8 @@ Ist
 
 \begin_layout Plain Layout
 Wenn zwei Frames mit unterschiedlichen Prioritäten (Low & High) zur gleichen
- Zeit eintreffen wird das Frame mit der Priorität High als Erstes weitergesendet.
+ Zeit eintreffen, wird das Frame mit der Priorität High als Erstes weitergesende
+t.
 \begin_inset Newline newline
 \end_inset
 
@@ -227,7 +229,7 @@ Nachweis
 
 \begin_layout Plain Layout
 Die Frames werden in unterschiedliche Queues (Warteschlangen) gesetzt und
- diese werden der Reihe nach abgearbeitet (Absteigend nach Priorität).
+ diese werden der Reihe nach abgearbeitet (absteigend nach Priorität).
 \begin_inset Newline newline
 \end_inset
 
@@ -263,32 +265,32 @@ typedef enum {
 
 \begin_layout Plain Layout
 
-    EXPRESS_RING,
+    Express_RING,
 \end_layout
 
 \begin_layout Plain Layout
 
-    EXPRESS_INTERNAL,
+    Express_INTERNAL,
 \end_layout
 
 \begin_layout Plain Layout
 
-    HIGH_RING,
+    High_RING,
 \end_layout
 
 \begin_layout Plain Layout
 
-    HIGH_INTERNAL,
+    High_INTERNAL,
 \end_layout
 
 \begin_layout Plain Layout
 
-    LOW_RING,
+    Low_RING,
 \end_layout
 
 \begin_layout Plain Layout
 
-    LOW_INTERNAL 
+    Low_INTERNAL 
 \end_layout
 
 \begin_layout Plain Layout
@@ -575,9 +577,9 @@ getExpressSendTime()
 \end_inset
 
  einen gültigen Wert zurück, der besagt, wann das Express-Frame versendet
- werden kann, so wird ein Event gesendet, der zum berechneten Zeitpunkt
- das Express-Frame versendet und das normale Frame wird verlängert (siehe
- 
+ werden kann, so wird ein Event erstellt, der zum berechneten Zeitpunkt
+ das Express-Frame versendet.
+ Das normale Frame wird entsprechend verlängert (siehe 
 \begin_inset Quotes fld
 \end_inset
 
@@ -785,7 +787,7 @@ reference "sec:Scheduler:-Zuflusslimitierung"
 \end_inset
 
  aufzufinden.
- In diesem Codeausschnitt befinden sich 2 Methoden, 
+ In diesem Codeausschnitt befinden sich zwei Methoden, 
 \begin_inset Quotes fld
 \end_inset
 
@@ -830,7 +832,7 @@ false
 
  zurück, wenn ein Low-Frame als Parameter mitgegeben wird und dessen Grösse
  die vorhandene Anzahl Tokens überschreitet.
- Zudem ist diese Funktion für die Token generierung zuständig.
+ Zudem ist diese Funktion für die Token-Generierung zuständig.
 \end_layout
 
 \begin_layout Plain Layout
@@ -943,7 +945,7 @@ Ist
 \begin_layout Plain Layout
 Bezüglich der Herkunft gibt es zwei Arten von Verkehr: Vom Ring und von
  Aussen auf den Ring.
- Dabei sind 3 Arten von Vortrittsregeln implementiert:
+ Es sind drei Arten von Vortrittsregeln implementiert:
 \end_layout
 
 \begin_layout Itemize
@@ -1077,7 +1079,7 @@ end{lstlisting}
 \end_layout
 
 \begin_layout Plain Layout
-Ein Ausschnitt, bei dem aufgezeigt wird wie die Vortritts-Mechanismen ablaufen,
+Ein Ausschnitt, bei dem aufgezeigt wird, wie die Vortritts-Mechanismen ablaufen,
  ist in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -1171,7 +1173,7 @@ Ist
 \begin_inset Text
 
 \begin_layout Plain Layout
-Es ist ein Mechanismus implementiert, welcher einen Intervall in zwei Phasen
+Es ist ein Mechanismus implementiert, welcher ein Intervall in zwei Phasen
  aufteilt.
  
 \end_layout
@@ -1185,7 +1187,7 @@ Es ist ein Mechanismus implementiert, welcher einen Intervall in zwei Phasen
 
 \begin_layout Plain Layout
 In der ersten Phase werden so viele Frames mit der Priorität High (zeitkritische
-r Traffic) verschickt wie möglich.
+r Traffic) versendet wie möglich.
  Wenn in dieser Phase noch Platz frei ist, es jedoch keine Frames mit der
  Priorität High mehr gibt, dann können Frames mit der Priorität Low (Bulk
  Traffic) auch innerhalb dieser Phase versendet werden.
@@ -1211,8 +1213,8 @@ In der zweiten Phase können lediglich Frames der Priorität Low versendet
 \end_layout
 
 \begin_layout Plain Layout
-Express-Frames (gehören auch zum zeitkritischen Traffic) können natürlich
- zu jeder Zeit versendet werden.
+Express-Frames (gehören auch zum zeitkritischen Traffic) können zu jeder
+ Zeit versendet werden.
 \begin_inset Newline newline
 \end_inset
 
@@ -1274,15 +1276,7 @@ true
 \end_layout
 
 \begin_layout Plain Layout
-Diese Funktion gibt bei Express- und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames immer 
+Diese Funktion gibt bei Express- und Low-Frames immer 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1290,24 +1284,9 @@ true
 \begin_inset Quotes frd
 \end_inset
 
- zurück, da Express-Frames immer und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames auch in jeder Phase gesendet werden können, da diese nur gesendet
- werden, wenn kein 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frame in den Queues existiert oder gesendet werden kann.
+ zurück, da Express-Frames immer und Low-Frames auch in jeder Phase gesendet
+ werden können, da diese nur gesendet werden, wenn kein High-Frame in den
+ Queues existiert oder gesendet werden kann.
 \end_layout
 
 \begin_layout Plain Layout
@@ -1318,16 +1297,8 @@ HIGH
 \end_layout
 
 \begin_layout Plain Layout
-Wird der Funktion eine Queue mit 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames übergeben, überprüft sie anhand der derzeitigen Zeit, ob das Frame
- gesendet werden kann oder nicht.
+Wird der Funktion eine Queue mit High-Frames übergeben, überprüft sie anhand
+ der derzeitigen Zeit, ob das Frame gesendet werden kann oder nicht.
  Dazu wird folgende Rechnung angewandt:
 \begin_inset Formula 
 \[
@@ -1374,7 +1345,7 @@ ret
 \begin_inset Quotes frd
 \end_inset
 
- beträgt dabei den Rückgabewert der Funktion 
+ enthält dabei den Rückgabewert der Funktion 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1391,7 +1362,7 @@ ret
 \begin_inset Quotes frd
 \end_inset
 
- 
+ = 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1435,7 +1406,7 @@ Lastgenerator
 \end_layout
 
 \begin_layout Standard
-Wie sich die Lastengenerierung eines einzelnen HSR-Nodes verhält, wird in
+Wie sich die Lastgenerierung eines einzelnen HSR-Nodes verhält, wird in
  der Konfigurations-XML-Datei festgelgt.
  Die Struktur dieser XML-Datei wird in Kapitel 
 \begin_inset CommandInset ref
@@ -1450,15 +1421,15 @@ reference "sub:Netzwerkaufbau"
 \end_layout
 
 \begin_layout Standard
-Das CPU-Modul eines HSR-Knotens, siehe Kapitel 
+Das CPU-Modul eines HSR-Knotens (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:DANH-Knoten"
 
 \end_inset
 
-, löst die Generierung einzelner Frames je nach Konfigurationsparameter
- mittels 
+) löst die Generierung einzelner Frames je nach Konfigurationsparameter
+ mittels sogenannter 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1491,10 +1462,10 @@ reference "sec:CPU-Lastgenerator"
 
 \begin_layout Standard
 Im Rahmen dieser Arbeit wurden bei den Simulationen nur Lastgeneratoren
- verwendet, die eine konstante Last generieren müssen.
- Das heisst, es wird nur die Konfiguration verwendet, welche Frames generiert
- nach einem vorgegebenen Zeitintervall.
- Der Zufallsanteil kann über einen 
+ verwendet, die eine konstante Last generieren.
+ Das heisst, es wird nur die Konfiguration verwendet, welche Frames nach
+ einem vorgegebenen Zeitintervall generiert.
+ Der Zufallsanteil kann dabei über einen 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1544,8 +1515,18 @@ Soll
 
 \begin_layout Plain Layout
 Der Lastgenerator generiert für die Simulation ein Verkehrsaufkommen mit
- konstanter Framerate.
-\begin_inset Newline newline
+ konstanter Frame-Rate.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{3 mm}
+\end_layout
+
 \end_inset
 
 
@@ -1582,6 +1563,20 @@ reference "sub:Netzwerkaufbau"
  Somit wird auf das definierte Intervall ein Wert aufsummiert, der sich
  zwischen 0 und dem epsilon-Wert bewegt und mit einer Zufallsfunktion zustande
  kommt.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{3 mm}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1843,7 +1838,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Siehe Nachweis, 
+Siehe Nachweis in Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Konstante-Framerate-Nachweis"
@@ -1963,7 +1958,15 @@ Nachweis
 
 \begin_layout Plain Layout
 Die spontanen Einzelmeldungen werden mit einem Zeitintervall und einem verhältni
-smässig grossen Epsilon parametrisiert.
+smässig grossen 
+\begin_inset Quotes fld
+\end_inset
+
+epsilon
+\begin_inset Quotes frd
+\end_inset
+
+-Wert parametrisiert.
  So kann das Verhalten spontaner Einzelmeldungen simuliert werden.
  Dieser Mechanismus wird in den Simulationen verwendet, um Express-Frames
  zu versenden, damit diese mit einer zufällig gewählten Zeit spontan versendet
@@ -2174,19 +2177,20 @@ Nach einigen Anlaufschwierigkeiten (Code-Refactoring und fehlendem Quellcode
 
 \begin_layout Standard
 Was den Implementationsstand bei Drucklegung dieser Arbeit betrifft, ist
- die Modellierung eines HSR-Knotens gemäss Aufgbenstellung so weit abgeschlossen.
+ die Modellierung eines HSR-Knotens gemäss Aufgabenstellung so weit abgeschlosse
+n.
  Was derzeit noch nicht fertig implementiert ist, ist die Modellierung einer
  RedBox mit Interlink-Ports.
  Die Implementation wurde teilweise parallel zum HSR-Knoten erstellt, ist
- jedoch noch nicht abgeschlossen.
+ jedoch aus Zeitmangel nicht abgeschlossen.
  Wenn versucht wird eine RedBox in eine Simulation einzubauen wird derzeit
- noch eine Exception geworfen (NotYetImplemented).
+ noch eine Exception geworfen.
 \end_layout
 
 \begin_layout Standard
 Neben der fortlaufenden Pflege der Dokumentation erstellten wir für das
  Projekt ein Wiki, in dem die neusten Erkenntnisse und Besprechungen festgehalte
-n wurden und die unser Betreuer jederzeit einsehen konnte.
+n wurden und das unser Betreuer jederzeit einsehen konnte.
  Für die Entwicklung der Implementation und der Dokumentation verwendeten
  wir ein Versionsverwaltungssystem (
 \begin_inset Quotes fld
@@ -2230,6 +2234,13 @@ Zusammenfassend kann ein positives Fazit gezogen werden: Das Projekt wurde
  umgesetzt.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Ausblick
 \end_layout
@@ -2243,8 +2254,8 @@ erken zu simulieren, wobei es sich bei IET um einen Standard handelt, der
 
 \begin_layout Standard
 Die Implementierung würde sich beliebig erweitern lassen.
- Wir sehen das Potenzial in der Umsetzung von Verbindungen zwischen HSR-
- und Nicht-HSR-Netzwerken sowie der Kopplung verschiedener HSR-Ringe.
+ Wir sehen Potenzial in der Umsetzung von Verbindungen zwischen HSR- und
+ Nicht-HSR-Netzwerken sowie der Kopplung verschiedener HSR-Ringe.
 \end_layout
 
 \begin_layout Standard

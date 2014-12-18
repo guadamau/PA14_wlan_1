@@ -159,6 +159,13 @@ c) Durch ein zeitgesteuertes Scheduling kann man Zeitfenster für kritische
  Kommunikation reservieren und somit Verzögerungszeiten garantieren.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Paragraph
 2 Aufgabenstellung
 \end_layout
@@ -337,6 +344,13 @@ Nächste Besprechung fällt aus
 \end_layout
 
 \end_deeper
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Kalenderwoche 40: 02.10.2014
 \end_layout
@@ -418,6 +432,13 @@ Frame mehrmals unterbrechbar
 
 \begin_layout Itemize
 Queuegrösse ist auch ein Faktor (Per INI-Datei der Simulation definierbar)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -909,6 +930,13 @@ Frame mit Messwerten beträgt 160 Bytes: ca.
 
 \end_deeper
 \end_deeper
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Itemize
 Visualisierung der Resultate
 \end_layout
@@ -1058,15 +1086,7 @@ name "sub:Kalenderwoche-50:-11.12.2014"
 \end_layout
 
 \begin_layout Itemize
-Zuflusslimitierung nur für Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Zuflusslimitierung nur für Frames der Priorität Low
 \end_layout
 
 \begin_deeper
@@ -1204,6 +1224,13 @@ Debian (32 bit)
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Für den Betrieb der virtuellen Maschine sind keine Login-Daten notwendig.
  Es wird automatisch eine Desktop-Umgebung gestartet, die in etwa folgendermasse
 n aussieht (Desktop-Icons können variieren):
@@ -1265,6 +1292,13 @@ Info
 \end_inset
 
  zu finden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1469,6 +1503,13 @@ omnetpp.ini
 n nicht angewandt (derzeit als Kommentar gesetzt).
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Netzwerkaufbau
 \end_layout
@@ -1632,29 +1673,20 @@ reference "sub:Netzwerkaufbau"
  Frametyps für einen bestimmten Knoten (mittels MAC-Adresse).
  Für einen Knoten können mehrere solcher Einträge existieren, sodass er
  z.B.
- ständig 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-- und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames generieren könnte.
+ ständig High- und Low-Frames generieren könnte.
  Es können auch Knoten existieren, die keinen Eintrag in der XML-Datei haben.
 \end_layout
 
 \begin_layout Standard
 In der XML-Datei ist des Weiteren aufgeführt, für was welcher Inhalt editiert
  werden muss.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -1711,7 +1743,7 @@ PA14_wlan_1
 placement H
 wide false
 sideways false
-status collapsed
+status open
 
 \begin_layout Plain Layout
 \noindent
@@ -1797,6 +1829,13 @@ Konfigurations-/Simulationsauswahl in OMNeT++
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 Wenn man 
 \begin_inset Quotes fld
 \end_inset
@@ -1856,6 +1895,13 @@ Simulationsumgebung in OMNeT++
 \begin_layout Standard
 Die Fensterbereiche kann man sich nach Belieben zu recht ziehen.
  Im unteren Bereich ist der Nachrichtenverlauf aufgeführt.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2018,6 +2064,13 @@ Finish
  Nun kann man die Resultate der Simulation ansehen.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Resultate ansehen
 \end_layout
@@ -2146,6 +2199,13 @@ Beispielsimulation
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -2566,6 +2626,13 @@ label{lst:cputobothports},  captionpos=b,language=C++]{_srcListings/MultiPrioHan
 dleMsg_EndNodeSwitch.cc}
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 

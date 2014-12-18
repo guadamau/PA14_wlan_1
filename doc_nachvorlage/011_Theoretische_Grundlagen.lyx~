@@ -93,7 +93,7 @@ OMNeT++
 \end_layout
 
 \begin_layout Standard
-OMNeT++ ist ein C++-Framework, welches es erleichtert, Netzwerke und all
+OMNeT++ ist ein C++-Framework, welches es ermöglicht, Netzwerke und all
  deren Komponenten mit einem sehr hohen Detaillierungsgrad zu modellieren
  und den Netzwerk-Datenverkehr zu simulieren.
  Die Simulationen können grafisch dargestellt werden.
@@ -117,7 +117,7 @@ Die Abhandlung der Simulationen in OMNeT++ erfolgt sequentiell, trotzdem
  Es besteht die Möglichkeit, die Simulation in mehreren Threads zum Laufen
  zu bringen, jedoch erfordert dies einen sehr hohen Aufwand und bringt eine
  hohe Komplexität mit sich, weshalb nur dazu geraten wird, wenn es absolut
- nicht anders geht 
+ unabdingbar ist 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "OMNET_PARALLEL"
@@ -128,12 +128,12 @@ key "OMNET_PARALLEL"
 \end_layout
 
 \begin_layout Section
-High-availability Seamless Redundancy (HSR)
+High Availability Seamless Redundancy (HSR)
 \end_layout
 
 \begin_layout Standard
-HSR ist ein Ethernet-Redundanz-Protokoll, welches im Fehlerfall keine Ausfallzei
-t hat und es erlaubt, Geräte zusammen zu schliessen, um ein kosten-effektives
+HSR ist ein Ethernet-Redundanz-Protokoll, das im Fehlerfall keine Ausfallzeit
+ hat und es erlaubt, Geräte zusammen zu schliessen, um ein kosteneffektives
  Netzwerk betreiben zu können.
  Es ermöglicht komplexe Topologien wie Ringe und Ringe von Ringen und ist
  einfach in Hardware zu implementieren.
@@ -151,14 +151,14 @@ key "HSR_PPT"
 \begin_layout Standard
 Die Bedingung für ein Gerät in einem HSR-Netzwerk ist, dass es mindestens
  zwei Ethernet Ports haben muss.
- Ein nicht HSR-fähiges Gerät wird mittels eines Redundancy Box (RedBox)
+ Ein nicht HSR-fähiges Gerät wird mittels einer Redundancy Box (RedBox)
  angeschlossen, welche die HSR-Funktionen stellvertretend erbringt.
  Wenn ein Frame versendet werden muss, wird eine Kopie davon erstellt und
  auf den Ring gleichzeitig in beide Richtungen übertragen.
  In einem fehlerfreien Netzwerk kommen somit immer zwei oder mehr Frames
  beim Empfänger an.
- Es ist die Aufgabe des Empfängers, Duplikate nicht auf höheren Schichten
- weiter zu geben.
+ Es ist die Aufgabe des Empfängers, Duplikate nicht an höhere Schichten
+ weiter zu reichen.
  Unicast-Frames und dessen Duplikate werden vom Empfänger vom Ring entfernt.
  Multicast- und Broadcast-Frames werden vom Sender vom Ring entfernt.
  Der Sinn davon ist, dass bei einem Ausfall eines Gerätes mindestens ein
@@ -182,8 +182,8 @@ key "HSR_PPT"
 \end_layout
 
 \begin_layout Standard
-Die Duplikat-Erkennung findet anhand der Source-MAC-Adresse und der Sequenznumme
-r statt.
+Die Duplikat-Erkennung findet anhand der Quell-MAC-Adresse und der Sequenznummer
+ eines Frames statt.
  Jedes Gerät führt eine Liste mit den Sequenznummern für jede MAC-Adresse
  und kann somit einfach bereits erhaltene Frames feststellen.
  Diese Einträge werden solange behalten wie sich das Frame im HSR-Netzwerk
@@ -214,7 +214,7 @@ status open
 \begin_inset Graphics
 	filename ../doc/_img/HSR-Konzept.png
 	display false
-	width 120mm
+	width 100mm
 
 \end_inset
 
@@ -298,8 +298,11 @@ DANH
 \begin_inset Text
 
 \begin_layout Plain Layout
-Double Attached Node implementing HSR: Direkt in den Ring eingefügter Knoten
- mit Ethernet Ports.
+
+\series bold
+Double Attached Node implementing HSR
+\series default
+: Direkt in den Ring eingefügter Knoten mit zwei Ethernet Ports.
  Die beiden Ports teilen sich dabei die MAC- und IP-Adresse 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -328,8 +331,11 @@ RedBox
 \begin_inset Text
 
 \begin_layout Plain Layout
-Redundancy Box: Dient dazu nicht HSR-fähige Geräte an einem Netzwerk anzuschlies
-sen.
+
+\series bold
+Redundancy Box
+\series default
+: Dient dazu, nicht HSR-fähige Geräte an einem Netzwerk anzuschliessen.
 \end_layout
 
 \end_inset
@@ -349,7 +355,7 @@ QuadBox
 \begin_inset Text
 
 \begin_layout Plain Layout
-Dienen, um HSR-Ringe miteinander zu koppeln.
+Werden verwendet, um HSR-Ringe miteinander zu koppeln.
  Eine Quadbox hat 4 Ethernet Ports.
  Um zwei HSR-Ringe miteinander zu koppeln benötigt es zwei Quadboxen.
 \end_layout
@@ -371,8 +377,12 @@ VDAN
 \begin_inset Text
 
 \begin_layout Plain Layout
-Virtual Doubly Attached Node: (Nicht HSR-fähige) Knoten, die mittels RedBox
- am HSR-Netzwerk angeschlossen sind.
+
+\series bold
+Virtual Doubly Attached Node
+\series default
+: (Nicht HSR-fähige) Knoten, die mittels RedBox am HSR-Netzwerk angeschlossen
+ sind.
 \end_layout
 
 \end_inset
@@ -392,15 +402,12 @@ DANP
 \begin_inset Text
 
 \begin_layout Plain Layout
-Double Attached Node implementing PRP (siehe Glossar 
-\begin_inset CommandInset ref
-LatexCommand vpageref
-reference "Glossar"
 
-\end_inset
-
-): Endknoten in einem PRP-Netzwerk, welches über RedBoxes an einem HSR-Netzwerk
- angeschlossen ist.
+\series bold
+Double Attached Node implementing PRP
+\series default
+: Endknoten in einem PRP-Netzwerk, welcher über eine RedBox an einem HSR-Netzwer
+k angeschlossen ist.
  Ein DANP muss für die Kommunikation mit einem DANH das HSR-Protokoll nicht
  kennen.
 \end_layout
@@ -483,7 +490,7 @@ nt (DMLT) Study Group
 \end_inset
 
  daran gearbeitet hat.
- Für das erarbeiten des Entwurfs ging die Gruppe dann zur 
+ Für das Erarbeiten des Entwurfs ging die Gruppe dann zur 
 \begin_inset Quotes fld
 \end_inset
 
@@ -519,9 +526,9 @@ Ethernet
 \end_inset
 
  zu erweitern, um IET zu ermöglichen.
- Mittels IET wird es möglich sein dass Geräte, die IET unterstützen, zwischen
- sogenannten Express und Normal Frames unterscheiden, den Sendevorgang der
- normalen Frames unterbrechen und somit Express Frames (auch IET Frames
+ Mittels IET wird es möglich sein, dass Geräte, die IET unterstützen, zwischen
+ sogenannten normalen Frames und Express-Frames unterscheiden, den Sendevorgang
+ der normalen Frames unterbrechen und somit Express-Frames (auch IET Frames
  genannt) schneller senden können 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -536,7 +543,7 @@ key "IET_DRAFT_PAR"
 Der Grund dafür ist, dass neue Märkte wie zum Beispiel die industrielle
  Automatisierung und Transport (Flugzeuge, Züge und grosse Fahrzeuge) Ethernet
  adaptiert haben und die Nachfrage nach einer kleinen Latenz aufgrund von
- ihrer Hochverfügbarkeit steigern 
+ ihrer Hochverfügbarkeit steigt 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "IET_DRAFT_PAR"
@@ -558,7 +565,7 @@ Physical
 \begin_inset Quotes frd
 \end_inset
 
- gemacht werden und die Express Frames von Geräten, die nicht IET-fähig
+ gemacht werden und die Express-Frames von Geräten, die nicht IET-fähig
  sind, verworfen werden 
 \begin_inset CommandInset citation
 LatexCommand cite
@@ -567,8 +574,8 @@ key "IET_DRAFT_IETTF"
 \end_inset
 
 .
- Die normalen Frames werden, wenn sie durch Express Frames unterbrochen
- werden, aufgeteilt in Mframes (
+ Die normalen Frames werden, wenn sie durch Express-Frames unterbrochen
+ werden, aufgeteilt in mFrames (
 \begin_inset Quotes fld
 \end_inset
 
@@ -593,7 +600,7 @@ key "IET_DRAFT_IETTF"
 .
  So wird das bereits Gesendete nicht verworfen, sondern wird mit dem später
  ankommenden Rest wieder zusammengesetzt.
- Express Frames werden nicht fragmentiert.
+ Express-Frames werden nicht fragmentiert.
 \end_layout
 
 \begin_layout Standard
@@ -644,8 +651,15 @@ key "IET_DRAFT_IETTF"
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
-Mframe
+mFrame
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Mframe"
@@ -656,7 +670,7 @@ name "sec:Mframe"
 \end_layout
 
 \begin_layout Standard
-Ein Mframe (steht für 
+Ein mFrame (steht für 
 \begin_inset Quotes fld
 \end_inset
 
@@ -674,7 +688,7 @@ key "IET_DRAFT_IETTF"
 \end_inset
 
 .
- Die Struktur eines Mframes ist dem eines Ethernet Frames sehr ähnlich.
+ Die Struktur eines mFrames ist dem eines Ethernet Frames sehr ähnlich.
 \end_layout
 
 \begin_layout Standard
@@ -701,7 +715,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Mframe Format 
+mFrame Format 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "IET_DRAFT_IETTF"
@@ -730,11 +744,11 @@ name "mframe-format-image"
 
 \begin_layout Standard
 Das SMD-Feld nach der Präambel (anstelle des SFD (Start Frame Delimiter)
- Feldes) wird in einem Mframe verwendet, um die Fragmente zu kennzeichnen.
+ Feldes) wird in einem mFrame verwendet, um die Fragmente zu kennzeichnen.
  So hat das erste Fragment einen SMD-Ix-Wert, um zu signalisieren, dass
  es sich um das erste Fragment eines Frames handelt.
  Die darauf folgenden Fragmente haben einen SMD-Cx-Wert und ein FragCount-Feld.
- Im SMD-Ix- und SMD-Cx-Feld wird jeweils eine Framenummer vergeben, wobei
+ Im SMD-Ix- und SMD-Cx-Feld wird jeweils eine Frame-Nummer vergeben, wobei
  im FragCount-Feld die Nummer des Fragments steht.
  Dabei wechselt jedes dieser Felder jeweils zwischen 4 verschiedenen Werten
  (siehe Tabelle 
@@ -754,10 +768,10 @@ key "Draft_Standart"
 \end_inset
 
 .
- Gibt es dann ein Fragment mit dem FragCount Wert 3, so hat das nächjste
+ Gibt es dann ein Fragment mit dem FragCount Wert 3, so hat das nächste
  Frame wieder den FragCount-Wert 0.
  Mittels FragCount-Feld wird davor geschützt, dass falsche Frames zusammengesetz
-t werden wenn bis zu 3 Fragmente verloren gegangen sind.
+t werden, wenn bis zu 3 Fragmente verloren gegangen sind.
  Die FragCount-Werte haben jeweils eine Hamming-Distanz von 4 zueinander,
  um den Wert bei Bitfehlern in der Übertragung trotzdem erkennen zu können
  
@@ -807,7 +821,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
-Mframe Typ
+mFrame Typ
 \end_layout
 
 \end_inset
@@ -1289,18 +1303,18 @@ key "Draft_Standart"
 \end_inset
 
 .
- Da im ersten Fragment im Data-Bereich mehr als nur Daten sind, beträgt
+ Da im ersten Fragment im Data-Bereich mehr als nur Nutzdaten sind, beträgt
  dort der effektiv kleinste Datenbereich (abzüglich MAC-Empfänger-, MAC-Sender-A
 dresse und EtherType-Feld, also 14 Bytes) 46 Bytes.
- Hat das ursprüngliche Frame zudem ein VLAN-Tag können die effektiven Daten
- mindestens 42 Bytes gross sein.
+ Hat das ursprüngliche Frame zudem einen VLAN-Tag, können die effektiven
+ Daten mindestens 42 Bytes gross sein.
  
 \end_layout
 
 \begin_layout Standard
 Eine Fragmentierung findet jedoch nur statt wenn mindestens 64 Data-Bytes
- versendet und mindestens 64 Data-Bytes noch ausstehen, jedoch muss das
- bereits Versendete ein Vielfaches von 8 sein 
+ versendet und mindestens 64 Data-Bytes noch ausstehen.
+ Dabei muss das bereits Versendete ein Vielfaches von 8 sein 
 \begin_inset CommandInset citation
 LatexCommand cite
 key "Draft_Standart"
@@ -1326,18 +1340,25 @@ key "IET_DRAFT_IETTF"
 .
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
-Beispiel mit IET und Mframe
+Beispiel mit IET und mFrame
 \end_layout
 
 \begin_layout Standard
 Folgendes Szenario ist zu betrachten: Es wird gerade ein normales Frame
- gesendet.
+ mit der Priorität High oder Low gesendet.
  Während diesem Sendevorgang trifft ein Express-Frame ein.
  Der Sendevorgang des normalen Frames muss nun unterbrochen werden, indem
- das normale Frame fragmentiert und in das Mframe Format umgewandelt wird.
- Die Sequenz der zu sendenden Frame würde folgendermassen aussehen (für
- das Mframe Format siehe Abbildung 
+ das normale Frame fragmentiert wird.
+ Die Sequenz der zu sendenden Frames würde folgendermassen aussehen (mFrame
+ Format siehe Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "mframe-format-image"
@@ -1372,7 +1393,7 @@ status open
 
 \begin_layout Plain Layout
 Beispiel eines Sendevorgangs, bei dem ein Express Frame ein normales Frame
- unterbricht
+ in zwei Fragmente aufteilt
 \end_layout
 
 \end_inset
@@ -1386,16 +1407,8 @@ Beispiel eines Sendevorgangs, bei dem ein Express Frame ein normales Frame
 \end_layout
 
 \begin_layout Standard
-Wie im Kapitel 
-\begin_inset CommandInset ref
-LatexCommand vref
-reference "sec:Mframe"
-
-\end_inset
-
- erwähnt, können maximal 4 Frames in je maximal 5 Fragmente aufgeteilt werden.
- Sobald das letzte Fragment eintrifft wurde das Frame komplett übertragen
- und dessen Framenummer (siehe Tabelle 
+Sobald das letzte Fragment eintrifft, wurde das Frame komplett übertragen
+ und dessen Frame-Nummer (siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "table_smd_fragcount"

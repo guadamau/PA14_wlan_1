@@ -1,15 +1,15 @@
 % *****************************************************************************
 % Nomenclature descriptions
 
-\newcommand{\hsrdesc}{High-availability Seamless Redundancy. Redundanzprotokoll für Ethernet basierte Netzwerke. HSR ist für redundant gekoppelte Ringtopologien ausgelegt. Die Datenübermittlung innerhalb eines HSR-Rings ist im Fehlerfall gewährleistet, wenn eine Netzwerkschnittstelle ausfallen sollte.}
+\newcommand{\hsrdesc}{\textbf{High Availability Seamless Redundancy}. Redundanzprotokoll für Ethernet basierte Netzwerke. HSR ist für redundant gekoppelte Ringtopologien ausgelegt. Die Datenübermittlung innerhalb eines HSR-Rings ist im Fehlerfall gewährleistet, wenn eine Netzwerkschnittstelle ausfallen sollte.}
 
-\newcommand{\ietdesc}{Interspersed Express Traffic. Erlaubt es Frames während des Sendevorgangs zu unterbrechen, um sogenannte Express Frames so schnell wie möglich versenden zu können.}
+\newcommand{\ietdesc}{\textbf{Interspersed Express Traffic}. Erlaubt es Frames während des Sendevorgangs zu unterbrechen, um sogenannte Express-Frames so schnell wie möglich versenden zu können.}
 
-\newcommand{\ifgdesc}{Interframe Gap. Minimaler zeitlicher Abstand zwischen zwei Frames.}
+\newcommand{\ifgdesc}{\textbf{Interframe Gap}. Minimaler zeitlicher Abstand zwischen dem Versand zweier Frames.}
 
-\newcommand{\prpdesc}{Parallel Redundancy Protocol. Hat ein ähnliches Funktionsprinzip wie HSR, aber auch Unterschiede wie z.B. das Frameformat. PRP- und HSR-Netze können jedoch über RedBoxen kommunizieren.}
+\newcommand{\prpdesc}{\textbf{Parallel Redundancy Protocol}. Hat ein ähnliches Funktionsprinzip wie HSR, aber auch Unterschiede wie z.B. das Frameformat. PRP- und HSR-Netze können jedoch über RedBoxen kommunizieren.}
 
-\newcommand{\ethernetIIdesc}{Definiert eine Struktur, um Nutzdaten über ein Ethernet-Netzwerk zu versenden. Es ist die kleinste adressierbare Einheit auf dem Link Layer. Die Struktur eines EthernetII-Frames gliedert sich wie folgt: Start of frame delimiter, Zieladresse, Quelladresse, Tag (optional), Ethertype (Ethernet II), Nutzdatenanteil, Frame check sequence (CRC).}
+\newcommand{\ethernetIIdesc}{Definiert eine Struktur, um Nutzdaten über ein Ethernet-Netzwerk zu versenden. Es ist die kleinste adressierbare Einheit auf dem Link Layer. Die Struktur eines EthernetII-Frames gliedert sich wie folgt: Zieladresse, Quelladresse, VLAN-Tag (optional), Ethertype (Ethernet II), Nutzdatenanteil, Frame Check Sequence (CRC).}
 
 \newcommand{\mframedesc}{MAC Merge Frame ist ein Format eines Ethernet Frames. Im Gegensatz zu herkömmlichen EthernetII Frames, stellt das mFrame Format Parameter und Strukturen zur Verfügung, die es ermöglichen, das Ethernet Frame zu fragmentieren.}
 
@@ -21,7 +21,7 @@
 
 \newcommand{\lyxdesc}{LyX ist ein Front-End-Editor für das Textsatz-System \LaTeX. Das freie Softwarepaket kann unter \url{http://www.lyx.org} heruntergeladen werden und ist für die Betriebssysteme Linux, Windows und Mac OS X verfügbar.}
 
-\newcommand{\predesc}{Unter Preemption versteht man den Vorgang, welcher das Unterbrechen der Frames im IET ausführt. Frames, die keine Express-Priorität haben, können während ihres Sendevorgangs von Express-Frames unterbrochen werden. Die Preemption wird im Rahmen dieser Arbeit lediglich mittels Zeitrechung vollzogen, das heisst, es werden keine Frames effektiv unterbrochen, jedoch deren Übertragungszeiten künstlich verlängert. Das Ergebnis ist das selbe wie bei einer effektiven Fragmentierung.}
+\newcommand{\predesc}{Unter Preemption versteht man den Vorgang, welcher das Unterbrechen der Frames im IET ausführt. Frames, die keine Express-Priorität haben, können während ihres Sendevorgangs von Express-Frames unterbrochen werden. Die Preemption wird im Rahmen dieser Arbeit lediglich mittels Zeitrechung vollzogen, das heisst, es werden keine Frames effektiv unterbrochen, jedoch deren Übertragungszeiten künstlich verlängert. Das Ergebnis ist dasselbe wie bei einer effektiven Fragmentierung.}
 
 
 % *****************************************************************************

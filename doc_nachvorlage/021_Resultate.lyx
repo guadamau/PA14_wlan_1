@@ -165,7 +165,7 @@ Beispiel eines Histogramms für Frames einer bestimmten Priorität
 Bei diesem Histogramm ist ersichtlich, wie viele Frames (Y-Achse) welche
  Übertragungsdauer in Sekunden (X-Achse) haben.
  Dieser Grafik kann man entnehmen, dass kein Frame äusserst lange verzögert
- wurde und alle Frames in etwa die gleiche Übertragungsdauer hatten.
+ wurde und alle Frames eine ähnliche Übertragungsdauer hatten.
 \end_layout
 
 \begin_layout Itemize
@@ -251,15 +251,8 @@ In dieser Grafik sieht man zu welchem Zeitpunkt in Sekunden (X-Achse) wie
  So lässt sich auch feststellen, wann ein Frame zur Queue hinzugefügt oder
  entfernt wurde.
  In diesem Beispiel ist ersichtlich, dass ständig Express-Frames versendet
- werden, während sich 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames anstauen und nicht immer umgehend versendet werden können.
+ werden, während sich High-Frames anstauen und nicht immer umgehend versendet
+ werden können.
 \begin_inset Newline newline
 \end_inset
 
@@ -343,10 +336,11 @@ Anzahl Unterbrechungen (Preemptions)
 \end_layout
 
 \begin_layout Standard
-Bei diesen Grafiken kann man, wie es in der vorherigen Grafik gezeigt wurde,
- auch die Eigenschaften mehrerer Prioritäten / Queues kombiniert ausgeben.
- Dies macht jedoch nicht immer Sinn, da die Skalierung von den Quellen sehr
- unterschiedlich ausfallen kann.
+Bei diesen Grafiken kann man, wie es in den vorherigen Grafiken gezeigt
+ wurde, auch die Eigenschaften mehrerer Prioritäten / Queues kombiniert
+ ausgeben.
+ Dies macht jedoch nicht immer Sinn, da die Skalierung der Werte sehr unterschie
+dlich ausfallen kann.
 \end_layout
 
 \begin_layout Standard
@@ -358,7 +352,7 @@ Die Werte werden lediglich innerhalb des sogenannten Steady-States aufgezeichnet
 
 \begin_layout Standard
 In diesem Kapitel werden nicht die Resultate aller Knoten im Netzwerk angegeben
- und ausgewertet, da viele Knoten das selbe Verhalten haben.
+ und ausgewertet, da viele Knoten dasselbe Verhalten haben.
  Anhand der Dateien, die sich auf dem USB-Stick befinden, der dieser Arbeit
  beiliegt, hat man die Möglichkeit, die entsprechende Simulation nochmals
  selbst durchzuführen und alle Resultate zu betrachten.
@@ -414,15 +408,308 @@ reference "fig:Bsp-Queueverlauf_Exp_High"
 \end_inset
 
  zu betrachten.
- Dort ist klar ersichtlich, dass sich die Frames in der 
-\begin_inset Quotes fld
+ Dort ist klar ersichtlich, dass sich die Frames in der High-Queue anstauen,
+ während fortlaufend Express-Frames versendet werden.
+\end_layout
+
+\begin_layout Standard
+Es wurde von jedem Typ ein einzelnes Frame via Multicast durch das Netzwerk
+ gesendet, um die kleinstmögliche Zeit für den kompletten Durchlauf eines
+ Frames bis zum erneuten Erreichen des Senders herauszufinden:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="3">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<column alignment="left" valignment="top">
+<row>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Priorität
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Grösse in Bytes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dauer 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[
+\backslash
+mu s]$
+\end_layout
+
 \end_inset
 
-HIGH
-\begin_inset Quotes frd
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Express
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+100
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$241.84 
+\backslash
+mu s$
+\end_layout
+
 \end_inset
 
--Queue anstauen, während fortlaufend Express-Frames versendet werden.
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+High
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+160
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$318.64 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$2033.84 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+64
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$195.76 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Low
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1500 & 64 im Durchschnitt
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1114.80 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Übertragungszeiten einzelner Multicast-Frames in Szenario 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -464,7 +751,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -473,7 +760,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -482,7 +769,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -671,9 +958,9 @@ status open
 \noindent
 \align center
 \begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_1_FCFS/Hist_Exp.svg
+	filename _img/simulation/Scenario_01/1_1_FCFS/1_1_FCFS_delay_hist_exp.svg
 	display false
-	scale 60
+	scale 55
 
 \end_inset
 
@@ -710,24 +997,23 @@ Die Übertragungszeiten der Express-Frames liegen nahe beieinander und sind
  Wenn alle Express-Frames sofort nach ihrer Erzeugung hätten versendet werden
  können, wäre nur ein Balken im Histogramm ersichtlich.
  Hier hingegen kann man feststellen, dass mit dem Versand zeitweise abgewartet
- werden musste bis ein Fragment eines normalen Frames erstellt werden konnte
+ werden musste, bis ein Fragment eines normalen Frames erstellt werden konnte
  oder Platz frei war, um das Express-Frame zu senden.
  Dank der Frame-Preemption musste kein Express-Frame zu lange warten, bis
  es versendet werden konnte.
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -754,15 +1040,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.1 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.1 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -785,8 +1063,8 @@ status open
 \backslash
 newcommand{
 \backslash
-histhighstddesc}{Man kann gut erkennen, dass der grösste Teil aller <<HIGH>>-Fra
-mes schnellstmöglich übertragen werden konnte.
+histhighstddesc}{Man kann gut erkennen, dass der grösste Teil aller High-Frames
+ schnellstmöglich übertragen werden konnte.
  Jedoch existieren vereinzelte Frames, die aufgrund Preemption oder Frames,
  die gerade versendet werden, eine markante Verzögerung aufweisen.}
 \end_layout
@@ -813,17 +1091,16 @@ histhighstddesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -850,15 +1127,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.1 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.1 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -882,9 +1151,9 @@ status open
 newcommand{
 \backslash
 histlowstddesc}{In dieser Grafik kann man klar feststellen, welches die
- Frames à 64 Bytes und welche die mit 1500 Bytes sind.
- Dies resultiert daraus, dass hier TCP-ähnlicher Unicast-Traffic simuliert
- wird zwischen zwei Knoten.
+ Low-Frames à 64 Bytes und welche die mit 1500 Bytes sind.
+ Dies resultiert daraus, dass hier zwischen zwei Knoten TCP-ähnlicher Unicast-Tr
+affic simuliert wird.
  Kein Frame hat eine auffallend längere Übertragungsdauer, jedoch sieht
  man an der Zeitachse, dass die durchschnittliche Übertragungszeit deutlich
  länger ist, als diejenige der höher priorisierten Frames.}
@@ -911,6 +1180,13 @@ histlowstddesc
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
 \end_layout
@@ -918,15 +1194,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -961,15 +1229,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der High-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -983,16 +1243,8 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-Die 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames stauen sich zwar zeitweise an, jedoch kann dieser Stau immer wieder
- abgebaut werden, bevor sich weitere Frames aufstauen.
+Die High-Frames stauen sich zwar zeitweise an, jedoch kann dieser Stau immer
+ wieder abgebaut werden, bevor sich weitere Frames aufstauen.
  Maximal werden beim Ausgang A 2 Frames und beim Ausgang B 8 Frames auf
  einmal in einer Queue gespeichert.
  Diese Divergenz lässt sich dadurch erklären, dass 
@@ -1003,16 +1255,8 @@ MU2
 \begin_inset Quotes frd
 \end_inset
 
- beim Ausgang A weniger oft 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet, da diese selbst mit der Generierung von Frames beschäftigt
- ist.
+ beim Ausgang A weniger oft High-Frames versendet, da diese selbst mit der
+ Generierung von Frames beschäftigt ist.
  An Ausgang B hingegen ist 
 \begin_inset Quotes fld
 \end_inset
@@ -1026,17 +1270,16 @@ PU2
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -1051,7 +1294,7 @@ newcommand{
 \backslash
 queuelownojam}{Aufgrund der (verglichen mit den Frames anderer Prioritäten)
  niedriger Erzeugungsrate stauten sich bei den Frames mit der Priorität
- <<LOW>> keine bei einem Ausgang eines Knotens an.}
+ Low keine bei einem Ausgang eines Knotens an.}
 \end_layout
 
 \end_inset
@@ -1116,6 +1359,13 @@ Szenario 1 / Simulation 1.1: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.2: Vortritt für Frames vom Ring
 \end_layout
@@ -1155,7 +1405,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -1164,7 +1414,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -1173,7 +1423,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -1392,15 +1642,7 @@ histexpredirdesc
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -1427,15 +1669,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.2 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -1465,17 +1699,16 @@ histhighstddesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -1502,15 +1735,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.2 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -1539,6 +1764,13 @@ histlowstddesc
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
 \end_layout
@@ -1546,15 +1778,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -1589,15 +1813,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
+: Grösse der High-Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
 \end_layout
 
 \end_inset
@@ -1642,16 +1858,8 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei Ausgang B mit Frames, die intern generiert werden (Frame A hat
- das selbe Verhalten)
+: Grösse der High-Queues bei Ausgang B mit Frames, die intern generiert
+ werden (Frame A hat das selbe Verhalten)
 \end_layout
 
 \end_inset
@@ -1665,17 +1873,11 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-Gesamthaft ist das Verhalten der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues dasselbe wie bei der vorherigen Simulation, mit dem Unterschied,
- dass hier die Queues nach ihrer Herkunft aufgeteilt sind.
- Da von den anderen Knoten viel mehr Traffic eintrifft als intern (von 
+Gesamthaft ist das Verhalten der High-Queues dasselbe wie bei der vorherigen
+ Simulation, mit dem Unterschied, dass hier die Queues nach ihrer Herkunft
+ aufgeteilt sind.
+ Da von den anderen Knoten viel mehr Traffic eintrifft, als intern (von
+ 
 \begin_inset Quotes fld
 \end_inset
 
@@ -1692,15 +1894,7 @@ MU1
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -1760,6 +1954,13 @@ Szenario 1 / Simulation 1.2: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.3: Vortritt für Frames von Aussen
 \end_layout
@@ -1799,7 +2000,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -1808,7 +2009,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -1817,7 +2018,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -2014,15 +2215,7 @@ histexpredirdesc
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -2049,15 +2242,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.3 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -2087,17 +2272,16 @@ histhighstddesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -2124,15 +2308,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.3 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -2168,6 +2344,13 @@ histlowstddesc
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
 \end_layout
@@ -2175,15 +2358,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -2218,15 +2393,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
+: Grösse der High-Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
 \end_layout
 
 \end_inset
@@ -2249,24 +2416,16 @@ name "fig:scen1_1_3_high_ring_queues"
 \begin_layout Standard
 Bei dieser Simulation werden intern generierte Frames den Frames, die vom
  Ring her kommen, vorgezogen.
- Aus diesem Grund können die intern generierten Frames sofort versandt werden
- ohne einen Rückstau entstehen zu lassen.
- Bei den Frames gibt es wie man sehen kann einen Rückstau, der jedoch wieder
- abgearbeitet werden kann.
+ Aus diesem Grund können die intern generierten Frames sofort versendet
+ werden ohne einen Rückstau entstehen zu lassen.
+ Bei den Frames gibt es, wie man sehen kann, einen Rückstau, der jedoch
+ wieder abgearbeitet werden kann.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -2326,6 +2485,13 @@ Szenario 1 / Simulation 1.3: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
 \begin_inset CommandInset label
@@ -2378,7 +2544,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -2387,7 +2553,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -2396,7 +2562,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -2591,17 +2757,16 @@ histexpredirdesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -2629,15 +2794,7 @@ status open
 
 \begin_layout Plain Layout
 Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Übertragungszeiten
- von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+ von High-Frames
 \end_layout
 
 \end_inset
@@ -2667,17 +2824,16 @@ histhighstddesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -2705,15 +2861,7 @@ status open
 
 \begin_layout Plain Layout
 Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Übertragungszeiten
- von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+ von Low-Frames
 \end_layout
 
 \end_inset
@@ -2734,16 +2882,9 @@ name "fig:scen1_1_4_low_his_88"
 \end_layout
 
 \begin_layout Standard
-Da die Zuflusslimitierung sich auf 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames beschränkt, ist hier ersichtlich, dass fast die Hälfte der niedrig
- priorisierten Frames um einige Zeit verzögert werden.
+Da die Zuflusslimitierung sich auf Low-Frames beschränkt, ist hier ersichtlich,
+ dass fast die Hälfte der niedrig priorisierten Frames um einige Zeit verzögert
+ werden.
  Werden die Übertragungszeiten mit einem Histogramm aus einer der vorherigen
  Simulationen (siehe Abbildung 
 \begin_inset CommandInset ref
@@ -2780,15 +2921,15 @@ mu s$
 \end_inset
 
  aufweist.
- Dies ist dadurch zu erklären, dass durch die Zuflusslimitierung 
-\begin_inset Quotes fld
+ Dies ist dadurch zu erklären, dass durch die Zuflusslimitierung Low-Frames
+ zurückgehalten werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
-LOW
-\begin_inset Quotes frd
-\end_inset
 
--Frames zurückgehalten werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2798,15 +2939,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -2841,15 +2974,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
+: Grösse der High-Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
 \end_layout
 
 \end_inset
@@ -2863,7 +2988,7 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-Das Verhalten ist grundsätzlich das selbe wie bei der Abbildung 
+Das Verhalten ist grundsätzlich dasselbe wie bei der Abbildung 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "fig:scen1_1_3_high_ring_queues"
@@ -2871,37 +2996,21 @@ reference "fig:scen1_1_3_high_ring_queues"
 \end_inset
 
 , jedoch ist erkennbar, dass der Rückstau hier marginal kleiner ausfällt
- als bei der verwiesenen Abbildung, da weniger 
-\begin_inset Quotes fld
+ als bei der verwiesenen Abbildung, da weniger Low-Frames versendet werden
+ und es somit mehr Platz für High-Frames hat.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
-LOW
-\begin_inset Quotes frd
-\end_inset
 
--Frames versandt werden und es somit mehr Platz für 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames hat.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -2936,15 +3045,8 @@ MU5
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
+: Grösse der Low-Queues bei beiden Ausgängen mit Frames, die intern generiert
+ werden
 \end_layout
 
 \end_inset
@@ -2965,17 +3067,10 @@ name "fig:scen1_1_4_low_int_queue"
 \end_layout
 
 \begin_layout Standard
-Diese Abbildung zeigt markant auf wie die Zuflusslimitierung fungiert.
- Solange 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames generiert werden, staut sich die Queue an und kann je nach konfigurierte
-m Zuflusslimit mit entsprechender Geschwindigkeit abgearbeitet werden.
+Diese Abbildung zeigt markant auf, wie die Zuflusslimitierung fungiert.
+ Solange Low-Frames generiert werden, staut sich die Queue an und kann je
+ nach konfiguriertem Zuflusslimit mit entsprechender Geschwindigkeit abgearbeite
+t werden.
  Wird ein kleines Limit eingestellt, staut sich die Queue schneller an als
  mit einem grösseren Wert.
  Dies kann in den Kapiteln 
@@ -3037,6 +3132,13 @@ Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung: Anzahl Unterbrechungen
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Vergleich mit einer kleineren Zuflusslimitierung von 76 Kbit/s 
 \begin_inset CommandInset label
@@ -3079,7 +3181,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -3088,7 +3190,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -3097,7 +3199,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -3294,15 +3396,7 @@ status open
 
 \begin_layout Plain Layout
 Szenario 1 / Simulation 1.4 mit 76 Kbit/s Limitierung / Übertragungszeiten
- von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+ von Low-Frames
 \end_layout
 
 \end_inset
@@ -3390,15 +3484,8 @@ MU5
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
+: Grösse der Low-Queues bei beiden Ausgängen mit Frames, die intern generiert
+ werden
 \end_layout
 
 \end_inset
@@ -3420,6 +3507,13 @@ reference "fig:scen1_1_4_low_int_queue"
 \end_inset
 
  schneller angestaut (grössere Steigung).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -3464,7 +3558,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -3473,7 +3567,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -3482,7 +3576,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -3679,15 +3773,7 @@ status open
 
 \begin_layout Plain Layout
 Szenario 1 / Simulation 1.4 mit 100 Kbit/s Limitierung / Übertragungszeiten
- von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+ von Low-Frames
 \end_layout
 
 \end_inset
@@ -3746,15 +3832,8 @@ MU5
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
+: Grösse der Low-Queues bei beiden Ausgängen mit Frames, die intern generiert
+ werden
 \end_layout
 
 \end_inset
@@ -3773,6 +3852,13 @@ Betrachtet man lediglich diese Grafik, kann man die Zuflusslimitierung nicht
  In Kombination mit dem vorher aufgeführten Histogramm, lässt sich sagen,
  dass die Frames zurückgehalten werden, jedoch verschickt werden, bevor
  ein Neues erzeugt wird.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -3814,7 +3900,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -3823,7 +3909,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -3832,7 +3918,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -4029,15 +4115,7 @@ histexpredirdesc
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -4064,15 +4142,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.5 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -4102,17 +4172,16 @@ histhighstddesc
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -4139,15 +4208,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.5 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -4176,6 +4237,13 @@ histlowstddesc
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
 \end_layout
@@ -4183,15 +4251,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -4226,15 +4286,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
+: Grösse der High-Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
 \end_layout
 
 \end_inset
@@ -4265,15 +4317,7 @@ eise den Frames vom Ring und den intern generierten Frames der Vortritt
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -4333,6 +4377,13 @@ Szenario 1 / Simulation 1.5: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.6: Zeitschlitzverfahren
 \begin_inset CommandInset label
@@ -4345,16 +4396,9 @@ name "sub:Simulation-1.6:-Zeitschlitzverfa"
 \end_layout
 
 \begin_layout Standard
-Es wurde ein Zeitschlitz mit einer Grün- und Rotphase von je 10000 Bytes
- definiert, wobei lediglich in der Grünphase 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet werden können.
+Es wurde ein Zeitschlitz mit einer Grün- und Rot-Phase von je 10000 Bytes
+ definiert, wobei lediglich in der Grün-Phase High-Frames versendet werden
+ können.
  Dies bedeutet, dass bei einer Übertragungsrate von 100 MBit/s eine Phase
  
 \begin_inset ERT
@@ -4407,7 +4451,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -4416,7 +4460,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -4425,7 +4469,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -4642,30 +4686,22 @@ Szenario 1 / Simulation 1.6 / Übertragungszeiten von Express-Frames
 
 \begin_layout Standard
 Die Express-Frames haben hier im Vergleich zu den anderen Simulationen im
- Durchschnitt die geringste Übertragungszeit, da hier am wenigsten 
-\begin_inset Quotes fld
+ Durchschnitt die geringste Übertragungszeit, da hier am wenigsten High-Frames
+ in einer bestimmten Zeit versendet werden und somit mehr Platz für Express-Fram
+es freigeben.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
-HIGH
-\begin_inset Quotes frd
-\end_inset
 
--Frames in einer bestimmten Zeit versendet werden und somit mehr Platz für
- Express-Frames freigeben.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -4692,15 +4728,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.6 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.6 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -4715,15 +4743,7 @@ HIGH
 
 \begin_layout Standard
 Der Zeitschlitzmechanismus ist hier aufgrund der grossen Verteilung erkennbar.
- Hier gibt es 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames, die bis maximal ca.
+ Hier gibt es High-Frames, die bis maximal ca.
  
 \begin_inset ERT
 status open
@@ -4751,21 +4771,20 @@ mu s$
 
 \end_inset
 
- für den Frameversand aufgewendet werden.
+ für den Frame-Versand aufgewendet werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -4792,15 +4811,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.6 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.6 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -4814,37 +4825,20 @@ LOW
 \end_layout
 
 \begin_layout Standard
-Dadurch, dass die 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames zurückgehalten werden, entsteht auch mehr Platz für das Übertragen
- von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames.
+Dadurch, dass die High-Frames zurückgehalten werden, entsteht auch mehr
+ Platz für das Übertragen von Low-Frames.
  Jedoch wird dieser Platz auch von Express-Frames beansprucht, weshalb sich
  die Frames länger als bei den vorherigen Simulationen ohne Zuflusslimitierung
  verzögern.
  Des Weiteren entstehen die längeren Verzögerungszeiten auch dadurch, dass
- die 
-\begin_inset Quotes fld
+ die High-Frames prioritär behandelt werden.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
-HIGH
-\begin_inset Quotes frd
-\end_inset
 
--Frames prioritär behandelt werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4854,15 +4848,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -4897,15 +4883,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der High-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -4920,29 +4898,13 @@ HIGH
 
 \begin_layout Standard
 Es ist ein stärkerer Rückstau vorhanden als bei den bisherigen Simulationen,
- da in einer Rotphase keine 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet werden können.
+ da in einer Rotphase keine High-Frames versendet werden können.
 \end_layout
 
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -5002,6 +4964,13 @@ Szenario 1 / Simulation 1.6: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.7: Maximale Auslastung
 \end_layout
@@ -5045,7 +5014,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -5054,7 +5023,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -5063,7 +5032,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -5289,17 +5258,16 @@ Da in dieser Simulation mehr Knoten vorhanden sind, durch die die Frames
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -5326,15 +5294,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.7 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.7 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -5363,8 +5323,15 @@ Folgendes lässt sich über dieses und das vorherige Histogramm aussagen:
 Aufgrund der hohen Netzauslastung haben nicht mehr die meisten Frames die
  geringste Übertragungszeit (siehe vorherige Simulationen ohne Zeitschlitzverfah
 ren).
- Es fällt auf, dass die Werte in diesen beiden Histogrammen normal verteilt
+ Es fällt auf, dass die Werte in diesen beiden Histogrammen normalverteilt
  sind.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5374,15 +5341,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -5417,15 +5376,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der High-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -5485,6 +5436,13 @@ Szenario 1 / Simulation 1.7: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Simulation 1.8: Maximale Auslastung mit TCP-ähnlichem Verkehr 
 \begin_inset CommandInset label
@@ -5531,7 +5489,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-EXPRESS
+Express
 \end_layout
 
 \end_inset
@@ -5540,7 +5498,7 @@ EXPRESS
 \begin_inset Text
 
 \begin_layout Plain Layout
-HIGH
+High
 \end_layout
 
 \end_inset
@@ -5549,7 +5507,7 @@ HIGH
 \begin_inset Text
 
 \begin_layout Plain Layout
-LOW
+Low
 \end_layout
 
 \end_inset
@@ -5765,17 +5723,16 @@ Szenario 1 / Simulation 1.8 / Übertragungszeiten von Express-Frames
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -5802,15 +5759,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.8 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.8 / Übertragungszeiten von High-Frames
 \end_layout
 
 \end_inset
@@ -5842,17 +5791,16 @@ reference "fig:scen1_1_7_hist_high"
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -5879,15 +5827,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.8 / Übertragungszeiten von 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames
+Szenario 1 / Simulation 1.8 / Übertragungszeiten von Low-Frames
 \end_layout
 
 \end_inset
@@ -5925,10 +5865,17 @@ mu s$
 
 \end_inset
 
- auf.
+ (Breite des ersten Balkens im Histogramm) auf.
  Da es jedoch aufgrund der Netzwerkauslastung eine sehr breite Streuung
  der Übertragungszeiten gibt, sind die Klassenbreiten des Histogramms gegenüber
  den beiden vorhergehenden Histogrammen vergleichsweise hoch.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5938,15 +5885,7 @@ Queues
 \begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität High
 \end_layout
 
 \begin_layout Standard
@@ -5981,15 +5920,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der High-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -6019,17 +5950,16 @@ Maximale Auslastung
 \end_layout
 
 \begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
-Frames mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+Frames mit der Priorität Low
 \end_layout
 
 \begin_layout Standard
@@ -6064,15 +5994,7 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der Low-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -6124,15 +6046,7 @@ MU5
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
+: Grösse der Low-Queues bei beiden Ausgängen
 \end_layout
 
 \end_inset
@@ -6154,17 +6068,9 @@ MU5
 \end_inset
 
  generiert den TCP-ähnlichen Traffic.
- Die 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frames stauen sich in der Queue an, weil auf dem Ring ein enormes Datenaufkomme
-n herrscht, das durch die höher priorisierten Frames der anderen Knoten
- verursacht wird.
+ Die Low-Frames stauen sich in der Queue an, weil auf dem Ring ein enormes
+ Datenaufkommen herrscht, das durch die höher priorisierten Frames der anderen
+ Knoten verursacht wird.
 \end_layout
 
 \begin_layout Subsubsection
@@ -6208,6 +6114,13 @@ Szenario 1 / Simulation 1.8: Anzahl Unterbrechungen durch Express-Frames
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Fazit
 \end_layout
@@ -6238,7 +6151,7 @@ E=Punkte\, für\, ExpressFrames
 
 \begin_inset Formula 
 \[
-H=Punkte\, für\, Frames\, der\, Priorität\, HIGH
+H=Punkte\, für\, Frames\, der\, Priorität\, High
 \]
 
 \end_inset
@@ -6246,7 +6159,7 @@ H=Punkte\, für\, Frames\, der\, Priorität\, HIGH
 
 \begin_inset Formula 
 \[
-L=Punkte\, für\, Frames\, der\, Priorität\, LOW
+L=Punkte\, für\, Frames\, der\, Priorität\, Low
 \]
 
 \end_inset
@@ -6341,15 +6254,7 @@ mu s]$
 
 \end_inset
 
- 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
-
+ High
 \end_layout
 
 \end_inset
@@ -6380,15 +6285,7 @@ mu s]$
 
 \end_inset
 
- 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-
+ Low
 \end_layout
 
 \end_inset
@@ -7061,16 +6958,8 @@ reference "sub:Simulation-1.4:-Vortritt"
 
 ) die tiefsten durchschnittlichen Übertragungszeiten aufweist.
  Dies lässt sich dadurch erklären, dass der für unseren Anwendungsfall unwichtig
-e Traffic (mit der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-) begrenzt wird und somit die höher priorisierten Frames mehr Platz auf
- dem Ethernet haben.
+e Traffic (mit der Priorität Low) begrenzt wird und somit die höher priorisierte
+n Frames mehr Platz auf dem Ethernet haben.
 \end_layout
 
 \begin_layout Standard
@@ -7090,48 +6979,18 @@ reference "sub:Simulation-1.6:-Zeitschlitzverfa"
 
 \end_inset
 
-) besser ab, jedoch nur weil der Versand von 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames durch das Zeitschlitzverfahren eingeschränkt wird und somit diese
- nur in der Grün-Phase gesendet werden können.
- Wenn weniger 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet werden können die Express-Frames eher versendet werden,
- womit diese schneller ankommen.
- Da die 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames für unseren Anwendungsfall aber wichtige Daten beinhalten, ist dieser
- Mechanismus suboptimal für das Versenden von Messwerten.
+) besser ab, jedoch nur weil der Versand von High-Frames durch das Zeitschlitzve
+rfahren eingeschränkt wird und somit diese nur in der Grün-Phase gesendet
+ werden können.
+ Wenn weniger High-Frames versendet werden, können die Express-Frames eher
+ versendet werden, womit diese schneller ankommen.
+ Da die High-Frames für unseren Anwendungsfall aber wichtige Daten beinhalten,
+ ist dieser Mechanismus suboptimal für das Versenden von Messwerten.
 \end_layout
 
 \begin_layout Standard
-Die durchschnittliche Übertragungsdauer der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames ist gegenüber der Simulation 1.4 bei der Simulation 1.8 
+Die durchschnittliche Übertragungsdauer der High-Frames ist gegenüber der
+ Simulation 1.4 bei der Simulation 1.8 
 \begin_inset Quotes fld
 \end_inset
 
@@ -7146,16 +7005,9 @@ reference "sub:Simulation-1.8:-Maximale"
 
 \end_inset
 
-) schneller, dies aber nur weil dort einiges mehr an 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versendet wird und diese somit den Express-Frames weniger Platz
- für die Fragmentierung lassen (siehe 
+) schneller, dies aber nur weil dort einiges mehr an High-Frames versendet
+ wird und diese somit den Express-Frames weniger Platz für die Fragmentierung
+ lassen (siehe 
 \begin_inset Quotes fld
 \end_inset
 
@@ -7179,15 +7031,7 @@ Je nach Bedürfnis kann man also folgende Konfigurationen empfehlen:
 
 \begin_layout Itemize
 Wer auf den unwichtigen Traffic (TCP-ähnlicher Verkehr / Frames mit Priorität
- 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
-) verzichten kann, dem wird Simulation 1.4 
+ Low) verzichten kann, dem wird Simulation 1.4 
 \begin_inset Quotes fld
 \end_inset
 
@@ -7199,15 +7043,7 @@ Vortritt für Frames von Aussen mit Zuflusslimitierung
 \end_layout
 
 \begin_layout Itemize
-Ist der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Traffic nicht ganz unwichtig (wenn u.a.
+Ist der Low-Traffic nicht ganz unwichtig (wenn u.a.
  Protokolle des Application Layers gebraucht werden und schnell reagieren
  müssen (z.B.
  Management-Konsole)), dann wird eine Konfiguration ohne Zuflusslimitierung
