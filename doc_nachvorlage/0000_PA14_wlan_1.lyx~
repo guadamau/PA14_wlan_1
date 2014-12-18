@@ -19,6 +19,7 @@
 \rhead{\nouppercase{\rightmark}}
 \renewcommand{\chaptermark}[1]{\markright{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
 \chead{}
 \lfoot{\myTitle}
 \rfoot{\thepage/\pageref{LastPage}}
@@ -63,7 +64,8 @@
 
 % basicstyle=\scriptsize\ttfamily,
  \lstset{
-   basicstyle=\scriptsize\ttfamily,
+   basicstyle=\tiny\ttfamily,
+%   basicstyle=\scriptsize\ttfamily,
    keywordstyle=\bfseries\ttfamily\color{blue},
    stringstyle=\color{darkgreen}\ttfamily,
    commentstyle=\color{middlegray}\ttfamily,

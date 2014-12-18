@@ -235,6 +235,13 @@ Beispiel eines Queueverlaufs für Frames von 2 Queues
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:Bsp-Queueverlauf_Exp_High"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -323,6 +330,16 @@ unterbrochen
 , wird dies vermerkt.
  So kann man sehen, zu welchem Zeitpunkt wieviele Unterbrechungen stattgefunden
  haben.
+ Dies ist bei der jeweiligen Simulation im Graphen im entsprechenden Unterkapite
+l mit dem Titel 
+\begin_inset Quotes fld
+\end_inset
+
+Anzahl Unterbrechungen (Preemptions)
+\begin_inset Quotes frd
+\end_inset
+
+ einsehbar.
 \end_layout
 
 \begin_layout Standard
@@ -356,6 +373,56 @@ Für dieses Szenario werden die Werte ab dem Zeitpunkt t=0.02s bis zu tstop=0.5
  aufgezeichnet.
  Dieser Bereich beeinhaltet für dieses Szenario garantiert nur das Verhalten
  innerhalb des Steady-States.
+\end_layout
+
+\begin_layout Standard
+Über die Grösse der Queues mit Express-Frames lässt sich betreffend jeder
+ Simulation in diesem Szenario folgendes sagen: In keinem Knoten haben sich
+ die Express-Frames bei einem Ausgang angestaut.
+ Jedes generierte Express-Frame konnte schnellstmöglich versandt werden.
+ Wie sich die Queues mit anderen Frames verhalten, wenn sie sich anstauen,
+ wird in den einzelnen Simulationen dieses Szenarios beschrieben.
+ 
+\end_layout
+
+\begin_layout Standard
+Je nach Mechanismus verhalten sich die Queues andersartig, während die Chrakteri
+stiken der Queues mit Express-Frames immer ähnlich verlaufen.
+ Lediglich die Reihenfolge der Express-Frames untereinander und der exakte
+ Zeitpunkt der 
+\begin_inset Quotes fld
+\end_inset
+
+Fragmentierung
+\begin_inset Quotes frd
+\end_inset
+
+ normaler Frames durch Express-Frames kann von Simulation zu Simulation
+ variieren, jedoch ist dieser Unterschied für die Simulationen dieses Szenarios
+ untereinander betrachtet gering und vernachlässigbar.
+ Der Einfluss der Express-Frames auf die anderen Frames ist in der jeweiligen
+ Simulation in den entsprechenden Queues ersichtlich.
+\end_layout
+
+\begin_layout Standard
+Als Beispiel für den Einfluss von Express-Frames auf Andere ist die Abbildung
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:Bsp-Queueverlauf_Exp_High"
+
+\end_inset
+
+ zu betrachten.
+ Dort ist klar ersichtlich, dass sich die Frames in der 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Queue anstauen, während fortlaufend Express-Frames versendet werden.
 \end_layout
 
 \begin_layout Subsection
@@ -623,11 +690,30 @@ Szenario 1 / Simulation 1.1 / Übertragungszeiten von Express-Frames
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_1_Exp_Histogram"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Die Übertragungszeiten der Express-Frames liegen nahe beieinander und sind
+ alle im selben Bereich verteilt.
+ Wenn alle Express-Frames sofort nach ihrer Erzeugung hätten versendet werden
+ können, wäre nur ein Balken im Histogramm ersichtlich.
+ Hier hingegen kann man feststellen, dass mit dem Versand zeitweise abgewartet
+ werden musste bis ein Fragment eines normalen Frames erstellt werden konnte
+ oder Platz frei war, um das Express-Frame zu senden.
+ Dank der Frame-Preemption musste kein Express-Frame zu lange warten, bis
+ es versendet werden konnte.
 \end_layout
 
 \begin_layout Standard
@@ -682,6 +768,43 @@ HIGH
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand{
+\backslash
+histhighstddesc}{Man kann gut erkennen, dass der grösste Teil aller <<HIGH>>-Fra
+mes schnellstmöglich übertragen werden konnte.
+ Jedoch existieren vereinzelte Frames, die aufgrund Preemption oder Frames,
+ die gerade versendet werden, eine markante Verzögerung aufweisen.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histhighstddesc
 \end_layout
 
 \end_inset
@@ -748,19 +871,48 @@ LOW
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand{
+\backslash
+histlowstddesc}{In dieser Grafik kann man klar feststellen, welches die
+ Frames à 64 Bytes und welche die mit 1500 Bytes sind.
+ Dies resultiert daraus, dass hier TCP-ähnlicher Unicast-Traffic simuliert
+ wird zwischen zwei Knoten.
+ Kein Frame hat eine auffallend längere Übertragungsdauer, jedoch sieht
+ man an der Zeitachse, dass die durchschnittliche Übertragungszeit deutlich
+ länger ist, als diejenige der höher priorisierten Frames.}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histlowstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-In keinem Knoten haben sich die Express-Frames bei einem Ausgang angestaut.
- Jedes generierte Express-Frame konnte schnellstmöglich versandt werden.
 \end_layout
 
 \begin_layout Standard
@@ -831,6 +983,49 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+Die 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames stauen sich zwar zeitweise an, jedoch kann dieser Stau immer wieder
+ abgebaut werden, bevor sich weitere Frames aufstauen.
+ Maximal werden beim Ausgang A 2 Frames und beim Ausgang B 8 Frames auf
+ einmal in einer Queue gespeichert.
+ Diese Divergenz lässt sich dadurch erklären, dass 
+\begin_inset Quotes fld
+\end_inset
+
+MU2
+\begin_inset Quotes frd
+\end_inset
+
+ beim Ausgang A weniger oft 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet, da diese selbst mit der Generierung von Frames beschäftigt
+ ist.
+ An Ausgang B hingegen ist 
+\begin_inset Quotes fld
+\end_inset
+
+PU2
+\begin_inset Quotes frd
+\end_inset
+
+ angeschlossen, welche die Frames einfach nur weiterleiten muss und selbst
+ keine generiert.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -845,16 +1040,39 @@ LOW
 \end_layout
 
 \begin_layout Standard
-Aufgrund der (verglichen mit den restlichen Frames) niedriger Erzeugungsrate
- stauten sich auch bei den Frames mit der Priorität 
-\begin_inset Quotes fld
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+newcommand{
+\backslash
+queuelownojam}{Aufgrund der (verglichen mit den Frames anderer Prioritäten)
+ niedriger Erzeugungsrate stauten sich bei den Frames mit der Priorität
+ <<LOW>> keine bei einem Ausgang eines Knotens an.}
+\end_layout
+
 \end_inset
 
-LOW
-\begin_inset Quotes frd
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+queuelownojam
+\end_layout
+
 \end_inset
 
- keine bei einem Ausgang eines Knotens an.
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -1134,35 +1352,36 @@ Express-Frames
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/Hist_Exp.svg
-	display false
-	scale 60
+
+
+\backslash
+newcommand{
+\backslash
+histexpredirdesc}{Die Übertragungszeiten der Express-Frames in dieser Simulation
+ sind dieselben wie in Abbildung 
+\backslash
+vref{fig:scen1_1_1_Exp_Histogram}.
+ Die Erläuterung dazu ist unter besagter Abbildung zu finden.}
+\end_layout
 
 \end_inset
 
 
 \end_layout
 
-\begin_layout Plain Layout
-\begin_inset Caption Standard
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Übertragungszeiten von Express-Frames
-\end_layout
-
-\end_inset
 
 
+\backslash
+histexpredirdesc
 \end_layout
 
 \end_inset
@@ -1230,6 +1449,22 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histhighstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -1288,106 +1523,24 @@ LOW
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histlowstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU1_Exp_Ring.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die vom Ring
- kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU1_Exp_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die intern
- generiert werden
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1417,7 +1570,7 @@ status open
 \begin_inset Graphics
 	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU1_High_A_B_Ring.svg
 	display false
-	scale 60
+	scale 50
 
 \end_inset
 
@@ -1470,7 +1623,7 @@ status open
 \begin_inset Graphics
 	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU1_High_B_Int.svg
 	display false
-	scale 60
+	scale 50
 
 \end_inset
 
@@ -1512,6 +1665,31 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+Gesamthaft ist das Verhalten der 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Queues dasselbe wie bei der vorherigen Simulation, mit dem Unterschied,
+ dass hier die Queues nach ihrer Herkunft aufgeteilt sind.
+ Da von den anderen Knoten viel mehr Traffic eintrifft als intern (von 
+\begin_inset Quotes fld
+\end_inset
+
+MU1
+\begin_inset Quotes frd
+\end_inset
+
+) generiert wird, staut es sich bei der Ring-Queue mehr an, obwohl diesen
+ Frames der Vortritt gewährt ist.
+ So lässt sich jedoch der Stau wieder aufheben und es gibt genügend Platz,
+ um zwischendurch intern generierte Frames versenden zu können.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -1526,104 +1704,14 @@ LOW
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU1_LOW_A_B_Ring.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_2_Vortritt_Ring/MU5_LOW_A_B_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.2 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU5
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
-\end_layout
-
-\end_inset
-
-
+\backslash
+queuelownojam
 \end_layout
 
 \end_inset
@@ -1908,35 +1996,14 @@ Express-Frames
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/Hist_Exp.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Übertragungszeiten von Express-Frames
-\end_layout
-
-\end_inset
-
-
+\backslash
+histexpredirdesc
 \end_layout
 
 \end_inset
@@ -2004,6 +2071,22 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histhighstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -2055,6 +2138,29 @@ LOW
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_3_low_histogram"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histlowstddesc
 \end_layout
 
 \end_inset
@@ -2064,104 +2170,6 @@ LOW
 
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/MU1_EXP_Ring.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die vom Ring
- kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/MU1_EXP_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die intern
- generiert werden
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2224,6 +2232,13 @@ HIGH
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_3_high_ring_queues"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2232,57 +2247,12 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/MU1_High_A_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei Ausgang A mit Frames, die intern generiert werden (Frame B hat
- das selbe Verhalten)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+Bei dieser Simulation werden intern generierte Frames den Frames, die vom
+ Ring her kommen, vorgezogen.
+ Aus diesem Grund können die intern generierten Frames sofort versandt werden
+ ohne einen Rückstau entstehen zu lassen.
+ Bei den Frames gibt es wie man sehen kann einen Rückstau, der jedoch wieder
+ abgearbeitet werden kann.
 \end_layout
 
 \begin_layout Standard
@@ -2300,104 +2270,14 @@ LOW
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/MU1_Low_Ring.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_3_Vortritt_Internal/MU5_Low_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.3 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU5
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
-\end_layout
-
-\end_inset
-
-
+\backslash
+queuelownojam
 \end_layout
 
 \end_inset
@@ -2448,20 +2328,23 @@ Szenario 1 / Simulation 1.3: Anzahl Unterbrechungen durch Express-Frames
 
 \begin_layout Subsection
 Simulation 1.4: Vortritt für Frames von Aussen mit Zuflusslimitierung
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Simulation-1.4:-Vortritt"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Die Zuflusslimitierung wurde auf ein maximum von 88 Kbits gesetzt.
+Die Zuflusslimitierung wurde auf ein maximum von 88 Kbit/s gesetzt.
  Im weiteren Verlauf wird das Ergebnis mit Simulationen, die eine Zuflusslimitie
-rung von 76 und 100 Kbits gesetzt haben, verglichen.
+rung von 76 und 100 Kbit/s gesetzt haben, verglichen.
 \end_layout
 
 \begin_layout Subsubsection
 Übertragungszeiten
-\end_layout
-
-\begin_layout Standard
-88Kbit/s 
 \end_layout
 
 \begin_layout Standard
@@ -2672,7 +2555,7 @@ mu s$
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung / Datenangabe 
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Datenangabe 
 \end_layout
 
 \end_inset
@@ -2692,36 +2575,14 @@ Express-Frames
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/88kbits/Hist_Exp.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung / Übertragungszeiten
- von Express-Frames
-\end_layout
-
-\end_inset
-
-
+\backslash
+histexpredirdesc
 \end_layout
 
 \end_inset
@@ -2767,7 +2628,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung / Übertragungszeiten
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Übertragungszeiten
  von 
 \begin_inset Quotes fld
 \end_inset
@@ -2782,6 +2643,22 @@ HIGH
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histhighstddesc
 \end_layout
 
 \end_inset
@@ -2827,7 +2704,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung / Übertragungszeiten
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Übertragungszeiten
  von 
 \begin_inset Quotes fld
 \end_inset
@@ -2842,113 +2719,80 @@ LOW
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_4_low_his_88"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Da die Zuflusslimitierung sich auf 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames beschränkt, ist hier ersichtlich, dass fast die Hälfte der niedrig
+ priorisierten Frames um einige Zeit verzögert werden.
+ Werden die Übertragungszeiten mit einem Histogramm aus einer der vorherigen
+ Simulationen (siehe Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_3_low_histogram"
+
+\end_inset
+
+) verglichen, sieht man, dass hier die maximale Übertragungszeit ca.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$82000 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ beträgt wobei die im referenzierten Histogramm maximal 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$860 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ aufweist.
+ Dies ist dadurch zu erklären, dass durch die Zuflusslimitierung 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames zurückgehalten werden.
 \end_layout
 
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/88kbits/MU1_Exp_Ring.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die vom Ring
- kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/88kbits/MU1_Exp_Int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die intern
- generiert werden
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -2989,7 +2833,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Knoten 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3019,38 +2863,23 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/88kbits/MU1_High_A_Int.svg
-	display false
-	scale 60
+Das Verhalten ist grundsätzlich das selbe wie bei der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_3_high_ring_queues"
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
+, jedoch ist erkennbar, dass der Rückstau hier marginal kleiner ausfällt
+ als bei der verwiesenen Abbildung, da weniger 
 \begin_inset Quotes fld
 \end_inset
 
-MU1
+LOW
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
+-Frames versandt werden und es somit mehr Platz für 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3058,18 +2887,7 @@ HIGH
 \begin_inset Quotes frd
 \end_inset
 
--Queues bei Ausgang A mit Frames, die intern generiert werden (Frame B hat
- das selbe Verhalten)
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+-Frames hat.
 \end_layout
 
 \begin_layout Standard
@@ -3081,59 +2899,6 @@ Frames mit der Priorität
 
 LOW
 \begin_inset Quotes frd
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/88kbits/MU1_LOW_Ring.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \end_inset
 
 
@@ -3163,7 +2928,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 / Knoten 
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung / Knoten 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3185,11 +2950,49 @@ LOW
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_4_low_int_queue"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Diese Abbildung zeigt markant auf wie die Zuflusslimitierung fungiert.
+ Solange 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames generiert werden, staut sich die Queue an und kann je nach konfigurierte
+m Zuflusslimit mit entsprechender Geschwindigkeit abgearbeitet werden.
+ Wird ein kleines Limit eingestellt, staut sich die Queue schneller an als
+ mit einem grösseren Wert.
+ Dies kann in den Kapiteln 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Vergleich-mit-einer-76"
+
+\end_inset
+
+ und 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Vergleich-mit-einer-100"
+
+\end_inset
+
+ betrachtet werden.
 \end_layout
 
 \begin_layout Subsubsection
@@ -3220,7 +3023,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung: Anzahl Unterbrechungen
+Szenario 1 / Simulation 1.4 mit 88 Kbit/s Limitierung: Anzahl Unterbrechungen
  durch Express-Frames
 \end_layout
 
@@ -3235,7 +3038,14 @@ Szenario 1 / Simulation 1.4 mit 88 Kbits Limitierung: Anzahl Unterbrechungen
 \end_layout
 
 \begin_layout Subsubsection
-Vergleich mit einer Zuflusslimitierung von 76 Kbits
+Vergleich mit einer kleineren Zuflusslimitierung von 76 Kbit/s 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Vergleich-mit-einer-76"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3317,7 +3127,7 @@ $75$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3336,7 +3146,7 @@ $17454$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3355,7 +3165,7 @@ $224$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3446,7 +3256,7 @@ mu s$
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 76Kbit/s Limitierung / Datenangabe 
+Szenario 1 / Simulation 1.4 mit 76 Kbit/s Limitierung / Datenangabe 
 \end_layout
 
 \end_inset
@@ -3457,14 +3267,173 @@ Szenario 1 / Simulation 1.4 mit 76Kbit/s Limitierung / Datenangabe
 \end_inset
 
 
-\end_layout
-
-\begin_layout Subsubsection
-Vergleich mit einer Zuflusslimitierung von 100 Kbits
 \end_layout
 
 \begin_layout Standard
-100Kbit/s
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/76kbits/hist_low.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.4 mit 76 Kbit/s Limitierung / Übertragungszeiten
+ von 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Anhand der Zeitachsen dieser und Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_4_low_his_88"
+
+\end_inset
+
+ kann man sehen, dass mit einer Limitierung von 76 Kbit/s die Frames weitaus
+ längere Übertragungszeiten haben.
+ Das Maximum liegt hier bei 
+ca.
+ 
+\lang ngerman
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$180000 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ und bei der referenzierten Grafik bei ca.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$ 82000 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+.
+ Dafür haben hier die höher priorisierten Frames im Durchschnitt eine kürzere
+ Übertragungsdauer.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/76kbits/Queue_MU5_Low_Internal.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.4 mit 76 Kbit/s Limitierung / Knoten 
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+: Grösse der 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Queues bei beiden Ausgängen mit Frames, die intern generiert werden
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Hier werden die Frames im Vergleich zur Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_4_low_int_queue"
+
+\end_inset
+
+ schneller angestaut (grössere Steigung).
+\end_layout
+
+\begin_layout Subsubsection
+Vergleich mit einer grösseren Zuflusslimitierung von 100 Kbit/s 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Vergleich-mit-einer-100"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3546,7 +3515,7 @@ $75$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3565,7 +3534,7 @@ $17454$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3584,7 +3553,7 @@ $224$
 
 \end_inset
 
-0
+
 \end_layout
 
 \end_inset
@@ -3675,7 +3644,7 @@ mu s$
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Szenario 1 / Simulation 1.4 mit 100Kbit/s Limitierung / Datenangabe 
+Szenario 1 / Simulation 1.4 mit 100 Kbit/s Limitierung / Datenangabe 
 \end_layout
 
 \end_inset
@@ -3686,6 +3655,127 @@ Szenario 1 / Simulation 1.4 mit 100Kbit/s Limitierung / Datenangabe
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/100kbits/hist_low.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.4 mit 100 Kbit/s Limitierung / Übertragungszeiten
+ von 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Beim Vergleich dieser und der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_3_low_histogram"
+
+\end_inset
+
+ kann man sehen, dass mit einer Limitierung von 100 Kbit/s die Frames zurückgeha
+lten werden.
+ Im Vergleich zu den Limitierungen mit 76 und 88 Kbit/s werden hier die
+ Übertragungszeiten weniger markant verlängert.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_4_Vortritt_Int_Zuflusslim/100kbits/Queue_MU5_Low_Internal.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.4 mit 100 Kbit/s Limitierung / Knoten 
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+: Grösse der 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Queues bei beiden Ausgängen mit Frames, die intern generiert werden
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Betrachtet man lediglich diese Grafik, kann man die Zuflusslimitierung nicht
+ feststellen.
+ In Kombination mit dem vorher aufgeführten Histogramm, lässt sich sagen,
+ dass die Frames zurückgehalten werden, jedoch verschickt werden, bevor
+ ein Neues erzeugt wird.
 \end_layout
 
 \begin_layout Subsection
@@ -3924,35 +4014,14 @@ Express-Frames
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/Hist_Exp.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Übertragungszeiten von Express-Frames
-\end_layout
-
-\end_inset
-
-
+\backslash
+histexpredirdesc
 \end_layout
 
 \end_inset
@@ -4020,6 +4089,22 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histhighstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -4078,106 +4163,24 @@ LOW
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+histlowstddesc
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_Exp_Ring.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die vom Ring
- kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_Exp_int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen mit Frames, die intern
- generiert werden
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -4248,30 +4251,7 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_High_int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Knoten 
+Da von den anderen Knoten viel mehr Traffic eintrifft als intern (von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -4279,25 +4259,10 @@ MU1
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
+) generiert wird, staut es sich bei der Ring-Queue mehr an, obwohl abwechslungsw
+eise den Frames vom Ring und den intern generierten Frames der Vortritt
+ gewährt wird.
+ Wie auch bei vorherigen Simulationen kann der Stau wieder gelöst werden.
 \end_layout
 
 \begin_layout Standard
@@ -4315,104 +4280,14 @@ LOW
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_Low_Ring.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die vom Ring kommen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU5_Low_int.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.5 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU5
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen mit Frames, die intern generiert werden
-\end_layout
-
-\end_inset
-
-
+\backslash
+queuelownojam
 \end_layout
 
 \end_inset
@@ -4463,6 +4338,41 @@ Szenario 1 / Simulation 1.5: Anzahl Unterbrechungen durch Express-Frames
 
 \begin_layout Subsection
 Simulation 1.6: Zeitschlitzverfahren
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Simulation-1.6:-Zeitschlitzverfa"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Es wurde ein Zeitschlitz mit einer Grün- und Rotphase von je 10000 Bytes
+ definiert, wobei lediglich in der Grünphase 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet werden können.
+ Dies bedeutet, dass bei einer Übertragungsrate von 100 MBit/s eine Phase
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$800 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ dauert.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4734,6 +4644,20 @@ Szenario 1 / Simulation 1.6 / Übertragungszeiten von Express-Frames
 \end_layout
 
 \begin_layout Standard
+Die Express-Frames haben hier im Vergleich zu den anderen Simulationen im
+ Durchschnitt die geringste Übertragungszeit, da hier am wenigsten 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames in einer bestimmten Zeit versendet werden und somit mehr Platz für
+ Express-Frames freigeben.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -4790,6 +4714,48 @@ HIGH
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Der Zeitschlitzmechanismus ist hier aufgrund der grossen Verteilung schön
+ erkennbar.
+ Hier gibt es 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames, die bis maximal ca.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$3000 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ benötigen, wobei bei den vorherigen Simulationen maximal ca.
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$1000 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ für den Frameversand aufgewendet werden.
 \end_layout
 
 \begin_layout Standard
@@ -4851,59 +4817,42 @@ LOW
 
 \end_layout
 
-\begin_layout Subsubsection
-Queues
-\end_layout
-
 \begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_6_Zeitschlitz/MU1_Exp.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.6 / Knoten 
+Dadurch, dass die 
 \begin_inset Quotes fld
 \end_inset
 
-MU1
+HIGH
 \begin_inset Quotes frd
 \end_inset
 
-: Grösse der Express-Queues bei beiden Ausgängen
-\end_layout
-
+-Frames zurückgehalten werden, entsteht auch mehr Platz für das Übertragen
+ von 
+\begin_inset Quotes fld
 \end_inset
 
-
-\end_layout
-
+LOW
+\begin_inset Quotes frd
 \end_inset
 
+-Frames.
+ Jedoch wird dieser Platz auch von Express-Frames beansprucht, weshalb sich
+ die Frames länger als bei den vorherigen Simulationen ohne Zuflusslimitierung
+ verzögern.
+ Desweiteren entstehen die längeren Verzögerungszeiten auch dadurch, dass
+ die 
+\begin_inset Quotes fld
+\end_inset
 
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames prioritär behandelt werden.
+\end_layout
+
+\begin_layout Subsubsection
+Queues
 \end_layout
 
 \begin_layout Standard
@@ -4974,6 +4923,19 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+Es ist ein stärkerer Rückstau vorhanden als bei den bisherigen Simulationen,
+ da in einer Rotphase keine 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet werden können.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -4988,51 +4950,14 @@ LOW
 \end_layout
 
 \begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_6_Zeitschlitz/MU1_LOW.svg
-	display false
-	scale 60
-
-\end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.6 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Queues bei beiden Ausgängen
-\end_layout
-
-\end_inset
-
-
+\backslash
+queuelownojam
 \end_layout
 
 \end_inset
@@ -5083,6 +5008,10 @@ Szenario 1 / Simulation 1.6: Anzahl Unterbrechungen durch Express-Frames
 
 \begin_layout Subsection
 Simulation 1.7: Maximale Auslastung
+\end_layout
+
+\begin_layout Standard
+Anstelle von 14 werden 17 MUs eingesetzt, um das Netz stärker auszulasten.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5344,11 +5273,23 @@ Szenario 1 / Simulation 1.7 / Übertragungszeiten von Express-Frames
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_7_hist_exp"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Da in dieser Simulation mehr Knoten vorhanden sind, durch die die Frames
+ weitergeleitet werden müssen, entstehen automatisch längere Übertragungszeiten.
 \end_layout
 
 \begin_layout Standard
@@ -5403,66 +5344,35 @@ HIGH
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:scen1_1_7_hist_high"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Folgendes lässt sich über dieses und das vorherige Histogramm aussagen:
+ 
+\end_layout
+
+\begin_layout Standard
+Aufgrund der hohen Netzauslastung haben nicht mehr die meisten Frames die
+ geringste Übertragungszeit (siehe vorherige Simulationen ohne Zeitschlitzverfah
+ren).
+ Es fällt auf, dass die Werte in diesen beiden Histogrammen normalverteilt
+ sind.
 \end_layout
 
 \begin_layout Subsubsection
 Queues
-\end_layout
-
-\begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_7_Max_Auslastung/MU1_Exp.svg
-	display false
-	scale 60
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.7 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5532,6 +5442,12 @@ HIGH
 
 \end_layout
 
+\begin_layout Standard
+Hier lässt sich feststellen, dass das Netzwerk sich nahe an der Maximalauslastun
+g befindet, da sich die Queues nie ganz abbauen, aber auch nicht sonderlich
+ anstauen.
+\end_layout
+
 \begin_layout Subsubsection
 Anzahl Unterbrechungen (Preemptions)
 \end_layout
@@ -5574,7 +5490,14 @@ Szenario 1 / Simulation 1.7: Anzahl Unterbrechungen durch Express-Frames
 \end_layout
 
 \begin_layout Subsection
-Simulation 1.8: Maximale Auslastung mit TCP-ähnlichem Verkehr
+Simulation 1.8: Maximale Auslastung mit TCP-ähnlichem Verkehr 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Simulation-1.8:-Maximale"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsubsection
@@ -5905,6 +5828,24 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+Folgendes lässt sich über dieses und das vorherige Histogramm aussagen:
+ 
+\end_layout
+
+\begin_layout Standard
+Da diese Simulation grundsätzlich dieselbe wie die vorherige ist, aber zusätzlic
+h TCP-ähnlicher Traffic generiert wird, kann man erkennen, dass die Normalvertei
+lung, wie sie in der Abbildung 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "fig:scen1_1_7_hist_high"
+
+\end_inset
+
+ zu sehen ist, hier eine grössere Abweichung aufweist.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -5963,59 +5904,39 @@ LOW
 
 \end_layout
 
-\begin_layout Subsubsection
-Queues
-\end_layout
-
 \begin_layout Standard
-
-\series bold
-Express-Frames
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float figure
-placement H
-wide false
-sideways false
+Die meisten Frames weisen eine Übertragungszeit zwischen 
+\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
-\noindent
-\align center
-\begin_inset Graphics
-	filename _img/simulation/Scenario_01/1_8_Max_Auslastung_TCP_similar/Queue_MU1_Exp_Internal.svg
-	display false
-	scale 60
+
+$0$
+\end_layout
 
 \end_inset
 
-
-\end_layout
+ und 
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
-\begin_inset Caption Standard
 
-\begin_layout Plain Layout
-Szenario 1 / Simulation 1.8 / Knoten 
-\begin_inset Quotes fld
-\end_inset
-
-MU1
-\begin_inset Quotes frd
-\end_inset
-
-: Grösse der Express-Queues bei beiden Ausgängen
+$2200 
+\backslash
+mu s$
 \end_layout
 
 \end_inset
 
-
+ auf.
+ Da es jedoch aufgrund der Netzwerkauslastung eine sehr breite Streuung
+ der Übertragungszeiten gibt, sind die Klassenbreiten des Histogramms gegenüber
+ den beiden vorhergehenden Histogrammen vergleichsweise hoch.
 \end_layout
 
-\end_inset
-
-
+\begin_layout Subsubsection
+Queues
 \end_layout
 
 \begin_layout Standard
@@ -6086,6 +6007,22 @@ HIGH
 \end_layout
 
 \begin_layout Standard
+Hier lässt sich feststellen, dass das Netzwerk sich nahe an der Maximalauslastun
+g befindet, da sich die Queues nie ganz abbauen.
+ Im Vergleich zur Simulation 
+\begin_inset Quotes fld
+\end_inset
+
+Maximale Auslastung
+\begin_inset Quotes frd
+\end_inset
+
+ ist hier erkennbar, dass sich ein grösserer Rückstau in den Queues bildet.
+ Dies ist auf den zusätzlichen TCP-ähnlichen Traffic zurückzuführen, der
+ bei dieser Simulation generiert wird.
+\end_layout
+
+\begin_layout Standard
 
 \series bold
 Frames mit der Priorität 
@@ -6152,6 +6089,88 @@ LOW
 
 \end_layout
 
+\begin_layout Standard
+Auch hier ist die hohe Netzwerkauslastung erkennbar.
+ Allerdings kann die Queue zeitweise ganz abgebaut werden.
+ Dies ist so aufgrund der Häufigkeit, in der TCP-ähnlicher Traffic generiert
+ wird.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_8_Max_Auslastung_TCP_similar/Queue_MU5_Low_Internal.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.8 / Knoten 
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+: Grösse der 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Queues bei beiden Ausgängen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+ generiert den TCP-ähnlichen Traffic.
+ Die 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames stauen sich in der Queue an, weil auf dem Ring ein enormes Datenaufkomme
+n herrscht, das durch die höher priorisierten Frames der anderen Knoten
+ verursacht wird.
+\end_layout
+
 \begin_layout Subsubsection
 Anzahl Unterbrechungen (Preemptions)
 \end_layout
@@ -6195,6 +6214,1008 @@ Szenario 1 / Simulation 1.8: Anzahl Unterbrechungen durch Express-Frames
 
 \begin_layout Subsection
 Fazit
+\end_layout
+
+\begin_layout Standard
+Es wurden die durchschnittlichen Übertragungszeiten der Frames nach ihrer
+ Priorität zusammengeführt und verglichen, um die bestmögliche Konfiguration
+ zu erörtern.
+ Dazu werden die Werte pro Priorität sortiert und dem kleinsten Wert die
+ höchste Punktzahl (8 Punkte) vergeben.
+ Befinden sich zwei unterschiedliche Werte in der selben Mikrosekunde, so
+ erhalten sie die selbe Punktzahl.
+\end_layout
+
+\begin_layout Standard
+Die Punkte werden je nach Priorität gewichtet und folgendermassen zusammengezähl
+t:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E=Punkte\, für\, ExpressFrames
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+H=Punkte\, für\, Frames\, der\, Priorität\, HIGH
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+L=Punkte\, für\, Frames\, der\, Priorität\, LOW
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+Total\, Punkte=3*E+2*H+L
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="8">
+<features rotate="0" tabularvalignment="middle">
+<column alignment="center" valignment="top" width="5text%">
+<column alignment="center" valignment="top" width="13text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="13text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="13text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="10text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Sim #
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittelwert 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[
+\backslash
+mu s]$
+\end_layout
+
+\end_inset
+
+ Express
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Punkte E
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittelwert 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[
+\backslash
+mu s]$
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Punkte H
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Mittelwert 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$[
+\backslash
+mu s]$
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Punkte L
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Total Punkte
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+272.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+368.83
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+445.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+38
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+274.13
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+369.06
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+446.28
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+273.02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+368.48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+445.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+269.93
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+347.18
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+12417.16
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+273.02
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+368.59
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+445.25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+35
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+263.68
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1131.17
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+613.94
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+36
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+355.84
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+469.46
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+-
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+17
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1.8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+347.92
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+309.07
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+8
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+97475.52
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+29
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Ranking der Simulationen nach ihren Mittelwerten (Übertragungszeiten)
+\end_layout
+
+\end_inset
+
+
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Ranking_Sim_MW"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Aus dieser Tabelle kann man entnehmen, dass im Gesamten die 
+\series bold
+Simulation 1.4
+\series default
+ 
+\series bold
+
+\begin_inset Quotes fld
+\end_inset
+
+Vortritt für Frames von Aussen mit Zuflusslimitierung von 88 Kbit/s
+\begin_inset Quotes frd
+\end_inset
+
+
+\series default
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Simulation-1.4:-Vortritt"
+
+\end_inset
+
+) die tiefsten durchschnittlichen Übertragungszeiten aufweist.
+ Dies lässt sich dadurch erklären, dass der für unseren Anwendungsfall unwichtig
+e Traffic (mit der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+) begrenzt wird und somit die höher priorisierten Frames mehr Platz auf
+ dem Ethernet haben.
+\end_layout
+
+\begin_layout Standard
+Bezüglich der durchschnittlichen Übertragungsdauer bei Express-Frames schneidet
+ zwar die Simulation 1.6 
+\begin_inset Quotes fld
+\end_inset
+
+Zeitschlitzverfahren
+\begin_inset Quotes frd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Simulation-1.6:-Zeitschlitzverfa"
+
+\end_inset
+
+) besser ab, jedoch nur weil der Versand von 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames durch das Zeitschlitzverfahren eingeschränkt wird und somit diese
+ nur in der Grün-Phase gesendet werden können.
+ Wenn weniger 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet werden können die Express-Frames eher versendet werden,
+ womit diese schneller ankommen.
+ Da die 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames für unseren Anwendungsfall aber wichtige Daten beinhalten, ist dieser
+ Mechanismus suboptimal für das Versenden von Messwerten.
+\end_layout
+
+\begin_layout Standard
+Die durchschnittliche Übertragungsdauer der 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames ist gegenüber der Simulation 1.4 bei der Simulation 1.8 
+\begin_inset Quotes fld
+\end_inset
+
+Maximale Auslastung mit TCP-ähnlichem Verkehr
+\begin_inset Quotes frd
+\end_inset
+
+ (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Simulation-1.8:-Maximale"
+
+\end_inset
+
+) schneller, dies aber nur weil dort einiges mehr an 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+-Frames versendet wird und diese somit den Express-Frames weniger Platz
+ für die Fragmentierung lassen (siehe 
+\begin_inset Quotes fld
+\end_inset
+
+Mittelwert Express
+\begin_inset Quotes frd
+\end_inset
+
+ in der Tabelle 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "tab:Ranking_Sim_MW"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Je nach Bedürfnis kann man also folgende Konfigurationen empfehlen:
+\end_layout
+
+\begin_layout Itemize
+Wer auf den unwichtigen Traffic (TCP-ähnlicher Verkehr / Frames mit Priorität
+ 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+) verzichten kann, dem wird Simulation 1.4 
+\begin_inset Quotes fld
+\end_inset
+
+Vortritt für Frames von Aussen mit Zuflusslimitierung
+\begin_inset Quotes frd
+\end_inset
+
+ empfohlen.
+\end_layout
+
+\begin_layout Itemize
+Ist der 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Traffic nicht ganz unwichtig (wenn u.a.
+ Protokolle des Application Layers gebraucht werden und schnell reagieren
+ müssen (z.B.
+ Management-Konsole)), dann wird eine Konfiguration ohne Zuflusslimitierung
+ wie auch ohne Zeitschlitzverfahren empfohlen.
 \end_layout
 
 \end_body

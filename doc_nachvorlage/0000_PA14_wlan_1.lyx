@@ -15,10 +15,11 @@
 \usepackage{lastpage}
 
 % Kopf- und Fusszeilendefinition
-\lhead{\includegraphics[scale=1.0]{_img/InES_small.png}}
+\lhead{\includegraphics[scale=0.9]{_img/InES_small.png}}
 \rhead{\nouppercase{\rightmark}}
 \renewcommand{\chaptermark}[1]{\markright{#1}{}}
 \renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\renewcommand{\subsectionmark}[1]{\markright{#1}{}}
 \chead{}
 \lfoot{\myTitle}
 \rfoot{\thepage/\pageref{LastPage}}
