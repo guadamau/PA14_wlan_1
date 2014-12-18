@@ -107,7 +107,7 @@ reference "sub:Mechanismen-zur-Trafficregelung"
 \end_layout
 
 \begin_layout Subsection
-Prioritäten der Ethernet-Frames
+Prioritäten der Ethernet-Frames 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Prioritäten-der-Ethernet-Frames"
@@ -160,7 +160,7 @@ Als ein Low-Frame werden alle Frames definiert, welche ein VLAN-Tag mit
 \end_layout
 
 \begin_layout Subsection
-Mechanismen zur Trafficregelung
+Mechanismen zur Trafficregelung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sub:Mechanismen-zur-Trafficregelung"
@@ -691,7 +691,14 @@ reference "sub:Kalenderwoche-49:-04.12.2014"
 \end_layout
 
 \begin_layout Subsection
-Netzwerkaufbau
+Netzwerkaufbau 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Netzwerkaufbau"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -710,13 +717,6 @@ reference "sub:Szenario-1:-Substation"
 \end_inset
 
 ):
-\begin_inset CommandInset label
-LatexCommand label
-name "sub:Netzwerkaufbau"
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -5364,7 +5364,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset
@@ -6439,6 +6439,13 @@ Lastprofil Szenario 1: Substation Automation
 \end_inset
 
 
+\begin_inset CommandInset label
+LatexCommand label
+name "tab:Lastprofil_Szenario_1"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -6669,7 +6676,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset
@@ -7897,7 +7904,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset

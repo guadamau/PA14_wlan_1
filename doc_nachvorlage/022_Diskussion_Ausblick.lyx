@@ -105,23 +105,7 @@ reference "sub:Simulation-1.7:-Maximale"
 
 ).
  Die Simulation von IET funktioniert wie erwartet und die Preemption von
- Frames der Priorität 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
- und 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
- kann zeitlich simuliert werden.
+ Frames der Priorität high und low kann zeitlich simuliert werden.
 \end_layout
 
 \begin_layout Standard
@@ -739,7 +723,7 @@ omnetpp.ini
 \begin_inset Quotes frd
 \end_inset
 
- kann das maxmimum an Tokens gesetzt werden.
+ kann das Maximum an Tokens gesetzt werden.
  Wird kein Maximum gesetzt, wird der Traffic nicht limitiert.
 \end_layout
 
@@ -836,16 +820,16 @@ containerHasEnoughBytes()
 \begin_inset Quotes frd
 \end_inset
 
- wird vor jedem Versand aufgerufen und gibt false zurück, wenn ein 
+ wird vor jedem Versand aufgerufen und gibt 
 \begin_inset Quotes fld
 \end_inset
 
-LOW
+false
 \begin_inset Quotes frd
 \end_inset
 
--Frame als Parameter mitgegeben wird und dessen Grösse die vorhandene Anzahl
- Tokens überschreitet.
+ zurück, wenn ein Low-Frame als Parameter mitgegeben wird und dessen Grösse
+ die vorhandene Anzahl Tokens überschreitet.
  Zudem ist diese Funktion für die Token generierung zuständig.
 \end_layout
 
@@ -867,15 +851,7 @@ subtractFromByteContainer()
 
  wird bei der vorhandenen Anzahl Tokens die Anzahl abgezogen, die der Grösse
  des mitgegebenen Frames in Bytes entspricht.
- Abgezogen wird jedoch nur, wenn es sich um ein 
-\begin_inset Quotes fld
-\end_inset
-
-LOW
-\begin_inset Quotes frd
-\end_inset
-
--Frame handelt.
+ Abgezogen wird jedoch nur, wenn es sich um ein Low-Frame handelt.
  Diese Funktion wird beim Versenden aufgeführt und wird nur dann ausgeführt,
  wenn genügend Tokens vorhanden sind.
 \end_layout
@@ -1085,14 +1061,14 @@ label{lst:enumqueuenum},captionpos=b]
 
 \begin_layout Plain Layout
 
-
-\backslash
-end{lstlisting}
+...
 \end_layout
 
 \begin_layout Plain Layout
 
-...
+
+\backslash
+end{lstlisting}
 \end_layout
 
 \end_inset
@@ -1208,7 +1184,7 @@ Es ist ein Mechanismus implementiert, welcher einen Intervall in zwei Phasen
 \end_layout
 
 \begin_layout Plain Layout
-In der ersten Phase werden so viele Frames mit der Priorität High (Zeitkritische
+In der ersten Phase werden so viele Frames mit der Priorität High (zeitkritische
 r Traffic) verschickt wie möglich.
  Wenn in dieser Phase noch Platz frei ist, es jedoch keine Frames mit der
  Priorität High mehr gibt, dann können Frames mit der Priorität Low (Bulk
@@ -1423,15 +1399,8 @@ true
 \begin_inset Quotes frd
 \end_inset
 
- ist, dann befindet sich die Simulation in der Grün-Phase und kann 
-\begin_inset Quotes fld
-\end_inset
-
-HIGH
-\begin_inset Quotes frd
-\end_inset
-
--Frames versenden.
+ ist, dann befindet sich die Simulation in der Grün-Phase und kann High-Frames
+ versenden.
 \end_layout
 
 \end_inset
@@ -1522,11 +1491,29 @@ reference "sec:CPU-Lastgenerator"
 
 \begin_layout Standard
 Im Rahmen dieser Arbeit wurden bei den Simulationen nur Lastgeneratoren
- verwenden die eine Ko
+ verwendet, die eine konstante Last generieren müssen.
+ Das heisst, es wird nur die Konfiguration verwendet, welche Frames generiert
+ nach einem vorgegebenen Zeitintervall.
+ Der Zufallsanteil kann über einen 
+\begin_inset Quotes fld
+\end_inset
+
+epsilon
+\begin_inset Quotes frd
+\end_inset
+
+-Parameter definiert werden.
 \end_layout
 
 \begin_layout Subsubsection
-Konstante Framerate
+Konstante Framerate 
+\begin_inset CommandInset label
+LatexCommand label
+name "sub:Konstante-Framerate-Nachweis"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -1558,7 +1545,17 @@ Soll
 \begin_layout Plain Layout
 Der Lastgenerator generiert für die Simulation ein Verkehrsaufkommen mit
  konstanter Framerate.
-\begin_inset Newline newline
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{3 mm}
+\end_layout
+
 \end_inset
 
 
@@ -1584,15 +1581,7 @@ Ist
 Es lässt sich ein Strom mit konstanter Framerate generieren.
  Mittels Konfigurationsdatei kann man die Rate (in welchen Zeitabständen
  ein neues Frame generiert werden soll) bestimmen.
- Zudem kann über den Parameter 
-\begin_inset Quotes fld
-\end_inset
-
-epsilon
-\begin_inset Quotes frd
-\end_inset
-
- (siehe Konfigurations-XML 
+ Zudem kann über den Parameter «epsilon» (siehe Konfigurations-XML 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Netzwerkaufbau"
@@ -1603,7 +1592,17 @@ reference "sub:Netzwerkaufbau"
  Somit wird auf das definierte Intervall ein Wert aufsummiert, der sich
  zwischen 0 und dem epsilon-Wert bewegt und mit einer Zufallsfunktion zustande
  kommt.
-\begin_inset Newline newline
+ 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace{3 mm}
+\end_layout
+
 \end_inset
 
 
@@ -1626,7 +1625,137 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-Hat das Konfigurations-XML 
+Der folgende Code-Ausschnitt zeigt auf, wie die Intervall-Zeit der Konstanten
+ Lastgenerierung berechnet wird.
+ Diese Zeit gibt an, wann das nächste Frame versendet werden muss.
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+lstset{language=C++,tabsize=2}
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{lstlisting}[caption={CPU.cc Intervall-Berechnung für Konstante Lastgenerier
+ung} 
+\backslash
+label{lst:constLoadgen},captionpos=b]
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+case BEHAVIOR_CONSTANT_LOADGEN: 
+\end_layout
+
+\begin_layout Plain Layout
+
+{ 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  if( delayedMessage->getSendData().last == 0 ) 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  { 		
+\end_layout
+
+\begin_layout Plain Layout
+
+    interval = delayedMessage->getSendData().interval;
+\end_layout
+
+\begin_layout Plain Layout
+
+    if( delayedMessage->getSendData().epsilon > 0.0 )
+\end_layout
+
+\begin_layout Plain Layout
+
+    {             
+\end_layout
+
+\begin_layout Plain Layout
+
+      epsilon = delayedMessage->getSendData().epsilon;             
+\end_layout
+
+\begin_layout Plain Layout
+
+      interval = uniform( interval, ( interval + epsilon ) );
+\end_layout
+
+\begin_layout Plain Layout
+
+    } 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  } 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  else 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  { 		
+\end_layout
+
+\begin_layout Plain Layout
+
+    randomLast = delayedMessage->getSendData().last; 	
+\end_layout
+
+\begin_layout Plain Layout
+
+  }
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\begin_layout Plain Layout
+
+...
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{lstlisting}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Wenn der epsilon-Wert = 0.0 konfiguriert wird, wird der Zufallsanteil ignoriert.
+ Somit lässt sich eine Last generieren, die feste Intervall-Zeiten aufweist.
 \end_layout
 
 \end_inset
@@ -1713,10 +1842,8 @@ Ist
 
 \begin_layout Plain Layout
 Es kann ein Verkehrsaufkommen generiert werden, bei dem die Zeitabstände
- zwischen den Frames zufällig gewählt wird.
- Zudem kann man bestimmen, innerhalb welchem Bereich der Zeitabstand zufällig
- gewählt werden soll (z.B.
- mindestens 100ns und maximal 500ns).
+ zwischen den Frames zufällig gewählt werden.
+ Dies wird erreicht, durch setzen eines Intervalls und einem epsilon-Wert.
 \begin_inset Newline newline
 \end_inset
 
@@ -1740,7 +1867,14 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Siehe Nachweis, 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Konstante-Framerate-Nachweis"
 
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1757,7 +1891,7 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Nachweis: Lastgenerator kann Frames mit zufülliger zeitlicher Verteilung
+Nachweis: Lastgenerator kann Frames mit zufälliger zeitlicher Verteilung
  erzeugen
 \end_layout
 
@@ -1852,7 +1986,19 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Die spontanen Einzelmeldungen werden mit einem Zeitintervall und einem verhältni
+smässig grossen Epsilon parametrisiert.
+ So kann das Verhalten spontaner Einzelmeldungen simuliert werden.
+ Dieser Mechanismus wird in den Simulationen verwendet, um Express-Frames
+ zu versenden, damit diese mit einer zufällig gewählten Zeit spontan versendet
+ werden (siehe 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "tab:Lastprofil_Szenario_1"
 
+\end_inset
+
+).
 \end_layout
 
 \end_inset
@@ -1942,6 +2088,19 @@ Ist
 Verschiedene Weiterleitungsvarianten können simuliert und analysiert werden.
  Statistiken können zudem generiert werden, was den Vergleich der Varianten
  untereinander vereinfacht.
+ Die Weiterleitungsvarianten sind in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Mechanismen-zur-Trafficregelung"
+
+\end_inset
+
+ aufgeführt.
+ Auf dem Datenträger, der dieser Dokumentation beiliegt, sind die Konfiguratione
+n der Simulationen enthalten.
+ Die Simulationen können somit erneut, oder aber auch mit neuen modifizierten
+ Parametern durchgeführt werden.
+ 
 \begin_inset Newline newline
 \end_inset
 
@@ -1965,7 +2124,23 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
+Die Konfigurationen der einzelnen Simulationen können dem Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Simulation"
 
+\end_inset
+
+ entnommen werden.
+ Deren Resultate und Interpretationen sind ausführlich dokumentiert in Kapitel
+ 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "chap:Resultate"
+
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1982,7 +2157,7 @@ Nachweis
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Nachweis: Simulationen durchführ- und interpretierbar
+Nachweis: Simulationen durchführbar und interpretierbar
 \end_layout
 
 \end_inset
@@ -2013,21 +2188,39 @@ reference "sec:Erfüllung-der-Aufgabenstellung"
 
 \begin_layout Standard
 Nach einigen Anlaufschwierigkeiten (Code-Refactoring und fehlendem Quellcode
- bei der vorherigen Arbeit) ging die Einarbeitungsphase in OMNeT++ und IET
- gut von Statten.
+ bei der vorherigen Arbeit), ging die Einarbeitungsphase in OMNeT++ und
+ IET gut von Statten.
  Auch die Struktur der Dokumentation war schnell aufgebaut.
  Ein sehr grosser Vorteil bei unserem Vorgehen war, dass die Dokumentation
  parallel zu den Programmierarbeiten fortlaufend gepflegt wurde und somit
  keine Informationen verloren gingen.
- 
 \end_layout
 
 \begin_layout Standard
-Neben der fortlaufenden Pflegung der Dokumentation erstellten wir für das
+Was den Implementationsstand bei Drucklegung dieser Arbeit betrifft, ist
+ die Modellierung eines HSR-Knotens gemäss Aufgbenstellung so weit abgeschlossen.
+ Was derzeit noch nicht fertig implementiert ist, ist die Modellierung einer
+ RedBox mit Interlink-Ports.
+ Die Implementation wurde teilweise parallel zum HSR-Knoten erstellt, ist
+ jedoch noch nicht abgeschlossen.
+ Wenn versucht wird eine RedBox in eine Simulation einzubauen wird derzeit
+ noch eine Exception geworfen (NotYetImplemented).
+\end_layout
+
+\begin_layout Standard
+Neben der fortlaufenden Pflege der Dokumentation erstellten wir für das
  Projekt ein Wiki, in dem die neusten Erkenntnisse und Besprechungen festgehalte
-n wurden und unser Betreuer jederzeit einsehen konnte.
+n wurden und die unser Betreuer jederzeit einsehen konnte.
  Für die Entwicklung der Implementation und der Dokumentation verwendeten
  wir ein Versionsverwaltungssystem (
+\begin_inset Quotes fld
+\end_inset
+
+Git
+\begin_inset Quotes frd
+\end_inset
+
+ mit 
 \begin_inset Quotes fld
 \end_inset
 
@@ -2035,9 +2228,9 @@ GitHub
 \begin_inset Quotes frd
 \end_inset
 
-).
- So wusste jeder beim Projekt Involvierte zu jeder Zeit was zu tun ist und
- was noch getan werden muss.
+ als Frontend).
+ So wussten alle Projektbeteiligten zu jeder Zeit was zu tun ist und was
+ noch getan werden muss.
 \end_layout
 
 \begin_layout Standard
@@ -2057,7 +2250,8 @@ Gerne würden wir eine weitere Arbeit in diesem Themengebiet und mit den
 
 \begin_layout Standard
 Zusammenfassend kann ein positives Fazit gezogen werden: Das Projekt wurde
- mit grossem Interesse erarbeitet und trägt unserer Meinung nach auch Früchte.
+ mit grossem Interesse erarbeitet und wurde unserer Meinung nach erfolgreich
+ umgesetzt.
 \end_layout
 
 \begin_layout Section

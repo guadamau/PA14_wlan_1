@@ -2633,7 +2633,7 @@ heduler.cc}
 \end_layout
 
 \begin_layout Section
-Scheduler: Mechanismen zur Queueverwaltung
+Scheduler: Mechanismen zur Queueverwaltung 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Scheduler:-Mechanismen-zur"
@@ -2663,7 +2663,7 @@ s_Scheduler.cc}
 \end_layout
 
 \begin_layout Section
-Scheduler: Zeitschlitzverfahren
+Scheduler: Zeitschlitzverfahren 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Scheduler:-Zeitschlitzverfahren"
@@ -2693,7 +2693,7 @@ eduler.cc}
 \end_layout
 
 \begin_layout Section
-CPU: Lastgenerator
+CPU: Lastgenerator 
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:CPU-Lastgenerator"
