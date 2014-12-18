@@ -1468,6 +1468,11 @@ reference "sec:CPU-Lastgenerator"
  eingesehen werden.
 \end_layout
 
+\begin_layout Standard
+Im Rahmen dieser Arbeit wurden bei den Simulationen nur Lastgeneratoren
+ verwenden die eine Ko
+\end_layout
+
 \begin_layout Subsubsection
 Konstante Framerate
 \end_layout
@@ -1569,7 +1574,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Hat das Konfigurations-XML 
 \end_layout
 
 \end_inset

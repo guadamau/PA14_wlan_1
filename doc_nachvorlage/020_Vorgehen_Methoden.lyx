@@ -81,36 +81,6 @@
 Vorgehen / Methoden
 \end_layout
 
-\begin_layout Itemize
-(Beschreibt die Grundüberlegungen der realisierten Lösung (Konstruktion/Entwurf)
- und die Realisierung als Simulation, als Prototyp oder als Software-Komponente)
-\end_layout
-
-\begin_layout Itemize
-(Definiert Messgrössen, beschreibt Mess- oder Versuchsaufbau, beschreibt
- und dokumentiert Durchführung der Messungen/Versuche)
-\end_layout
-
-\begin_layout Itemize
-(Experimente)
-\end_layout
-
-\begin_layout Itemize
-(Lösungsweg)
-\end_layout
-
-\begin_layout Itemize
-(Modell)
-\end_layout
-
-\begin_layout Itemize
-(Tests und Validierung)
-\end_layout
-
-\begin_layout Itemize
-(Theoretische Herleitung der Lösung)
-\end_layout
-
 \begin_layout Section
 Aufbau der Simulation
 \end_layout

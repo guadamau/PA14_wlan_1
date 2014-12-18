@@ -132,27 +132,6 @@ High-availability Seamless Redundancy (HSR)
 \end_layout
 
 \begin_layout Standard
-\begin_inset Note Comment
-status open
-
-\begin_layout Plain Layout
-Die Grundlagen zum Beschrieb und zur Funktionsweise des HSR-Protokolls wurden
- alle der bestehenden Vertiefungsarbeit 
-\begin_inset CommandInset citation
-LatexCommand cite
-key "VA_HSR_Simulation"
-
-\end_inset
-
- entnommen.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
 HSR ist ein Ethernet-Redundanz-Protokoll, welches im Fehlerfall keine Ausfallzei
 t hat und es erlaubt, Geräte zusammen zu schliessen, um ein kosten-effektives
  Netzwerk betreiben zu können.

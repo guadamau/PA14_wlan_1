@@ -1542,7 +1542,10 @@ reference "sub:Netzwerkaufbau"
 
 \end_inset
 
-) eine maximale Abweichung des herkömmlichen Intervalls definieren.
+) eine maximale Abweichung des herkömmlichen Intervalls definiert werden.
+ Somit wird auf das definierte Intervall ein Wert aufsummiert, der sich
+ zwischen 0 und dem epsilon-Wert bewegt und mit einer Zufallsfunktion zustande
+ kommt.
 \begin_inset Newline newline
 \end_inset
 
