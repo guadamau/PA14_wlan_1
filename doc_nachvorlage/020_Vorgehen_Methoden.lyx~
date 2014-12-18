@@ -81,36 +81,6 @@
 Vorgehen / Methoden
 \end_layout
 
-\begin_layout Itemize
-(Beschreibt die Grundüberlegungen der realisierten Lösung (Konstruktion/Entwurf)
- und die Realisierung als Simulation, als Prototyp oder als Software-Komponente)
-\end_layout
-
-\begin_layout Itemize
-(Definiert Messgrössen, beschreibt Mess- oder Versuchsaufbau, beschreibt
- und dokumentiert Durchführung der Messungen/Versuche)
-\end_layout
-
-\begin_layout Itemize
-(Experimente)
-\end_layout
-
-\begin_layout Itemize
-(Lösungsweg)
-\end_layout
-
-\begin_layout Itemize
-(Modell)
-\end_layout
-
-\begin_layout Itemize
-(Tests und Validierung)
-\end_layout
-
-\begin_layout Itemize
-(Theoretische Herleitung der Lösung)
-\end_layout
-
 \begin_layout Section
 Aufbau der Simulation
 \end_layout
@@ -694,8 +664,20 @@ Alle Frames, die beim DANH-Knoten ankommen oder von dessen CPU generiert
 \end_layout
 
 \begin_layout Standard
-Des Weiteren verursacht ein Knoten eine Verzögerung von 6us pro Frame (Vorgabe
- von unserem Betreuer, siehe Kapitel 
+Des Weiteren verursacht ein Knoten eine Verzögerung von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$6 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ pro Frame (Vorgabe von unserem Betreuer, siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Kalenderwoche-49:-04.12.2014"
