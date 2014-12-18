@@ -3325,11 +3325,8 @@ reference "fig:scen1_1_4_low_his_88"
 
  kann man sehen, dass mit einer Limitierung von 76 Kbit/s die Frames weitaus
  längere Übertragungszeiten haben.
- Das Maximum liegt hier bei 
-ca.
+ Das Maximum liegt hier bei ca.
  
-\lang ngerman
-
 \begin_inset ERT
 status open
 
@@ -3349,7 +3346,7 @@ status open
 
 \begin_layout Plain Layout
 
-$ 82000 
+$82000 
 \backslash
 mu s$
 \end_layout
@@ -4210,7 +4207,7 @@ status open
 \begin_inset Graphics
 	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_High_Ring.svg
 	display false
-	scale 60
+	scale 50
 
 \end_inset
 

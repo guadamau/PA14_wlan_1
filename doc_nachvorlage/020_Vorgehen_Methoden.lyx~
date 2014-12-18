@@ -2249,7 +2249,20 @@ Node2
 \begin_layout Standard
 Des Weiteren ist bei der Zeit folgendes zu beachten: Der Zeitpunkt, zu dem
  ein Frame generiert wird ist nicht der Sendezeitpunkt, da jeder Knoten
- intern einen Delay von 6us hat (siehe Kapitel 
+ intern einen Delay von 
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+$6 
+\backslash
+mu s$
+\end_layout
+
+\end_inset
+
+ hat (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sub:Definition-der-Knoten"
@@ -5068,7 +5081,7 @@ LOW
 
 \begin_layout Plain Layout
 Die Phasengrösse wird auf 10000 Bytes gesetzt, was bei einer gegebenen Übertragu
-ngsrate von 100Mbit/s 0.0008 beträgt.
+ngsrate von 100Mbit/s 0.0008s beträgt.
  Das heisst, das alle 0.0016s für 0.0008s lang 
 \begin_inset Quotes fld
 \end_inset

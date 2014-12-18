@@ -81,28 +81,80 @@
 Diskussion und Ausblick
 \end_layout
 
-\begin_layout Itemize
-Bespricht die erzielten Ergebnisse bezüglich ihrer Erwartbarkeit, Aussagekraft
- und Relevanz 
+\begin_layout Section
+Besprechung der Ergebnisse
 \end_layout
 
-\begin_layout Itemize
-Interpretation und Validierung der Resultate
+\begin_layout Standard
+Die umfangreichen Ergebnisse sind aufgrund der ausführlichen Überprüfung
+ der Implementation (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Überprüfung-der-Implementation"
+
+\end_inset
+
+) aussagekräftig.
+ Des Weiteren traten auch erwartete Ergebnisse ein, wie z.B., dass mit 17
+ MUs das Netzwerk an seine Grenzen stösst (siehe Simulation in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Simulation-1.7:-Maximale"
+
+\end_inset
+
+).
+ Die Simulation von IET funktioniert wie erwartet und die Preemption von
+ Frames der Priorität 
+\begin_inset Quotes fld
+\end_inset
+
+HIGH
+\begin_inset Quotes frd
+\end_inset
+
+ und 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+ kann zeitlich simuliert werden.
 \end_layout
 
-\begin_layout Itemize
-Rückblick auf Aufgabenstellung, erreicht bzw.
- nicht erreicht
+\begin_layout Standard
+Anhand der aus den Simulationen resultierenden Graphen lassen sich Annahmen
+ bestätigen, weisen einen verständlichen Ablauf auf und lassen auf klare
+ Aussagen schliessen.
+ Mittels dem vom unserem Betreuer vorgegebenen Anwendungsfall (siehe Besprechung
+ in Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sub:Kalenderwoche-46:-13.11.2014"
+
+\end_inset
+
+) erlangen die Simulationen eine praxisnahe Relevanz.
+ Es können Vorgaben zum Netzwerk, den Mechanismen und dem Lastprofil parametrisi
+ert werden, um den Optimierungsbedarf heraus zu kristallisieren.
 \end_layout
 
-\begin_layout Itemize
-Legt dar, wie an die Resultate (konkret vom Industriepartner oder weiteren
- Forschungsarbeiten; allgemein) angeschlossen werden kann; legt dar, welche
- Chancen die Resultate bieten
+\begin_layout Standard
+Mit den Daten, die der Arbeit auf einem USB-Stick beigelegt sind, können
+ die Simulationen selbst durchgeführt und verifiziert werden.
 \end_layout
 
 \begin_layout Section
-Erfüllung der Aufgabenstellung
+Erfüllung der Aufgabenstellung 
+\begin_inset CommandInset label
+LatexCommand label
+name "sec:Erfüllung-der-Aufgabenstellung"
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1468,6 +1520,11 @@ reference "sec:CPU-Lastgenerator"
  eingesehen werden.
 \end_layout
 
+\begin_layout Standard
+Im Rahmen dieser Arbeit wurden bei den Simulationen nur Lastgeneratoren
+ verwenden die eine Ko
+\end_layout
+
 \begin_layout Subsubsection
 Konstante Framerate
 \end_layout
@@ -1569,7 +1626,7 @@ Nachweis
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Hat das Konfigurations-XML 
 \end_layout
 
 \end_inset
@@ -1936,6 +1993,110 @@ Nachweis: Simulationen durchführ- und interpretierbar
 \end_inset
 
 
+\end_layout
+
+\begin_layout Section
+Rückblick
+\end_layout
+
+\begin_layout Standard
+Alle Anforderungen der Aufgabenstellung wurden aus unserer Sicht erreicht
+ und überprüft (siehe Kapitel 
+\begin_inset CommandInset ref
+LatexCommand vref
+reference "sec:Erfüllung-der-Aufgabenstellung"
+
+\end_inset
+
+).
+\end_layout
+
+\begin_layout Standard
+Nach einigen Anlaufschwierigkeiten (Code-Refactoring und fehlendem Quellcode
+ bei der vorherigen Arbeit) ging die Einarbeitungsphase in OMNeT++ und IET
+ gut von Statten.
+ Auch die Struktur der Dokumentation war schnell aufgebaut.
+ Ein sehr grosser Vorteil bei unserem Vorgehen war, dass die Dokumentation
+ parallel zu den Programmierarbeiten fortlaufend gepflegt wurde und somit
+ keine Informationen verloren gingen.
+\end_layout
+
+\begin_layout Standard
+Die Besprechungen mit unserem Betreuer erwiesen sich als interessant und
+ lehrreich.
+ Des Weiteren wurde die Arbeit zwischen Studenten und Dozenten auf einer
+ äusserst kooperativen Ebene umgesetzt und diskutiert.
+ Schade ist, dass solche Arbeiten während eines ereignisreichen Semesters
+ durchgeführt werden müssen und somit zu wenig Zeit für allfällige Detailpflege
+ und weitere Simulationen übrig bleibt.
+\end_layout
+
+\begin_layout Standard
+Gerne würden wir eine weitere Arbeit in diesem Themengebiet und mit den
+ Teilnehmern dieses Projektes in Anlauf nehmen.
+\end_layout
+
+\begin_layout Standard
+Zusammenfassend kann ein positives Fazit gezogen werden: Das Projekt wurde
+ mit grossem Interesse erarbeitet und trägt unserer Meinung nach auch Früchte.
+\end_layout
+
+\begin_layout Section
+Ausblick
+\end_layout
+
+\begin_layout Standard
+Mittels der implementierten Simulationsumgebung ist es möglich, IET in HSR-Netzw
+erken zu simulieren, wobei es sich bei IET um einen Standard handelt, der
+ bei Drucklegung dieser Arbeit noch immer im Entwicklungsstadium ist.
+ 
+\end_layout
+
+\begin_layout Standard
+Die Implementierung würde sich beliebig erweitern lassen.
+ Wir sehen das Potenzial in der Umsetzung von Verbindungen zwischen HSR-
+ und Nicht-HSR-Netzwerken sowie der Kopplung verschiedener HSR-Ringe.
+\end_layout
+
+\begin_layout Standard
+Des Weiteren könnten zusätzliche Mechanismen entwickelt und in Simulationen
+ beobachtet werden.
+ Zum Beispiel wäre die Umsetzung eines Schedulers mit einem ähnlichen Verfahren
+ zum 
+\begin_inset Quotes fld
+\end_inset
+
+Completely Fair Scheduler (CFS)
+\begin_inset Quotes frd
+\end_inset
+
+ innerhalb der gleichpriorisierten Queues denkbar.
+\end_layout
+
+\begin_layout Standard
+Mit der hier entwickelten Implementation könnte man selbstverständlich weitere
+ Szenarien und Simulationen konfigurieren und durchführen.
+ Dank der Daten, die dieser Arbeit beliegen, ist dies problemlos möglich.
+\end_layout
+
+\begin_layout Itemize
+Bespricht die erzielten Ergebnisse bezüglich ihrer Erwartbarkeit, Aussagekraft
+ und Relevanz 
+\end_layout
+
+\begin_layout Itemize
+Interpretation und Validierung der Resultate
+\end_layout
+
+\begin_layout Itemize
+Rückblick auf Aufgabenstellung, erreicht bzw.
+ nicht erreicht
+\end_layout
+
+\begin_layout Itemize
+Legt dar, wie an die Resultate (konkret vom Industriepartner oder weiteren
+ Forschungsarbeiten; allgemein) angeschlossen werden kann; legt dar, welche
+ Chancen die Resultate bieten
 \end_layout
 
 \end_body

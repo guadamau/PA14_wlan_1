@@ -3325,11 +3325,8 @@ reference "fig:scen1_1_4_low_his_88"
 
  kann man sehen, dass mit einer Limitierung von 76 Kbit/s die Frames weitaus
  längere Übertragungszeiten haben.
- Das Maximum liegt hier bei 
-ca.
+ Das Maximum liegt hier bei ca.
  
-\lang ngerman
-
 \begin_inset ERT
 status open
 
@@ -3349,7 +3346,7 @@ status open
 
 \begin_layout Plain Layout
 
-$ 82000 
+$82000 
 \backslash
 mu s$
 \end_layout
@@ -4210,7 +4207,7 @@ status open
 \begin_inset Graphics
 	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_High_Ring.svg
 	display false
-	scale 60
+	scale 55
 
 \end_inset
 
@@ -6092,8 +6089,83 @@ LOW
 \begin_layout Standard
 Auch hier ist die hohe Netzwerkauslastung erkennbar.
  Allerdings kann die Queue zeitweise ganz abgebaut werden.
- Dies ist so aufgrund der Zeitintervalle, in denen TCP-ähnlicher Traffic
- generiert wird.
+ Dies ist so aufgrund der Häufigkeit, in der TCP-ähnlicher Traffic generiert
+ wird.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\noindent
+\align center
+\begin_inset Graphics
+	filename _img/simulation/Scenario_01/1_8_Max_Auslastung_TCP_similar/Queue_MU5_Low_Internal.svg
+	display false
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Szenario 1 / Simulation 1.8 / Knoten 
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+: Grösse der 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Queues bei beiden Ausgängen
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Quotes fld
+\end_inset
+
+MU5
+\begin_inset Quotes frd
+\end_inset
+
+ generiert den TCP-ähnlichen Traffic.
+ Die 
+\begin_inset Quotes fld
+\end_inset
+
+LOW
+\begin_inset Quotes frd
+\end_inset
+
+-Frames stauen sich in der Queue an, weil auf dem Ring ein enormes Datenaufkomme
+n herrscht, das durch die höher priorisierten Frames der anderen Knoten
+ verursacht wird.
 \end_layout
 
 \begin_layout Subsubsection
