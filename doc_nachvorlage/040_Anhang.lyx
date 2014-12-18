@@ -2393,6 +2393,8 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 Documentation
 \end_layout
 
@@ -2403,6 +2405,10 @@ Documentation
 
 \begin_layout Plain Layout
 Beinhaltet diese Dokumentation als PDF-Datei und als Quellcode im LyX-Format
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2413,6 +2419,8 @@ Beinhaltet diese Dokumentation als PDF-Datei und als Quellcode im LyX-Format
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 PA14_wlan_1.vdi
 \end_layout
 
@@ -2430,6 +2438,10 @@ reference "sec:Starten-der-virtuellen"
 \end_inset
 
 )
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -2440,6 +2452,8 @@ reference "sec:Starten-der-virtuellen"
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 SourceCode_Simulation
 \end_layout
 
@@ -2450,8 +2464,50 @@ SourceCode_Simulation
 
 \begin_layout Plain Layout
 Beinhaltet den Source-Code dieses Projekts als C++-Code und OMNeT++-Files
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
+\begin_layout Plain Layout
+Folgende Ordner befinden sich innerhalb dieses Verzeichnisses:
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+omnetpp-4.5
+\series default
+: OMNeT++Version 4.5
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+Workspace: 
+\series default
+Workspace zur Integration in OMNeT++
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\series bold
+inet
+\series default
+: INET Framework von OMNeT++
+\end_layout
+
+\begin_layout Itemize
+
+\series bold
+PA14_wlan_1
+\series default
+: Programmierte Projektarbeit von Mauro Guadagnini und Prosper Leibundgut
+\end_layout
+
+\end_deeper
 \end_inset
 </cell>
 </row>
