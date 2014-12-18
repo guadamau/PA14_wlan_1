@@ -2019,6 +2019,21 @@ Nach einigen Anlaufschwierigkeiten (Code-Refactoring und fehlendem Quellcode
  Ein sehr grosser Vorteil bei unserem Vorgehen war, dass die Dokumentation
  parallel zu den Programmierarbeiten fortlaufend gepflegt wurde und somit
  keine Informationen verloren gingen.
+ Neben der fortlaufenden Pflegung der Dokumentation erstellten wir für das
+ Projekt ein Wiki, in dem die neusten Erkenntnisse und Besprechungen festgehalte
+n wurden und unser Betreuer jederzeit einsehen konnte.
+ Für die Entwicklung der Implementation und der Dokumentation verwendeten
+ wir ein Versionsverwaltungssystem (
+\begin_inset Quotes fld
+\end_inset
+
+GitHub
+\begin_inset Quotes frd
+\end_inset
+
+).
+ So wusste jeder beim Projekt Involvierte zu jeder Zeit was zu tun ist und
+ was noch getan werden muss.
 \end_layout
 
 \begin_layout Standard
@@ -2075,28 +2090,8 @@ Completely Fair Scheduler (CFS)
 
 \begin_layout Standard
 Mit der hier entwickelten Implementation könnte man selbstverständlich weitere
- Szenarien und Simulationen konfigurieren und durchführen.
+ Szenarien und Simulationen konfigurieren, durchführen und analysieren.
  Dank der Daten, die dieser Arbeit beliegen, ist dies problemlos möglich.
-\end_layout
-
-\begin_layout Itemize
-Bespricht die erzielten Ergebnisse bezüglich ihrer Erwartbarkeit, Aussagekraft
- und Relevanz 
-\end_layout
-
-\begin_layout Itemize
-Interpretation und Validierung der Resultate
-\end_layout
-
-\begin_layout Itemize
-Rückblick auf Aufgabenstellung, erreicht bzw.
- nicht erreicht
-\end_layout
-
-\begin_layout Itemize
-Legt dar, wie an die Resultate (konkret vom Industriepartner oder weiteren
- Forschungsarbeiten; allgemein) angeschlossen werden kann; legt dar, welche
- Chancen die Resultate bieten
 \end_layout
 
 \end_body
