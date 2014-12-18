@@ -27,6 +27,14 @@ RedBoxSwitch::~RedBoxSwitch()
 void
 RedBoxSwitch::initialize()
 {
+    /*
+     * REDBOX IS NOT YET FULLY IMPLEMENTED!
+     * Throw an error if anybody wants to use it in this state
+     */
+    ev.printfmsg("RedBox not yet implemented! Throwing cRuntimeError now! \n");
+    throw cRuntimeError("RedBox not yet implemented! \n");
+    endSimulation();
+
     /* Call initialize of the base class. */
     HsrSwitch::initialize();
     
