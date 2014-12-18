@@ -110,8 +110,8 @@ name "sec:Offizielle-Aufgabenstellung"
 \end_layout
 
 \begin_layout Standard
-In Anlagen für die Automatisierung der elektrischen Energieversorg hat sich
- Ethernet gut etabliert.
+In Anlagen für die Automatisierung der elektrischen Energieversorgung hat
+ sich Ethernet gut etabliert.
  Ein Anwendungsfeld ist jedoch noch mit Unsicherheiten behaftet: der Prozessbus
  von Unterstationen.
  Bei dieser Anwendung werden extrem viele Messdaten erfasst und übertragen.
@@ -810,7 +810,7 @@ Ab
 \begin_inset Quotes fld
 \end_inset
 
-Ready State
+Steady State
 \begin_inset Quotes frd
 \end_inset
 
@@ -841,24 +841,24 @@ reference "sub:Kalenderwoche-46:-13.11.2014"
 
 \end_inset
 
-), die permanent Messwerte via Multicast versenden sollte so guet wie kein
+), die permanent Messwerte via Multicast versenden sollte so gut wie kein
  Platz mehr auf dem Ethernet frei sein.
 \end_layout
 
 \begin_layout Itemize
-Interval, in dem die Messwerte versendet werden, variiert von MU zu MU (Phase
- beginnt nicht überall zur exakt selben Zeit)
+Intervall, in dem die Messwerte versendet werden, variiert von MU zu MU
+ (Phase beginnt nicht überall zur exakt selben Zeit)
 \end_layout
 
 \begin_deeper
 \begin_layout Itemize
-Beim Interval eine Zufallszeit dazu- oder abzählen, sodass der Interval
+Beim Intervall eine Zufallszeit dazu- oder abzählen, sodass der Intervall
  nicht konstant ist
 \end_layout
 
 \begin_layout Itemize
 Delayunterschied zu Fall, an dem die MUs gleichzeitig und mit exakt selbem
- Interval senden untersuchen
+ Intervall senden untersuchen
 \end_layout
 
 \end_deeper
@@ -873,7 +873,7 @@ Einfluss TCP (High-Frame wird angestaut, wenn gerade ein Low-Frame gesendet
 \end_layout
 
 \begin_layout Itemize
-Was wenn TCP Löcuken zwischen High-Frames schamlos nutzt?
+Was wenn TCP Lücken zwischen High-Frames schamlos nutzt?
 \end_layout
 
 \begin_deeper
@@ -1127,7 +1127,7 @@ name "chap:Anleitung-zur-Simulationsumgebun"
 
 \begin_layout Standard
 Hierbei handelt es sich um eine grobe Anleitung, wie man die Simulationsumgebung
- mit den beigelieferten Daten ausführen, konfigurieren und dessen Resultate
+ mit den bei gelieferten Daten ausführen, konfigurieren und dessen Resultate
  analysieren kann.
  Der genaue Umgang mit OMNeT++ ist in dessen offiziellen User Manual beschrieben
  
@@ -1465,8 +1465,8 @@ omnetpp.ini
 \end_inset
 
  vermerkt sind.
- Bei den Zeilen mit einem #-Symbol am Anfang wird die dort gesetze Konfiguration
- nicht angewandt (derzeit als Kommentar gesetzt).
+ Bei den Zeilen mit einem #-Symbol am Anfang wird die dort gesetzte Konfiguratio
+n nicht angewandt (derzeit als Kommentar gesetzt).
 \end_layout
 
 \begin_layout Subsection
@@ -2395,6 +2395,7 @@ status open
 \begin_layout Plain Layout
 
 \series bold
+\lang german-ch
 Documentation
 \end_layout
 
@@ -2540,7 +2541,7 @@ Codeausschnitte
 \end_layout
 
 \begin_layout Section
-Switch: Zuteiltung Frame von CPU an beide Ports nach Aussen
+Switch: Zuteilung Frame von CPU an beide Ports nach Aussen
 \begin_inset CommandInset label
 LatexCommand label
 name "sec:Switch:-Zuteiltung-Frame"

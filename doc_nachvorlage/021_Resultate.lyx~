@@ -89,7 +89,7 @@ name "chap:Resultate"
 \end_layout
 
 \begin_layout Standard
-Die Resulate der Simulationen aus Kapitel 
+Die Resultate der Simulationen aus Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
 reference "sec:Simulation"
@@ -152,7 +152,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Beispiel eines Histograms für Frames einer bestimmten Priorität
+Beispiel eines Histogramms für Frames einer bestimmten Priorität
 \end_layout
 
 \end_inset
@@ -328,7 +328,7 @@ unterbrochen
 \end_inset
 
 , wird dies vermerkt.
- So kann man sehen, zu welchem Zeitpunkt wieviele Unterbrechungen stattgefunden
+ So kann man sehen, zu welchem Zeitpunkt wie viele Unterbrechungen stattgefunden
  haben.
  Dies ist bei der jeweiligen Simulation im Graphen im entsprechenden Unterkapite
 l mit dem Titel 
@@ -357,7 +357,7 @@ Die Werte werden lediglich innerhalb des sogenannten Steady-States aufgezeichnet
 \end_layout
 
 \begin_layout Standard
-In diesem Kapitel werden nicht die Resulate aller Knoten im Netzwerk angegeben
+In diesem Kapitel werden nicht die Resultate aller Knoten im Netzwerk angegeben
  und ausgewertet, da viele Knoten das selbe Verhalten haben.
  Anhand der Dateien, die sich auf dem USB-Stick befinden, der dieser Arbeit
  beiliegt, hat man die Möglichkeit, die entsprechende Simulation nochmals
@@ -371,7 +371,7 @@ Szenario 1: Substation Automation
 \begin_layout Standard
 Für dieses Szenario werden die Werte ab dem Zeitpunkt t=0.02s bis zu tstop=0.5
  aufgezeichnet.
- Dieser Bereich beeinhaltet für dieses Szenario garantiert nur das Verhalten
+ Dieser Bereich beinhaltet für dieses Szenario garantiert nur das Verhalten
  innerhalb des Steady-States.
 \end_layout
 
@@ -386,8 +386,8 @@ Für dieses Szenario werden die Werte ab dem Zeitpunkt t=0.02s bis zu tstop=0.5
 \end_layout
 
 \begin_layout Standard
-Je nach Mechanismus verhalten sich die Queues andersartig, während die Chrakteri
-stiken der Queues mit Express-Frames immer ähnlich verlaufen.
+Je nach Mechanismus verhalten sich die Queues andersartig, während die Charakter
+istiken der Queues mit Express-Frames immer ähnlich verlaufen.
  Lediglich die Reihenfolge der Express-Frames untereinander und der exakte
  Zeitpunkt der 
 \begin_inset Quotes fld
@@ -2338,7 +2338,7 @@ name "sub:Simulation-1.4:-Vortritt"
 \end_layout
 
 \begin_layout Standard
-Die Zuflusslimitierung wurde auf ein maximum von 88 Kbit/s gesetzt.
+Die Zuflusslimitierung wurde auf ein Maximum von 88 Kbit/s gesetzt.
  Im weiteren Verlauf wird das Ergebnis mit Simulationen, die eine Zuflusslimitie
 rung von 76 und 100 Kbit/s gesetzt haben, verglichen.
 \end_layout
@@ -4207,7 +4207,7 @@ status open
 \begin_inset Graphics
 	filename _img/simulation/Scenario_01/1_5_Reissverschluss/MU1_High_Ring.svg
 	display false
-	scale 55
+	scale 50
 
 \end_inset
 
@@ -4714,8 +4714,7 @@ HIGH
 \end_layout
 
 \begin_layout Standard
-Der Zeitschlitzmechanismus ist hier aufgrund der grossen Verteilung schön
- erkennbar.
+Der Zeitschlitzmechanismus ist hier aufgrund der grossen Verteilung erkennbar.
  Hier gibt es 
 \begin_inset Quotes fld
 \end_inset
@@ -4836,7 +4835,7 @@ LOW
  Jedoch wird dieser Platz auch von Express-Frames beansprucht, weshalb sich
  die Frames länger als bei den vorherigen Simulationen ohne Zuflusslimitierung
  verzögern.
- Desweiteren entstehen die längeren Verzögerungszeiten auch dadurch, dass
+ Des Weiteren entstehen die längeren Verzögerungszeiten auch dadurch, dass
  die 
 \begin_inset Quotes fld
 \end_inset

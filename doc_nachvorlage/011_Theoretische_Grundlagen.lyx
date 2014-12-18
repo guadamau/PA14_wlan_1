@@ -94,7 +94,7 @@ OMNeT++
 
 \begin_layout Standard
 OMNeT++ ist ein C++-Framework, welches es erleichtert, Netzwerke und all
- deren Kompnenten mit einem sehr hohen Detaillierungsgrad zu modellieren
+ deren Komponenten mit einem sehr hohen Detaillierungsgrad zu modellieren
  und den Netzwerk-Datenverkehr zu simulieren.
  Die Simulationen können grafisch dargestellt werden.
  Zur Auswertung der Simulationen steht eine grosse Auswahl an verschiedenen
@@ -754,7 +754,7 @@ key "Draft_Standart"
 \end_inset
 
 .
- Gibt es dann ein Fragment mit dem FragCount Wert 3, so hat das nächjste
+ Gibt es dann ein Fragment mit dem FragCount Wert 3, so hat das nächste
  Frame wieder den FragCount-Wert 0.
  Mittels FragCount-Feld wird davor geschützt, dass falsche Frames zusammengesetz
 t werden wenn bis zu 3 Fragmente verloren gegangen sind.

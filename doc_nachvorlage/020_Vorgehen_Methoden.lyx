@@ -197,7 +197,7 @@ reference "sub:Mechanismen-zur-Trafficregelung"
 
 \end_inset
 
-) implementiert sind und die Frames priorisiert abhandelt.
+) implementiert sind und die Frames priorisiert abgehandelt werden.
  Der Scheduler ist innerhalb des Switches implementiert und erhält vom Switch
  Zugang zu dessen Ausgängen, die er benötigt und die Frames, die er für
  seinen Ausgang zu koordinieren hat.
@@ -543,7 +543,7 @@ name "sub:Definition-der-Knoten"
 \begin_layout Standard
 Jede Komponente eines Knotens (Netzwerkinterface, Switch, etc.) ist eine
  eigene C++-Klasse, welche die jeweiligen Funktionen enthält.
- Ein Knoten wird dann aus diesen Komponenten zusammengesetzt,be indem eine
+ Ein Knoten wird dann aus diesen Komponenten zusammengesetzt, indem eine
  sogenannte NED-Datei (NED steht für Network Description) erstellt wird,
  in welcher die Komponenten initialisiert und verbunden werden 
 \begin_inset CommandInset citation
@@ -553,7 +553,7 @@ key "OMNET_USERGUIDE"
 \end_inset
 
 .
- Der Knoten selbst exisitert nicht als C++-Klasse, sondern lediglich als
+ Der Knoten selbst existiert nicht als C++-Klasse, sondern lediglich als
  NED-Datei.
 \end_layout
 
@@ -1995,8 +1995,8 @@ Generierung von Traffic (Lastprofile)
 \end_layout
 
 \begin_layout Standard
-In jedem Node ist ein Generator implementiert, welcher mittels Konfigurationspar
-ameter Frames in verschiedenen Folgemustern generieren kann.
+In jedem Knoten ist ein Generator implementiert, welcher mittels Konfigurationsp
+arameter Frames in verschiedenen Folgemustern generieren kann.
  In diesem Kapitel werden verschiedene Muster von Traffic (Lastprofile)
  aufgezeigt, die in der Simulation generiert werden können.
 \end_layout
@@ -2162,7 +2162,7 @@ Verhaltensüberprüfung
 
 \begin_layout Standard
 Für den Nachweis der Tests wird der Nachrichtenverlauf der jeweiligen Simulation
- verwendet oder eine Grafik, die den Queueverlauf (wann sind wieviele Frames
+ verwendet oder eine Grafik, die den Queueverlauf (wann sind wie viele Frames
  mit welcher Eigenschaft bei einem Ausgang vorhanden) aufweist, angezeigt.
  Wie diese Grafiken zu lesen sind wird in Kapitel 
 \begin_inset CommandInset ref
@@ -3861,7 +3861,7 @@ LOW
 \end_inset
 
  soll limitiert werden können.
- Als Limite kann eine Anzahl an Bytes, die pro Sekunde von 
+ Als Limit kann eine Anzahl an Bytes, die pro Sekunde von 
 \begin_inset Quotes fld
 \end_inset
 
@@ -3983,7 +3983,7 @@ Node2
 \begin_inset Quotes frd
 \end_inset
 
- mit 1000 Bytes (Generiert ab t=0.001 mit einem Interval von 0.001 bis zu
+ mit 1000 Bytes (Generiert ab t=0.001 mit einem Intervall von 0.001 bis zu
  tstop=0.051)
 \end_layout
 
@@ -4190,7 +4190,7 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
- ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051 generiert:
+ ab t=0.001 mit einem Intervall von 0.0001 bis zu tstop=0.051 generiert:
 \end_layout
 
 \begin_layout Itemize
@@ -4635,7 +4635,7 @@ Soll
 \begin_inset Text
 
 \begin_layout Plain Layout
-Abwechslungsweise soll ein Knoten mal dem gleichpriorisierten Frame vom
+Abwechslungsweise soll ein Knoten mal dem gleich priorisierten Frame vom
  Ring und mal von Aussen den Vortritt gewähren (siehe Kapitel 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -4711,7 +4711,7 @@ LOW
 \begin_inset Quotes frd
 \end_inset
 
- ab t=0.001 mit einem Interval von 0.0001 bis zu tstop=0.051 generiert (selbes
+ ab t=0.001 mit einem Intervall von 0.0001 bis zu tstop=0.051 generiert (selbes
  Lastprofil wie beim vorherigen Test, siehe Tabelle 
 \begin_inset CommandInset ref
 LatexCommand vref
@@ -5238,7 +5238,7 @@ Der Aufbau dieses Szenarios ist ein HSR-Ring mit DANH-Knoten.
 
 \begin_layout Standard
 Im HSR-Ring befinden sich 14 sogenannte Measurement Units (MU), welche die
- Messwerte mit Sensoren erfassen und diesemit Zeitstempel und sonstigen
+ Messwerte mit Sensoren erfassen und diese mit Zeitstempel und sonstigen
  Steuerinformationen in ein Frame packen.
  Ein solches Frame hat eine Gesamtgrösse von 160 Bytes (inklusive Header)
  und die Priorität 
@@ -5260,7 +5260,7 @@ HIGH
 \begin_layout Standard
 Neben den erwähnten Frames gibt es spontane Einzelmeldungen (Express-Frames,
  auch Multicast), welche selten und zufällig vorkommen.
- Die grösse dieser Express-Frames beträgt 100 Bytes.
+ Die Grösse dieser Express-Frames beträgt 100 Bytes.
  
 \end_layout
 
@@ -5364,7 +5364,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset
@@ -6669,7 +6669,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset
@@ -7897,7 +7897,7 @@ Ziel
 \begin_inset Text
 
 \begin_layout Plain Layout
-Interval (Alle x Sekunden)
+Intervall (Alle x Sekunden)
 \end_layout
 
 \end_inset

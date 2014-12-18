@@ -110,8 +110,8 @@ name "sec:Offizielle-Aufgabenstellung"
 \end_layout
 
 \begin_layout Standard
-In Anlagen für die Automatisierung der elektrischen Energieversorg hat sich
- Ethernet gut etabliert.
+In Anlagen für die Automatisierung der elektrischen Energieversorgung hat
+ sich Ethernet gut etabliert.
  Ein Anwendungsfeld ist jedoch noch mit Unsicherheiten behaftet: der Prozessbus
  von Unterstationen.
  Bei dieser Anwendung werden extrem viele Messdaten erfasst und übertragen.
@@ -810,7 +810,7 @@ Ab
 \begin_inset Quotes fld
 \end_inset
 
-Ready State
+Steady State
 \begin_inset Quotes frd
 \end_inset
 
@@ -873,7 +873,7 @@ Einfluss TCP (High-Frame wird angestaut, wenn gerade ein Low-Frame gesendet
 \end_layout
 
 \begin_layout Itemize
-Was wenn TCP Löcuken zwischen High-Frames schamlos nutzt?
+Was wenn TCP Lücken zwischen High-Frames schamlos nutzt?
 \end_layout
 
 \begin_deeper
@@ -2393,6 +2393,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
+\lang german-ch
 Documentation
 \end_layout
 
@@ -2417,6 +2420,8 @@ Beinhaltet diese Dokumentation als PDF-Datei und als Quellcode im LyX-Format
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 PA14_wlan_1.vdi
 \end_layout
 
@@ -2448,6 +2453,8 @@ reference "sec:Starten-der-virtuellen"
 \begin_inset Text
 
 \begin_layout Plain Layout
+
+\series bold
 SourceCode_Simulation
 \end_layout
 

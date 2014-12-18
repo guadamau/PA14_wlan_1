@@ -108,10 +108,11 @@ addcontentsline{toc}{chapter}{Zusammenfassung}
 
 \begin_layout Standard
 Für Echtzeit-Systeme, die aus mehreren Komponenten bestehen, welche miteinander
- über ein Netzwerk verbunden sind, sind Faktoren wie ausfallsichere Datenübertra
-gung sowie garantierte Datenübertragungszeiten von signifikanter Bedeutung.
+ über ein Netzwerk verbunden sind, haben Faktoren wie eine ausfallsichere
+ Datenübertragung und garantierte Datenübertragungszeiten eine signifikante
+ Bedeutung.
  Ein Ansatz, um diesen Kriterien gerecht zu werden, bietet das High Availability
- Seamless Redundancy (folgend auch bezeichnet als HSR) Protokoll.
+ Seamless Redundancy (nachfolgend auch bezeichnet als HSR) Protokoll.
  Redundante Datenübertragung und die Struktur der Verbindungen umgesetzt
  als Ring-Topologie zählen zu den Haupt-Charakteristiken des HSR-Protokolls.
  Im Zentrum dieser Arbeit liegt die Modellierung verschiedener Szenarien,
